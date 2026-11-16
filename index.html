@@ -202,6 +202,7 @@ dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
   .tl-card:not(:last-child)::after{content:'';position:absolute;right:-18px;top:50%;width:10px;height:10px;border-top:3px solid var(--muted);border-right:3px solid var(--muted);opacity:.45;transform:translateY(-50%) rotate(45deg)}
 }
 .cinfo{padding:12px 16px}.cinfo .cat-hd b{font-size:16px}
+.gnotes{margin:8px 0 0;padding-left:1.2em;color:var(--muted);font-size:13px;line-height:1.65}.gnotes li{margin:3px 0}.gnotes li::marker{color:var(--teal)}.gnotes b{color:var(--ink)}
 .fg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:10px 0 8px}
 .fg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column}
 .fg-h{display:flex;align-items:center;gap:10px}.fg-h h3{margin:0;font-size:16px;display:flex;align-items:center;gap:6px}
@@ -6563,11 +6564,11 @@ V.guide = ()=>`<h1>手引書</h1>
      <tr><th scope="row">つまずく所</th><td>単語を知っていても、意味が推測できない</td><td>意味は分かるのに、組み合わせを間違える（× <span class="en">do a mistake</span>、× <span class="en">strong rain</span>）</td></tr>
 
     </tbody></table></div>
-  <div class="muted small stack" style="margin-top:8px">
-    <p>日本語の「熟語」は意味が広く、イディオムなども含みます。このアプリの「句動詞（熟語）」は、動詞と短い語の組み合わせだけを集めています。</p>
-    <p>イディオムは、<span class="en">a piece of cake</span>（とても簡単なこと。直訳は「ケーキ1切れ」）のように、直訳では意味が通らない決まった言い回しです。</p>
-    <p><span class="en">take a shower</span>（コロケーション）と <span class="en">take off</span>（句動詞・離陸する）のように、似ていても分類が違うものがあります。迷うものは監修者が決めています。</p>
-  </div>`;
+  <ul class="gnotes">
+    <li>日本語の「熟語」は意味が広く、イディオムなども含みます。このアプリの「句動詞（熟語）」は、動詞と短い語の組み合わせだけを集めています。</li>
+    <li>イディオムは、<span class="en">a piece of cake</span>（とても簡単なこと。直訳は「ケーキ1切れ」）のように、直訳では意味が通らない決まった言い回しです。</li>
+    <li><span class="en">take a shower</span>（コロケーション）と <span class="en">take off</span>（句動詞・離陸する）のように、似ていても分類が違うものがあります。迷うものは監修者が決めています。</li>
+  </ul>`;
 
 function lvGuideHTML(){ return `
   <p class="muted">このアプリのレベルは、国際的な基準のCEFR（セファール）に合わせています。英検・TOEIC・IELTSでのおおよその目安も並べました。</p>
@@ -6575,13 +6576,13 @@ function lvGuideHTML(){ return `
     <thead><tr><th scope="col">レベル</th><th scope="col">CEFR</th><th scope="col">英検</th><th scope="col">TOEIC</th><th scope="col">IELTS</th></tr></thead>
     <tbody>${LV.map((l,i)=>`<tr><th scope="row" class="lvc${i}">${l}<span class="lvsub">${LV_SUB[i]}</span></th><td class="en">${LV_CEFR[i]}</td><td>${LV_MAP[i][0]}</td><td>${LV_MAP[i][1]}</td><td>${LV_MAP[i][2]}</td></tr><tr class="def"><td colspan="5">${esc(LV_DEF[i])}</td></tr>`).join('')}<tr class="ref"><th scope="row">最上級<span class="lvsub">参考・対象外</span></th><td class="en">C2</td><td>対応する級なし</td><td>目安なし</td><td>8.5〜9.0</td></tr></tbody>
   </table></div>
-  <div class="muted small stack" style="margin-top:8px">
-    <p>どれも大まかな目安です。試験ごとに測る技能や問題の形が違うので、点数どうしをぴったり換算することはできません。</p>
-    <p>英検: その級に合格した人の、おおよそのレベルです。たとえば2級の合格点はB1の範囲に入ります。合格点に届かなくても、成績表にB1と出ることがあります。</p>
-    <p>TOEIC: Listening &amp; Readingの合計点。ETSが示すCEFRごとの最低点をもとにした区切りです。ETSは、A1〜B1の人にはTOEIC Bridgeを勧めています。</p>
-    <p>IELTS: 公式の対応表はB1（4.0）からです。それより下は、資料によって区切りがばらつくので載せていません。</p>
-    <p>このアプリは上級（C1）までです。最上級のC2（教養のあるネイティブに近いレベル）は、参考として載せています。英検とTOEICには、C2に当たる級や点数がありません。TOEIC L&amp;Rは945点以上がC1の目安で、それより上の区切りはありません。</p>
-  </div>
+  <ul class="gnotes">
+    <li>どれも大まかな目安です。試験ごとに測る技能や問題の形が違うので、点数どうしをぴったり換算することはできません。</li>
+    <li><b>英検</b>：その級に合格した人の、おおよそのレベルです。たとえば2級の合格点はB1の範囲に入ります。合格点に届かなくても、成績表にB1と出ることがあります。</li>
+    <li><b>TOEIC</b>：Listening &amp; Readingの合計点。ETSが示すCEFRごとの最低点をもとにした区切りです。ETSは、A1〜B1の人にはTOEIC Bridgeを勧めています。</li>
+    <li><b>IELTS</b>：公式の対応表はB1（4.0）からです。それより下は、資料によって区切りがばらつくので載せていません。</li>
+    <li>このアプリは上級（C1）までです。最上級のC2（教養のあるネイティブに近いレベル）は、参考として載せています。英検とTOEICには、C2に当たる級や点数がありません。TOEIC L&amp;Rは945点以上がC1の目安で、それより上の区切りはありません。</li>
+  </ul>
 `; }
 function openLvGuide(){
   let d=document.getElementById('lvdlg');
