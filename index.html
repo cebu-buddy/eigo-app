@@ -12,7 +12,7 @@
 :root{
   --bg:#F2F8F7; --surface:#FFFFFF; --ink:#3D2613; --muted:#6E5A4B; --line:#D5E6E3;
   --teal:#49B0A8; --teal-ink:#2C7A73; --mint:#E7F4F3; --mint2:#CFE8E5;
-  --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --mango-ink:#A9620C; --pink-soft:#FCE6E8; --pink-ink:#BE4552; --st-known:#F3F8FD; --st-unknown:#FDF5F5; --st-none:#FFFCF0; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
+  --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --mango-ink:#A9620C; --pink-soft:#FCE6E8; --pink-ink:#BE4552; --st-known:#F3F8FD; --st-unknown:#FDF5F5; --st-none:#EEF7F6; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
   --jp:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
   --en:"Lexend","Helvetica Neue",Arial,sans-serif;
   --ipa:"Charis SIL","Doulos SIL","Lucida Grande","Segoe UI",sans-serif;
@@ -21,14 +21,14 @@
   :root:not([data-theme="light"]){
     --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
     --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
-    --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#2F3226; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+    --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
   --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
-  --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#2F3226; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+  --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -176,7 +176,7 @@ dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
 .sheetgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .sheetgrid button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:10px;text-align:left;font-size:14px;cursor:pointer}
 .sheetgrid button.on{border:2px solid var(--teal);background:var(--mint);font-weight:700}
-.learn-head{display:flex;justify-content:space-between;align-items:center;gap:8px 12px;flex-wrap:wrap;margin-bottom:6px}
+.learn-head{position:relative;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:8px 12px;flex-wrap:wrap;margin-bottom:6px}
 .learn-head h1{margin:8px 0}
 .mylist{display:flex;gap:6px}
 .mybtn{border:1.5px solid var(--mango);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer;white-space:nowrap}
