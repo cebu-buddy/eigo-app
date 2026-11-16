@@ -461,6 +461,34 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
   .cv,.cv *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 .gr-pt{margin:.7em 0;line-height:1.75}.gr-lb{display:block;font-size:.82em;color:var(--teal-ink);margin-bottom:.1em}
+
+.bd-ad{position:relative;overflow:hidden;border-radius:16px;background:var(--mint);color:var(--ink);text-decoration:none;display:flex;flex-direction:column;border:1px solid var(--mint2)}
+.bd-ad:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.bd-ad .bd-pr{font-size:11px;color:var(--teal-ink);font-weight:700;letter-spacing:.02em}
+.bd-ad b{font-size:16px;line-height:1.45}
+.bd-ad small{font-size:12.5px;color:var(--muted);line-height:1.5}
+.bd-cta{display:inline-flex;align-items:center;gap:6px;background:var(--cta-bg);color:#fff;font-weight:700;font-size:13.5px;border-radius:999px;padding:8px 14px;align-self:flex-start;position:relative;z-index:1}
+.bd-ad:hover .bd-cta{filter:brightness(1.06)}
+.bd-cta svg{width:16px;height:16px}
+.bd-sea{position:absolute;inset:auto 0 0 0;width:100%;height:46%}
+.bd-chars{display:flex;gap:2px}
+.bd-tile{padding:12px 14px;gap:4px}
+.bd-tile .bd-body{position:relative;z-index:1;display:flex;flex-direction:column;gap:3px}
+.bd-tile b{font-size:14.5px}
+.bd-tile .bd-cta{margin:4px 0 0;padding:6px 12px;font-size:12.5px}
+.bd-tile .bd-sea{height:34%}
+.bd-tile .bd-sea circle{display:none}
+.bd-tile .bd-chars{position:absolute;right:8px;bottom:6px;z-index:1}
+.bd-tall{margin-top:12px}
+.bd-tall .bd-art{position:relative;height:150px;background:var(--mango-soft)}
+.bd-tall .bd-art .bd-sea{height:100%}
+.bd-tall .bd-art .bd-chars{position:absolute;left:24px;bottom:14px;gap:6px}
+.bd-tall .bd-in{padding:16px 20px 20px;display:flex;flex-direction:column;gap:8px}
+.bd-tall b{font-size:19px}
+.bd-tall ul{margin:2px 0 6px;padding:0;list-style:none;display:grid;gap:6px;font-size:13.5px}
+.bd-tall li{display:flex;gap:8px;align-items:flex-start}
+.bd-tall li i{flex:none;width:20px;height:20px;border-radius:50%;background:var(--teal);color:#fff;font-style:normal;font-size:12px;display:grid;place-items:center;margin-top:1px}
+@media (max-width:959px){ .home-grid .bd-tile{grid-column:1/-1;flex-direction:row;align-items:center;padding:14px 16px} .bd-tile .bd-body{flex:1} .bd-tile .bd-cta{margin:8px 0 0} .bd-tile .bd-sea{height:100%;width:38%;left:auto;right:0} .bd-tile .bd-chars{right:14px;bottom:10px} }
 </style>
 </head>
 <body>
@@ -468,6 +496,13 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 <script>
 
 const COUNSEL_URL = 'https://lin.ee/TyLuCWw';
+
+const BD_LINE_IC=`<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.6 0 .9l-.1.9c0 .3-.2 1 .9.5s6-3.5 8.2-6.1C21.6 14 22 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg>`;
+const bdSea=(w,h)=>`<svg class="bd-sea" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><circle cx="${w*0.78}" cy="${h*0.32}" r="${h*0.16}" fill="#F5A524" opacity=".9"/><path d="M0 ${h*0.55} Q ${w*0.25} ${h*0.48} ${w*0.5} ${h*0.55} T ${w} ${h*0.55} V ${h} H 0 Z" fill="#86C7C2"/><path d="M0 ${h*0.68} Q ${w*0.25} ${h*0.6} ${w*0.5} ${h*0.68} T ${w} ${h*0.68} V ${h} H 0 Z" fill="#49B0A8"/><path d="M0 ${h*0.84} Q ${w*0.3} ${h*0.78} ${w*0.6} ${h*0.86} T ${w} ${h*0.82} V ${h} H 0 Z" fill="#F3E3C3"/></svg>`;
+const bdChars=n=>`<span class="bd-chars" aria-hidden="true">${CH.coco.svg(n)}${CH.mango.svg(n)}</span>`;
+const bdHref=()=>esc(COUNSEL_URL||'https://cebu-buddy.com/');
+const bdTile=()=>`<a class="bd-ad bd-tile" href="${bdHref()}" target="_blank" rel="noopener">${bdSea(240,200)}<span class="bd-body"><span class="bd-pr">PR　セブ島留学バディー</span><b>セブ島留学、<br>手数料0円で相談できます</b><span class="bd-cta">${BD_LINE_IC} LINEで無料相談</span></span>${bdChars(34)}</a>`;
+const bdTall=()=>`<a class="bd-ad bd-tall" href="${bdHref()}" target="_blank" rel="noopener"><div class="bd-art">${bdSea(400,150)}${bdChars(52)}</div><div class="bd-in"><span class="bd-pr">PR　セブ島留学バディー</span><b>覚えた英語、<br>フィリピン留学で使ってみない？</b><ul><li><i aria-hidden="true">✓</i>フィリピンの語学学校70校と提携</li><li><i aria-hidden="true">✓</i>スタッフは全員、留学経験者。現地サポートも</li><li><i aria-hidden="true">✓</i>最低価格保証</li></ul><span class="bd-cta">${BD_LINE_IC} LINEで無料相談する</span></div></a>`;
 const LV = ['入門','初級','中級','中上級','上級'];
 const LV_SUB = ['はじめの一歩','日常会話','留学で困らない','意見が言える','仕事で使える'];
 const LV_CEFR = ['A1','A2','B1','B2','C1'];
@@ -9329,6 +9364,7 @@ V.home = ()=>{
     <button class="tile" data-act="learn" data-cat="wh"><b>ワーホリ対策</b>${tileMark('wh',2)}<span>場面ごとのフレーズとシミュレーション</span></button>
     <button class="tile" data-act="go" data-v="resume"><b>履歴書をつくる</b>${tileMark('resume',2)}<span>AIと一問一答で強みを見つける</span></button>
     <button class="tile" data-act="learn" data-cat="grammar"><b>文法</b>${tileMark('grammar',2)}<span>レベル別の単元と確認問題</span></button>
+    ${bdTile()}
   </div>
   <h2>保存庫の新着</h2>
   ${latest.length ? `<div class="list">${latest.map(v=>`<button class="li" data-act="go" data-v="vault"><span><span class="t">${esc(v.en||'（メモ）')}</span><br><span class="s">${esc(v.ja)}</span></span><span class="tag">${esc(v.scene||'未分類')}</span></button>`).join('')}</div>`
@@ -9565,7 +9601,7 @@ V.learn = ()=>{
   ${showLv?`<div class="filter"><p class="filter-l">レベル</p><div class="chips sub"><button class="chip ${R.lv==='all'?'on':''}" data-act="lv" data-lv="all">全レベル <span class="lv-n">${lvCnt('all')}</span></button>${LV.map((l,i)=>`<button class="chip ${String(R.lv)===String(i)?'on':''}" data-act="lv" data-lv="${i}">${l} <span class="en">${LV_CEFR[i]}</span> <span class="lv-n">${lvCnt(i)}</span></button>`).join('')}<button class="linkbtn" data-act="lvguide" aria-haspopup="dialog">レベルの目安</button></div></div>`:''}${(R.cat==='study'||R.cat==='dialog'||R.cat==='grammar'||R.cat==='wh')?'':`<div class="ja-tg"><button class="tg ${S.hideJa===false?'':'on'}" data-act="hideja" aria-pressed="${S.hideJa!==false}"><span class="tg-sw" aria-hidden="true"></span>日本語を隠す（カーソルを当てると表示）</button></div>`}</div>
   <div class="split ${sel?'has-sel':''}" style="margin-top:14px">
     <div class="list-col ${S.hideJa===false?'':'hide-ja'}">${(R.cat==='study'||R.cat==='dialog'||R.cat==='grammar'||R.cat==='wh')?groups:(list.length?`<div class="list">${list.map(liRow).join('')}</div>`:`<div class="panel empty">${coco(52)}<p style="margin-top:8px">${R.cat==='known'?'「覚えた」にした項目はありません。テストで正解するか「覚えた」を押すと、ここに集まります。':R.cat==='unknown'?'「まだ」にした項目はありません。テストや学習で「まだ」にすると、ここに集まります。':R.cat==='fav'?'★を付けた項目はありません。気に入った表現に★を付けると、ここから見返せます。':'このレベルの内容はまだありません。'}</p></div>`)}</div>
-    <div class="detail-col">${sel?`<div class="seltop"><button class="btn sm back" data-act="unsel">← 一覧に戻る</button>${miniNav(sel.id)}</div>`+swipeWrap(sel)+stepNav(sel.id):`<div class="panel empty muted">一覧から選ぶと、ここに詳しく出ます。</div>`}</div>
+    <div class="detail-col">${sel?`<div class="seltop"><button class="btn sm back" data-act="unsel">← 一覧に戻る</button>${miniNav(sel.id)}</div>`+swipeWrap(sel)+stepNav(sel.id):`<div class="panel empty muted">一覧から選ぶと、ここに詳しく出ます。</div>${bdTall()}`}</div>
   </div>`;
 };
 
