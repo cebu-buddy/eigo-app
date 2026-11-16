@@ -6203,7 +6203,7 @@ document.addEventListener('click', e=>{
     case 'sel': R.sel=d.id; PRON={id:null,url:null,rec:null,result:''}; rerender(); if(window.innerWidth<960) window.scrollTo(0,0); break;
     case 'unsel': R.sel=null; rerender(); break;
     case 'fav': setProg(d.id,{fav:!P(d.id).fav}); rerender(); break;
-    case 'know': mark(d.id,d.ok==='1'); rerender(); break;
+    case 'know': { const want=d.ok==='1'?'known':'unknown'; if(P(d.id).state===want){  const p=Object.assign({},P(d.id)); delete p.state; delete p.step; delete p.next; S.prog[d.id]=p; save(); } else mark(d.id,d.ok==='1'); rerender(); break; }
     case 'hideja': S.hideJa = (S.hideJa===false); save(); rerender(); break;
     case 'tovault': { const x=ITEMS.find(i=>i.id===d.id); if(x){ addVault(x.en,x.ja,x.scene||CATS[x.cat],'item'); rerender(); } break; }
     case 'exvault': addVault(d.en,d.ja,d.scene,'item'); rerender(); break;
