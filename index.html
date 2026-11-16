@@ -763,7 +763,214 @@ const ITEMS = [
  it('pattern',3,"It's worth ~ing",'','～する価値がある',"This book is worth reading.",'この本は読む価値がある。',"Is it worth visiting Oslob?",'オスロブは行く価値がある？'),
  it('pattern',3,"What if ~?",'','もし～だったらどうする？',"What if it rains tomorrow?",'もし明日雨が降ったらどうする？',"What if we take a taxi instead?",'代わりにタクシーにしたらどう？'),
  it('pattern',4,"No matter what ~",'','たとえ何が～でも',"No matter what happens, don't give up.",'何が起きても、あきらめないで。',"No matter what you say, I'm going.",'あなたが何と言おうと、私は行く。'),
- it('pattern',4,"It wasn't until ~ that ...",'','～して初めて…した',"It wasn't until I came to Cebu that I started speaking English.",'セブに来て初めて英語を話し始めた。',"It wasn't until later that I understood.",'あとになってようやく分かった。')
+ it('pattern',4,"It wasn't until ~ that ...",'','～して初めて…した',"It wasn't until I came to Cebu that I started speaking English.",'セブに来て初めて英語を話し始めた。',"It wasn't until later that I understood.",'あとになってようやく分かった。'),
+
+ it('wh',1,"Do you have any openings?",'','（仕事の）空きはありますか？',"Hi, do you have any openings at the moment?",'こんにちは、今お仕事の空きはありますか？',"Do you have any openings for kitchen hands?",'キッチンハンドの空きはありますか？','仕事探し'),
+ it('wh',2,"I'm on a working holiday visa.",'','ワーキングホリデービザで来ています。',"I'm on a working holiday visa, so I can work full-time.",'ワーホリビザなので、フルタイムで働けます。',"I'm on a working holiday visa until next October.",'来年の10月までワーホリビザです。','仕事探し'),
+ it('wh',1,"I'm calling about the job ad.",'','求人広告の件でお電話しました。',"Hi, I'm calling about the job ad on Seek.",'こんにちは、求人サイトの広告の件でお電話しました。',"I'm calling about the barista position.",'バリスタの募集の件でお電話しました。','応募の電話・メール'),
+ it('wh',2,"Is the position still available?",'','その仕事はまだ募集していますか？',"Hi, is the position still available?",'こんにちは、その仕事はまだ募集していますか？',"I saw your ad. Is the position still available?",'広告を見ました。まだ募集していますか？','応募の電話・メール'),
+ it('wh',2,"Please find my resume attached.",'','履歴書を添付しました。（メールで）',"Please find my resume attached. I look forward to hearing from you.",'履歴書を添付しました。お返事をお待ちしています。',"Please find attached my resume and references.",'履歴書と推薦者の情報を添付しました。','応募の電話・メール'),
+ it('wh',3,"I'm writing to apply for ~.",'','～に応募したくご連絡しました。（メールの書き出し）',"I'm writing to apply for the waitstaff position.",'ホールスタッフの募集に応募したくご連絡しました。',"I'm writing to apply for the role advertised on your website.",'御社のサイトに掲載の職に応募したくご連絡しました。','応募の電話・メール'),
+ it('wh',2,"I'm a quick learner.",'','覚えるのが早いです。',"I don't have much experience, but I'm a quick learner.",'経験はあまりありませんが、覚えるのは早いです。',"I'm a quick learner and I work hard.",'覚えるのが早く、まじめに働きます。','面接'),
+ it('wh',2,"I enjoy working in a team.",'','チームで働くのが好きです。',"I enjoy working in a team and helping others.",'チームで働いたり、人を手伝ったりするのが好きです。',"I enjoy working in a busy team.",'忙しいチームで働くのが好きです。','面接'),
+ it('wh',2,"How many hours a week can I work?",'','週に何時間働けますか？',"How many hours a week can I work here?",'ここでは週に何時間働けますか？',"I'd like to work about 30 hours a week.",'週30時間くらい働きたいです。','面接'),
+ it('wh',1,"When would you like me to come in?",'','いつ伺えばよいですか？',"Thank you! When would you like me to come in?",'ありがとうございます！いつ伺えばよいですか？',"When would you like me to come in for the trial?",'トライアルにはいつ伺えばよいですか？','トライアル（試し勤務）'),
+ it('wh',1,"What should I wear?",'','何を着て行けばいいですか？',"What should I wear for the trial shift?",'トライアルには何を着て行けばいいですか？',"Should I wear black shoes?",'黒い靴を履いて行くべきですか？','トライアル（試し勤務）'),
+ it('wh',2,"Is the trial paid?",'','トライアルは有給ですか？',"Sorry, can I ask if the trial is paid?",'すみません、トライアルは有給か伺ってもいいですか？',"How long is the trial shift?",'トライアルは何時間ですか？','トライアル（試し勤務）'),
+ it('wh',2,"Could you show me how to do it?",'','やり方を見せてもらえますか？',"Could you show me how to use the coffee machine?",'コーヒーマシンの使い方を見せてもらえますか？',"Sorry, could you show me how to do it once more?",'すみません、もう一度やり方を見せてもらえますか？','トライアル（試し勤務）'),
+ it('wh',1,"Where should I put my things?",'','荷物はどこに置けばいいですか？',"Hi, where should I put my things?",'こんにちは、荷物はどこに置けばいいですか？',"Is there a locker where I can put my bag?",'カバンを入れられるロッカーはありますか？','職場の初日'),
+ it('wh',1,"What should I do first?",'','まず何をすればいいですか？',"I'm ready. What should I do first?",'準備できました。まず何をすればいいですか？',"I've finished. What should I do next?",'終わりました。次は何をすればいいですか？','職場の初日'),
+ it('wh',2,"Just to make sure, ...",'','念のための確認ですが…',"Just to make sure, I take the order and then pass it to the kitchen?",'念のため確認ですが、注文を取ってキッチンに渡せばいいですか？',"Just to make sure, my break is at two?",'念のため、休憩は2時ですか？','職場の初日'),
+ it('wh',2,"Sorry, I didn't catch your name.",'','すみません、お名前を聞き取れませんでした。',"Sorry, I didn't catch your name. I'm Yuki.",'すみません、お名前を聞き取れませんでした。ユキです。',"Sorry, what was your name again?",'すみません、もう一度お名前を伺えますか？','職場の初日'),
+ it('wh',1,"When is the roster posted?",'','シフト表はいつ出ますか？',"When is next week's roster posted?",'来週のシフト表はいつ出ますか？',"Is the roster on the app?",'シフト表はアプリで見られますか？','シフト・休みの連絡'),
+ it('wh',2,"I'm happy to pick up extra shifts.",'','追加のシフトにも喜んで入ります。',"I'm happy to pick up extra shifts this week.",'今週は追加のシフトにも喜んで入ります。',"Let me know if you need someone to cover a shift.",'シフトの穴埋めが必要なら言ってください。','シフト・休みの連絡'),
+ it('wh',1,"What size would you like?",'','サイズはどうしますか？',"What size would you like? Small, regular or large?",'サイズはどうしますか？スモール、レギュラー、ラージ？',"What milk would you like?",'ミルクはどうしますか？','カフェの接客'),
+ it('wh',1,"Can I get a name for the order?",'','ご注文のお名前を伺えますか？',"Can I get a name for the order?",'ご注文のお名前を伺えますか？',"Two flat whites for Sam!",'サムさん、フラットホワイト2つです！','カフェの接客'),
+ it('wh',2,"Sorry about the wait.",'','お待たせしてすみません。',"Sorry about the wait. Here's your coffee.",'お待たせしてすみません。コーヒーです。',"Thanks for waiting.",'お待ちいただきありがとうございます。','カフェの接客'),
+ it('wh',1,"Table for how many?",'','何名様ですか？',"Hi there! Table for how many?",'いらっしゃいませ！何名様ですか？',"Do you have a booking?",'ご予約はありますか？','レストランの接客'),
+ it('wh',1,"Are you ready to order?",'','ご注文はお決まりですか？',"Are you ready to order, or do you need a few more minutes?",'ご注文はお決まりですか？それとも、もう少しお時間が必要ですか？',"Can I get you something to drink first?",'先にお飲み物はいかがですか？','レストランの接客'),
+ it('wh',2,"Do you have any allergies?",'','アレルギーはありますか？',"Before you order, do you have any allergies?",'ご注文の前に、アレルギーはありますか？',"This dish contains nuts.",'この料理にはナッツが入っています。','レストランの接客'),
+ it('wh',1,"How is everything?",'','お料理はいかがですか？',"How is everything? Can I get you anything else?",'お料理はいかがですか？ほかに何かお持ちしましょうか？',"Would you like to see the dessert menu?",'デザートのメニューをご覧になりますか？','レストランの接客'),
+ it('wh',1,"Behind you!",'','後ろ通ります！',"Behind you! Hot plate!",'後ろ通ります！熱いお皿です！',"Coming through!",'通ります！','キッチン・裏方の仕事'),
+ it('wh',2,"Where does this go?",'','これはどこにしまいますか？',"Sorry, where does this go?",'すみません、これはどこにしまいますか？',"Where do the clean plates go?",'きれいなお皿はどこに置きますか？','キッチン・裏方の仕事'),
+ it('wh',2,"We're running low on ~.",'','～が残り少ないです。',"We're running low on milk.",'牛乳が残り少ないです。',"We're out of napkins.",'ナプキンが切れています。','キッチン・裏方の仕事'),
+ it('wh',2,"Should I start closing up?",'','閉店作業を始めてもいいですか？',"It's nine. Should I start closing up?",'9時です。閉店作業を始めてもいいですか？',"I've mopped the floor. What else needs doing?",'床のモップがけは終わりました。ほかにやることはありますか？','キッチン・裏方の仕事'),
+ it('wh',2,"What's the hourly rate?",'','時給はいくらですか？',"Can I ask what the hourly rate is?",'時給はいくらか伺ってもいいですか？',"Is the rate higher on weekends?",'週末は時給が上がりますか？','給料・契約の確認'),
+ it('wh',2,"When do we get paid?",'','給料日はいつですか？',"When do we get paid? Weekly or fortnightly?",'給料日はいつですか？毎週ですか、2週間ごとですか？',"Will I get a payslip?",'給与明細はもらえますか？','給料・契約の確認'),
+ it('wh',3,"I think there's a mistake on my payslip.",'','給与明細に間違いがあると思います。',"Sorry, I think there's a mistake on my payslip. Some hours are missing.",'すみません、給与明細に間違いがあると思います。何時間か抜けています。',"Could you check my hours for last week?",'先週の勤務時間を確認していただけますか？','給料・契約の確認'),
+ it('wh',3,"Do I need to give you my tax file number?",'','タックスファイルナンバーを伝える必要がありますか？',"Do I need to give you my tax file number before I start?",'働き始める前にタックスファイルナンバーを伝える必要がありますか？',"Where should I send my super details?",'スーパー（年金）の情報はどこに送ればいいですか？','給料・契約の確認'),
+ it('wh',1,"Is the room still available?",'','その部屋はまだ空いていますか？',"Hi, I saw your ad. Is the room still available?",'こんにちは、広告を見ました。その部屋はまだ空いていますか？',"Can I come and see the room?",'部屋を見に行ってもいいですか？','家探し・シェアハウス'),
+ it('wh',2,"Are bills included?",'','光熱費は込みですか？',"How much is the rent? Are bills included?",'家賃はいくらですか？光熱費は込みですか？',"The rent is 250 dollars a week, bills included.",'家賃は週250ドル、光熱費込みです。','家探し・シェアハウス'),
+ it('wh',2,"How much is the bond?",'','保証金（ボンド）はいくらですか？',"How much is the bond, and when do I get it back?",'保証金はいくらで、いつ戻ってきますか？',"The bond is two weeks' rent.",'保証金は家賃の2週間分です。','家探し・シェアハウス'),
+ it('wh',2,"What are the house rules?",'','家のルールはありますか？',"Before I move in, what are the house rules?",'入居する前に、家のルールを教えてもらえますか？',"Is it OK to have friends over?",'友達を呼んでもいいですか？','家探し・シェアハウス'),
+ it('wh',1,"I'd like to open a bank account.",'','銀行口座を開きたいです。',"Hi, I'd like to open a bank account.",'こんにちは、銀行口座を開きたいです。',"What do I need to open an account?",'口座を開くには何が必要ですか？','銀行・携帯の手続き'),
+ it('wh',2,"Are there any monthly fees?",'','月々の手数料はかかりますか？',"Are there any monthly fees for this account?",'この口座に月々の手数料はかかりますか？',"Is there a fee for using other ATMs?",'他行のATMを使うと手数料はかかりますか？','銀行・携帯の手続き'),
+ it('wh',1,"I'd like to get a SIM card.",'','SIMカードがほしいです。',"Hi, I'd like to get a prepaid SIM card.",'こんにちは、プリペイドのSIMカードがほしいです。',"Which plan has the most data?",'どのプランがいちばんデータ量が多いですか？','銀行・携帯の手続き'),
+ it('wh',2,"Can I keep my number?",'','番号はそのまま使えますか？',"If I change plans, can I keep my number?",'プランを変えても、番号はそのまま使えますか？',"How do I top up my phone?",'携帯のチャージはどうやりますか？','銀行・携帯の手続き'),
+ it('wh',1,"I'd like to make an appointment.",'','予約をしたいです。（病院など）',"I'd like to make an appointment with a GP.",'一般医（GP）の予約をしたいです。',"Do you have any appointments today?",'今日予約は取れますか？','病院・薬局'),
+ it('wh',2,"Do you bulk bill?",'','（窓口負担なしの）バルクビリングはできますか？',"Sorry, do you bulk bill?",'すみません、バルクビリングはできますか？',"How much is a consultation?",'診察料はいくらですか？','病院・薬局'),
+ it('wh',1,"Can I get this without a prescription?",'','処方せんなしで買えますか？',"Can I get this medicine without a prescription?",'この薬は処方せんなしで買えますか？',"I need something for a sore throat.",'のどの痛みに効くものがほしいです。','病院・薬局'),
+ it('wh',2,"How often should I take it?",'','どれくらいの頻度で飲めばいいですか？',"How often should I take it? After meals?",'どれくらいの頻度で飲めばいいですか？食後ですか？',"Can I take it with other medicine?",'ほかの薬と一緒に飲んでも大丈夫ですか？','病院・薬局'),
+ it('wh',2,"I'd like to give my notice.",'','退職の申し出をしたいです。',"I'd like to give my two weeks' notice.",'2週間前の退職の申し出をしたいです。',"I'm leaving Australia next month, so I'd like to give my notice.",'来月オーストラリアを離れるので、退職を申し出たいです。','仕事を辞める・推薦状'),
+ it('wh',2,"My last day will be ~.",'','最終出勤日は～です。',"My last day will be Friday the 20th.",'最終出勤日は20日の金曜日です。',"Can my last day be next Sunday?",'最終日は来週の日曜日でもいいですか？','仕事を辞める・推薦状'),
+ it('wh',3,"Would you be willing to be a reference?",'','推薦者になっていただけますか？',"Would you be willing to be a reference for my next job?",'次の仕事の推薦者になっていただけますか？',"Could you write me a reference letter?",'推薦状を書いていただけますか？','仕事を辞める・推薦状'),
+ it('wh',2,"Thank you for everything.",'','いろいろとありがとうございました。',"Thank you for everything. I learned so much here.",'いろいろとありがとうございました。ここでたくさん学びました。',"It was great working with you all.",'皆さんと働けて本当に良かったです。','仕事を辞める・推薦状'),
+
+ it('word',0,'lunch','/lʌntʃ/','昼食',"Let's have lunch together.",'一緒にお昼を食べよう。',"Lunch is from twelve to one.",'お昼は12時から1時までです。'),
+ it('word',0,'beach','/biːtʃ/','ビーチ、浜辺',"Let's go to the beach.",'ビーチに行こう。',"The beach is beautiful.",'その浜辺はきれいです。'),
+ it('word',0,'clean','/kliːn/','きれいな、掃除する',"My room is clean.",'私の部屋はきれいです。',"I clean my room on Sundays.",'日曜日に部屋を掃除します。'),
+ it('word',0,'hot','/hɑːt/','暑い、熱い',"It's very hot today.",'今日はとても暑い。',"Be careful. The soup is hot.",'気をつけて。スープが熱いよ。'),
+ it('word',0,'cold','/koʊld/','寒い、冷たい',"Can I have a cold drink?",'冷たい飲み物をもらえますか？',"The classroom is cold.",'教室が寒い。'),
+ it('word',0,'help','/help/','助ける、手伝う、助け',"Can you help me?",'手伝ってもらえますか？',"Thanks for your help.",'手伝ってくれてありがとう。'),
+ it('word',0,'answer','/ˈænsər/','答え、答える',"What's the answer?",'答えは何ですか？',"Please answer the question.",'質問に答えてください。'),
+ it('word',0,'question','/ˈkwestʃən/','質問',"Can I ask a question?",'質問してもいいですか？',"That's a good question.",'いい質問ですね。'),
+ it('word',0,'week','/wiːk/','週',"I'm staying for four weeks.",'4週間滞在します。',"See you next week.",'また来週。'),
+ it('word',0,'happy','/ˈhæpi/','うれしい、幸せな',"I'm happy to meet you.",'お会いできてうれしいです。',"She looks happy today.",'彼女は今日うれしそうだ。'),
+ it('word',0,'sick','/sɪk/','具合が悪い',"I feel sick.",'気分が悪い。',"He's sick today.",'彼は今日具合が悪い。'),
+ it('word',0,'near','/nɪr/','近くに、近い',"Is there a bank near here?",'この近くに銀行はありますか？',"The school is near the beach.",'学校はビーチの近くです。'),
+ it('word',1,'invite','/ɪnˈvaɪt/','招待する、誘う',"She invited me to her party.",'彼女がパーティーに招待してくれた。',"Thanks for inviting me.",'誘ってくれてありがとう。'),
+ it('word',1,'promise','/ˈprɑːmɪs/','約束する、約束',"I promise I'll call you.",'電話するって約束する。',"You promised!",'約束したでしょ！'),
+ it('word',1,'worry','/ˈwɜːri/','心配する',"Don't worry about it.",'気にしないで。',"I'm worried about the test.",'テストが心配です。'),
+ it('word',1,'quiet','/ˈkwaɪət/','静かな',"The library is quiet.",'図書館は静かです。',"Please be quiet.",'静かにしてください。'),
+ it('word',1,'noisy','/ˈnɔɪzi/','うるさい',"The street is very noisy.",'通りがとてもうるさい。',"My neighbors are noisy at night.",'隣の人たちが夜うるさい。'),
+ it('word',1,'dangerous','/ˈdeɪndʒərəs/','危険な',"It's dangerous to walk alone at night.",'夜ひとりで歩くのは危険です。',"Is this area dangerous?",'このあたりは危ないですか？'),
+ it('word',1,'safe','/seɪf/','安全な',"Is it safe to swim here?",'ここで泳いでも安全ですか？',"Keep your passport in a safe place.",'パスポートは安全な場所にしまって。'),
+ it('word',1,'luggage','/ˈlʌɡɪdʒ/','手荷物、旅行かばん',"Where can I leave my luggage?",'荷物はどこに置けますか？',"My luggage didn't arrive.",'荷物が届きませんでした。'),
+ it('word',1,'passport','/ˈpæspɔːrt/','パスポート',"Don't forget your passport.",'パスポートを忘れないで。',"Can I see your passport?",'パスポートを拝見できますか？'),
+ it('word',1,'change','/tʃeɪndʒ/','変える、おつり',"Keep the change.",'おつりは取っておいて。',"Can I change my class?",'クラスを変えられますか？'),
+ it('word',1,'order','/ˈɔːrdər/','注文する、注文',"Are you ready to order?",'ご注文はお決まりですか？',"I ordered a pizza.",'ピザを注文しました。'),
+ it('word',1,'healthy','/ˈhelθi/','健康的な',"I want to eat healthy food.",'健康的な食事をしたい。',"Walking is healthy.",'歩くのは体にいい。'),
+ it('word',2,'challenge','/ˈtʃælɪndʒ/','挑戦、難題',"Living abroad is a big challenge.",'海外で暮らすのは大きな挑戦です。',"I like a challenge.",'挑戦するのが好きです。'),
+ it('word',2,'culture','/ˈkʌltʃər/','文化',"I'm interested in Filipino culture.",'フィリピンの文化に興味があります。',"Culture shock is normal.",'カルチャーショックは普通のことです。'),
+ it('word',2,'local','/ˈloʊkəl/','地元の',"Let's try some local food.",'地元の料理を食べてみよう。',"Ask a local for directions.",'地元の人に道を聞いてみて。'),
+ it('word',2,'attend','/əˈtend/','出席する',"I attend class every day.",'毎日授業に出席しています。',"Did you attend the meeting?",'会議に出た？'),
+ it('word',2,'prepare','/prɪˈper/','準備する',"I need to prepare for the interview.",'面接の準備をしないと。',"Did you prepare your presentation?",'発表の準備はした？'),
+ it('word',2,'achieve','/əˈtʃiːv/','達成する',"I achieved my goal.",'目標を達成した。',"What do you want to achieve here?",'ここで何を達成したい？'),
+ it('word',2,'goal','/ɡoʊl/','目標',"My goal is to work in Australia.",'私の目標はオーストラリアで働くことです。',"Set a small goal every week.",'毎週小さな目標を立てよう。'),
+ it('word',2,'patient','/ˈpeɪʃənt/','忍耐強い、患者',"My teacher is very patient.",'先生はとても辛抱強い。',"Be patient. It takes time.",'焦らないで。時間がかかるよ。'),
+ it('word',2,'polite','/pəˈlaɪt/','礼儀正しい',"It's polite to say thank you.",'お礼を言うのは礼儀正しいことです。',"Is this a polite way to ask?",'これはていねいな聞き方ですか？'),
+ it('word',2,'rude','/ruːd/','失礼な',"It's rude to be late.",'遅刻は失礼です。',"I didn't mean to be rude.",'失礼なことを言うつもりはなかった。'),
+ it('word',2,'familiar','/fəˈmɪljər/','よく知っている、なじみのある',"Are you familiar with this area?",'このあたりに詳しいですか？',"This song sounds familiar.",'この曲は聞き覚えがある。'),
+ it('word',2,'necessary','/ˈnesəseri/','必要な',"Is it necessary to book?",'予約は必要ですか？',"Bring only what's necessary.",'必要なものだけ持ってきて。'),
+ it('word',3,'independent','/ˌɪndɪˈpendənt/','自立した',"Living abroad made me more independent.",'海外生活で前より自立した。',"She's very independent.",'彼女はとても自立している。'),
+ it('word',3,'communicate','/kəˈmjuːnɪkeɪt/','意思を伝え合う',"I can communicate in English now.",'今は英語でやりとりができます。',"It's important to communicate clearly.",'はっきり伝え合うことが大切だ。'),
+ it('word',3,'negotiate','/nɪˈɡoʊʃieɪt/','交渉する',"I negotiated the rent.",'家賃を交渉した。',"Can we negotiate the price?",'値段を交渉できますか？'),
+ it('word',3,'apply','/əˈplaɪ/','応募する、申し込む',"I applied for a job at a café.",'カフェの仕事に応募した。',"How do I apply for a visa?",'ビザはどうやって申し込みますか？'),
+ it('word',3,'qualification','/ˌkwɑːlɪfɪˈkeɪʃən/','資格',"Do you need any qualifications for this job?",'この仕事に資格は必要ですか？',"I have a barista qualification.",'バリスタの資格を持っています。'),
+ it('word',3,'contract','/ˈkɑːntrækt/','契約、契約書',"Please read the contract carefully.",'契約書をよく読んでください。',"I signed a six-month contract.",'6か月の契約にサインした。'),
+ it('word',3,'cancel','/ˈkænsəl/','取り消す、中止する',"I need to cancel my booking.",'予約を取り消したいです。',"The flight was canceled.",'その便は欠航になった。'),
+ it('word',3,'mention','/ˈmenʃən/','言及する、話に出す',"You mentioned a good café.",'いいカフェの話をしていたよね。',"Don't mention it.",'どういたしまして（気にしないで）。'),
+ it('word',3,'admit','/ədˈmɪt/','認める',"I admit I was wrong.",'私が間違っていたと認めます。',"He admitted his mistake.",'彼は自分の間違いを認めた。'),
+ it('word',3,'deny','/dɪˈnaɪ/','否定する',"She denied it.",'彼女はそれを否定した。',"I can't deny that it was fun.",'楽しかったのは否定できない。'),
+ it('word',3,'improvement','/ɪmˈpruːvmənt/','改善、上達',"There's a big improvement in your writing.",'ライティングがすごく上達したね。',"Any suggestions for improvement?",'改善の提案はありますか？'),
+ it('word',3,'aware','/əˈwer/','気づいている、知っている',"Are you aware of the rules?",'規則は知っていますか？',"I wasn't aware of that.",'それは知りませんでした。'),
+ it('word',4,'thorough','/ˈθɜːroʊ/','徹底的な',"The doctor gave me a thorough check.",'医者が徹底的に診てくれた。',"Please be thorough when you clean.",'掃除するときは隅々まで丁寧にお願いします。'),
+ it('word',4,'consistent','/kənˈsɪstənt/','一貫した',"Consistent practice is the key.",'継続して練習することが鍵だ。',"Her work is always consistent.",'彼女の仕事はいつも安定している。'),
+ it('word',4,'versatile','/ˈvɜːrsətəl/','多才な、用途の広い',"She's a versatile worker.",'彼女は何でもこなせる働き手だ。',"This jacket is very versatile.",'このジャケットはいろいろな場面で使える。'),
+ it('word',4,'spontaneous','/spɑːnˈteɪniəs/','その場の思いつきの、自発的な',"We took a spontaneous trip to Bohol.",'思いつきでボホールに旅行した。',"I like spontaneous plans.",'思いつきの計画が好きだ。'),
+ it('word',4,'tedious','/ˈtiːdiəs/','退屈で面倒な',"Filling out forms is tedious.",'書類を書くのは面倒だ。',"The work was tedious but important.",'その仕事は退屈だが大事だった。'),
+ it('word',4,'candid','/ˈkændɪd/','率直な',"Thank you for your candid feedback.",'率直なご意見ありがとうございます。',"To be candid, I disagree.",'率直に言うと、反対です。'),
+ it('word',4,'pragmatic','/præɡˈmætɪk/','実際的な、現実的な',"We need a pragmatic solution.",'現実的な解決策が必要だ。',"She's very pragmatic about money.",'彼女はお金について現実的だ。'),
+ it('word',4,'alleviate','/əˈliːvieɪt/','和らげる',"This medicine will alleviate the pain.",'この薬で痛みが和らぎます。',"Exercise can alleviate stress.",'運動はストレスを和らげる。'),
+ it('word',4,'deteriorate','/dɪˈtɪriəreɪt/','悪化する',"The weather deteriorated quickly.",'天気が急に悪化した。',"His health began to deteriorate.",'彼の健康が悪化し始めた。'),
+ it('word',4,'ubiquitous','/juːˈbɪkwɪtəs/','どこにでもある',"Jeepneys are ubiquitous in Cebu.",'セブではジプニーがどこにでも走っている。',"Smartphones are ubiquitous now.",'今やスマホはどこにでもある。'),
+
+ it('phrasal',0,'come in','','入る',"Come in, please.",'どうぞ入ってください。',"Can I come in?",'入ってもいいですか？'),
+ it('phrasal',0,'put on','','身につける、着る',"Put on your jacket. It's cold.",'上着を着て。寒いよ。',"I put on sunscreen every morning.",'毎朝日焼け止めを塗る。'),
+ it('phrasal',0,'take off','','脱ぐ、離陸する',"Please take off your shoes.",'靴を脱いでください。',"The plane took off on time.",'飛行機は定刻に離陸した。'),
+ it('phrasal',1,'look after','','世話をする',"Can you look after my bag?",'カバンを見ていてくれる？',"She looks after her little brother.",'彼女は弟の世話をしている。'),
+ it('phrasal',1,'get on','','（乗り物に）乗る',"Get on the bus here.",'ここでバスに乗って。',"We got on the ferry at eight.",'8時にフェリーに乗った。'),
+ it('phrasal',1,'get off','','（乗り物から）降りる',"Where should I get off?",'どこで降りればいいですか？',"Get off at the next stop.",'次の停留所で降りて。'),
+ it('phrasal',1,'set up','','設定する、準備する',"Can you help me set up my phone?",'携帯の設定を手伝ってくれる？',"We set up the tables for the party.",'パーティー用にテーブルを準備した。'),
+ it('phrasal',1,'throw away','','捨てる',"Don't throw away the receipt.",'レシートを捨てないで。',"I threw away my old shoes.",'古い靴を捨てた。'),
+ it('phrasal',2,'pick out','','選ぶ',"Can you help me pick out a gift?",'プレゼント選びを手伝ってくれる？',"She picked out a nice dress.",'彼女は素敵なドレスを選んだ。'),
+ it('phrasal',2,'work out','','運動する、うまくいく',"I work out at the gym three times a week.",'週3回ジムで運動している。',"Don't worry. It'll work out.",'心配しないで。うまくいくよ。'),
+ it('phrasal',2,'sort out','','解決する、整理する',"I need to sort out my visa.",'ビザのことを片付けないと。',"Let's sort it out together.",'一緒に解決しよう。'),
+ it('phrasal',2,'make up','','仲直りする、作り上げる',"They argued but made up later.",'彼らはけんかしたが、あとで仲直りした。',"He made up an excuse.",'彼は言い訳をでっち上げた。'),
+ it('phrasal',2,'cut down on','','～を減らす',"I'm trying to cut down on sugar.",'砂糖を減らそうとしている。',"You should cut down on coffee.",'コーヒーを減らしたほうがいい。'),
+ it('phrasal',3,'take over','','引き継ぐ',"Can you take over my shift?",'シフトを引き継いでくれる？',"She took over the business from her father.",'彼女は父親から事業を引き継いだ。'),
+ it('phrasal',3,'point out','','指摘する',"Thanks for pointing out my mistake.",'間違いを指摘してくれてありがとう。',"The teacher pointed out some problems.",'先生がいくつか問題を指摘した。'),
+ it('phrasal',3,'go over','','見直す、確認する',"Let's go over the answers.",'答えを見直そう。',"Can we go over the plan again?",'もう一度計画を確認できる？'),
+ it('phrasal',3,'fall behind','','遅れをとる',"I fell behind in class when I was sick.",'病気のとき授業で遅れをとった。',"Don't fall behind on your homework.",'宿題を遅らせないで。'),
+ it('phrasal',4,'iron out','','（問題を）解消する',"We need to iron out a few details.",'いくつか細かい点を詰める必要がある。',"They ironed out their differences.",'彼らは意見の違いを解消した。'),
+ it('phrasal',4,'touch base','','連絡を取る、確認し合う',"Let's touch base next week.",'来週また連絡を取り合おう。',"I just wanted to touch base about the project.",'プロジェクトの件で確認したくて。'),
+ it('phrasal',4,'follow up on','','（その後の）確認をする',"I'm following up on my application.",'応募の件で確認のご連絡です。',"Could you follow up on this?",'これの確認をお願いできますか？'),
+
+ it('colloc',0,'take a seat','','座る',"Please take a seat.",'どうぞおかけください。',"Take a seat anywhere.",'どこでも座って。'),
+ it('colloc',0,'have fun','','楽しむ',"Have fun at the party!",'パーティー楽しんでね！',"We had so much fun.",'すごく楽しかった。'),
+ it('colloc',0,'go shopping','','買い物に行く',"Let's go shopping this weekend.",'今週末買い物に行こう。',"I went shopping at the mall.",'モールに買い物に行った。'),
+ it('colloc',1,'get lost','','道に迷う',"I got lost on the way to school.",'学校へ行く途中で道に迷った。',"It's easy to get lost here.",'ここは迷いやすい。'),
+ it('colloc',1,'take medicine','','薬を飲む',"Did you take your medicine?",'薬は飲んだ？',"Take this medicine after meals.",'この薬は食後に飲んでください。'),
+ it('colloc',1,'miss the bus','','バスに乗り遅れる',"I missed the bus this morning.",'今朝バスに乗り遅れた。',"Hurry, or we'll miss the bus.",'急がないとバスに乗り遅れるよ。'),
+ it('colloc',1,'tell the truth','','本当のことを言う',"Please tell me the truth.",'本当のことを言って。',"To tell the truth, I was nervous.",'実を言うと、緊張していた。'),
+ it('colloc',1,'make noise','','音を立てる、騒ぐ',"Please don't make noise after ten.",'10時以降は騒がないでください。',"The fan makes a strange noise.",'扇風機が変な音を立てる。'),
+ it('colloc',2,'make a suggestion','','提案する',"Can I make a suggestion?",'提案してもいいですか？',"She made a good suggestion.",'彼女はいい提案をした。'),
+ it('colloc',2,'make a complaint','','苦情を言う',"I'd like to make a complaint.",'苦情を申し上げたいのですが。',"Several guests made complaints about the noise.",'何人かの客が騒音の苦情を言った。'),
+ it('colloc',2,'break a promise','','約束を破る',"Don't break your promise.",'約束を破らないで。',"I never break a promise.",'私は約束を破らない。'),
+ it('colloc',2,'take notes','','メモを取る',"Take notes during the class.",'授業中はメモを取って。',"I took notes on my phone.",'携帯にメモを取った。'),
+ it('colloc',2,'run a business','','事業を経営する',"My parents run a small business.",'両親は小さな事業を経営している。',"She runs a café in Sydney.",'彼女はシドニーでカフェを経営している。'),
+ it('colloc',2,'fast food','','ファストフード',"I try not to eat fast food.",'ファストフードはなるべく食べないようにしている。',"There are many fast food places here.",'ここにはファストフード店がたくさんある。'),
+ it('colloc',3,'make an exception','','例外を認める',"Could you make an exception this time?",'今回は例外にしていただけませんか？',"We can't make an exception.",'例外は認められません。'),
+ it('colloc',3,'face a problem','','問題に直面する',"We faced a lot of problems at first.",'最初はたくさんの問題に直面した。',"Every student faces this problem.",'どの学生もこの問題にぶつかる。'),
+ it('colloc',3,'highly recommend','','強くすすめる',"I highly recommend this school.",'この学校を強くおすすめします。',"The tour was highly recommended.",'そのツアーは強くすすめられていた。'),
+ it('colloc',3,'deeply sorry','','心からすまなく思う',"I'm deeply sorry for the trouble.",'ご迷惑をおかけして心からおわびします。',"We are deeply sorry.",'深くおわび申し上げます。'),
+ it('colloc',4,'pose a risk','','危険をもたらす',"Strong currents pose a risk to swimmers.",'強い潮の流れは泳ぐ人に危険をもたらす。',"This doesn't pose any risk.",'これには何の危険もない。'),
+ it('colloc',4,'meet expectations','','期待に応える',"The course met my expectations.",'そのコースは期待どおりだった。',"We work hard to meet customers' expectations.",'お客さまの期待に応えるため努力している。'),
+
+ it('idiom',2,'hit the road','','出発する',"It's late. Let's hit the road.",'遅くなった。そろそろ出発しよう。',"We hit the road at six.",'6時に出発した。'),
+ it('idiom',2,'sleep on it','','一晩よく考える',"Let me sleep on it.",'一晩考えさせて。',"Don't decide now. Sleep on it.",'今決めないで。一晩考えて。'),
+ it('idiom',2,'in hot water','','困ったことになって',"I'm in hot water with my boss.",'上司とまずいことになっている。',"He got in hot water for being late.",'彼は遅刻してまずいことになった。'),
+ it('idiom',2,'pull someone\'s leg','','からかう',"Are you pulling my leg?",'からかってるの？',"Don't worry, I'm just pulling your leg.",'心配しないで、からかっただけ。'),
+ it('idiom',2,'a long shot','','見込みの薄いこと',"It's a long shot, but let's try.",'望みは薄いけど、やってみよう。',"Getting that job is a long shot.",'あの仕事に受かるのは難しい。'),
+ it('idiom',3,'learn the ropes','','やり方・コツを覚える',"It took me a week to learn the ropes.",'仕事のやり方を覚えるのに1週間かかった。',"She's still learning the ropes.",'彼女はまだ仕事を覚えている最中だ。'),
+ it('idiom',3,'get cold feet','','おじけづく',"I got cold feet before the interview.",'面接の前におじけづいた。',"Don't get cold feet now!",'今さらおじけづかないで！'),
+ it('idiom',3,'on cloud nine','','有頂天で',"She's been on cloud nine since she got the job.",'彼女は仕事が決まってから有頂天だ。',"I was on cloud nine after passing IELTS.",'IELTSに合格して有頂天だった。'),
+ it('idiom',3,'face the music','','報いを受ける、現実と向き合う',"I broke the rule, so I have to face the music.",'ルールを破ったので、責任を取らないと。',"It's time to face the music.",'現実と向き合う時だ。'),
+ it('idiom',3,'play it by ear','','臨機応変にやる',"Let's play it by ear.",'その場の流れで決めよう。',"We didn't plan much. We just played it by ear.",'あまり計画せず、臨機応変にやった。'),
+ it('idiom',4,'bite off more than you can chew','','手に負えないことを引き受ける',"I bit off more than I could chew.",'自分の手に負えないことを引き受けてしまった。',"Don't bite off more than you can chew.",'無理をして引き受けすぎないで。'),
+ it('idiom',4,'the ball is in your court','','次はあなたが決める番だ',"I've made my offer. The ball is in your court.",'こちらの条件は出しました。次はあなたが決める番です。',"Now the ball is in their court.",'今度は向こうが決める番だ。'),
+ it('idiom',4,'a drop in the ocean','','焼け石に水',"Ten dollars is a drop in the ocean.",'10ドルなんて焼け石に水だ。',"Our efforts felt like a drop in the ocean.",'私たちの努力は焼け石に水のように感じた。'),
+ it('idiom',4,'back to square one','','振り出しに戻る',"The plan failed, so we're back to square one.",'計画が失敗して、振り出しに戻った。',"I lost my notes and had to go back to square one.",'ノートをなくして、最初からやり直すことになった。'),
+ it('idiom',4,'read between the lines','','行間を読む',"You have to read between the lines.",'行間を読まないとだめだよ。',"Reading between the lines, he wasn't happy.",'言外の意味をくむと、彼は不満だった。'),
+
+ it('pattern',0,"I need ~",'','～が必要です',"I need a new charger.",'新しい充電器が必要です。',"I need some help.",'少し手伝いが必要です。'),
+ it('pattern',0,"Where can I ~?",'','どこで～できますか？',"Where can I buy a SIM card?",'どこでSIMカードを買えますか？',"Where can I get a taxi?",'どこでタクシーに乗れますか？'),
+ it('pattern',1,"I'm looking for ~",'','～を探しています',"I'm looking for a pharmacy.",'薬局を探しています。',"I'm looking for a part-time job.",'アルバイトを探しています。'),
+ it('pattern',1,"Would you like ~?",'','～はいかがですか？',"Would you like some coffee?",'コーヒーはいかがですか？',"Would you like to come with us?",'一緒に来ませんか？'),
+ it('pattern',1,"I'm afraid ~",'','あいにく～です',"I'm afraid I can't come.",'あいにく行けません。',"I'm afraid we're closed.",'あいにく閉店しております。'),
+ it('pattern',1,"It's hard to ~",'','～するのは難しい',"It's hard to understand fast English.",'速い英語を聞き取るのは難しい。',"It's hard to wake up early.",'早起きするのはつらい。'),
+ it('pattern',2,"I'm not used to ~ing",'','～するのに慣れていない',"I'm not used to speaking English all day.",'一日中英語を話すのに慣れていない。',"I'm not used to eating rice three times a day.",'1日3回ご飯を食べるのに慣れていない。'),
+ it('pattern',2,"I'm about to ~",'','ちょうど～するところ',"I'm about to leave.",'ちょうど出るところです。',"The class is about to start.",'授業がもうすぐ始まる。'),
+ it('pattern',2,"Do you happen to ~?",'','ひょっとして～ですか？',"Do you happen to know his number?",'ひょっとして彼の番号を知ってる？',"Do you happen to have a pen?",'ひょっとしてペン持ってない？'),
+ it('pattern',2,"I can't wait to ~",'','～するのが待ちきれない',"I can't wait to see you.",'会えるのが待ちきれない。',"I can't wait to go to Australia.",'オーストラリアに行くのが待ちきれない。'),
+ it('pattern',3,"I'd rather ~ than ...",'','…するより～したい',"I'd rather stay home than go out.",'出かけるより家にいたい。',"I'd rather take the bus than walk.",'歩くよりバスに乗りたい。'),
+ it('pattern',3,"There's no point in ~ing",'','～しても意味がない',"There's no point in worrying.",'心配しても意味がない。',"There's no point in waiting.",'待っても仕方がない。'),
+ it('pattern',3,"As far as I know, ~",'','私の知る限りでは～',"As far as I know, the school is open on Saturday.",'私の知る限り、学校は土曜日も開いている。',"As far as I know, he's from Davao.",'私の知る限り、彼はダバオ出身だ。'),
+ it('pattern',3,"It's no wonder ~",'','～なのも不思議ではない',"It's no wonder you're tired.",'疲れているのも無理はない。',"It's no wonder this place is popular.",'ここが人気なのも当然だ。'),
+ it('pattern',4,"Had I known ~, I would have ...",'','～と知っていたら…したのに',"Had I known it would rain, I would have brought an umbrella.",'雨が降ると知っていたら、傘を持ってきたのに。',"Had I known, I would have helped.",'知っていたら手伝ったのに。'),
+ it('pattern',4,"Not until ~ did I ...",'','～して初めて…した',"Not until I lived abroad did I appreciate my family.",'海外に住んで初めて家族のありがたみが分かった。',"Not until later did I realize my mistake.",'あとになって初めて間違いに気づいた。'),
+
+ it('study',0,"Can I sit here?",'','ここに座ってもいい？',"Excuse me, can I sit here?",'すみません、ここに座ってもいいですか？',"Is anyone sitting here?",'ここ、誰か座ってる？','授業中'),
+ it('study',0,"Which page?",'','何ページですか？',"Sorry, which page are we on?",'すみません、今何ページですか？',"Which page is the homework on?",'宿題は何ページですか？','授業中'),
+ it('study',1,"Can you check my answer?",'','答えを確認してもらえますか？',"Can you check my answer to number three?",'3番の答えを確認してもらえますか？',"Is my answer correct?",'私の答えは合っていますか？','授業中'),
+ it('study',1,"I'm not sure how to pronounce this.",'','これの発音が分かりません。',"I'm not sure how to pronounce this word.",'この単語の発音が分かりません。',"How do you pronounce this?",'これはどう発音しますか？','授業中'),
+ it('study',1,"Could you give me some feedback?",'','フィードバックをいただけますか？',"Could you give me some feedback on my essay?",'エッセイにフィードバックをいただけますか？',"Thank you for the feedback.",'フィードバックをありがとうございます。','授業中'),
+ it('study',2,"I'd like to practice for IELTS.",'','IELTSの練習をしたいです。',"In the one-on-one class, I'd like to practice for IELTS speaking.",'マンツーマンでは、IELTSのスピーキングの練習をしたいです。',"Could we do a mock test?",'模擬テストをやってもらえますか？','授業中'),
+ it('study',2,"Could you speak more naturally?",'','もっと自然な速さで話してもらえますか？',"I want to get used to real English. Could you speak more naturally?",'本物の英語に慣れたいので、もっと自然に話してもらえますか？',"Don't slow down for me.",'私のためにゆっくり話さなくて大丈夫です。','授業中'),
+ it('study',0,"Where is the cafeteria?",'','食堂はどこですか？',"Excuse me, where is the cafeteria?",'すみません、食堂はどこですか？',"Is the cafeteria open now?",'食堂は今開いていますか？','学校生活'),
+ it('study',1,"Can I join you?",'','一緒にいい？',"Hi, can I join you?",'やあ、一緒にいい？',"We're going to the mall. Do you want to join us?",'モールに行くけど、一緒に来る？','学校生活'),
+ it('study',1,"When is the level test?",'','レベルテストはいつですか？',"When is the next level test?",'次のレベルテストはいつですか？',"Did you pass the level test?",'レベルテストに合格した？','学校生活'),
+ it('study',1,"Where can I print this?",'','これはどこで印刷できますか？',"Where can I print my homework?",'宿題はどこで印刷できますか？',"Is there a printer I can use?",'使えるプリンターはありますか？','学校生活'),
+ it('study',1,"How was your weekend?",'','週末はどうだった？',"Hi! How was your weekend?",'やあ！週末はどうだった？',"It was great. I went to Moalboal.",'最高だったよ。モアルボアルに行ったんだ。','学校生活'),
+ it('study',2,"I'd like to talk to the student manager.",'','学生担当の方と話したいです。',"Excuse me, I'd like to talk to the student manager.",'すみません、学生担当の方と話したいです。',"Who should I talk to about my classes?",'授業のことは誰に相談すればいいですか？','学校生活'),
+ it('study',2,"I'm thinking of changing my course.",'','コースを変えようか考えています。',"I'm thinking of changing my course to IELTS.",'IELTSコースに変えようか考えています。',"Is it possible to change my course next month?",'来月コースを変えることはできますか？','学校生活'),
+ it('study',0,"The toilet doesn't flush.",'','トイレが流れません。',"Excuse me, the toilet in my room doesn't flush.",'すみません、部屋のトイレが流れません。',"The toilet is clogged.",'トイレが詰まっています。','寮・生活'),
+ it('study',0,"Can I have more towels?",'','タオルをもう少しもらえますか？',"Can I have more towels, please?",'タオルをもう少しいただけますか？',"Can I get new sheets?",'新しいシーツをもらえますか？','寮・生活'),
+ it('study',1,"There are ants in my room.",'','部屋にアリがいます。',"There are ants in my room. Could you do something?",'部屋にアリがいます。何とかしてもらえますか？',"I saw a cockroach in the bathroom.",'浴室でゴキブリを見ました。','寮・生活'),
+ it('study',1,"Can I use the kitchen?",'','キッチンを使ってもいいですか？',"Can I use the kitchen to make noodles?",'麺を作るのにキッチンを使ってもいいですか？',"Is there a microwave I can use?",'使える電子レンジはありますか？','寮・生活'),
+ it('study',1,"Where can I buy water?",'','水はどこで買えますか？',"Where can I buy drinking water?",'飲み水はどこで買えますか？',"Is there a water dispenser on this floor?",'この階にウォーターサーバーはありますか？','寮・生活'),
+ it('study',2,"The power went out.",'','停電しました。',"The power went out in my room.",'部屋が停電しました。',"How long will the power outage last?",'停電はどれくらい続きますか？','寮・生活'),
+ it('study',2,"I'd like to have a package delivered here.",'','ここに荷物を届けてもらいたいです。',"Can I have a package delivered to the school?",'学校に荷物を届けてもらうことはできますか？',"Did a package arrive for me?",'私宛ての荷物は届いていますか？','寮・生活')
 ];
 const INTERVIEW = [
  {id:'iv:about',q:"Tell me about yourself.",ja:'自己紹介をしてください。',tip:'名前よりも「どんな人で、何ができるか」を30秒ほどで。仕事の経験を1つ入れる。',a:"I'm Yuki from Japan. I worked at a café for two years, so I'm used to busy shifts. I'm friendly and I learn quickly.",aja:'日本から来たユキです。カフェで2年間働いたので、忙しいシフトには慣れています。人と話すのが好きで、覚えるのが早いです。'},
@@ -912,6 +1119,103 @@ SC('褒める時',1,"I like your ~.",'その～、いいね。',["I like your sh
  ['mango',"[[I like your|その～、いいね]] bag. Where did you get it?",'そのバッグいいね。どこで買ったの？'],['coco',"Thanks! I got it at the night market.",'ありがとう！ナイトマーケットで買ったんだ。'],['mango',"I want to go there too.",'私も行きたい。']]]);
 SC('褒める時',1,"Your English is getting better.",'英語がうまくなってきたね。',["Your English is getting better every week.",'毎週、英語がうまくなってきているね。',"Your pronunciation is getting better.",'発音が良くなってきたね。'],[{coco:'先生',mango:'あなた'},[
  ['coco',"[[Your English is getting better.|英語がうまくなってきたね。]]",'英語がうまくなってきたね。'],['mango',"Really? Thank you! I've been practicing a lot.",'本当ですか？ありがとうございます！たくさん練習しています。'],['coco',"It shows. Keep going!",'よく分かるよ。その調子！']]]);
+
+SC('カジュアル',0,"No way!",'うそでしょ！／まさか！',["No way! You passed?",'うそ！受かったの？',"No way! That's amazing.",'まさか！すごいね。'],[FR,[
+ ['coco',"I saw a whale shark today!",'今日ジンベエザメを見たよ！'],['mango',"[[No way!|うそでしょ！]] Where?",'うそでしょ！どこで？'],['coco',"In Oslob. It was huge.",'オスロブで。すごく大きかった。']]]);
+SC('カジュアル',0,"I'm down.",'乗った！／いいよ、行く。',["\"Karaoke tonight?\" \"I'm down.\"",'「今夜カラオケ行く？」「行く行く」',"If you're going to the beach, I'm down.",'ビーチに行くなら、私も行く。'],[FR,[
+ ['coco',"Want to get dinner at the night market?",'ナイトマーケットで夕食食べない？'],['mango',"[[I'm down.|乗った！]] What time?",'乗った！何時？'],['coco',"Let's leave at seven.",'7時に出よう。']]]);
+SC('カジュアル',1,"That makes sense.",'なるほどね／それなら納得。',["Oh, that makes sense.",'ああ、なるほどね。',"That makes sense. Thanks for explaining.",'納得した。説明してくれてありがとう。'],[FR,[
+ ['coco',"The class was canceled because the teacher is sick.",'先生が病気だから、授業が中止になったんだって。'],['mango',"Oh, [[that makes sense.|なるほどね。]]",'ああ、なるほどね。'],['coco',"Want to study together instead?",'代わりに一緒に勉強する？']]]);
+SC('恋愛',1,"Are you seeing anyone?",'付き合っている人はいるの？',["Can I ask, are you seeing anyone?",'聞いてもいい？付き合っている人はいるの？',"I'm not seeing anyone right now.",'今は誰とも付き合っていないよ。'],[FR,[
+ ['coco',"[[Are you seeing anyone?|付き合っている人はいるの？]]",'付き合っている人はいるの？'],['mango',"No, not right now. Why?",'ううん、今はいないよ。どうして？'],['coco',"Just curious!",'ちょっと気になっただけ！']]]);
+SC('恋愛',1,"Would you like to grab a coffee sometime?",'今度コーヒーでもどう？',["Would you like to grab a coffee sometime this week?",'今週どこかでコーヒーでもどう？',"Would you like to grab dinner sometime?",'今度夕食でもどう？'],[{coco:'クラスメート',mango:'あなた'},[
+ ['mango',"[[Would you like to grab a coffee sometime?|今度コーヒーでもどう？]]",'今度コーヒーでもどう？'],['coco',"Sure, I'd love to!",'うん、ぜひ！'],['mango',"Great! How about Saturday?",'よかった！土曜日はどう？']]]);
+SC('恋愛',2,"I have a crush on ~.",'～のことが気になっている。',["I think I have a crush on him.",'彼のことが気になっているかも。',"I had a crush on my teacher in high school.",'高校のとき先生に憧れていた。'],[FR,[
+ ['mango',"Can I tell you a secret? [[I have a crush on|～のことが気になっている]] Ken.",'秘密を話していい？ケンのことが気になっているんだ。'],['coco',"Really? You should tell him!",'本当？伝えなよ！'],['mango',"No way, I'm too shy.",'無理、恥ずかしすぎる。']]]);
+SC('好き嫌い',0,"I love it!",'大好き！',["I love it! Thank you!",'すごく気に入った！ありがとう！',"I love Filipino food.",'フィリピン料理が大好き。'],[FR,[
+ ['coco',"How do you like the mango shake?",'マンゴーシェイクはどう？'],['mango',"[[I love it!|大好き！]] It's so sweet.",'大好き！すごく甘い。'],['coco',"I knew you would.",'気に入ると思った。']]]);
+SC('好き嫌い',1,"I'm not a big fan of ~.",'～はあまり好きじゃない。',["I'm not a big fan of spicy food.",'辛い食べ物はあまり好きじゃない。',"I'm not a big fan of horror movies.",'ホラー映画はあまり好きじゃない。'],[FR,[
+ ['coco',"Do you want to try the durian?",'ドリアン食べてみる？'],['mango',"Hmm, [[I'm not a big fan of|～はあまり好きじゃない]] strong smells.",'うーん、においが強いのはあまり好きじゃないんだ。'],['coco',"Ha ha, I understand.",'はは、分かる。']]]);
+SC('好き嫌い',1,"It's not my cup of tea.",'私の好みじゃない。',["Jazz is not really my cup of tea.",'ジャズはあまり私の好みじゃない。',"Camping isn't my cup of tea.",'キャンプは好みじゃない。'],[FR,[
+ ['coco',"Do you want to go clubbing tonight?",'今夜クラブに行かない？'],['mango',"Thanks, but [[it's not my cup of tea.|私の好みじゃないんだ。]]",'ありがとう、でも好みじゃないんだ。'],['coco',"OK, maybe karaoke next time?",'そっか、じゃあ次はカラオケは？']]]);
+SC('感情',0,"I'm so happy!",'すごくうれしい！',["I'm so happy for you!",'自分のことのようにうれしい！',"I'm so happy I came here.",'ここに来られて本当にうれしい。'],[FR,[
+ ['mango',"I passed my level test!",'レベルテストに合格した！'],['coco',"Congratulations!",'おめでとう！'],['mango',"Thanks! [[I'm so happy!|すごくうれしい！]]",'ありがとう！すごくうれしい！']]]);
+SC('感情',1,"I'm a bit homesick.",'少しホームシックなんだ。',["I'm a bit homesick these days.",'最近少しホームシックなんだ。',"Do you ever get homesick?",'ホームシックになることある？'],[FR,[
+ ['coco',"You look down. Are you OK?",'元気なさそうだね。大丈夫？'],['mango',"[[I'm a bit homesick.|少しホームシックなんだ。]] I miss my family.",'少しホームシックなんだ。家族に会いたい。'],['coco',"That's normal. Let's go eat something nice.",'それは普通のことだよ。おいしいもの食べに行こう。']]]);
+SC('感情',2,"I'm stressed out.",'ストレスがたまっている。',["I'm stressed out about the test.",'テストのことでストレスがたまっている。',"You look stressed out.",'ストレスがたまってそうだね。'],[FR,[
+ ['mango',"[[I'm stressed out.|ストレスがたまってるんだ。]] I have three tests this week.",'ストレスがたまってるんだ。今週テストが3つある。'],['coco',"Take a break tonight. You'll do better tomorrow.",'今夜は休みなよ。そのほうが明日うまくいくよ。'],['mango',"Maybe you're right.",'そうかもね。']]]);
+SC('励ます時',0,"You can do it!",'あなたならできる！',["Don't worry. You can do it!",'心配しないで。あなたならできる！',"You can do it! I believe in you.",'できるよ！信じてる。'],[FR,[
+ ['mango',"I'm nervous about my presentation.",'発表が不安なんだ。'],['coco',"[[You can do it!|あなたならできる！]] You practiced a lot.",'あなたならできる！たくさん練習したじゃない。'],['mango',"Thanks. I'll do my best.",'ありがとう。がんばる。']]]);
+SC('励ます時',1,"Don't be so hard on yourself.",'自分を責めすぎないで。',["It's just one mistake. Don't be so hard on yourself.",'一回の間違いだよ。自分を責めすぎないで。',"Don't be so hard on yourself. Everyone makes mistakes.",'自分を責めすぎないで。誰でも間違えるよ。'],[FR,[
+ ['mango',"I failed the speaking test. I'm so bad at English.",'スピーキングテストに落ちた。英語が全然だめだ。'],['coco',"[[Don't be so hard on yourself.|自分を責めすぎないで。]] You've improved a lot.",'自分を責めすぎないで。すごく上達してるよ。'],['mango',"Really?",'本当？']]]);
+SC('励ます時',1,"Hang in there.",'がんばって／もう少しの辛抱だよ。',["Hang in there. Only one more week!",'がんばって。あと1週間だよ！',"I know it's hard, but hang in there.",'大変なのは分かるけど、もう少しの辛抱だよ。'],[FR,[
+ ['mango',"My job search isn't going well.",'仕事探しがうまくいっていないんだ。'],['coco',"[[Hang in there.|がんばって。]] Something will come up.",'がんばって。きっと何か見つかるよ。'],['mango',"Thanks. I'll keep trying.",'ありがとう。続けてみる。']]]);
+SC('怒る時',1,"That's not fair.",'それはずるい／不公平だ。',["That's not fair. I was here first.",'それはずるい。私が先に来ていたのに。',"It's not fair that I always have to clean.",'いつも私が掃除しなきゃいけないのは不公平だ。'],[FR,[
+ ['coco',"Sorry, the last ticket just sold out.",'ごめん、最後のチケットがちょうど売り切れた。'],['mango',"What? [[That's not fair.|それはずるいよ。]] I waited for an hour.",'え？それはずるいよ。1時間も待ったのに。'],['coco',"I know. I'm sorry.",'だよね。ごめん。']]]);
+SC('怒る時',1,"I'm really annoyed.",'本当にイライラしている。',["I'm really annoyed with my roommate.",'ルームメイトに本当にイライラしている。',"It's really annoying when people are late.",'人が遅れてくると本当にイライラする。'],[FR,[
+ ['coco',"What's wrong?",'どうしたの？'],['mango',"[[I'm really annoyed.|本当にイライラしてる。]] Someone ate my food in the fridge.",'本当にイライラしてる。誰かが冷蔵庫の私の食べ物を食べたの。'],['coco',"That's terrible! You should label it.",'ひどい！名前を書いておきなよ。']]]);
+SC('怒る時',2,"I've had enough.",'もううんざりだ。',["I've had enough of this noise.",'この騒音にはもううんざりだ。',"OK, I've had enough. I'm leaving.",'もううんざり。帰るね。'],[FR,[
+ ['mango',"The Wi-Fi is down again. [[I've had enough.|もううんざりだ。]]",'またWi-Fiが止まった。もううんざりだ。'],['coco',"Let's talk to the office together.",'一緒に事務所に言いに行こう。'],['mango',"Good idea.",'そうしよう。']]]);
+SC('アドバイス',1,"If I were you, I'd ~.",'私があなたなら、～するよ。',["If I were you, I'd take a taxi.",'私だったら、タクシーにするよ。',"If I were you, I'd talk to the teacher.",'私があなたなら、先生に相談するよ。'],[FR,[
+ ['mango',"Should I stay for one more month?",'もう1か月延長したほうがいいかな？'],['coco',"[[If I were you, I'd|私があなたなら～するよ]] stay. Your English is improving fast.",'私なら延長するよ。英語がどんどん上達してるし。'],['mango',"You think so?",'そう思う？']]]);
+SC('アドバイス',1,"Why don't you ~?",'～したらどう？',["Why don't you ask the teacher?",'先生に聞いてみたら？',"Why don't you take a day off?",'1日休んだらどう？'],[FR,[
+ ['mango',"I can't sleep at night.",'夜眠れないんだ。'],['coco',"[[Why don't you|～したらどう？]] stop using your phone before bed?",'寝る前に携帯を見るのをやめたらどう？'],['mango',"That's a good idea.",'いい考えだね。']]]);
+SC('アドバイス',2,"You might want to ~.",'～したほうがいいかもね。（やわらかい助言）',["You might want to bring a jacket. It's cold in the bus.",'上着を持って行ったほうがいいかも。バスの中は寒いよ。',"You might want to book early.",'早めに予約したほうがいいかもね。'],[FR,[
+ ['mango',"I'm going to Bohol this weekend.",'今週末ボホールに行くんだ。'],['coco',"Nice! [[You might want to|～したほうがいいかもね]] book the ferry today. It sells out.",'いいね！フェリーは今日予約したほうがいいかも。売り切れるから。'],['mango',"Thanks for the tip!",'教えてくれてありがとう！']]]);
+SC('言い訳をする時',1,"I didn't mean to.",'わざとじゃないんです。',["Sorry, I didn't mean to.",'ごめんなさい、わざとじゃないんです。',"I didn't mean to hurt you.",'傷つけるつもりはなかったんだ。'],[FR,[
+ ['coco',"Hey, that's my water!",'ちょっと、それ私の水だよ！'],['mango',"Oh, sorry! [[I didn't mean to.|わざとじゃないんだ。]] I thought it was mine.",'あ、ごめん！わざとじゃないの。自分のだと思った。'],['coco',"It's OK.",'大丈夫だよ。']]]);
+SC('言い訳をする時',1,"Something came up.",'急な用事ができて。',["Sorry, something came up. Can we meet tomorrow?",'ごめん、急な用事ができて。明日会える？',"Something came up at work.",'仕事で急な用事が入った。'],[FR,[
+ ['mango',"Sorry, I can't make it tonight. [[Something came up.|急な用事ができて。]]",'ごめん、今夜行けなくなった。急な用事ができて。'],['coco',"No problem. Is everything OK?",'大丈夫。何かあった？'],['mango',"Yes, I just need to finish some work.",'うん、ちょっと仕事を終わらせないといけなくて。']]]);
+SC('言い訳をする時',2,"It slipped my mind.",'うっかり忘れていました。',["Sorry, it completely slipped my mind.",'すみません、すっかり忘れていました。',"I meant to call you, but it slipped my mind.",'電話するつもりだったけど、うっかり忘れてた。'],[{coco:'先生',mango:'あなた'},[
+ ['coco',"Did you bring your homework?",'宿題は持ってきた？'],['mango',"Oh no, sorry. [[It slipped my mind.|うっかり忘れていました。]]",'しまった、すみません。うっかり忘れていました。'],['coco',"OK, bring it tomorrow.",'じゃあ、明日持ってきてね。']]]);
+SC('性格',1,"She's really outgoing.",'彼女はとても社交的です。',["She's really outgoing and makes friends easily.",'彼女はとても社交的で、すぐに友達ができる。',"I'm not very outgoing.",'私はあまり社交的じゃない。'],[FR,[
+ ['coco',"Who's that girl talking to everyone?",'みんなと話しているあの子は誰？'],['mango',"That's Mia. [[She's really outgoing.|彼女はとても社交的なんだ。]]",'ミアだよ。とても社交的なんだ。'],['coco',"I want to be like her.",'あんなふうになりたいな。']]]);
+SC('性格',1,"I'm a bit shy.",'少し人見知りです。',["I'm a bit shy at first, but I open up quickly.",'最初は少し人見知りだけど、すぐに打ち解けます。',"He's a bit shy around new people.",'彼は初対面の人の前では少し人見知りだ。'],[FR,[
+ ['coco',"You're so quiet in class.",'授業ではすごく静かだね。'],['mango',"Yeah, [[I'm a bit shy.|少し人見知りなんだ。]]",'うん、少し人見知りなんだ。'],['coco',"Don't worry. Everyone is friendly here.",'心配しないで。ここはみんな優しいよ。']]]);
+SC('性格',2,"He's very easygoing.",'彼はとてもおおらかです。',["My roommate is very easygoing.",'ルームメイトはとてもおおらかだ。',"She's easygoing and easy to talk to.",'彼女はおおらかで話しやすい。'],[FR,[
+ ['coco',"How's your new roommate?",'新しいルームメイトはどう？'],['mango',"Great! [[He's very easygoing.|とてもおおらかなんだ。]]",'最高！とてもおおらかなんだ。'],['coco',"Lucky you!",'ラッキーだね！']]]);
+SC('フォーマル',1,"I'd appreciate it if you could ~.",'～していただけるとありがたいです。',["I'd appreciate it if you could reply by Friday.",'金曜日までにお返事いただけるとありがたいです。',"I'd appreciate it if you could check this.",'こちらを確認していただけるとありがたいです。'],[{coco:'学校のスタッフ',mango:'あなた'},[
+ ['mango',"[[I'd appreciate it if you could|～していただけるとありがたいです]] change my room.",'部屋を変えていただけるとありがたいのですが。'],['coco',"Of course. Let me check what's available.",'もちろんです。空きを確認しますね。'],['mango',"Thank you very much.",'ありがとうございます。']]]);
+SC('フォーマル',2,"Would it be possible to ~?",'～することは可能でしょうか？',["Would it be possible to extend the deadline?",'締め切りを延ばしていただくことは可能でしょうか？',"Would it be possible to meet next week?",'来週お会いすることは可能でしょうか？'],[{coco:'先生',mango:'あなた'},[
+ ['mango',"[[Would it be possible to|～することは可能でしょうか]] take the test on Monday instead?",'代わりに月曜日にテストを受けることは可能でしょうか？'],['coco',"Let me check with the office.",'事務所に確認してみますね。'],['mango',"Thank you. I appreciate it.",'ありがとうございます。助かります。']]]);
+SC('フォーマル',2,"I'm sorry for the inconvenience.",'ご迷惑をおかけしてすみません。',["I'm sorry for the inconvenience. I'll fix it right away.",'ご迷惑をおかけしてすみません。すぐに直します。',"We're sorry for any inconvenience.",'ご不便をおかけして申し訳ございません。'],[{coco:'お客さん',mango:'あなた（店員）'},[
+ ['coco',"Excuse me, this isn't what I ordered.",'すみません、これは頼んだものと違います。'],['mango',"[[I'm sorry for the inconvenience.|ご迷惑をおかけしてすみません。]] I'll change it right away.",'ご迷惑をおかけしてすみません。すぐにお取り替えします。'],['coco',"Thank you.",'ありがとう。']]]);
+SC('パソコン、スマホ',0,"What's the Wi-Fi password?",'Wi-Fiのパスワードは何ですか？',["Excuse me, what's the Wi-Fi password?",'すみません、Wi-Fiのパスワードは何ですか？',"Do you have Wi-Fi here?",'ここにWi-Fiはありますか？'],[{coco:'店員',mango:'あなた'},[
+ ['mango',"Excuse me, [[what's the Wi-Fi password?|Wi-Fiのパスワードは何ですか？]]",'すみません、Wi-Fiのパスワードは何ですか？'],['coco',"It's on the back of your receipt.",'レシートの裏に書いてあります。'],['mango',"Got it. Thanks.",'分かりました。ありがとう。']]]);
+SC('パソコン、スマホ',1,"My phone is about to die.",'携帯の充電が切れそう。',["My phone is about to die. Do you have a charger?",'携帯の充電が切れそう。充電器ある？',"My battery is at 5%.",'バッテリーが残り5%なんだ。'],[FR,[
+ ['mango',"[[My phone is about to die.|携帯の充電が切れそう。]]",'携帯の充電が切れそう。'],['coco',"You can use my power bank.",'私のモバイルバッテリー使っていいよ。'],['mango',"Thanks, you're a lifesaver.",'ありがとう、助かった。']]]);
+SC('パソコン、スマホ',1,"Can you send it to me?",'それ送ってくれる？',["Can you send me the photos?",'写真送ってくれる？',"Can you send it to me on LINE?",'LINEで送ってくれる？'],[FR,[
+ ['coco',"I took a nice photo of you at the beach.",'ビーチでいい写真撮ったよ。'],['mango',"Really? [[Can you send it to me?|それ送ってくれる？]]",'本当？送ってくれる？'],['coco',"Sure, I'll send it now.",'うん、今送るね。']]]);
+SC('仕事、ビジネス',1,"Let me get back to you.",'あとでお返事します。',["Let me check and get back to you.",'確認してあとでお返事します。',"I'll get back to you by tomorrow.",'明日までにお返事します。'],[{coco:'同僚',mango:'あなた'},[
+ ['coco',"Can you work on Saturday?",'土曜日働ける？'],['mango',"I'm not sure yet. [[Let me get back to you.|あとでお返事します。]]",'まだ分からないです。あとでお返事します。'],['coco',"OK, let me know by tonight.",'じゃあ、今夜までに教えて。']]]);
+SC('仕事、ビジネス',2,"I'll take care of it.",'私が対応します。',["Don't worry. I'll take care of it.",'心配しないで。私が対応します。',"Who will take care of the customers?",'お客さんの対応は誰がしますか？'],[{coco:'同僚',mango:'あなた'},[
+ ['coco',"The printer is broken again.",'またプリンターが壊れた。'],['mango',"[[I'll take care of it.|私が対応します。]] I'll call the repair shop.",'私が対応します。修理屋さんに電話しますね。'],['coco',"Thanks, that helps a lot.",'ありがとう、すごく助かる。']]]);
+SC('仕事、ビジネス',2,"Could we schedule a meeting?",'打ち合わせの日を決められますか？',["Could we schedule a meeting for next week?",'来週、打ち合わせの日を決められますか？',"When are you free for a quick meeting?",'ちょっと打ち合わせできるのはいつですか？'],[{coco:'上司',mango:'あなた'},[
+ ['mango',"I have some ideas for the project. [[Could we schedule a meeting?|打ち合わせの日を決められますか？]]",'プロジェクトの案があります。打ち合わせの日を決められますか？'],['coco',"Sure. How about Thursday at ten?",'いいよ。木曜日の10時はどう？'],['mango',"That works for me.",'大丈夫です。']]]);
+SC('注意する時',0,"Watch out!",'危ない！',["Watch out! There's a car!",'危ない！車が来てる！',"Watch out for the step.",'段差に気をつけて。'],[FR,[
+ ['coco',"[[Watch out!|危ない！]]",'危ない！'],['mango',"Whoa! Thanks. I didn't see that motorbike.",'うわっ！ありがとう。あのバイクが見えてなかった。'],['coco',"Be careful crossing the street here.",'ここの道を渡るときは気をつけてね。']]]);
+SC('注意する時',1,"Be careful with ~.",'～に気をつけて。',["Be careful with your bag in the crowd.",'人混みではカバンに気をつけて。',"Be careful with the hot water.",'お湯に気をつけて。'],[FR,[
+ ['coco',"Are you going to Colon Street?",'コロン通りに行くの？'],['mango',"Yes, for shopping.",'うん、買い物に。'],['coco',"[[Be careful with|～に気をつけて]] your phone. There are pickpockets.",'携帯に気をつけて。スリがいるから。']]]);
+SC('注意する時',2,"Would you mind keeping it down?",'少し静かにしていただけますか？',["Sorry, would you mind keeping it down? I'm studying.",'すみません、少し静かにしていただけますか？勉強中なんです。',"Would you mind turning the music down?",'音楽の音を下げていただけますか？'],[{coco:'隣の部屋の人',mango:'あなた'},[
+ ['mango',"Hi, sorry. [[Would you mind keeping it down?|少し静かにしていただけますか？]] I have a test tomorrow.",'こんにちは、すみません。少し静かにしていただけますか？明日テストなんです。'],['coco',"Oh, sorry! We'll be quiet.",'あ、ごめんなさい！静かにします。'],['mango',"Thank you.",'ありがとう。']]]);
+SC('接客',1,"How can I help you?",'いかがなさいましたか？',["Hi, how can I help you today?",'こんにちは、今日はいかがなさいましたか？',"Is there anything else I can help you with?",'ほかに何かお手伝いできることはありますか？'],[{coco:'お客さん',mango:'あなた（店員）'},[
+ ['mango',"Hi, [[how can I help you?|いかがなさいましたか？]]",'こんにちは、いかがなさいましたか？'],['coco',"I'm looking for a gift for my mom.",'母へのプレゼントを探しています。'],['mango',"Sure. These candles are very popular.",'かしこまりました。こちらのキャンドルがとても人気です。']]]);
+SC('接客',1,"I'll be right with you.",'すぐに伺います。',["I'll be right with you.",'すぐに伺います。',"Please have a seat. I'll be right with you.",'おかけになってお待ちください。すぐに伺います。'],[{coco:'お客さん',mango:'あなた（店員）'},[
+ ['coco',"Excuse me!",'すみません！'],['mango',"[[I'll be right with you.|すぐに伺います。]]",'すぐに伺います。'],['coco',"Thank you. No rush.",'ありがとう。急がなくていいですよ。']]]);
+SC('接客',2,"Let me check that for you.",'お調べいたします。',["Let me check that for you. One moment, please.",'お調べいたします。少々お待ちください。',"Let me check if we have it in stock.",'在庫があるかお調べします。'],[{coco:'お客さん',mango:'あなた（店員）'},[
+ ['coco',"Do you have this in a medium?",'これのMサイズはありますか？'],['mango',"[[Let me check that for you.|お調べいたします。]]",'お調べいたします。'],['coco',"Thanks.",'ありがとう。'],['mango',"Yes, we have one left.",'はい、1点ございます。']]]);
+SC('スポーツ',0,"Do you play any sports?",'何かスポーツはする？',["Do you play any sports in Japan?",'日本で何かスポーツはしてる？',"I don't play any sports, but I like hiking.",'スポーツはしないけど、ハイキングは好き。'],[FR,[
+ ['coco',"[[Do you play any sports?|何かスポーツはする？]]",'何かスポーツはする？'],['mango',"I play tennis. How about you?",'テニスをするよ。あなたは？'],['coco',"Basketball! It's huge in the Philippines.",'バスケ！フィリピンではすごく人気なんだ。']]]);
+SC('スポーツ',1,"Who's winning?",'どっちが勝ってる？',["Who's winning? What's the score?",'どっちが勝ってる？スコアは？',"Who won the game last night?",'昨夜の試合はどっちが勝った？'],[FR,[
+ ['mango',"[[Who's winning?|どっちが勝ってる？]]",'どっちが勝ってる？'],['coco',"The Lakers, by five points.",'レイカーズが5点差で。'],['mango',"Wow, it's close!",'わあ、接戦だね！']]]);
+SC('スポーツ',1,"I'm out of shape.",'体がなまっている。',["I haven't exercised for months. I'm out of shape.",'何か月も運動していなくて、体がなまっている。',"I want to get in shape before summer.",'夏までに体を鍛えたい。'],[FR,[
+ ['coco',"Let's run on the beach tomorrow morning!",'明日の朝、ビーチを走ろうよ！'],['mango',"OK, but [[I'm out of shape.|体がなまってるんだ。]] Let's go slowly.",'いいけど、体がなまってるんだ。ゆっくりね。'],['coco',"No problem!",'大丈夫！']]]);
+SC('スラング',1,"That's sick!",'最高！／やばい！（良い意味）',["Your new board is sick!",'新しいボード、最高じゃん！',"That trick was sick!",'今の技やばかった！'],[FR,[
+ ['coco',"I got tickets for the concert!",'コンサートのチケット取れたよ！'],['mango',"[[That's sick!|最高！]]",'最高！'],['coco',"I know, right?",'でしょ？']]]);
+SC('スラング',1,"I'm broke.",'金欠なんだ。',["I can't go out tonight. I'm broke.",'今夜は出かけられない。金欠なんだ。',"I'm broke until payday.",'給料日まで金欠。'],[FR,[
+ ['coco',"Let's go shopping!",'買い物行こうよ！'],['mango',"Sorry, [[I'm broke.|金欠なんだ。]]",'ごめん、金欠なんだ。'],['coco',"Window shopping, then!",'じゃあ見るだけにしよう！']]]);
+SC('スラング',2,"No cap.",'マジで／うそじゃなく。（若者言葉）',["That was the best pizza ever, no cap.",'あれは人生最高のピザだった、マジで。',"No cap, I studied for ten hours.",'うそじゃなく、10時間勉強した。'],[FR,[
+ ['coco',"Was the island trip good?",'島への旅行は良かった？'],['mango',"It was amazing, [[no cap.|マジで。]]",'最高だったよ、マジで。'],['coco',"I need to go!",'行かなきゃ！']]]);
 const GEN_SCENES = ['あいさつ','初対面','食べる時','カジュアル','車内や乗り物','買い物','恋愛','好き嫌い','身体と健康、病気','感情','励ます時','怒る時','待ち合わせ','感謝する時','アドバイス','褒める時','言い訳をする時','旅行','性格','フォーマル','パソコン、スマホ','仕事、ビジネス','意見','電話','天気','注意する時','接客','道案内','スポーツ','スラング'];
 const GRAMMAR = [
  {id:'gr:be',lv:0,title:'be動詞（am / is / are）',body:['「〜です」「〜にいます」を表すのがbe動詞です。主語によって形が変わります。','I には am、you と複数には are、he・she・it と単数には is を使います。','否定は be動詞のあとに not（I\'m not / isn\'t / aren\'t）。疑問文は be動詞を前に出します（Are you ~?）。'],
@@ -1148,6 +1452,67 @@ const WH_SIMS = [
     ["Great. It'll be ready in a few minutes. I'll call your name.",'ありがとうございます。数分でできます。お名前をお呼びしますね。',3,'どれくらい待つか、どう受け取るかまで伝えられています。'],
     ["Thank you!",'ありがとうございます！',2,'感じは良いです。待ち時間も伝えるとさらに親切です。']]}]}
 ];
+
+WH_SIMS.push(
+ {id:'sim:firstday',scene:'職場の初日',title:'カフェでの初出勤',roles:{coco:'先輩スタッフ',mango:'あなた'},
+  setup:'今日はカフェで働く初日です。開店前に、先輩スタッフが声をかけてきました。',
+  steps:[
+   {en:"Hey, you must be the new staff member! I'm Sam.",ja:'やあ、新しく入った人だね！サムだよ。',opts:[
+    ["Yes.",'はい。',1,'通じますが、そっけなく聞こえます。名前も伝えましょう。'],
+    ["Hi Sam, I'm Yuki. Nice to meet you!",'こんにちは、サム。ユキです。よろしくお願いします！',3,'名前を言って明るくあいさつでき、初日の印象がとても良くなります。'],
+    ["I am new staff.",'私は新しいスタッフです。',1,'文法が不自然です。I\'m the new staff member. か、名前を伝えましょう。']]},
+   {en:"Nice to meet you too. Can you start by wiping down the tables?",ja:'よろしくね。まずテーブルを拭いてくれる？',opts:[
+    ["Sure! Where can I find a cloth?",'もちろん！ふきんはどこにありますか？',3,'引き受けたうえで、必要なものの場所を聞けています。'],
+    ["Why me?",'なぜ私が？',0,'反抗的に聞こえます。初日は特に避けましょう。'],
+    ["OK.",'はい。',2,'通じます。分からないことがあれば、その場で聞きましょう。']]},
+   {en:"They're under the counter. Then can you refill the sugar and napkins?",ja:'カウンターの下だよ。それから砂糖とナプキンを補充してくれる？',opts:[
+    ["Sorry, refill the what? Could you say that again?",'すみません、何を補充ですか？もう一度言ってもらえますか？',3,'聞き取れなかったら、聞き返すのがいちばん大切。何度でも聞いて大丈夫です。'],
+    ["Uh-huh.",'（分からないまま）うん。',0,'分からないまま進めるのは失敗のもと。必ず聞き返しましょう。'],
+    ["Sugar?",'砂糖？',2,'通じますが、Could you say that again? のほうがていねいです。']]},
+   {en:"Sugar and napkins. They're in the storeroom.",ja:'砂糖とナプキンだよ。倉庫にあるから。',opts:[
+    ["Got it. I'll let you know when I'm done.",'分かりました。終わったら知らせますね。',3,'終わったら報告する、と伝えられる人は信頼されます。'],
+    ["Fine.",'いいよ。',1,'Fine. は不満そうに聞こえることがあります。'],
+    ["OK, thanks!",'分かりました、ありがとう！',2,'自然です。']]}]},
+ {id:'sim:share',scene:'家探し・シェアハウス',title:'シェアハウスの内見に行く',roles:{coco:'家の持ち主',mango:'あなた'},
+  setup:'ネットで見つけたシェアハウスの部屋を見に来ました。持ち主が玄関で迎えてくれます。',
+  steps:[
+   {en:"Hi, you must be Yuki. Come on in!",ja:'こんにちは、ユキさんだね。どうぞ入って！',opts:[
+    ["Hi, thanks for having me. Nice to meet you.",'こんにちは、お時間ありがとうございます。はじめまして。',3,'お礼から入ると、とても感じが良いです。'],
+    ["Show me the room.",'部屋を見せて。',0,'命令に聞こえます。Could you show me the room? と。'],
+    ["Hello.",'こんにちは。',2,'通じますが、お礼を添えるとさらに良くなります。']]},
+   {en:"This is the room. The rent is 260 a week.",ja:'これが部屋だよ。家賃は週260ドル。',opts:[
+    ["Are bills included?",'光熱費は込みですか？',3,'家賃に何が含まれるかは、必ず確認したいポイントです。'],
+    ["Too expensive!",'高すぎる！',1,'気持ちは分かりますが、交渉するなら理由と一緒にていねいに。'],
+    ["OK.",'分かりました。',1,'すぐに了解せず、条件を確認しましょう。']]},
+   {en:"Yes, bills and Wi-Fi are included. There's a two-week bond.",ja:'うん、光熱費とWi-Fiは込み。保証金は2週間分だよ。',opts:[
+    ["When would I get the bond back?",'保証金はいつ戻ってきますか？',3,'保証金の返し方を確認しておくと、トラブルを防げます。'],
+    ["What's a bond?",'ボンドって何ですか？',2,'分からない言葉を聞けたのは良いこと。事前に調べておくとさらに安心です。'],
+    ["I don't want to pay a bond.",'保証金は払いたくありません。',0,'ほとんどの家で必要です。払わないと言うと、契約できないことが多いです。']]},
+   {en:"When you move out, if the room is clean. So, are you interested?",ja:'退去するとき、部屋がきれいならね。それで、どうかな？',opts:[
+    ["I really like it. Can I let you know by tomorrow?",'とても気に入りました。明日までにお返事してもいいですか？',3,'前向きな気持ちを伝えつつ、考える時間をもらえています。'],
+    ["Maybe.",'たぶん。',1,'あいまいすぎます。いつ返事をするか伝えましょう。'],
+    ["Yes, I'll take it!",'はい、ここにします！',2,'決めているなら良い答えです。契約書と支払い方法を必ず確認しましょう。']]}]},
+ {id:'sim:pay',scene:'給料・契約の確認',title:'給料が足りないことを店長に伝える',roles:{coco:'店長',mango:'あなた'},
+  setup:'給与明細を見ると、先週の土曜日の分が入っていないようです。休憩時間に店長に話しかけます。',
+  steps:[
+   {en:"Hey Yuki, what's up?",ja:'やあユキ、どうしたの？',opts:[
+    ["You didn't pay me!",'給料を払ってくれていません！',0,'責めるように聞こえます。まずは確認のお願いとして伝えましょう。'],
+    ["Do you have a minute? I have a question about my pay.",'少しお時間いいですか？給料のことで質問があります。',3,'相手の都合を聞いてから本題に入れています。'],
+    ["Money problem.",'お金の問題です。',1,'何のことか分かりにくいです。']]},
+   {en:"Sure. What's the problem?",ja:'いいよ。どうしたの？',opts:[
+    ["I think my hours from last Saturday are missing.",'先週土曜日の勤務時間が抜けていると思います。',3,'いつの何が足りないか、具体的に伝えられています。'],
+    ["My pay is wrong.",'給料が間違っています。',2,'通じますが、どこが違うか具体的に言うと早く解決します。'],
+    ["I want more money.",'もっとお金がほしいです。',0,'昇給のお願いと誤解されます。']]},
+   {en:"Hmm, let me check. Did you clock in that day?",ja:'うーん、確認するね。その日は打刻した？',opts:[
+    ["Yes, I worked from 9 to 3. I have a photo of the roster.",'はい、9時から3時まで働きました。シフト表の写真があります。',3,'時間と証拠を示せると、話がすぐに進みます。'],
+    ["I don't remember.",'覚えていません。',1,'働いた日と時間は、自分でも記録しておきましょう。'],
+    ["Of course I did!",'もちろんしました！',1,'強く言いすぎです。落ち着いて事実を伝えましょう。']]},
+   {en:"You're right, it's not in the system. I'll fix it in the next pay.",ja:'本当だ、システムに入っていないね。次の給料で直すよ。',opts:[
+    ["Thank you so much for checking.",'確認していただき、ありがとうございます。',3,'お礼で終えると、関係も良いままです。'],
+    ["Next pay? I need it now.",'次の給料？今必要です。',1,'急ぎなら、Is it possible to get it sooner? とていねいに。'],
+    ["OK.",'分かりました。',2,'通じます。お礼を一言添えるとさらに良いです。']]}]}
+);
+
 const SIM_MARK = ['×','△','○','◎'], SIM_WORD = ['避けたい','もう一歩','通じる','とても自然'];
 let SIM = {id:null,i:0,picks:[]};
 function simDetail(x){
@@ -1173,6 +1538,158 @@ function simDetail(x){
 
 const GR_CH = [{"n": "入門の基礎", "u": [["基1", "be動詞（am / is / are）と、その疑問文", "A1"], ["基3", "人称代名詞（I / my / me / mine）", "A1"], ["基4", "命令文と Let's", "A1"], ["基5", "疑問詞（what / where / when / who / why / how）", "A1"], ["基6", "数・時刻・日付の言い方", "A1"], ["基7", "否定文のまとめ（isn't / don't / can't など）", "A1"]]}, {"n": "時制（現在と過去）", "u": [["1", "現在進行形（I am doing）", "A1"], ["2", "現在形（I do / he does）と、否定文・疑問文", "A1"], ["101", "be動詞の過去形（was / were）", "A1"], ["3", "現在形と現在進行形の使い分け", "A2"], ["4", "過去形（I did）と、否定文・疑問文（didn't / Did you ~?）", "A1"], ["102", "規則動詞と不規則動詞", "A1"], ["5", "過去進行形（I was doing）と、過去形との使い分け", "A2"]]}, {"n": "現在完了と過去", "u": [["6", "現在完了（I have done）と、経験を聞く Have you ever ~?", "A2"], ["7", "現在完了進行形（I have been doing）", "B1"], ["8", "期間の言い方（how long / for / since / ago）", "A2"], ["9", "現在完了と過去形の違い", "B1"], ["10", "過去完了（I had done）", "B1"], ["11", "過去完了進行形（I had been doing）", "B2"], ["12", "have と have got", "A2"], ["13", "used to", "A2"]]}, {"n": "未来", "u": [["14", "現在形・進行形で未来を言う", "A2"], ["15", "be going to", "A1"], ["16", "will と shall", "A2"], ["17", "will と be going to の違い", "B1"], ["18", "未来進行形・未来完了（will be doing / will have done）", "B2"], ["19", "when・if のあとは現在形", "A2"]]}, {"n": "助動詞", "u": [["20", "can / could / be able to", "A2"], ["21", "could と could have done", "B1"], ["22", "must と can't（推量）", "B1"], ["23", "may と might", "A2"], ["24", "have to と must", "A2"], ["25", "mustn't と don't have to / don't need to", "A2"], ["26", "should", "A2"], ["27", "had better と it's time", "B1"], ["28", "would", "B1"], ["29", "お願い・申し出・許可・誘い", "A2"]]}, {"n": "if と wish（仮定法）", "u": [["30", "if I do と if I did の違い", "B1"], ["31", "今の「もしも」（if I knew / I wish I knew）", "B1"], ["32", "過去の「もしも」（if I had known）", "B2"], ["33", "wish の使い方", "B2"]]}, {"n": "受け身", "u": [["34", "受け身（is done / was done）", "A2"], ["35", "受け身のいろいろな形", "B1"], ["36", "It is said that ~ / be supposed to", "B2"], ["37", "have something done", "B2"]]}, {"n": "人の言ったことを伝える", "u": [["38", "人の言ったことを伝える（He said that ~）", "B1"]]}, {"n": "疑問文と助動詞", "u": [["39", "疑問文の作り方", "A1"], ["103", "疑問詞の疑問文のいろいろ（Who saw you? / What is it like?）", "A2"], ["40", "文の中の疑問文（Do you know where ~?）", "A2"], ["41", "短い返事（I think so / So do I / Neither do I）", "A2"], ["42", "付加疑問（~, isn't it?）", "B1"], ["104", "be / have / do の使い分け", "A2"]]}, {"n": "-ing と to", "u": [["43", "動詞 ＋ -ing（enjoy doing）", "A2"], ["44", "動詞 ＋ to（decide to）", "A2"], ["45", "動詞 ＋ 人 ＋ to（I want you to ~）", "A2"], ["46", "-ing と to で意味が変わる動詞", "B1"], ["47", "prefer と would rather", "B1"], ["48", "前置詞 ＋ -ing", "B1"], ["49", "be used to と get used to", "B1"], ["50", "動詞 ＋ 前置詞 ＋ -ing", "B2"], ["51", "There's no point in ~ing / It's worth ~ing", "B2"], ["52", "目的を言う（to / for / so that）", "A2"], ["53", "形容詞 ＋ to（easy to ~ / afraid to ~）", "B1"], ["54", "see 人 do と see 人 doing", "B2"], ["55", "-ing で始まるかたまり", "B2"]]}, {"n": "よく使う動詞（go / get / do / make / have）", "u": [["112", "go の使い方（go to / go for / go ~ing）", "A1"], ["113", "get の使い方", "A2"], ["114", "do と make", "A2"], ["115", "have の使い方（have breakfast など）", "A1"]]}, {"n": "名詞と冠詞", "u": [["56", "数えられる名詞と数えられない名詞", "A2"], ["57", "a / an と some", "A1"], ["58", "a / an と the", "A1"], ["59", "the を付けるとき・付けないとき", "A2"], ["60", "地名・固有名詞と the", "A2"], ["61", "名詞の複数形と、単数・複数の使い分け", "A1"], ["62", "名詞 ＋ 名詞（a bus driver）", "B1"], ["63", "'s と of", "A2"]]}, {"n": "代名詞と数量を表す言葉", "u": [["64", "myself / yourself など", "A2"], ["105", "this / that / these / those", "A1"], ["106", "one / ones", "A2"], ["107", "there is / there are（〜がある）", "A1"], ["65", "a friend of mine / on my own", "B1"], ["66", "there と it", "A2"], ["67", "some と any", "A1"], ["68", "no / none / nothing、somebody / anything など", "A2"], ["69", "much / many / few / little / a lot", "A2"], ["70", "all / most / none of など", "A2"], ["71", "both / neither / either", "A2"], ["72", "all / every / whole / each", "A2"]]}, {"n": "関係詞（名詞を後ろから説明する）", "u": [["73", "who / that / which", "A2"], ["74", "whose / whom / where", "B1"], ["75", "コンマ付きの説明（, who ~）", "B2"], ["76", "-ing と -ed で名詞を説明する", "B2"]]}, {"n": "形容詞と副詞", "u": [["77", "-ing と -ed の形容詞（boring と bored）", "A2"], ["78", "形容詞の使い方と並べ方（look tired など）", "A2"], ["79", "形容詞と副詞（quick と quickly）", "A2"], ["80", "so と such", "B1"], ["81", "enough と too", "A2"], ["82", "quite / pretty / rather / fairly", "B2"], ["83", "比較級（cheaper / more ~ than / as ~ as）", "A2"], ["84", "最上級（the cheapest / the most ~）", "A2"], ["85", "語順（動詞・目的語・場所・時、副詞の位置）", "A2"], ["108", "give 人 物 と give 物 to 人", "A2"], ["86", "still / yet / already（現在完了と一緒に使う）", "A2"], ["87", "even", "B2"]]}, {"n": "接続詞と前置詞", "u": [["94", "from ~ to / until / by / by the time", "A2"], ["88", "although / in spite of / despite", "B1"], ["109", "and / but / or / so / because", "A1"], ["89", "in case", "B2"], ["90", "unless / as long as", "B2"], ["91", "as のいろいろな意味", "B2"], ["92", "like と as / as if", "B1"], ["93", "before / after / during / while", "A2"]]}, {"n": "前置詞", "u": [["95", "時を表す at / on / in", "A1"], ["96", "on time と in time / at the end と in the end", "B1"], ["97", "場所を表す in / at / on", "A2"], ["110", "位置を表す前置詞（under / behind / next to など）", "A1"], ["98", "to / at / in / into", "A2"], ["111", "動きを表す前置詞（up / over / through など）", "A2"], ["99", "in / on / at のそのほかの使い方と by", "A2"], ["100", "名詞・形容詞・動詞と前置詞の組み合わせ", "A2"]]}];
 const GR_LINK = {'基1':'gr:be','8':'gr:perfect'};
+
+const G=(no,id,lv,title,body,ex,quiz)=>{ GRAMMAR.push({id,lv,title,body,ex,quiz}); GR_LINK[no]=id; };
+const Q=(q,o,a,why)=>({q,o,a,why});
+G('基3','gr:pron',0,'人称代名詞（I / my / me / mine）',
+ ['人を指す言葉は、文の中での役割で形が変わります。「〜は」が I、「〜の」が my、「〜を・〜に」が me、「〜のもの」が mine です。','you は you / your / you / yours、he は he / his / him / his、she は she / her / her / hers、we は we / our / us / ours、they は they / their / them / theirs。','前置詞（with, for, to など）のあとは「〜を・〜に」の形（me, him, them）を使います。'],
+ [["This is my bag.",'これは私のカバンです。'],["Can you help me?",'手伝ってもらえますか？'],["Is this pen yours?",'このペンはあなたのもの？']],
+ [Q('Can you come with ___?',['I','me','my'],1,'with のあとは「〜を・〜に」の形の me。'),Q('This isn\'t my phone. It\'s ___.',['her','she','hers'],2,'「彼女のもの」は hers。')]);
+G('基4','gr:imp',0,'命令文と Let\'s',
+ ['動詞の原形から始めると「〜して」という命令・お願いになります（Open the window.）。please を付けると、ていねいになります。','「〜しないで」は Don\'t ＋ 動詞の原形（Don\'t worry.）。','「一緒に〜しよう」は Let\'s ＋ 動詞の原形（Let\'s go.）。「〜するのはやめよう」は Let\'s not ~。'],
+ [["Please sit down.",'どうぞ座ってください。'],["Don't be late.",'遅れないでね。'],["Let's take a break.",'休憩しよう。']],
+ [Q('___ worry. It\'s OK.',['Not','Don\'t','No'],1,'「〜しないで」は Don\'t ＋ 動詞の原形。'),Q('Let\'s ___ to the beach!',['go','going','goes'],0,'Let\'s のあとは動詞の原形。')]);
+G('基5','gr:wh',0,'疑問詞（what / where / when / who / why / how）',
+ ['何かをくわしく聞くときは、疑問詞を文の最初に置き、そのあとは普通の疑問文の形にします（Where are you from? / What do you do?）。','what＝何、where＝どこ、when＝いつ、who＝誰、why＝なぜ、how＝どうやって・どんな様子。','how は組み合わせて使えます：how much（いくら）、how many（いくつ）、how long（どれくらいの間）、how often（どれくらいの頻度）。'],
+ [["Where do you live?",'どこに住んでいますか？'],["How long are you staying?",'どれくらい滞在しますか？'],["Why did you choose Cebu?",'なぜセブを選んだの？']],
+ [Q('___ much is this?',['What','How','Where'],1,'値段は How much。'),Q('___ is your birthday? — It\'s in May.',['When','Who','Why'],0,'「いつ」は When。')]);
+G('基6','gr:num',0,'数・時刻・日付の言い方',
+ ['時刻は「時＋分」をそのまま読みます（7:30 = seven thirty）。「〜時ちょうど」は o\'clock。','曜日の前は on（on Monday）、時刻の前は at（at 9:00）、月・年の前は in（in May）。','日付は「序数」で言います（May 3 = May third / the third of May）。1st, 2nd, 3rd, 4th…。'],
+ [["Class starts at eight thirty.",'授業は8時半に始まります。'],["My birthday is on June 21st.",'誕生日は6月21日です。'],["I arrived in April.",'4月に着きました。']],
+ [Q('The test is ___ Friday.',['in','at','on'],2,'曜日の前は on。'),Q('「5月2日」の読み方は？',['May two','May second','May twice'],1,'日付は序数で second。')]);
+G('基7','gr:neg',0,'否定文のまとめ（isn\'t / don\'t / can\'t など）',
+ ['be動詞の文は be動詞のあとに not（I\'m not tired. / It isn\'t far.）。','一般動詞の文は don\'t / doesn\'t / didn\'t ＋ 動詞の原形（I don\'t like spicy food. / She didn\'t come.）。','can・will などの助動詞は、そのあとに not（can\'t / won\'t）。'],
+ [["I'm not sure.",'よく分かりません。'],["He doesn't eat meat.",'彼は肉を食べません。'],["I can't swim.",'泳げません。']],
+ [Q('She ___ like coffee.',['don\'t','doesn\'t','isn\'t'],1,'she ＋ 一般動詞の否定は doesn\'t。'),Q('I ___ go to class yesterday.',['didn\'t','don\'t','wasn\'t'],0,'過去の一般動詞の否定は didn\'t ＋ 原形。')]);
+G('1','gr:prog',0,'現在進行形（I am doing）',
+ ['「今まさに〜している」ことを表します。形は be動詞（am / is / are）＋ 動詞の -ing。','「最近〜している」「今の時期だけ〜している」にも使えます（I\'m studying English in Cebu.）。','like, know, want など「状態」を表す動詞は、ふつう進行形にしません（× I\'m knowing）。'],
+ [["I'm eating lunch now.",'今お昼を食べています。'],["What are you doing?",'何してるの？'],["I'm staying at the school dorm.",'学校の寮に泊まっています。']],
+ [Q('Look! It ___.',['rains','is raining','rain'],1,'今まさに起きていることは進行形。'),Q('I ___ the answer.',['know','am knowing','knowing'],0,'know は状態を表すので進行形にしません。')]);
+G('2','gr:simple',0,'現在形（I do / he does）と、否定文・疑問文',
+ ['習慣や、いつも本当のことを表します（I get up at seven. / Water boils at 100°C.）。','主語が he / she / it と単数のときは、動詞に -s / -es を付けます（She works. / He watches.）。','否定は don\'t / doesn\'t、疑問は Do / Does ＋ 主語 ＋ 動詞の原形（Does she work here?）。'],
+ [["I study English every day.",'毎日英語を勉強しています。'],["She lives in Manila.",'彼女はマニラに住んでいます。'],["Do you like mango?",'マンゴーは好き？']],
+ [Q('My teacher ___ from Cebu.',['come','comes','coming'],1,'my teacher（単数）なので -s。'),Q('___ he play basketball?',['Do','Does','Is'],1,'he の疑問文は Does。')]);
+G('101','gr:was',0,'be動詞の過去形（was / were）',
+ ['am / is の過去は was、are の過去は were です。','I / he / she / it には was、you / we / they には were。','否定は wasn\'t / weren\'t、疑問は Was / Were を前に出します（Were you tired?）。'],
+ [["I was tired yesterday.",'昨日は疲れていました。'],["The food was delicious.",'料理がとてもおいしかった。'],["Were you at school?",'学校にいたの？']],
+ [Q('We ___ in Bohol last weekend.',['was','were','are'],1,'we には were。'),Q('___ the test difficult?',['Was','Were','Did'],0,'the test（単数）なので Was。')]);
+G('3','gr:simpleprog',1,'現在形と現在進行形の使い分け',
+ ['現在形は「いつも・習慣」、現在進行形は「今・この時期だけ」を表します。','I work at a café.（ふだんカフェで働いている）／I\'m working today.（今日は働いている）。','always ＋ 進行形で「いつも〜してばかり」という不満を表すこともあります（He\'s always complaining.）。'],
+ [["I usually walk to school, but today I'm taking a taxi.",'ふだんは歩いて学校に行くけど、今日はタクシーにしている。'],["She speaks three languages.",'彼女は3か国語を話します。']],
+ [Q('I ___ TV every night.',['watch','am watching','watching'],0,'毎晩の習慣なので現在形。'),Q('Be quiet! The baby ___.',['sleeps','is sleeping','sleep'],1,'今まさに寝ているので進行形。')]);
+G('4','gr:past',0,'過去形（I did）と、否定文・疑問文（didn\'t / Did you ~?）',
+ ['終わった過去の出来事を表します。規則動詞は -ed（played, watched）、不規則動詞は形が変わります（go → went, eat → ate）。','否定は didn\'t ＋ 動詞の原形（I didn\'t go.）。','疑問は Did ＋ 主語 ＋ 動詞の原形（Did you go?）。否定・疑問では動詞を過去形にしないのがポイント。'],
+ [["I went to the mall yesterday.",'昨日モールに行きました。'],["Did you sleep well?",'よく眠れた？'],["I didn't understand the question.",'質問が分かりませんでした。']],
+ [Q('Did you ___ the movie?',['saw','see','seen'],1,'Did のあとは原形。'),Q('Last night I ___ pizza.',['eat','ate','eaten'],1,'eat の過去形は ate。')]);
+G('5','gr:pastprog',1,'過去進行形（I was doing）と、過去形との使い分け',
+ ['「その時〜していた」という、過去のある時点で続いていた動作を表します。形は was / were ＋ -ing。','長く続いていた動作（過去進行形）の途中で、短い出来事（過去形）が起きた、という組み合わせでよく使います。','When you called, I was taking a shower.（電話が来たとき、シャワーを浴びていた）'],
+ [["I was studying at 10 p.m.",'夜10時は勉強していました。'],["It started to rain while we were walking.",'歩いている途中で雨が降り出した。']],
+ [Q('What ___ you doing at eight last night?',['did','were','was'],1,'you ＋ 過去進行形は were。'),Q('I was cooking when the phone ___.',['rang','was ringing','rings'],0,'途中で起きた短い出来事は過去形。')]);
+G('6','gr:ever',1,'現在完了（I have done）と、経験を聞く Have you ever ~?',
+ ['have / has ＋ 過去分詞で、過去の出来事が今とつながっていることを表します。','「〜したことがある」という経験に使えます。聞くときは Have you ever ＋ 過去分詞 ~?（Have you ever been to Bohol?）。','「〜したことがない」は I\'ve never ＋ 過去分詞。yesterday など、はっきりした過去の時を表す言葉とは一緒に使いません。'],
+ [["I've been to Australia twice.",'オーストラリアに2回行ったことがあります。'],["Have you ever tried balut?",'バロットを食べたことはある？'],["I've never seen snow.",'雪を見たことがありません。']],
+ [Q('Have you ever ___ sushi?',['ate','eaten','eat'],1,'have のあとは過去分詞 eaten。'),Q('I ___ to Cebu last year.',['have gone','went','have been'],1,'last year は終わった過去なので過去形。')]);
+G('15','gr:goingto',0,'be going to',
+ ['「〜するつもり」という、もう決めている予定を表します。形は be動詞 ＋ going to ＋ 動詞の原形。','今の様子から「〜しそうだ」と予想するときにも使います（Look at the clouds. It\'s going to rain.）。','会話では going to が gonna に聞こえることがよくあります。'],
+ [["I'm going to study in Cebu for three months.",'セブで3か月勉強するつもりです。'],["What are you going to do this weekend?",'今週末は何をするつもり？']],
+ [Q('I\'m going to ___ my friend tomorrow.',['meet','meeting','met'],0,'going to のあとは原形。'),Q('Watch out! You ___ fall!',['will going to','are going to','going to'],1,'今の様子からの予想は be going to。')]);
+G('16','gr:will',1,'will と shall',
+ ['その場で決めたこと（I\'ll have the chicken.）、約束・申し出（I\'ll help you.）、予想（It will be hot tomorrow.）に使います。','否定は won\'t（will not）。','Shall I ~?は「〜しましょうか」という申し出、Shall we ~?は「〜しましょうか」という誘い。少しかたい言い方です。'],
+ [["I'll call you later.",'あとで電話するね。'],["It won't take long.",'長くはかかりません。'],["Shall I open the window?",'窓を開けましょうか？']],
+ [Q('「その場で決めた」: The phone is ringing. I ___ get it.',['will','\'ll be','am going'],0,'その場で決めたことは will（I\'ll）。'),Q('will の否定の短い形は？',['willn\'t','won\'t','don\'t will'],1,'will not の短縮形は won\'t。')]);
+G('19','gr:whenif',1,'when・if のあとは現在形',
+ ['未来のことでも、when（〜するとき）や if（もし〜なら）のあとは現在形を使います。','When I arrive, I\'ll call you.（× When I will arrive）','If it rains tomorrow, we\'ll stay home.（× If it will rain）。文の後半は will を使えます。'],
+ [["I'll text you when I get home.",'家に着いたらメッセージするね。'],["If you're free, let's have dinner.",'もし空いていたら、夕食に行こう。']],
+ [Q('If it ___ tomorrow, I\'ll stay home.',['will rain','rains','rained'],1,'if のあとは未来でも現在形。'),Q('Call me when you ___ at the airport.',['arrive','will arrive','arrived'],0,'when のあとは現在形。')]);
+G('20','gr:can',1,'can / could / be able to',
+ ['can は「〜できる」。否定は can\'t。過去は could（When I was young, I could swim well.）。','will などのあとでは can が使えないので be able to を使います（I\'ll be able to speak English soon.）。','Can you ~? / Could you ~? は「〜してくれる？」というお願いにもなります。Could のほうがていねいです。'],
+ [["Can you speak Japanese?",'日本語を話せる？'],["I couldn't sleep last night.",'昨夜は眠れなかった。'],["Could you help me?",'手伝っていただけますか？']],
+ [Q('I hope I\'ll ___ come.',['can','be able to','could'],1,'will のあとは be able to。'),Q('もっとていねいなお願いは？',['Can you open the door?','Could you open the door?','You open the door.'],1,'Could you ~? のほうがていねい。')]);
+G('24','gr:haveto',1,'have to と must',
+ ['どちらも「〜しなければならない」。have to は外のルールや事情、must は話す人の強い気持ちによく使います。','過去は had to（must に過去形はありません）。','have to の疑問は Do I have to ~?（〜しなければいけませんか？）。会話では have to のほうがよく使われます。'],
+ [["I have to wear a uniform at work.",'仕事では制服を着なければなりません。'],["I had to wait for an hour.",'1時間待たなければならなかった。'],["Do I have to pay now?",'今払わなければいけませんか？']],
+ [Q('Yesterday I ___ get up at five.',['must','had to','have to'],1,'過去は had to。'),Q('___ I have to bring my passport?',['Do','Must','Am'],0,'have to の疑問文は Do I have to ~?')]);
+G('25','gr:mustnt',1,'mustn\'t と don\'t have to / don\'t need to',
+ ['mustn\'t は「〜してはいけない」という禁止です（You mustn\'t smoke here.）。','don\'t have to / don\'t need to は「〜しなくてもいい」で、意味がまったく違います。','You don\'t have to come.（来なくてもいいよ）／You mustn\'t come.（来てはいけない）'],
+ [["You don't have to bring anything.",'何も持ってこなくていいよ。'],["You mustn't swim here. It's dangerous.",'ここで泳いではいけません。危険です。']],
+ [Q('It\'s Sunday. I ___ go to school.',['mustn\'t','don\'t have to','must'],1,'「行かなくてもいい」は don\'t have to。'),Q('You ___ touch that. It\'s hot!',['don\'t have to','mustn\'t','needn\'t'],1,'禁止は mustn\'t。')]);
+G('26','gr:should',1,'should',
+ ['「〜したほうがいい」「〜すべきだ」という助言やおすすめを表します。','否定は shouldn\'t（〜しないほうがいい）。','「〜すべき？」と相談するときは Should I ~?（Should I bring a jacket?）。'],
+ [["You should try the mango shake.",'マンゴーシェイクを飲んでみるといいよ。'],["You shouldn't walk alone at night.",'夜はひとりで歩かないほうがいい。'],["What should I do?",'どうしたらいい？']],
+ [Q('You look tired. You ___ go to bed early.',['should','shouldn\'t','mustn\'t'],0,'助言は should。'),Q('「相談」: ___ I take a taxi?',['Should','Do','Must'],0,'「〜すべき？」は Should I ~?')]);
+G('29','gr:request',1,'お願い・申し出・許可・誘い',
+ ['お願い：Can you ~? / Could you ~? / Would you mind ~ing?（〜していただけますか）。','許可：Can I ~? / May I ~? / Is it OK if I ~?（〜してもいいですか）。May I はていねい。','申し出：Shall I ~? / Do you want me to ~?（〜しましょうか）。誘い：Would you like to ~? / Do you want to ~?（〜しませんか）。'],
+ [["Would you mind closing the door?",'ドアを閉めていただけますか？'],["May I use the restroom?",'お手洗いをお借りしてもいいですか？'],["Would you like to join us?",'ご一緒にいかがですか？']],
+ [Q('Would you mind ___ the window?',['open','to open','opening'],2,'Would you mind のあとは -ing。'),Q('いちばんていねいな許可の求め方は？',['Can I sit here?','May I sit here?','I sit here?'],1,'May I ~? がいちばんていねい。')]);
+G('34','gr:passive',1,'受け身（is done / was done）',
+ ['「〜される」「〜された」を表します。形は be動詞 ＋ 過去分詞。','誰がしたかを言うときは by ~（This bag was made by my mother.）。誰がしたか重要でないときは言いません。','English is spoken in the Philippines.（フィリピンでは英語が話されている）'],
+ [["Breakfast is served at seven.",'朝食は7時に出されます。'],["My phone was stolen.",'携帯が盗まれました。'],["The class was canceled.",'授業が中止になった。']],
+ [Q('This room ___ every day.',['cleans','is cleaned','cleaned'],1,'「掃除される」は is cleaned。'),Q('The movie ___ in 2020.',['made','was made','is made'],1,'過去の受け身は was ＋ 過去分詞。')]);
+G('39','gr:question',0,'疑問文の作り方',
+ ['be動詞の文は be動詞を前に出します（Are you ready?）。','一般動詞の文は Do / Does / Did を前に置き、動詞は原形にします（Do you like it? / Did she call?）。','can・will などの助動詞の文は助動詞を前に出します（Can you swim? / Will you come?）。'],
+ [["Are you hungry?",'お腹すいてる？'],["Does this bus go downtown?",'このバスは中心部へ行きますか？'],["Can I pay by card?",'カードで払えますか？']],
+ [Q('___ you finish your homework?',['Do','Did','Are'],1,'過去のことなので Did。'),Q('___ she speak English?',['Do','Is','Does'],2,'she ＋ 一般動詞の疑問は Does。')]);
+G('40','gr:embedded',1,'文の中の疑問文（Do you know where ~?）',
+ ['Do you know ~? や Could you tell me ~? のあとに疑問文を入れると、ふつうの文の語順（主語 ＋ 動詞）に戻ります。','Where is the station? → Do you know where the station is?','Yes / No で答える疑問文は if（または whether）を使います（Do you know if he\'s coming?）。'],
+ [["Could you tell me where the restroom is?",'お手洗いがどこか教えていただけますか？'],["I don't know what time it starts.",'何時に始まるか分かりません。']],
+ [Q('Do you know where ___?',['is the bank','the bank is','does the bank'],1,'文の中では「主語＋動詞」の語順。'),Q('Do you know ___ the shop is open?',['if','what','that'],0,'Yes/No の疑問は if。')]);
+G('43','gr:ing',1,'動詞 ＋ -ing（enjoy doing）',
+ ['いくつかの動詞は、あとに続く動詞を -ing の形にします。','代表的な動詞：enjoy, finish, mind, stop, avoid, keep, practice, suggest, give up。','I enjoy swimming.（× enjoy to swim）／I finished cleaning my room.'],
+ [["I enjoy talking with my teachers.",'先生たちと話すのが楽しいです。'],["Have you finished eating?",'食べ終わった？'],["Keep practicing!",'練習を続けて！']],
+ [Q('I enjoy ___ new people.',['to meet','meeting','meet'],1,'enjoy のあとは -ing。'),Q('She gave up ___.',['to smoke','smoking','smoke'],1,'give up のあとは -ing。')]);
+G('44','gr:to',1,'動詞 ＋ to（decide to）',
+ ['いくつかの動詞は、あとに to ＋ 動詞の原形を続けます。','代表的な動詞：want, decide, plan, hope, need, learn, promise, agree, try。','I want to study abroad.／I decided to stay for two more weeks.'],
+ [["I need to buy a new charger.",'新しい充電器を買わないと。'],["We decided to go to Oslob.",'オスロブに行くことにした。'],["I'm learning to cook.",'料理を習っています。']],
+ [Q('I hope ___ you again.',['seeing','to see','see'],1,'hope のあとは to ＋ 原形。'),Q('They decided ___ a taxi.',['taking','to take','take'],1,'decide のあとは to ＋ 原形。')]);
+G('56','gr:count',1,'数えられる名詞と数えられない名詞',
+ ['数えられる名詞は a / an を付けたり、複数形にしたりできます（a book, two books）。','数えられない名詞は a / an を付けず、複数形にもしません（water, money, information, advice, furniture, homework）。','数えられない名詞の量は a glass of water、a piece of advice のように言います。'],
+ [["Can I have some water?",'お水をもらえますか？'],["She gave me some good advice.",'彼女が良いアドバイスをくれた。'],["I have a lot of homework.",'宿題がたくさんある。']],
+ [Q('I need some ___.',['informations','information','an information'],1,'information は数えられない名詞。'),Q('Can I get ___ of advice?',['a piece','an','a'],0,'advice は a piece of advice で数えます。')]);
+G('58','gr:article',0,'a / an と the',
+ ['a / an は「（いくつかあるうちの）ひとつの」、初めて話に出てくるものに使います。母音の音で始まる語の前は an（an apple, an hour）。','the は「その」、話している人どうしが「どれのことか」分かっているものに使います。','I bought a bag. The bag was cheap.（1回目は a、2回目は the）'],
+ [["I have a question.",'質問があります。'],["Can you close the door?",'（その）ドアを閉めてくれる？'],["It takes an hour.",'1時間かかります。']],
+ [Q('I waited for ___ hour.',['a','an','the'],1,'hour は母音の音で始まるので an。'),Q('There\'s a café near here. ___ café is very popular.',['A','An','The'],2,'2回目なので the。')]);
+G('67','gr:someany',0,'some と any',
+ ['some は「いくつかの・いくらかの」で、ふつうの文に使います（I have some friends here.）。','any は否定文と疑問文でよく使います（I don\'t have any money. / Do you have any questions?）。','すすめる・お願いするときの疑問文では some を使います（Would you like some coffee? / Can I have some water?）。'],
+ [["I bought some fruit.",'果物をいくつか買った。'],["Do you have any plans?",'何か予定はある？'],["Would you like some tea?",'紅茶はいかがですか？']],
+ [Q('I don\'t have ___ cash.',['some','any','a'],1,'否定文では any。'),Q('Would you like ___ cake?',['some','any','a few'],0,'すすめる疑問文では some。')]);
+G('69','gr:much',1,'much / many / few / little / a lot',
+ ['many は数えられる名詞（many people）、much は数えられない名詞（much time）に使います。','a lot of はどちらにも使え、会話でよく使います。much は否定文・疑問文で多く使われます。','a few（少しある・数えられる）／a little（少しある・数えられない）。a を取ると「ほとんどない」という否定の意味になります。'],
+ [["How many students are in your class?",'クラスに学生は何人いる？'],["I don't have much time.",'あまり時間がない。'],["I have a few friends here.",'ここに友達が何人かいる。']],
+ [Q('How ___ money do you have?',['many','much','few'],1,'money は数えられないので much。'),Q('I speak ___ Spanish.',['a few','a little','many'],1,'言語は数えられないので a little。')]);
+G('83','gr:comp',1,'比較級（cheaper / more ~ than / as ~ as）',
+ ['2つを比べて「〜より…だ」と言うときは、短い形容詞は -er（cheaper, bigger）、長い形容詞は more（more expensive）。後ろに than ~。','good → better、bad → worse は形が変わります。','「〜と同じくらい…」は as ＋ 形容詞 ＋ as。否定の not as ~ as は「〜ほど…ない」。'],
+ [["Cebu is warmer than Tokyo.",'セブは東京より暖かい。'],["This course is more expensive than that one.",'このコースはあのコースより高い。'],["My English isn't as good as yours.",'私の英語はあなたほど上手じゃない。']],
+ [Q('This bag is ___ than that one.',['cheap','cheaper','more cheap'],1,'cheap は短いので -er。'),Q('His English is ___ than mine.',['gooder','better','more good'],1,'good の比較級は better。')]);
+G('84','gr:sup',1,'最上級（the cheapest / the most ~）',
+ ['3つ以上の中で「いちばん〜」と言うときは、the ＋ -est（the cheapest）、長い形容詞は the most（the most beautiful）。','good → the best、bad → the worst。','範囲は in（in the class）や of（of all）で表します。'],
+ [["This is the best restaurant in town.",'ここは町でいちばんのレストランです。'],["What's the most difficult part?",'いちばん難しいところはどこ？']],
+ [Q('She is ___ student in the class.',['the tallest','tallest','the taller'],0,'最上級は the ＋ -est。'),Q('It was ___ day of my life.',['the best','the most good','the better'],0,'good の最上級は the best。')]);
+G('95','gr:atonin',0,'時を表す at / on / in',
+ ['at は時刻やある一点（at 7:00, at night, at the weekend＝イギリス英語）。','on は曜日と日付（on Monday, on May 5th, on my birthday）。','in は月・年・季節・朝昼晩（in May, in 2026, in summer, in the morning）。'],
+ [["I'll see you at six.",'6時に会おう。'],["The course starts on Monday.",'コースは月曜日に始まります。'],["I'm going to Australia in March.",'3月にオーストラリアへ行きます。']],
+ [Q('My flight is ___ Sunday.',['at','on','in'],1,'曜日は on。'),Q('I usually study ___ the morning.',['at','on','in'],2,'in the morning。')]);
+G('97','gr:place',1,'場所を表す in / at / on',
+ ['in は「〜の中に」、囲まれた空間や国・町（in the room, in Cebu）。','at は「〜で」、ある地点や目的の場所（at the bus stop, at school, at work）。','on は「〜の上に・表面に」（on the table, on the wall, on the second floor）。'],
+ [["I'm at the airport now.",'今空港にいます。'],["My room is on the third floor.",'私の部屋は3階です。'],["She lives in Manila.",'彼女はマニラに住んでいます。']],
+ [Q('Wait for me ___ the entrance.',['in','at','on'],1,'ある地点は at。'),Q('There\'s a picture ___ the wall.',['in','at','on'],2,'表面にくっついているので on。')]);
+G('107','gr:thereis',0,'there is / there are（〜がある）',
+ ['「（どこかに）〜がある・いる」と言うときに使います。1つなら There is、複数なら There are。','否定は There isn\'t / There aren\'t、疑問は Is there ~? / Are there ~?','場所は後ろに付けます（There\'s a café near the school.）。'],
+ [["Is there an ATM near here?",'この近くにATMはありますか？'],["There are 20 students in my class.",'クラスには学生が20人います。']],
+ [Q('There ___ many restaurants on this street.',['is','are','be'],1,'複数なので are。'),Q('___ a pharmacy near here?',['Is there','There is','Are there'],0,'1つのものを聞くので Is there。')]);
+G('73','gr:relative',1,'関係詞 who / that / which',
+ ['名詞のあとに who / that / which ＋ 文を続けて、「〜する人」「〜するもの」と説明できます。','人には who（または that）、物には which（または that）。','the teacher who teaches us（私たちを教えている先生）／the bag that I bought（私が買ったカバン）。目的語になるときは that / which を省けます。'],
+ [["I have a friend who lives in Sydney.",'シドニーに住んでいる友達がいます。'],["This is the book that I told you about.",'これが前に話した本です。']],
+ [Q('The woman ___ works at the front desk is kind.',['which','who','where'],1,'人なので who。'),Q('Is this the bus ___ goes to the airport?',['who','that','what'],1,'物なので that（または which）。')]);
+G('31','gr:if2',2,'今の「もしも」（if I knew / I wish I knew）',
+ ['今の事実と違うことを想像するときは、if のあとを過去形にして、後半は would ＋ 動詞の原形にします。','If I had more time, I would travel more.（実際は時間がない）','be動詞は主語に関係なく were を使うのが正式です（If I were you, I would ~）。I wish ＋ 過去形で「〜だったらいいのに」。'],
+ [["If I were rich, I would buy a house in Cebu.",'お金持ちだったら、セブに家を買うのに。'],["I wish I could speak English fluently.",'英語をすらすら話せたらいいのに。']],
+ [Q('If I ___ his number, I would call him.',['know','knew','will know'],1,'今の事実と違う想像は過去形。'),Q('If I ___ you, I would ask the teacher.',['am','were','will be'],1,'If I were you が決まった形。')]);
+G('114','gr:domake',1,'do と make',
+ ['do は「（作業・仕事・やるべきことを）する」：do homework, do the dishes, do your best, do a favor。','make は「（何かを）作る・生み出す」：make a mistake, make a decision, make friends, make a reservation, make money。','迷ったら「何かが新しくできるなら make」が目安です。ただし決まった組み合わせとして覚えるのが確実です。'],
+ [["I need to do my homework.",'宿題をしないと。'],["Don't be afraid to make mistakes.",'間違えることを怖がらないで。'],["Could you do me a favor?",'お願いがあるんだけど。']],
+ [Q('I ___ a reservation for two.',['did','made','had'],1,'予約は make a reservation。'),Q('Let\'s ___ the dishes.',['do','make','take'],0,'皿洗いは do the dishes。')]);
+
 const findAny = id=>WH_SIMS.find(x=>x.id===id)||ITEMS.find(x=>x.id===id)||DIALOGS.find(x=>x.id===id)||GRAMMAR.find(x=>x.id===id)||INTERVIEW.find(x=>x.id===id);
 function dueCount(){ const t=today(); let n=0; for(const k in S.prog){ if(S.prog[k].next && S.prog[k].next<=t) n++; } n+=S.vault.filter(v=>v.next && v.next<=t).length; return n; }
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
