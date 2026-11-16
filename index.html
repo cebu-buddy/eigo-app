@@ -230,7 +230,7 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 #toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50;max-width:90vw}
 #toast.show{opacity:1}
 @media (min-width: 960px){#toast{bottom:32px}}
-.lvtable{width:100%;min-width:520px;border-collapse:collapse;font-size:13px;table-layout:fixed}.lvtable thead th{width:20%}
+.lvtable{width:100%;min-width:520px;border-collapse:collapse;font-size:13px;table-layout:fixed}.lvtable:not(.cmp) thead th{width:20%}.lvtable.cmp{table-layout:auto;min-width:0}
 .lvtable tbody th.lvc0{color:var(--lv0)}.lvtable tbody th.lvc1{color:var(--lv1)}.lvtable tbody th.lvc2{color:var(--lv2)}.lvtable tbody th.lvc3{color:var(--lv3)}.lvtable tbody th.lvc4{color:var(--lv4)}
 .lvtable th,.lvtable td{padding:9px 8px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
 @media (min-width: 600px){.lvtable{font-size:14px}.lvtable th,.lvtable td{padding:10px 12px}}
@@ -6063,16 +6063,15 @@ V.guide = ()=>`<h1>手引書</h1>
   <h2>カテゴリーの説明</h2>
   <p class="muted small" style="margin:0 0 8px">「学ぶ」のカードの右上にある ⓘ を押しても、同じ説明が見られます。</p>
   <div class="list">${Object.keys(CAT_INFO).map(k=>`<div class="panel" style="padding:12px 16px"><b>${esc(CATS[k])}</b><p class="small" style="margin:2px 0 0">${esc(CAT_INFO[k].one)}</p></div>`).join('')}<div class="panel" style="padding:12px 16px"><b>保存庫</b><p class="small" style="margin:2px 0 0">言えなかった表現をためて、復習して、次に使えるようにする自分だけの場所。</p></div></div>
-  <h2>句動詞とコロケーションの違い</h2>
-  <p class="muted">どちらも「2語以上のまとまり」ですが、覚える目的とテストのやり方が違うので、分けています。</p>
+  <h2>句動詞（熟語）とコロケーションの違い</h2>
+  <p class="muted">どちらも「2語以上のまとまり」ですが、性質とつまずく所が違うので、分けています。</p>
   <div class="panel" style="padding:0;overflow-x:auto"><table class="lvtable cmp">
     <thead><tr><th scope="col"></th><th scope="col">句動詞（熟語）</th><th scope="col">コロケーション</th></tr></thead>
     <tbody>
      <tr><th scope="row">どんなもの</th><td>組み合わせると<b>別の意味</b>になる</td><td>英語ならではの<b>語呂合わせ</b>（よく一緒に使う自然な組み合わせ）</td></tr>
      <tr><th scope="row">例</th><td><span class="en">give up</span>（あきらめる）<br><span class="en">put off</span>（延期する）</td><td><span class="en">make a mistake</span>（間違える）<br><span class="en">heavy rain</span>（大雨）</td></tr>
      <tr><th scope="row">つまずく所</th><td>単語を知っていても、意味が推測できない</td><td>意味は分かるのに、組み合わせを間違える（× <span class="en">do a mistake</span>、× <span class="en">strong rain</span>）</td></tr>
-     <tr><th scope="row">身につく力</th><td>聞いて分かる力</td><td>自然に話す・書く力</td></tr>
-     <tr><th scope="row">テスト</th><td>意味を選ぶ（日本語 ⇄ 英語）</td><td>穴埋め（<span class="en">___ a mistake</span> → make / do / take）</td></tr>
+
     </tbody></table></div>
   <div class="muted small stack" style="margin-top:8px">
     <p>日本語の「熟語」は意味が広く、イディオムなども含みます。このアプリの「句動詞（熟語）」は、動詞と短い語の組み合わせだけを集めています。</p>
