@@ -292,7 +292,9 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
   .split{grid-template-columns:340px 1fr;align-items:start}
   .split.has-sel .list-col{display:block}
   .split.has-sel .back{display:none}
-  .detail-col{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto}
+  .detail-col{position:sticky;top:calc(var(--lvh,0px) + 16px);max-height:calc(100vh - var(--lvh,0px) - 32px);overflow-y:auto}
+
+  .lv-sticky{position:sticky;top:0;z-index:4;box-shadow:0 -12px 0 12px var(--bg)}
 }
 .dlg-line{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px}
 .dlg-line.right{flex-direction:row-reverse}
@@ -5309,7 +5311,7 @@ function rerender(){ const y=window.scrollY;
     const l=on.offsetLeft-c.offsetLeft, r=l+on.offsetWidth;
     if(l<c.scrollLeft+8 || r>c.scrollLeft+c.clientWidth-8) c.scrollLeft=Math.max(0,l-(c.clientWidth-on.offsetWidth)/2); });
 }
-function after(){ const f=$('[data-autofocus]'); if(f) f.focus(); if(typeof fitCV==='function') requestAnimationFrame(fitCV); }
+function after(){ const f=$('[data-autofocus]'); if(f) f.focus(); { const lv=$('.lv-sticky'); document.documentElement.style.setProperty('--lvh', lv&&innerWidth>=960 ? lv.offsetHeight+'px' : '0px'); } if(typeof fitCV==='function') requestAnimationFrame(fitCV); }
 
 const PRODUCER = {name:'セブ島留学バディー', url:'https://cebu-buddy.com/'};
 const producedBy = (cls='')=>`<p class="produced ${cls}">Produced by <a href="${PRODUCER.url}" target="_blank" rel="noopener">${PRODUCER.name}</a></p>`;
@@ -5576,7 +5578,7 @@ V.learn = ()=>{
   ${R.cat==='wh'?`<p class="muted small" style="margin:10px 0 0">ワーホリで実際に出会う場面ごとに、フレーズと、返事を選んで進めるシミュレーションで練習します。</p><div class="filter"><label class="filter-l" for="wh-sel">場面</label><div class="gsel"><select id="wh-sel" data-change="whscene">${WH_SCENES.map((s,i)=>{ const n=WH_SIMS.filter(x=>x.scene===s).length+ITEMS.filter(x=>x.cat==='wh'&&x.scene===s).length; return `<option value="${esc(s)}" ${(R.whScene||WH_SCENES[0])===s?'selected':''}>${i+1}. ${esc(s)}${n?'':'（準備中）'}</option>`; }).join('')}</select></div></div>`:''}
   ${R.cat==='colloc'?`<div class="filter"><label class="filter-l" for="ct-sel">種類</label><div class="gsel"><select id="ct-sel" data-change="ctype"><option value="all">すべての種類（${ITEMS.filter(x=>x.cat==='colloc').length}）</option>${COLLOC_TYPES.map(s=>`<option value="${esc(s)}" ${R.ctype===s?'selected':''}>${esc(s)}（${ITEMS.filter(x=>x.cat==='colloc'&&x.scene===s).length}）</option>`).join('')}</select></div></div>`:''}
   ${R.cat==='dialog'?`<p class="muted small" style="margin:10px 0 0">教科書の英語ではなく、ネイティブが実際に使う自然な言い方を、場面ごとに覚えます。</p><div class="filter"><label class="filter-l" for="sc-sel">場面</label><div class="gsel"><select id="sc-sel" data-change="scene">${GEN_SCENES.map(s=>{ const n=ITEMS.filter(x=>x.cat==='scene'&&x.scene===s).length; return `<option value="${esc(s)}" ${R.scene===s?'selected':''}>${esc(s)}${n?`（${n}フレーズ）`:'（準備中）'}</option>`; }).join('')}</select></div></div>`:''}
-  ${showLv?`<div class="filter"><p class="filter-l">レベル</p><div class="chips sub"><button class="chip ${R.lv==='all'?'on':''}" data-act="lv" data-lv="all">全レベル</button>${LV.map((l,i)=>`<button class="chip ${String(R.lv)===String(i)?'on':''}" data-act="lv" data-lv="${i}">${l} <span class="en">${LV_CEFR[i]}</span></button>`).join('')}<button class="linkbtn" data-act="lvguide" aria-haspopup="dialog">レベルの目安</button></div></div>`:''}
+  ${showLv?`<div class="filter lv-sticky"><p class="filter-l">レベル</p><div class="chips sub"><button class="chip ${R.lv==='all'?'on':''}" data-act="lv" data-lv="all">全レベル</button>${LV.map((l,i)=>`<button class="chip ${String(R.lv)===String(i)?'on':''}" data-act="lv" data-lv="${i}">${l} <span class="en">${LV_CEFR[i]}</span></button>`).join('')}<button class="linkbtn" data-act="lvguide" aria-haspopup="dialog">レベルの目安</button></div></div>`:''}
   <div class="split ${sel?'has-sel':''}" style="margin-top:14px">
     <div class="list-col ${S.hideJa===false?'':'hide-ja'}">${(R.cat==='study'||R.cat==='dialog'||R.cat==='grammar'||R.cat==='wh')?'':`<div class="ja-tg"><button class="tg ${S.hideJa===false?'':'on'}" data-act="hideja" aria-pressed="${S.hideJa!==false}"><span class="tg-sw" aria-hidden="true"></span>日本語を隠す（カーソルを当てると表示）</button></div>`}${(R.cat==='study'||R.cat==='dialog'||R.cat==='grammar'||R.cat==='wh')?groups:(list.length?`<div class="list">${list.map(liRow).join('')}</div>`:`<div class="panel empty">${coco(52)}<p style="margin-top:8px">${R.cat==='known'?'「覚えた」にした項目はありません。テストで正解するか「覚えた」を押すと、ここに集まります。':R.cat==='unknown'?'「まだ」にした項目はありません。テストや学習で「まだ」にすると、ここに集まります。':R.cat==='fav'?'★を付けた項目はありません。気に入った表現に★を付けると、ここから見返せます。':'このレベルの内容はまだありません。'}</p></div>`)}</div>
     <div class="detail-col">${sel?`<div class="seltop"><button class="btn sm back" data-act="unsel">← 一覧に戻る</button>${miniNav(sel.id)}</div>`+swipeWrap(sel)+stepNav(sel.id):`<div class="panel empty muted">一覧から選ぶと、ここに詳しく出ます。</div>`}</div>
