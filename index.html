@@ -4788,29 +4788,138 @@ const GRAMMAR = [
   quiz:[{q:"I've lived here ___ 2024.",o:['for','since','during'],a:1,why:'始まった時点（2024年）には since を使います。'},{q:'今セブにいて2週間: I have been ___ Cebu for two weeks.',o:['to','in','at'],a:1,why:'今もセブにいるので in。been to は「行ったことがある」です。'}]}
 ];
 
+const LQ_PER = 4;
 const LQ_CATS = [
  {cat:'word',name:'単語',how:'英語の意味を選んでください',qs:[
-  {q:'breakfast',o:['朝食','昼食','夕食']},{q:'borrow',o:['借りる','貸す','返す']},{q:'improve',o:['上達する','減らす','あきらめる']},
-  {q:'reluctant',o:['気が進まない','とても熱心な','怒っている']},{q:'meticulous',o:['細心の','大ざっぱな','気難しい']}]},
+  {q:"breakfast",o:["朝食", "昼食", "夕食"],lv:0},
+  {q:"yesterday",o:["昨日", "明日", "今日"],lv:0},
+  {q:"cheap",o:["安い", "高い", "古い"],lv:0},
+  {q:"hungry",o:["おなかがすいた", "のどがかわいた", "眠い"],lv:0},
+  {q:"borrow",o:["借りる", "貸す", "返す"],lv:1},
+  {q:"decide",o:["決める", "迷う", "断る"],lv:1},
+  {q:"arrive",o:["着く", "出発する", "待つ"],lv:1},
+  {q:"neighbor",o:["近所の人", "親戚", "同僚"],lv:1},
+  {q:"improve",o:["上達する", "減らす", "あきらめる"],lv:2},
+  {q:"avoid",o:["避ける", "選ぶ", "守る"],lv:2},
+  {q:"require",o:["必要とする", "断る", "提案する"],lv:2},
+  {q:"opportunity",o:["機会", "責任", "経験"],lv:2},
+  {q:"reluctant",o:["気が進まない", "とても熱心な", "怒っている"],lv:3},
+  {q:"inevitable",o:["避けられない", "目に見えない", "信じられない"],lv:3},
+  {q:"thorough",o:["徹底的な", "一時的な", "表面的な"],lv:3},
+  {q:"cope",o:["うまく対処する", "あきらめる", "協力する"],lv:3},
+  {q:"meticulous",o:["細心の", "大ざっぱな", "気難しい"],lv:4},
+  {q:"ubiquitous",o:["どこにでもある", "めったにない", "時代遅れの"],lv:4},
+  {q:"scrutinize",o:["詳しく調べる", "批判する", "見逃す"],lv:4},
+  {q:"pragmatic",o:["実際的な", "理想主義の", "感情的な"],lv:4}]},
  {cat:'phrasal',name:'句動詞',how:'英語の意味を選んでください',qs:[
-  {q:'get up',o:['起きる','寝る','座る']},{q:'look for',o:['探す','世話をする','楽しみにする']},{q:'give up',o:['あきらめる','始める','続ける']},
-  {q:'put off',o:['延期する','火を消す','服を着る']},{q:'come up with',o:['思いつく','追いつく','我慢する']}]},
+  {q:"get up",o:["起きる", "寝る", "座る"],lv:0},
+  {q:"sit down",o:["座る", "立つ", "横になる"],lv:0},
+  {q:"turn on",o:["（電気などを）つける", "消す", "回す"],lv:0},
+  {q:"come back",o:["戻る", "出かける", "近づく"],lv:0},
+  {q:"look for",o:["探す", "世話をする", "楽しみにする"],lv:1},
+  {q:"find out",o:["（調べて）分かる", "なくす", "見落とす"],lv:1},
+  {q:"wake up",o:["目が覚める", "眠りにつく", "寝坊する"],lv:1},
+  {q:"pick up",o:["拾う・迎えに行く", "落とす", "片付ける"],lv:1},
+  {q:"give up",o:["あきらめる", "始める", "続ける"],lv:2},
+  {q:"look forward to",o:["楽しみにする", "振り返る", "心配する"],lv:2},
+  {q:"run out of",o:["使い果たす", "逃げ出す", "手に入れる"],lv:2},
+  {q:"take care of",o:["世話をする", "注意して聞く", "気にしない"],lv:2},
+  {q:"put off",o:["延期する", "火を消す", "服を着る"],lv:3},
+  {q:"turn down",o:["断る", "受け入れる", "やり直す"],lv:3},
+  {q:"put up with",o:["我慢する", "片付ける", "言い返す"],lv:3},
+  {q:"make up for",o:["埋め合わせる", "化粧をする", "言い訳をする"],lv:3},
+  {q:"come up with",o:["思いつく", "追いつく", "我慢する"],lv:4},
+  {q:"get away with",o:["（悪いことをして）罰を受けずに済む", "一緒に出かける", "やめる"],lv:4},
+  {q:"live up to",o:["（期待に）応える", "長生きする", "同居する"],lv:4},
+  {q:"brush up on",o:["（腕を）磨き直す", "掃除する", "忘れる"],lv:4}]},
  {cat:'colloc',name:'コロケーション',how:'空いているところに入る語を選んでください',qs:[
-  {q:'___ breakfast（朝食を食べる）',o:['have','do','make']},{q:'___ a mistake（間違える）',o:['make','do','take']},{q:'___ rain（大雨）',o:['heavy','strong','big']},
-  {q:'___ a conclusion（結論に達する）',o:['reach','arrive','get']},{q:'a ___ decision（即決）',o:['snap','fast','rapid']}]},
+  {q:"___ breakfast（朝食を食べる）",o:["have", "do", "make"],lv:0},
+  {q:"___ a shower（シャワーを浴びる）",o:["take", "make", "do"],lv:0},
+  {q:"___ your homework（宿題をする）",o:["do", "make", "take"],lv:0},
+  {q:"___ a photo（写真を撮る）",o:["take", "make", "get"],lv:0},
+  {q:"___ a mistake（間違える）",o:["make", "do", "take"],lv:1},
+  {q:"___ attention（注意を払う）",o:["pay", "give", "put"],lv:1},
+  {q:"___ a party（パーティーを開く）",o:["have", "do", "open"],lv:1},
+  {q:"___ a promise（約束を守る）",o:["keep", "protect", "save"],lv:1},
+  {q:"___ rain（大雨）",o:["heavy", "strong", "big"],lv:2},
+  {q:"___ coffee（濃いコーヒー）",o:["strong", "thick", "heavy"],lv:2},
+  {q:"___ a risk（危険を冒す）",o:["take", "make", "do"],lv:2},
+  {q:"___ progress（進歩する）",o:["make", "do", "get"],lv:2},
+  {q:"___ a conclusion（結論に達する）",o:["reach", "arrive", "get"],lv:3},
+  {q:"___ a goal（目標を達成する）",o:["achieve", "succeed", "arrive"],lv:3},
+  {q:"a ___ smoker（ヘビースモーカー）",o:["heavy", "strong", "big"],lv:3},
+  {q:"___ a role（役割を果たす）",o:["play", "act", "make"],lv:3},
+  {q:"a ___ decision（即決）",o:["snap", "fast", "rapid"],lv:4},
+  {q:"a ___ contrast（際立った対照）",o:["stark", "dry", "thick"],lv:4},
+  {q:"___ a balance（バランスを取る）",o:["strike", "hit", "beat"],lv:4},
+  {q:"the ___ majority（大多数）",o:["vast", "wide", "broad"],lv:4}]},
  {cat:'idiom',name:'イディオム',how:'英語の意味を選んでください',qs:[
-  {q:'Take care.',o:['気をつけてね','注意して聞いて','世話をして']},{q:'a piece of cake',o:['とても簡単なこと','ケーキ1切れ','少しだけ']},{q:'under the weather',o:['体調がすぐれない','天気が悪い','外にいる']},
-  {q:'break the ice',o:['場をなごませる','氷を割る','約束を破る']},{q:'once in a blue moon',o:['めったにない','月に一度','満月の夜に']}]},
+  {q:"Take care.",o:["気をつけてね", "注意して聞いて", "世話をして"],lv:0},
+  {q:"See you later.",o:["またね", "あとで見てね", "遅れないでね"],lv:0},
+  {q:"Excuse me.",o:["すみません", "許して", "出ていって"],lv:0},
+  {q:"No problem.",o:["大丈夫ですよ", "困っています", "答えがありません"],lv:0},
+  {q:"a piece of cake",o:["とても簡単なこと", "ケーキ1切れ", "少しだけ"],lv:1},
+  {q:"Make yourself at home.",o:["くつろいでね", "家に帰って", "自分で作って"],lv:1},
+  {q:"in a hurry",o:["急いでいる", "心配している", "迷っている"],lv:1},
+  {q:"Take it easy.",o:["気楽にいこう", "簡単に取って", "ゆっくり話して"],lv:1},
+  {q:"under the weather",o:["体調がすぐれない", "天気が悪い", "外にいる"],lv:2},
+  {q:"hit the books",o:["しっかり勉強する", "本をたたく", "本を片付ける"],lv:2},
+  {q:"cost an arm and a leg",o:["とても高い", "けがをする", "安く済む"],lv:2},
+  {q:"on the same page",o:["考えが一致している", "同じ本を読んでいる", "同じクラスにいる"],lv:2},
+  {q:"break the ice",o:["場をなごませる", "氷を割る", "約束を破る"],lv:3},
+  {q:"the last straw",o:["我慢の限界を超える最後の一押し", "最後の望み", "最後の一杯"],lv:3},
+  {q:"beat around the bush",o:["遠回しに言う", "草むらを探す", "仕事をさぼる"],lv:3},
+  {q:"a blessing in disguise",o:["不幸に見えて実は幸運なこと", "隠れた才能", "変装した人"],lv:3},
+  {q:"once in a blue moon",o:["めったにない", "月に一度", "満月の夜に"],lv:4},
+  {q:"bite the bullet",o:["嫌なことに覚悟して立ち向かう", "口をつぐむ", "危険を避ける"],lv:4},
+  {q:"jump the gun",o:["早まったことをする", "銃を撃つ", "先頭に立つ"],lv:4},
+  {q:"the elephant in the room",o:["皆が気づいているのに触れない問題", "部屋の中の大きな家具", "目立ちたがりの人"],lv:4}]},
  {cat:'pattern',name:'構文',how:'空いているところに入る語を選んでください',qs:[
-  {q:"I'd like ___ order, please.",o:['to','for','at']},{q:"It's too hot ___ study.",o:['to','for','that']},{q:'If I ___ you, I would call him.',o:['were','am','be']},
-  {q:'I wish I ___ studied harder.',o:['had','have','would']},{q:"It wasn't until I came here ___ I realized it.",o:['that','when','which']}]},
+  {q:"I'd like ___ order, please.",o:["to", "for", "at"],lv:0},
+  {q:"Can you ___ me?",o:["help", "helping", "to help"],lv:0},
+  {q:"There ___ a book on the desk.",o:["is", "are", "be"],lv:0},
+  {q:"Let's ___ lunch.",o:["have", "having", "to have"],lv:0},
+  {q:"It's too hot ___ study.",o:["to", "for", "that"],lv:1},
+  {q:"I'm going ___ visit my friend.",o:["to", "for", "at"],lv:1},
+  {q:"It takes ten minutes ___ walk there.",o:["to", "for", "with"],lv:1},
+  {q:"I have ___ finish this today.",o:["to", "for", "that"],lv:1},
+  {q:"If I ___ you, I would call him.",o:["were", "am", "be"],lv:2},
+  {q:"Would you mind ___ the window?",o:["opening", "to open", "open"],lv:2},
+  {q:"It's important ___ you to sleep well.",o:["for", "to", "of"],lv:2},
+  {q:"The more you practice, ___ you get.",o:["the better", "better", "more better"],lv:2},
+  {q:"I wish I ___ studied harder.",o:["had", "have", "would"],lv:3},
+  {q:"I'm used to ___ up early.",o:["getting", "get", "got"],lv:3},
+  {q:"She is not only kind ___ smart.",o:["but also", "and also", "or also"],lv:3},
+  {q:"It's time we ___ home.",o:["went", "go", "going"],lv:3},
+  {q:"It wasn't until I came here ___ I realized it.",o:["that", "when", "which"],lv:4},
+  {q:"Had I known, I ___ have come.",o:["would", "will", "had"],lv:4},
+  {q:"No sooner had I arrived ___ it started to rain.",o:["than", "when", "then"],lv:4},
+  {q:"What I need ___ more time.",o:["is", "are", "have"],lv:4}]},
  {cat:'grammar',name:'文法',how:'空いているところに入る語を選んでください',qs:[
-  {q:'She ___ a student.',o:['is','am','are']},{q:'We ___ to the beach last weekend.',o:['went','go','going']},{q:"I've lived here ___ 2019.",o:['since','for','during']},
-  {q:'He suggested ___ the meeting.',o:['postponing','to postpone','postpone']},{q:'Hardly ___ the door when the phone rang.',o:['had he opened','he had opened','he opened']}]}
+  {q:"She ___ a student.",o:["is", "am", "are"],lv:0},
+  {q:"I ___ coffee every morning.",o:["drink", "drinks", "drinking"],lv:0},
+  {q:"___ you like music?",o:["Do", "Are", "Does"],lv:0},
+  {q:"They ___ playing soccer now.",o:["are", "is", "am"],lv:0},
+  {q:"We ___ to the beach last weekend.",o:["went", "go", "going"],lv:1},
+  {q:"This bag is ___ than that one.",o:["bigger", "big", "more big"],lv:1},
+  {q:"Have you ever ___ sushi?",o:["eaten", "ate", "eat"],lv:1},
+  {q:"There isn't ___ milk left.",o:["any", "some", "many"],lv:1},
+  {q:"I've lived here ___ 2019.",o:["since", "for", "during"],lv:2},
+  {q:"This book ___ by many people.",o:["is read", "reads", "is reading"],lv:2},
+  {q:"If it rains tomorrow, I ___ stay home.",o:["will", "would", "am"],lv:2},
+  {q:"This is the town ___ I was born.",o:["where", "which", "what"],lv:2},
+  {q:"He suggested ___ the meeting.",o:["postponing", "to postpone", "postpone"],lv:3},
+  {q:"By next year, I ___ here for ten years.",o:["will have lived", "will live", "have lived"],lv:3},
+  {q:"I'd rather you ___ smoke here.",o:["didn't", "don't", "won't"],lv:3},
+  {q:"She denied ___ the money.",o:["taking", "to take", "take"],lv:3},
+  {q:"Hardly ___ the door when the phone rang.",o:["had he opened", "he had opened", "he opened"],lv:4},
+  {q:"___ it not been for your help, I would have failed.",o:["Had", "If", "Were"],lv:4},
+  {q:"Seldom ___ such a beautiful view.",o:["have I seen", "I have seen", "I saw"],lv:4},
+  {q:"It is essential that he ___ on time.",o:["be", "is", "was"],lv:4}]}
 ];
 
 const lqCat = c=>LQ_CATS.find(x=>x.cat===c);
-const lqLevel = score=>Math.max(0, score-1);
+const lqLevel = byLv=>Math.max(0, byLv.filter(n=>n>=3).length-1);
 function lqLatest(upTo){
   const m={}; (S.lvHist||[]).filter(h=>!upTo||h.d<=upTo).forEach(h=>{ m[h.cat]=h; }); return m; }
 function lqOverall(upTo){ const v=Object.values(lqLatest(upTo)); if(!v.length) return null; return v.reduce((a,h)=>a+h.lv,0)/v.length; }
@@ -5353,7 +5462,7 @@ V.welcome = ()=>`<div style="padding-top:8vh">
 
 V.home = ()=>{
   const due = dueCount(), known = Object.values(S.prog).filter(p=>p.state==='known').length;
-  const lvLine = S.level==null ? 'まずはレベル診断から。カテゴリーごとに5問で、今のレベルが分かります。' : `今のレベルは「${lvName(S.level)}」。${esc(LV_TEXT[S.level])}`;
+  const lvLine = S.level==null ? 'まずはレベル診断から。カテゴリーごとに20問で、今のレベルが分かります。' : `今のレベルは「${lvName(S.level)}」。${esc(LV_TEXT[S.level])}`;
   const latest = S.vault.slice(-2).reverse();
   const t = tier();
   const banner = t==='customer' ? ''
@@ -5364,7 +5473,7 @@ V.home = ()=>{
   <button class="hero-study" data-act="learn" data-cat="study"><div><h2>留学で使う英語</h2><p>授業中・学校生活・寮と生活で、そのまま使える表現と会話</p></div><div class="pair">${coco(52)}${mango(52)}</div></button>
   <div class="home-grid">
     <div class="tile today"><div class="num">${due}</div><div><b>今日の復習</b><span>覚えた ${known}件・保存庫 ${S.vault.length}件</span></div></div>
-    <button class="tile" data-act="go" data-v="level"><b>レベル診断</b>${tileMark('level',0)}<span>${S.level==null?'カテゴリーごとに5問':'記録とグラフを見る'}</span></button>
+    <button class="tile" data-act="go" data-v="level"><b>レベル診断</b>${tileMark('level',0)}<span>${S.level==null?'カテゴリーごとに20問':'記録とグラフを見る'}</span></button>
     <button class="tile" data-act="go" data-v="pron"><b>発音講座</b>${tileMark('pron',1)}<span>発音記号・ルール・聞き分け・言ってみる</span></button>
     <button class="tile" data-act="go" data-v="talk"><b>AI英会話</b>${tileMark('talk',1)}<span>面接・授業・ルームメイトと練習</span></button>
     <button class="tile" data-act="learn" data-cat="wh"><b>ワーホリ対策</b>${tileMark('wh',2)}<span>場面ごとのフレーズとシミュレーション</span></button>
@@ -5389,22 +5498,22 @@ V.level = ()=>{
   }
   const latest=lqLatest(), ov=lqOverall(), taken=Object.keys(latest).length;
   let head='';
-  if(LQS.done){ const c=lqCat(LQS.cat), lv=lqLevel(LQS.score);
-    head=`<div class="panel" style="margin-bottom:12px"><p class="muted small" style="margin:0">${c.name}の結果（${LQS.score} / 5問正解）</p>
+  if(LQS.done){ const c=lqCat(LQS.cat), lv=lqLevel(LQS.byLv);
+    head=`<div class="panel" style="margin-bottom:12px"><p class="muted small" style="margin:0">${c.name}の結果（${LQS.score} / ${LQS.qs.length}問正解）</p>
       <div style="font-size:26px;font-weight:700;color:var(--teal-ink)">${LV[lv]} <span class="en" style="font-size:16px">${LV_CEFR[lv]}</span></div>
       <p class="small" style="margin:0">${esc(LV_SUB[lv])}</p></div>`; }
   const olv = ov==null?null:Math.round(ov);
   return `<h1>レベル診断</h1>${head}
   <div class="panel"><div class="greet" style="margin:0">${olv!=null&&olv>=2?mango(64):coco(64)}<div>
     <p class="muted small" style="margin:0">今の総合レベル${taken?`（${taken} / ${LQ_CATS.length}カテゴリーの平均）`:''}</p>
-    ${olv==null?`<div style="font-size:20px;font-weight:700">まだ診断していません</div><p class="small" style="margin:0">カテゴリーを1つ選んで、5問から始めましょう。</p>`
+    ${olv==null?`<div style="font-size:20px;font-weight:700">まだ診断していません</div><p class="small" style="margin:0">カテゴリーを1つ選んで、20問から始めましょう。</p>`
       :`<div style="font-size:30px;font-weight:700;color:var(--teal-ink)">${LV[olv]} <span class="en" style="font-size:18px">${LV_CEFR[olv]}</span></div><p class="small" style="margin:0;color:var(--teal-ink)">${LV_SUB[olv]}</p>`}
   </div></div>
   ${olv!=null?`<p class="small" style="margin-top:10px">${esc(LV_TEXT[olv])}　<button class="linkbtn" data-act="lvguide">レベルの目安</button></p>`:''}
   <div class="lq-grid">${LQ_CATS.map(c=>{const h=latest[c.cat];return `<div class="lq-cell"><div class="lq-name">${c.name}</div>
     ${h?`<div class="lq-lv">${LV[h.lv]} <span class="en">${LV_CEFR[h.lv]}</span></div><div class="lq-bar" aria-hidden="true">${LV.map((_,i)=>`<i class="${i<=h.lv?'on':''}"></i>`).join('')}</div><div class="muted small">${fmtD(h.d)}</div>`:`<div class="muted small" style="margin:6px 0">未診断</div>`}
-    <button class="btn sm ${h?'':'primary'}" data-act="lvstart" data-cat="${c.cat}">${h?'もう一度':'5問で診断'}</button></div>`}).join('')}</div>
-  <p class="muted small">各カテゴリー5問の簡易判定です。正式なCEFRの判定ではありません。</p>
+    <button class="btn sm ${h?'':'primary'}" data-act="lvstart" data-cat="${c.cat}">${h?'もう一度':'20問で診断'}</button></div>`}).join('')}</div>
+  <p class="muted small">各カテゴリー20問（各レベル4問）の簡易判定です。レベルごとに4問中3問以上正解で、そのレベルに届いているとみなします。正式なCEFRの判定ではありません。</p>
   </div>
   <h2>成長の記録</h2>${growthHTML()}
   ${olv!=null?`<div class="panel stack" style="margin-top:14px"><h3>このレベルからの留学プランを相談しませんか？</h3><p class="muted">レベルに合う学校と期間を、無料でご案内します。</p>${cta}</div>`:''}`;
@@ -5438,15 +5547,15 @@ function growthHTML(){
    </svg></div>
    <details style="margin-top:6px"><summary class="small">記録を表で見る（${H.length}件）</summary>
     <table class="lvtable" style="margin-top:6px"><thead><tr><th scope="col">実施日</th><th scope="col">カテゴリー</th><th scope="col">結果</th><th scope="col">正解</th></tr></thead>
-    <tbody>${H.slice().reverse().map(h=>`<tr><td>${h.d}</td><td>${lqCat(h.cat).name}</td><td>${LV[h.lv]} <span class="en">${LV_CEFR[h.lv]}</span></td><td>${h.sc} / 5</td></tr>`).join('')}</tbody></table></details>
+    <tbody>${H.slice().reverse().map(h=>`<tr><td>${h.d}</td><td>${lqCat(h.cat).name}</td><td>${LV[h.lv]} <span class="en">${LV_CEFR[h.lv]}</span></td><td>${h.sc} / ${h.n||5}</td></tr>`).join('')}</tbody></table></details>
   </div>`;
 }
-function lvStart(cat){ const c=lqCat(cat); LQS={cat,i:0,score:0,pick:null,done:false,qs:c.qs.map(q=>({...q,opts:shuffle(q.o.slice())}))}; R.v='level'; render(); }
-function lvFinish(){ const lv=lqLevel(LQS.score); S.lvHist=S.lvHist||[]; const d=today();
-  S.lvHist=S.lvHist.filter(h=>!(h.d===d&&h.cat===LQS.cat)); S.lvHist.push({d,cat:LQS.cat,lv,sc:LQS.score}); S.lvHist.sort((a,b)=>a.d<b.d?-1:a.d>b.d?1:0);
+function lvStart(cat){ const c=lqCat(cat); LQS={cat,i:0,score:0,byLv:[0,0,0,0,0],pick:null,done:false,qs:c.qs.map(q=>({...q,opts:shuffle(q.o.slice())}))}; R.v='level'; render(); }
+function lvFinish(){ const lv=lqLevel(LQS.byLv); S.lvHist=S.lvHist||[]; const d=today();
+  S.lvHist=S.lvHist.filter(h=>!(h.d===d&&h.cat===LQS.cat)); S.lvHist.push({d,cat:LQS.cat,lv,sc:LQS.score,n:LQS.qs.length}); S.lvHist.sort((a,b)=>a.d<b.d?-1:a.d>b.d?1:0);
   S.level=Math.round(lqOverall()); S.levelDate=d; LQS.done=true; save(); }
 function lvSample(){ const plan={'2026-08-20':[0,1,0,0,1,0],'2026-09-25':[1,1,1,0,1,1],'2026-10-30':[2,1,1,1,2,1],'2026-11-15':[2,2,2,1,2,2]};
-  S.lvHist=[]; Object.entries(plan).forEach(([d,a])=>LQ_CATS.forEach((c,i)=>S.lvHist.push({d,cat:c.cat,lv:a[i],sc:a[i]+1})));
+  S.lvHist=[]; Object.entries(plan).forEach(([d,a])=>LQ_CATS.forEach((c,i)=>S.lvHist.push({d,cat:c.cat,lv:a[i],sc:(a[i]+1)*4,n:20})));
   S.level=Math.round(lqOverall()); S.levelDate='2026-11-15'; save(); }
 
 function listFor(){
@@ -6033,7 +6142,7 @@ const GUIDE_FEATS = [
  ['learn','book','g0','学ぶ','英語の中身を覚える場所です。','単語・句動詞・イディオム・場面別フレーズ・文法などから選びます。レベルで絞り込み、「覚えた」「まだ」で仕分けると、復習する日が自動で決まります。'],
  ['vault','vault','g1','保存庫','言えなかった表現をためる、自分だけの単語帳です。','授業や会話で言えなかったことをAIに聞いて、ここに入れます。復習して、実際に使えたら「実際に使えた！」を押します。'],
  ['test','test','g2','テスト','覚えたかどうかを確かめます。','範囲を選んで、4択で答えます。正解は「覚えた」、不正解は「まだ」に入り、復習する日が自動で決まります。'],
- ['level','level','g0','レベル診断','今の自分のレベルを知ります。','カテゴリーごとに5問の簡単な判定です。結果を見て、「学ぶ」で自分のレベルから始めましょう（正式なCEFRの判定ではありません）。'],
+ ['level','level','g0','レベル診断','今の自分のレベルを知ります。','カテゴリーごとに20問の簡単な判定です。結果を見て、「学ぶ」で自分のレベルから始めましょう（正式なCEFRの判定ではありません）。'],
  ['pron','mic','g1','発音講座','通じる発音の基本を身につけます。','発音記号の読み方、日本人が苦手な音、音のつながり、リズムを、ルール → 聞き分け → 言ってみる の順で練習します。'],
  ['talk','chat','g2','AI英会話','AIを相手に、英語で話す練習をします。','場面を選んで話します。終わると直しの一覧が出て、そのまま保存庫に入れられます。'],
  ['resume','doc','g0','履歴書','ワーホリの仕事探しに使う、英文の履歴書をつくります。','質問に日本語で答えると、AIがアピールポイントを英文にまとめます。できた履歴書はPDFで保存（印刷）できます。入力した内容は、この端末にだけ保存されます。'],
@@ -6249,7 +6358,7 @@ document.addEventListener('click', e=>{
     case 'rec': toggleRec(); break;
     case 'judge': judge(d.t); break;
     case 'gq': { GQ[d.id]=GQ[d.id]||{}; GQ[d.id][+d.q]=+d.i; rerender(); break; }
-    case 'lvpick': if(LQS.pick===null){ LQS.pick=+d.i; const q=LQS.qs[LQS.i]; if(q.opts[+d.i]===q.o[0]) LQS.score++; rerender(); } break;
+    case 'lvpick': if(LQS.pick===null){ LQS.pick=+d.i; const q=LQS.qs[LQS.i]; if(q.opts[+d.i]===q.o[0]){ LQS.score++; LQS.byLv[q.lv]++; } rerender(); } break;
     case 'lvstart': lvStart(d.cat); break;
     case 'puopen': PU={id:d.id,i:0,t:Math.round(Math.random()),pick:null,score:0}; PRON={id:null,url:null,rec:null,result:''}; rerender(); window.scrollTo(0,0); break;
     case 'puclose': PU={id:null,i:0,t:0,pick:null,score:0}; rerender(); window.scrollTo(0,0); break;
