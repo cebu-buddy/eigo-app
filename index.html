@@ -461,7 +461,7 @@ function mango(s=56){
   <circle cx="18" cy="45" r="3.2" fill="#F26D5B" opacity=".55"/><circle cx="46" cy="45" r="3.2" fill="#F26D5B" opacity=".55"/>
   <path d="M27 45c3 3.5 7 3.5 10 0" stroke="#2A1A10" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>`;
 }
-const CH = {coco:{name:'ココ（仮）',svg:coco}, mango:{name:'マンゴー（仮）',svg:mango}};
+const CH = {coco:{name:'ココ',svg:coco}, mango:{name:'マンゴー',svg:mango}};
 
 const I = {
  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>',
@@ -5537,7 +5537,7 @@ function shell(){
   const FEAT = {ask:'ask',vault:'vault',talk:'talk',resume:'resume'};
   const lk = v=> FEAT[v] && !feature(FEAT[v]) ? `<span class="lockmark" aria-label="鍵">${I.lock}</span>` : '';
   const side =`<nav class="side" aria-label="メニュー">
-    <button class="brand" data-act="go" data-v="home">${mango(34)}<span>ココマンゴー英語<small>ベータ版（名前は仮）</small></span></button>
+    <button class="brand" data-act="go" data-v="home">${mango(34)}<span>ココマンゴー英語<small>ベータ版</small></span></button>
     ${NAV.filter(n=>n[0]!=='ask').map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
     <div class="grp">ほかの機能</div>
     ${NAV2.map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
@@ -5545,7 +5545,7 @@ function shell(){
     <button class="ask-cta" data-act="go" data-v="ask">${I.chat}<span>言えなかった表現を<br>AIに聞く</span></button>
     ${producedBy('side-pb')}
   </nav>`;
-  const top = `<header class="top"><button class="brand" data-act="go" data-v="home">${mango(30)}<span>ココマンゴー英語<small>ベータ版（名前は仮）</small></span></button>
+  const top = `<header class="top"><button class="brand" data-act="go" data-v="home">${mango(30)}<span>ココマンゴー英語<small>ベータ版</small></span></button>
     <div class="top-links"><button class="icon-btn" data-act="go" data-v="guide">手引書</button><button class="icon-btn" data-act="go" data-v="me">マイページ</button></div></header>`;
   const tab = `<nav class="tabbar" aria-label="メインメニュー">${NAV.map(n=> n[0]==='ask'
      ? `<button class="ask ${R.v==='ask'?'on':''}" data-act="go" data-v="ask"><span class="bubble">${n[2]}</span>${n[1]}</button>`
@@ -5594,7 +5594,7 @@ V.home = ()=>{
   const banner = t==='customer' ? ''
     : t==='counseled' ? `<div class="note tier"><span>お試し中（あと${trialLeft()}日）: AI即答は今日あと${askLeft()}回、保存庫はあと${Math.max(0,vaultRoom())}件。成約すると、すべての機能を留学のあとも使えます。</span><button class="btn sm cta" data-act="upsell">相談する</button><span class="upsell-msg small"></span></div>`
     : `<div class="note tier"><span>${expired()?`お試しの期限が切れました。保存庫の${S.vault.length}件は残っています。成約すると続きから使えます。`:`面談前は、レベル診断・テスト・一部の内容だけ使えます。無料カウンセリングを受けると、${TRIAL_DAYS}日間のお試しで多くの機能が使えます。`}</span><button class="btn sm cta" data-act="upsell">無料カウンセリングを相談する</button><span class="upsell-msg small"></span></div>`;
-  return `<div class="greet">${coco(64)}<div class="speech"><b>ココ（仮）</b>${esc(S.user)}さん、${lvLine}</div></div>
+  return `<div class="greet">${coco(64)}<div class="speech"><b>ココ</b>${esc(S.user)}さん、${lvLine}</div></div>
   ${banner}
   <button class="hero-study" data-act="learn" data-cat="study"><div><h2>留学で使う英語</h2><p>授業中・学校生活・寮と生活で、そのまま使える表現と会話</p></div><div class="pair">${coco(52)}${mango(52)}</div></button>
   <div class="home-grid">
@@ -6001,7 +6001,7 @@ V.ask = ()=>{
   const a = ASK.a;
   return `<h1>AIに聞く</h1>
   ${tier()!=='customer'?`<p class="tier note">お試し中: 今日あと${askLeft()}回聞けます（1日${LIMIT.counseled.ask}回まで）。成約すると1日${LIMIT.customer.ask}回まで使えます。</p>`:''}
-  <div class="greet" style="margin-top:0">${mango(52)}<div class="speech"><b>マンゴー（仮）</b>言いたいのに言えなかった表現、分からなかった単語を聞いてね。答えは保存庫に入れて、次に使えるようにしよう。</div></div>
+  <div class="greet" style="margin-top:0">${mango(52)}<div class="speech"><b>マンゴー</b>言いたいのに言えなかった表現、分からなかった単語を聞いてね。答えは保存庫に入れて、次に使えるようにしよう。</div></div>
   <div class="panel stack">
     <form class="ask-box" data-form="ask"><input type="text" id="ask-q" value="${esc(ASK.q)}" placeholder="例: 「割り勘にしよう」は英語で？" aria-label="AIへの質問" data-autofocus><button class="btn primary" type="submit">聞く</button></form>
     <div class="chips">${Object.keys(AI_DEMO).map(k=>`<button class="chip" data-act="askdemo" data-q="${esc(k)}">${esc(k)}</button>`).join('')}</div>
@@ -6074,7 +6074,7 @@ V.test = ()=>{
   }
   if(T.i>=T.qs.length){
     const good = T.score>=Math.ceil(T.qs.length*.7);
-    return `<h1>テストの結果</h1><div class="panel"><div class="greet" style="margin:0">${good?mango(72):coco(72)}<div class="speech"><b>${good?'マンゴー（仮）':'ココ（仮）'}</b>${T.score} / ${T.qs.length}問正解！${good?'この調子！':'「まだ」の表現は、未記憶の一覧から復習できます。'}</div></div></div>
+    return `<h1>テストの結果</h1><div class="panel"><div class="greet" style="margin:0">${good?mango(72):coco(72)}<div class="speech"><b>${good?'マンゴー':'ココ'}</b>${T.score} / ${T.qs.length}問正解！${good?'この調子！':'「まだ」の表現は、未記憶の一覧から復習できます。'}</div></div></div>
     <div class="row" style="margin-top:12px"><button class="btn primary" data-act="tstart">同じ範囲でもう一度</button><button class="btn" data-act="treset">範囲を選び直す</button><button class="btn" data-act="learn" data-cat="unknown">未記憶の一覧へ</button></div>`;
   }
   const q=T.qs[T.i], ans=T.pick!==null, ja2en=T.setup.dir!=='en2ja';
@@ -6215,7 +6215,7 @@ V.resume = ()=>{
    <div class="stack">
     <div class="panel"><h3>AIと一問一答で強みを見つける</h3>
       ${RQ.i<0?`<p class="muted small">質問に日本語で答えると、AIがアピールポイントを英文にまとめます。</p><button class="btn mango" data-act="rqstart">はじめる</button>`
-       : RQ.i<RQS.length?`<div class="greet" style="margin:6px 0">${coco(44)}<div class="speech"><b>ココ（仮）</b>${esc(RQS[RQ.i])}</div></div><form data-form="rq" class="ask-box"><input type="text" id="rq-a" aria-label="答え" data-autofocus><button class="btn primary">答える</button></form><p class="muted small">${RQ.i+1} / ${RQS.length}</p>`
+       : RQ.i<RQS.length?`<div class="greet" style="margin:6px 0">${coco(44)}<div class="speech"><b>ココ</b>${esc(RQS[RQ.i])}</div></div><form data-form="rq" class="ask-box"><input type="text" id="rq-a" aria-label="答え" data-autofocus><button class="btn primary">答える</button></form><p class="muted small">${RQ.i+1} / ${RQS.length}</p>`
        : `<p>まとめた例を「自己紹介」に入れました。本番は、あなたの答えからAIが英文を作ります。</p><button class="btn sm" data-act="rqstart">もう一度</button>`}
     </div>
     <div class="panel"><h3>色を選ぶ</h3>
@@ -6276,7 +6276,7 @@ const GUIDE_FEATS = [
 ];
 const FEAT_LOCK = v=>{ const F={ask:'ask',vault:'vault',talk:'talk',resume:'resume'}; return F[v] && !feature(F[v]) ? `<span class="lockmark" aria-label="鍵（今の区分では使えません）">${I.lock}</span>` : ''; };
 V.guide = ()=>`<h1>手引書</h1>
-  <div class="greet" style="margin-top:0">${coco(56)}<div class="speech"><b>ココ（仮）</b>時期ごと・機能ごとの使い方です。帰国後も続けて使えます。</div></div>
+  <div class="greet" style="margin-top:0">${coco(56)}<div class="speech"><b>ココ</b>時期ごと・機能ごとの使い方です。帰国後も続けて使えます。</div></div>
   <section class="ask-hero" aria-labelledby="ask-hero-h">
     <p class="ask-hero-k">このアプリでいちばん大事にしている機能</p>
     <h2 id="ask-hero-h">言えなかった表現を、その場でAIに聞く</h2>
