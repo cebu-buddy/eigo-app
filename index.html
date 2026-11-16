@@ -515,6 +515,8 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 
 const COUNSEL_URL = 'https://lin.ee/TyLuCWw';
 
+const AI_URL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://127.0.0.1:8790/api/ask' : '';
+
 const BD_LINE_IC=`<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.6 0 .9l-.1.9c0 .3-.2 1 .9.5s6-3.5 8.2-6.1C21.6 14 22 12.6 22 11c0-4.4-4.5-8-10-8z"/></svg>`;
 const bdSea=(w,h)=>`<svg class="bd-sea" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><circle cx="${w*0.78}" cy="${h*0.32}" r="${h*0.16}" fill="#F5A524" opacity=".9"/><path d="M0 ${h*0.55} Q ${w*0.25} ${h*0.48} ${w*0.5} ${h*0.55} T ${w} ${h*0.55} V ${h} H 0 Z" fill="#86C7C2"/><path d="M0 ${h*0.68} Q ${w*0.25} ${h*0.6} ${w*0.5} ${h*0.68} T ${w} ${h*0.68} V ${h} H 0 Z" fill="#49B0A8"/><path d="M0 ${h*0.84} Q ${w*0.3} ${h*0.78} ${w*0.6} ${h*0.86} T ${w} ${h*0.82} V ${h} H 0 Z" fill="#F3E3C3"/></svg>`;
 const bdChars=n=>`<span class="bd-chars" aria-hidden="true">${CH.coco.svg(n)}${CH.mango.svg(n)}</span>`;
@@ -9780,6 +9782,18 @@ function judge(target){
   }catch(e){ PRON.result='この端末では判定ができません。'; rerender(); }
 }
 
+async function askAI(q){
+  if(AI_DEMO[q] || !AI_URL){ ASK={q,a:AI_DEMO[q]||{none:true},fb:null}; rerender(); return; }
+  const id=Date.now(); ASK={q,a:{loading:true,id},fb:null}; rerender();
+  let a;
+  try{
+    const r=await fetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q})});
+    const j=await r.json().catch(()=>({error:'答えを受け取れませんでした。'}));
+    a = j.error ? {err:j.error} : j;
+  }catch(e){ a={err:'AIの中継サーバーにつながりませんでした。パソコンで中継サーバーが動いているか確かめてください。'}; }
+  if(ASK.a && ASK.a.id===id){ ASK={q,a,fb:null}; if(R.v==='ask') rerender(); }
+}
+
 V.ask = ()=>{
   if(!feature('ask')) return `<h1>AIに聞く</h1>${upsell('AIに聞く機能は、無料カウンセリング（面談）を受けると使えます。')}`;
   const a = ASK.a;
@@ -9789,11 +9803,14 @@ V.ask = ()=>{
   <div class="panel stack">
     <form class="ask-box" data-form="ask"><input type="text" id="ask-q" value="${esc(ASK.q)}" placeholder="例: 「割り勘にしよう」は英語で？" aria-label="AIへの質問" data-autofocus><button class="btn primary" type="submit">聞く</button></form>
     <div class="chips">${Object.keys(AI_DEMO).map(k=>`<button class="chip" data-act="askdemo" data-q="${esc(k)}">${esc(k)}</button>`).join('')}</div>
-    <p class="muted small">AI即答は準備中です。今は、上の4つの例だけ見本の答えが出ます（単語1語のときは発音記号つき）。名前や連絡先は書かないでください。</p>
+    <p class="muted small">${AI_URL?'試験運用中: このパソコンの中継サーバーを通して、AI（Claude）が答えます。答えに間違いがあることもあります。':'AI即答は準備中です。今は、上の4つの例だけ見本の答えが出ます（単語1語のときは発音記号つき）。'}名前や連絡先は書かないでください。</p>
   </div>
-  ${a? (a.none ? `<div class="panel" style="margin-top:12px"><p>AI即答は準備中です。使えるようになると、ここに答え（表現・解説・例文2つ）が出ます。今は、質問をメモとして保存庫に入れておけます。</p><button class="btn sm" data-act="askmemo">質問をメモとして保存庫に入れる</button></div>`
+  ${a&&a.loading?`<div class="panel" style="margin-top:12px" role="status"><p style="margin:0">${mango(36)} 考えています…（数秒かかります）</p></div>`:''}
+  ${a&&a.err?`<div class="panel" style="margin-top:12px" role="alert"><p style="margin:0 0 8px">${esc(a.err)}</p><button class="btn sm" data-act="askmemo">質問をメモとして保存庫に入れる</button></div>`:''}
+  ${a&&!a.loading&&!a.err? (a.none ? `<div class="panel" style="margin-top:12px"><p>AI即答は準備中です。使えるようになると、ここに答え（表現・解説・例文2つ）が出ます。今は、質問をメモとして保存庫に入れておけます。</p><button class="btn sm" data-act="askmemo">質問をメモとして保存庫に入れる</button></div>`
    : `<div class="panel answer" style="margin-top:12px">
       <h3>英語の表現</h3><div class="row"><span class="word en" style="font-size:24px;font-weight:600">${esc(a.en)}</span>${sayBtn(a.en)}</div>${ipaHTML(a.en,a.ipa)}<p>${esc(a.ja)}</p>
+      ${(a.alt||[]).length?`<h3>言い換え</h3>${a.alt.map(e=>`<div class="ex"><div class="row"><span class="e">${esc(e[0])}</span>${sayBtn(e[0])}</div><div class="muted">${esc(e[1])}</div></div>`).join('')}`:''}
       <h3>解説</h3><p>${esc(a.ex)}</p>
       <h3>例文</h3>${a.ex2.map(e=>`<div class="ex"><div class="row"><span class="e">${esc(e[0])}</span>${sayBtn(e[0])}</div><div class="muted">${esc(e[1])}</div></div>`).join('')}
       <div class="row" style="margin-top:12px"><button class="btn mango" data-act="askvault" ${S.vault.some(v=>v.en===a.en)?'disabled':''}>${S.vault.some(v=>v.en===a.en)?'保存庫に入れました':'保存庫に入れる'}</button>
@@ -10426,7 +10443,7 @@ document.addEventListener('click', e=>{
 });
 document.addEventListener('submit', e=>{
   const f=e.target.closest('[data-form]'); if(!f) return; e.preventDefault();
-  if(f.dataset.form==='ask'){ const q=$('#ask-q').value.trim(); if(!q) return; if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[limTier()].ask}回）を使い切りました。`); return; } useAsk(); ASK={q,a:AI_DEMO[q]||{none:true},fb:null}; rerender(); }
+  if(f.dataset.form==='ask'){ const q=$('#ask-q').value.trim(); if(!q) return; if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[limTier()].ask}回）を使い切りました。`); return; } useAsk(); askAI(q); }
   if(f.dataset.form==='vadd'){ const en=$('#va-en').value.trim(), ja=$('#va-ja').value.trim(); if(!en||!ja){ alert('英語と意味を入れてください。'); return; } addVault(en,ja,$('#va-sc').value,'manual'); rerender(); }
   if(f.dataset.form==='talk'){ talkSend($('#talk-in').value); }
   if(f.dataset.form==='rq'){ const a=$('#rq-a').value.trim(); if(!a) return; RQ.answers.push(a); RQ.i++;
