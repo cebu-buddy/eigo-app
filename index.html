@@ -9831,7 +9831,7 @@ V.ask = ()=>{
   if(!feature('ask')) return `<h1>AIに聞く</h1>${upsell('AIに聞く機能は、無料カウンセリング（面談）を受けると使えます。')}`;
   const a = ASK.a;
   return `<h1>AIに聞く</h1>
-  ${tier()!=='customer'?`<p class="tier note">お試し中: 今日あと${askLeft()}回聞けます（1日${LIMIT.counseled.ask}回まで）。成約すると1日${LIMIT.customer.ask}回まで使えます。</p>`:''}
+  ${limTier()!=='customer'?`<p class="tier note">お試し中: 今日あと${askLeft()}回聞けます（1日${LIMIT.counseled.ask}回まで）。成約すると1日${LIMIT.customer.ask}回まで使えます。</p>`:''}
   <div class="greet" style="margin-top:0">${mango(52)}<div class="speech"><b>マンゴー</b>言いたいのに言えなかった表現、分からなかった単語を聞いてね。答えは保存庫に入れて、次に使えるようにしよう。</div></div>
   <div class="panel stack">
     <form class="ask-box" data-form="ask"><input type="text" id="ask-q" value="${esc(ASK.q)}" placeholder="${VOICE_OK?'例: 「割り勘にしよう」は英語で？（マイクで話してもOK）':'例: 「割り勘にしよう」は英語で？'}" aria-label="AIへの質問" data-autofocus>${VOICE_OK?`<span class="vlang" role="group" aria-label="音声入力の言葉"><button type="button" class="${VOICE.lang==='ja-JP'?'on':''}" data-act="vlang" data-l="ja-JP" aria-pressed="${VOICE.lang==='ja-JP'}">日本語</button><button type="button" class="${VOICE.lang==='en-US'?'on':''}" data-act="vlang" data-l="en-US" aria-pressed="${VOICE.lang==='en-US'}">English</button></span>`:''}${VOICE_OK?`<button type="button" class="btn vbtn ${VOICE.on?'on':''}" data-act="askvoice" aria-pressed="${VOICE.on}" aria-label="${VOICE.on?'音声入力を止める':'声で入力する'}" title="声で入力">${I.mic}</button>`:''}<button class="btn primary" type="submit">聞く</button></form>
