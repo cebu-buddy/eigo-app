@@ -174,6 +174,19 @@ dialog.sheet[open]{animation:sheetUp .26s cubic-bezier(.16,1,.3,1)}
 dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
 .sheet-grip{width:40px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 10px}
 .gs-lead{margin:0 0 8px;color:var(--muted)}.gsteps{list-style:none;margin:0;padding:0;font-size:13px;line-height:1.65}.gsteps li{display:flex;gap:6px;padding:5px 0;border-top:1px dashed var(--line)}.gsteps li:first-child{border-top:0}.gs-n{flex:none;color:var(--teal-ink);font-weight:700}
+
+.tl{position:relative;display:grid;grid-template-columns:1fr;gap:14px;margin:6px 0 14px;padding-left:38px}
+.tl::before{content:'';position:absolute;left:13px;top:18px;bottom:18px;width:3px;border-radius:3px;background:linear-gradient(180deg,var(--teal),var(--lv1),var(--mango),var(--pink))}
+.tl-card{position:relative;margin:0;border-top:4px solid var(--tlc)}
+.tl-dot{position:absolute;left:-38px;top:14px;width:30px;height:30px;border-radius:50%;background:var(--tlc);color:#fff;font-family:var(--en);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--bg)}
+.tl-when{margin:0 0 2px;font-size:12px;font-weight:700;color:var(--tlc)}
+.tl-card h3{margin-top:0}
+@media (min-width:1100px){
+  .tl{grid-template-columns:repeat(4,1fr);gap:26px;padding-left:0;padding-top:46px}
+  .tl::before{left:12.5%;right:12.5%;top:17px;bottom:auto;width:auto;height:3px;background:linear-gradient(90deg,var(--teal),var(--lv1),var(--mango),var(--pink))}
+  .tl-dot{left:50%;top:-46px;transform:translateX(-50%)}
+  .tl-card:not(:last-child)::after{content:'';position:absolute;right:-18px;top:50%;width:10px;height:10px;border-top:3px solid var(--muted);border-right:3px solid var(--muted);opacity:.45;transform:translateY(-50%) rotate(45deg)}
+}
 .fg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:10px 0 8px}
 .fg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column}
 .fg-h{display:flex;align-items:center;gap:10px}.fg-h h3{margin:0;font-size:16px;display:flex;align-items:center;gap:6px}
@@ -6028,11 +6041,11 @@ const GUIDE_FEATS = [
 const FEAT_LOCK = v=>{ const F={vault:'vault',talk:'talk',resume:'resume'}; return F[v] && !feature(F[v]) ? `<span class="lockmark" aria-label="鍵（今の区分では使えません）">${I.lock}</span>` : ''; };
 V.guide = ()=>`<h1>手引書</h1>
   <div class="greet" style="margin-top:0">${coco(56)}<div class="speech"><b>ココ（仮）</b>時期ごと・機能ごとの使い方です。帰国後も続けて使えます。</div></div>
-  <div class="home-grid">
-    <div class="panel"><h3>留学前</h3><p class="small gs-lead">出発の1〜3か月前から基礎を固めておくと、現地の授業に早くなじめます。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>レベル診断で、今の自分のレベルを知る</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>「留学で使う英語」で、授業中・学校生活の表現を覚える</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>自分のレベルの単語と構文を、「覚えた・まだ」で仕分けながら進める</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>AI英会話の「授業の始まりの雑談」で、話す練習をする</span></li></ol></div>
-    <div class="panel"><h3>留学中</h3><p class="small gs-lead">毎日の授業と生活が、いちばんの練習の場になります。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>授業で言えなかったことは、その日のうちにAIに聞く</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>聞いた表現を保存庫に入れて、次の授業で使ってみる</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>使えたら「実際に使えた！」を押して、使える表現を増やす</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>寮・生活の表現や場面別フレーズで、授業の外の英語も広げる</span></li></ol></div>
-    <div class="panel"><h3>ワーホリの前</h3><p class="small gs-lead">仕事探しでは、英語の面接と履歴書が最初の関門です。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>「ワーホリ対策」で、現地で出会う場面の表現を覚える</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>面接対策で、よく聞かれる質問と答え方を準備する</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>AI英会話で、面接の受け答えを練習する</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>「履歴書」で、英文の履歴書をつくる</span></li></ol></div>
-    <div class="panel"><h3>留学のあと（帰国後）</h3><p class="small gs-lead">留学で伸びた英語は、使わないと少しずつ落ちていきます。帰国後も続けて使えます。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>保存庫の復習で、留学中に覚えた表現を忘れないようにする</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>単語・句動詞・イディオムを、一つ上のレベルへ進める</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>AI英会話で、話す機会を毎日少しずつ持つ</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>仕事や旅行の英語、次の留学やワーホリの準備にも使う</span></li></ol></div>
+  <div class="tl" aria-label="時期の流れ">
+    <div class="panel tl-card" style="--tlc:var(--teal)"><span class="tl-dot" aria-hidden="true">1</span><p class="tl-when">出発の1〜3か月前</p><h3>留学前</h3><p class="small gs-lead">出発前に基礎を固めておくと、現地の授業に早くなじめます。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>レベル診断で、今の自分のレベルを知る</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>「留学で使う英語」で、授業中・学校生活の表現を覚える</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>自分のレベルの単語と構文を、「覚えた・まだ」で仕分けながら進める</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>AI英会話の「授業の始まりの雑談」で、話す練習をする</span></li></ol></div>
+    <div class="panel tl-card" style="--tlc:var(--lv1)"><span class="tl-dot" aria-hidden="true">2</span><p class="tl-when">現地で</p><h3>留学中</h3><p class="small gs-lead">毎日の授業と生活が、いちばんの練習の場になります。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>授業で言えなかったことは、その日のうちにAIに聞く</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>聞いた表現を保存庫に入れて、次の授業で使ってみる</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>使えたら「実際に使えた！」を押して、使える表現を増やす</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>寮・生活の表現や場面別フレーズで、授業の外の英語も広げる</span></li></ol></div>
+    <div class="panel tl-card" style="--tlc:var(--mango)"><span class="tl-dot" aria-hidden="true">3</span><p class="tl-when">仕事探しの前に</p><h3>ワーホリの前</h3><p class="small gs-lead">仕事探しでは、英語の面接と履歴書が最初の関門です。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>「ワーホリ対策」で、現地で出会う場面の表現を覚える</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>面接対策で、よく聞かれる質問と答え方を準備する</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>AI英会話で、面接の受け答えを練習する</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>「履歴書」で、英文の履歴書をつくる</span></li></ol></div>
+    <div class="panel tl-card" style="--tlc:var(--pink)"><span class="tl-dot" aria-hidden="true">4</span><p class="tl-when">帰国してから</p><h3>留学のあと（帰国後）</h3><p class="small gs-lead">留学で伸びた英語は、使わないと少しずつ落ちていきます。帰国後も続けて使えます。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>保存庫の復習で、留学中に覚えた表現を忘れないようにする</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>単語・句動詞・イディオムを、一つ上のレベルへ進める</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>AI英会話で、話す機会を毎日少しずつ持つ</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>仕事や旅行の英語、次の留学やワーホリの準備にも使う</span></li></ol></div>
   </div>
   <h2>それぞれの機能の使い方</h2>
   <p class="muted small" style="margin-top:-4px">左のメニュー（スマホは下のメニュー）にある機能の、役割と使い方です。</p>
