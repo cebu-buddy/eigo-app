@@ -459,12 +459,12 @@ function coco(s=56){
 function mango(s=56){
   const id = 'mg' + (++_g);
   return `<svg class="chara" width="${s}" height="${s}" viewBox="0 0 64 64" aria-hidden="true">
-  <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD15A"/><stop offset="1" stop-color="#F07F2E"/></linearGradient></defs>
-  <path d="M33 12c2-6 9-9 15-7-3 5-8 7-15 7z" fill="#4CAF62"/><path d="M32 13v-4" stroke="#6E452C" stroke-width="2.4" stroke-linecap="round"/>
-  <path d="M32 12c14 0 25 13 25 28 0 12-10 19-25 19S7 52 7 40C7 25 18 12 32 12z" fill="url(#${id})"/>
+  <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4D65A"/><stop offset=".35" stop-color="#FFC94A"/><stop offset="1" stop-color="#F07F2E"/></linearGradient></defs>
+  <path d="M31 8c2-5 8-7 13-5-3 4-7 6-13 5z" fill="#4CAF62"/><path d="M30 9V5" stroke="#6E452C" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M29 8C41 7 53 19 53 36C53 51 44 61 32 61C19 61 11 52 11 40C11 26 18 9 29 8z" fill="url(#${id})"/>
   <circle cx="24" cy="38" r="2.8" fill="#2A1A10"/><circle cx="40" cy="38" r="2.8" fill="#2A1A10"/>
   <circle cx="25" cy="37" r="1" fill="#fff"/><circle cx="41" cy="37" r="1" fill="#fff"/>
-  <circle cx="18" cy="45" r="3.2" fill="#F26D5B" opacity=".55"/><circle cx="46" cy="45" r="3.2" fill="#F26D5B" opacity=".55"/>
+  <circle cx="19" cy="45" r="3.2" fill="#F26D5B" opacity=".55"/><circle cx="45" cy="45" r="3.2" fill="#F26D5B" opacity=".55"/>
   <path d="M27 45c3 3.5 7 3.5 10 0" stroke="#2A1A10" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>`;
 }
 const CH = {coco:{name:'ココ',svg:coco}, mango:{name:'マンゴー',svg:mango}};
