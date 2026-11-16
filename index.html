@@ -10072,7 +10072,7 @@ const GUIDE_FEATS = [
  ['level','level','g0','レベル診断','今の自分のレベルを知ります。','カテゴリーごとに20問の簡単な判定です。結果を見て、「学ぶ」で自分のレベルから始めましょう（正式なCEFRの判定ではありません）。'],
  ['pron','mic','g1','発音講座','通じる発音の基本を身につけます。','発音記号の読み方、日本人が苦手な音、音のつながり、リズムを、ルール → 聞き分け → 言ってみる の順で練習します。'],
  ['talk','chat','g2','AI英会話','AIを相手に、英語で話す練習をします。','場面を選んで話します。終わると直しの一覧が出て、そのまま保存庫に入れられます。'],
- ['resume','doc','g0','履歴書','ワーホリの仕事探しに使う、英文の履歴書をつくります。','質問に日本語で答えると、AIがアピールポイントを英文にまとめます。できた履歴書はPDFで保存（印刷）できます。入力した内容は、この端末にだけ保存されます。'],
+ ['resume','doc','g0','履歴書','ワーホリの仕事探しに使う、英文の履歴書（レジュメ）をつくります。','質問に日本語で答えると、AIがアピールポイントを英文にまとめます。できた履歴書はPDFで保存（印刷）できます。入力した内容は、この端末にだけ保存されます。'],
 ];
 const FEAT_LOCK = v=>{ const F={ask:'ask',vault:'vault',talk:'talk',resume:'resume'}; return F[v] && !feature(F[v]) ? `<span class="lockmark" aria-label="鍵（今の区分では使えません）">${I.lock}</span>` : ''; };
 V.guide = ()=>`<div class="guide-pg"><h1>手引書</h1>
@@ -10095,6 +10095,22 @@ V.guide = ()=>`<div class="guide-pg"><h1>手引書</h1>
     <p class="ask-hero-end">毎日の生活や仕事で出会った表現が、少しずつたまっていきます。<b>あなたが本当に出会った言葉だけでできた、あなただけのとっておきの辞書</b>になります。</p>
     <div class="row" style="justify-content:space-between;align-items:center;gap:10px"><p class="muted small" style="margin:0">コツ: 忘れないうちに、その日のうちに聞きましょう。名前や連絡先は書かないでください。</p><button class="btn primary sm" data-act="go" data-v="ask">${I.chat} AIに聞いてみる</button></div>
   </section>
+  <h2>英語の勉強のほかに、できること</h2>
+  <p class="muted small" style="margin-top:-4px">単語やフレーズを覚えるだけでなく、通じる発音と、ワーホリの仕事探し（レジュメ・面接）の準備もできます。</p>
+  <div class="fg-grid">
+   <div class="fg"><div class="fg-h"><span class="cat-ic g1" aria-hidden="true">${I.mic}</span><h3>発音の練習</h3></div>
+    <p class="fg-role">通じる発音の基本を、ひとりで練習できます。</p>
+    <p class="fg-how">「発音講座」で、発音記号の読み方、日本人が苦手な音、音のつながり、リズムを、ルール → 聞き分け → 言ってみる の順で練習します。単語やフレーズの画面では、自分の発音をチェックすることもできます。</p>
+    <button class="linkbtn" data-act="go" data-v="pron">発音講座を開く</button></div>
+   <div class="fg"><div class="fg-h"><span class="cat-ic g0" aria-hidden="true">${I.doc}</span><h3>レジュメ（英文の履歴書）づくり</h3></div>
+    <p class="fg-role">ワーホリの仕事探しで出す、英文のレジュメをつくれます。</p>
+    <p class="fg-how">「履歴書」で、質問に日本語で答えると、AIがあなたの経験とアピールポイントを英文にまとめます。できたレジュメはPDFで保存（印刷）して、お店に持っていけます。「ワーホリ対策」では、レジュメを渡すときのひとことも練習できます。</p>
+    <button class="linkbtn" data-act="go" data-v="resume">履歴書を開く</button></div>
+   <div class="fg"><div class="fg-h"><span class="cat-ic g2" aria-hidden="true">${I.chat}</span><h3>面接対策</h3></div>
+    <p class="fg-role">仕事の面接でよく聞かれる質問と、答え方を準備できます。</p>
+    <p class="fg-how">「ワーホリ対策」の「面接」で、よく聞かれる質問と答え方の例、返事を選んで進めるシミュレーションで練習します。仕上げに「AI英会話」の「ワーホリの面接練習」で、本番のように受け答えを練習できます。</p>
+    <button class="linkbtn" data-act="learn" data-cat="wh" data-sc="面接">面接対策を開く</button></div>
+  </div>
   <h2>時期ごとの使い方</h2>
   <div class="tl" aria-label="時期の流れ">
     <div class="panel tl-card" style="--tlc:var(--tl1)"><span class="tl-dot" aria-hidden="true">1</span><p class="tl-when">出発の1〜3か月前</p><h3>留学前</h3><p class="small gs-lead">出発前に基礎を固めておくと、現地の授業に早くなじめます。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>レベル診断で、今の自分のレベルを知る</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>「留学で使う英語」で、授業中・学校生活の表現を覚える</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>自分のレベルの単語と構文を、「覚えた・まだ」で仕分けながら進める</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>AI英会話の「授業の始まりの雑談」で、話す練習をする</span></li></ol></div>
@@ -10319,7 +10335,7 @@ document.addEventListener('click', e=>{
       PRON={id:null,url:null,rec:null,result:''}; go('learn',ex); break; }
     case 'theme': S.theme=d.t; save(); applyTheme(); document.querySelectorAll('.theme-sw button').forEach(b=>{const on=b.dataset.t===d.t; b.classList.toggle('on',on); b.setAttribute('aria-checked',on);}); break;
     case 'ipaplay': { const u=ipaUrl(d.k); if(u){ try{speechSynthesis.cancel();}catch(e){} try{ new Audio(u).play(); }catch(e){} } break; }
-    case 'learn': PRON.id=null; document.getElementById('catdlg')?.close(); document.getElementById('cidlg')?.close(); go('learn',{cat:d.cat,lv:'all',sel:null}); break;
+    case 'learn': PRON.id=null; document.getElementById('catdlg')?.close(); document.getElementById('cidlg')?.close(); go('learn',Object.assign({cat:d.cat,lv:'all',sel:null},d.sc?{whScene:d.sc}:{})); break;
     case 'learnmenu': PRON.id=null; go('learn',{cat:null,sel:null}); break;
     case 'catsheet': openCatSheet(); break;
     case 'catinfo': openCatInfo(d.cat); break;
