@@ -403,6 +403,16 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .answer h3{font-size:14px;color:var(--teal-ink);margin:12px 0 4px}
 .ask-box{display:flex;gap:8px}
 .ask-box input{flex:1}
+
+.ask-box .vbtn{flex:none;width:44px;padding:0;display:inline-grid;place-items:center;border-radius:12px}
+.ask-box .vbtn svg{width:20px;height:20px}
+.ask-box .vbtn.on{background:var(--pink);border-color:var(--pink);color:#fff;animation:vpulse 1.2s ease-in-out infinite}
+@keyframes vpulse{50%{box-shadow:0 0 0 6px var(--pink-soft)}}
+@media (prefers-reduced-motion:reduce){.ask-box .vbtn.on{animation:none}}
+.vlang{display:inline-flex;gap:2px;padding:2px;border-radius:999px;background:var(--mint);border:1px solid var(--line);font-size:12px}
+.vlang button{border:0;background:transparent;border-radius:999px;padding:3px 10px;cursor:pointer;color:var(--muted);font-size:12px}
+.vlang button.on{background:var(--surface);color:var(--teal-ink);font-weight:700}
+.vrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .mic.rec{background:var(--pink);border-color:var(--pink)}
 
 .designs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
@@ -9782,6 +9792,24 @@ function judge(target){
   }catch(e){ PRON.result='この端末では判定ができません。'; rerender(); }
 }
 
+const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+const VOICE_OK = !!SpeechRec;
+const VOICE = {on:false, lang:'ja-JP', rec:null};
+function voiceUI(){
+  const b=document.querySelector('.ask-box .vbtn'); if(b){ b.classList.toggle('on',VOICE.on); b.setAttribute('aria-pressed',VOICE.on); b.setAttribute('aria-label',VOICE.on?'音声入力を止める':'声で入力する'); }
+  const s=document.getElementById('vstat'); if(s) s.textContent = VOICE.on ? '聞いています…話し終わると止まります' : '';
+}
+function voiceToggle(){
+  if(!VOICE_OK) return;
+  if(VOICE.on){ try{ VOICE.rec&&VOICE.rec.stop(); }catch(e){} return; }
+  const rec=new SpeechRec(); rec.lang=VOICE.lang; rec.interimResults=true; rec.continuous=false; rec.maxAlternatives=1;
+  const el=document.getElementById('ask-q'); const base=el?el.value.trim():'';
+  rec.onresult=e=>{ let t=''; for(const r of e.results) t+=r[0].transcript; const f=document.getElementById('ask-q'); if(f){ f.value=(base?base+' ':'')+t; ASK.q=f.value; } };
+  rec.onerror=e=>{ toast(e.error==='not-allowed'||e.error==='service-not-allowed' ? 'マイクが使えません。ブラウザの設定で、マイクの利用を許可してください。' : e.error==='no-speech' ? '声が聞き取れませんでした。もう一度試してください。' : '音声入力がうまくいきませんでした。'); };
+  rec.onend=()=>{ VOICE.on=false; VOICE.rec=null; voiceUI(); const f=document.getElementById('ask-q'); if(f) f.focus(); };
+  try{ rec.start(); VOICE.on=true; VOICE.rec=rec; voiceUI(); }catch(e){ toast('音声入力を始められませんでした。'); }
+}
+
 async function askAI(q){
   if(AI_DEMO[q] || !AI_URL){ ASK={q,a:AI_DEMO[q]||{none:true},fb:null}; rerender(); return; }
   const id=Date.now(); ASK={q,a:{loading:true,id},fb:null}; rerender();
@@ -9801,7 +9829,8 @@ V.ask = ()=>{
   ${tier()!=='customer'?`<p class="tier note">お試し中: 今日あと${askLeft()}回聞けます（1日${LIMIT.counseled.ask}回まで）。成約すると1日${LIMIT.customer.ask}回まで使えます。</p>`:''}
   <div class="greet" style="margin-top:0">${mango(52)}<div class="speech"><b>マンゴー</b>言いたいのに言えなかった表現、分からなかった単語を聞いてね。答えは保存庫に入れて、次に使えるようにしよう。</div></div>
   <div class="panel stack">
-    <form class="ask-box" data-form="ask"><input type="text" id="ask-q" value="${esc(ASK.q)}" placeholder="例: 「割り勘にしよう」は英語で？" aria-label="AIへの質問" data-autofocus><button class="btn primary" type="submit">聞く</button></form>
+    <form class="ask-box" data-form="ask"><input type="text" id="ask-q" value="${esc(ASK.q)}" placeholder="${VOICE_OK?'例: 「割り勘にしよう」は英語で？（マイクで話してもOK）':'例: 「割り勘にしよう」は英語で？'}" aria-label="AIへの質問" data-autofocus>${VOICE_OK?`<button type="button" class="btn vbtn ${VOICE.on?'on':''}" data-act="askvoice" aria-pressed="${VOICE.on}" aria-label="${VOICE.on?'音声入力を止める':'声で入力する'}" title="声で入力">${I.mic}</button>`:''}<button class="btn primary" type="submit">聞く</button></form>
+    ${VOICE_OK?`<div class="vrow"><span class="muted small">話す言葉</span><span class="vlang" role="group" aria-label="音声入力の言葉"><button type="button" class="${VOICE.lang==='ja-JP'?'on':''}" data-act="vlang" data-l="ja-JP" aria-pressed="${VOICE.lang==='ja-JP'}">日本語</button><button type="button" class="${VOICE.lang==='en-US'?'on':''}" data-act="vlang" data-l="en-US" aria-pressed="${VOICE.lang==='en-US'}">English</button></span><span class="muted small" id="vstat" aria-live="polite">${VOICE.on?'聞いています…話し終わると止まります':''}</span></div>`:''}
     <div class="chips">${Object.keys(AI_DEMO).map(k=>`<button class="chip" data-act="askdemo" data-q="${esc(k)}">${esc(k)}</button>`).join('')}</div>
     <p class="muted small">${AI_URL?'試験運用中: このパソコンの中継サーバーを通して、AI（Claude）が答えます。答えに間違いがあることもあります。':'AI即答は準備中です。今は、上の4つの例だけ見本の答えが出ます（単語1語のときは発音記号つき）。'}名前や連絡先は書かないでください。</p>
   </div>
@@ -10420,6 +10449,8 @@ document.addEventListener('click', e=>{
     case 'askvault': if(ASK.a&&!ASK.a.none){ addVault(ASK.a.en,ASK.a.ja,'AIに聞いた','ai'); rerender(); } break;
     case 'askmemo': if(addVault('',ASK.q,'メモ','ai')){ ASK={q:'',a:null,fb:null}; go('vault'); } break;
     case 'askfb': ASK.fb=d.v; rerender(); break;
+    case 'askvoice': voiceToggle(); break;
+    case 'vlang': VOICE.lang=d.l; if(VOICE.on){ try{VOICE.rec.stop();}catch(e){} } document.querySelectorAll('.vlang button').forEach(x=>{ const on=x.dataset.l===d.l; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); }); break;
     case 'vf': VF=d.f; rerender(); break;
     case 'vused': { const v=S.vault.find(x=>String(x.id)===d.id); if(v){ v.used=(v.used||0)+1; save(); rerender(); } break; }
     case 'vknow': { const v=S.vault.find(x=>String(x.id)===d.id); if(v){ Object.assign(v,review(v,d.ok==='1')); save(); rerender(); } break; }
@@ -10443,7 +10474,7 @@ document.addEventListener('click', e=>{
 });
 document.addEventListener('submit', e=>{
   const f=e.target.closest('[data-form]'); if(!f) return; e.preventDefault();
-  if(f.dataset.form==='ask'){ const q=$('#ask-q').value.trim(); if(!q) return; if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[limTier()].ask}回）を使い切りました。`); return; } useAsk(); askAI(q); }
+  if(f.dataset.form==='ask'){ const q=$('#ask-q').value.trim(); if(!q) return; if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[limTier()].ask}回）を使い切りました。`); return; } if(VOICE.on){ try{VOICE.rec.stop();}catch(e){} } useAsk(); askAI(q); }
   if(f.dataset.form==='vadd'){ const en=$('#va-en').value.trim(), ja=$('#va-ja').value.trim(); if(!en||!ja){ alert('英語と意味を入れてください。'); return; } addVault(en,ja,$('#va-sc').value,'manual'); rerender(); }
   if(f.dataset.form==='talk'){ talkSend($('#talk-in').value); }
   if(f.dataset.form==='rq'){ const a=$('#rq-a').value.trim(); if(!a) return; RQ.answers.push(a); RQ.i++;
