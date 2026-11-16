@@ -371,7 +371,7 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
   @page{size:A4;margin:0}
   .cv,.cv *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
-.gr-pt{margin:.55em 0}.gr-lb{display:block;font-size:.82em;color:var(--teal-ink);margin-bottom:.1em}
+.gr-pt{margin:.7em 0;line-height:1.75}.gr-lb{display:block;font-size:.82em;color:var(--teal-ink);margin-bottom:.1em}
 </style>
 </head>
 <body>
@@ -3300,6 +3300,8 @@ function grammarAudio(id){
   const g=GRAMMAR.find(x=>x.id===id); JA_PLAY=id; rerender();
   sayJa(g.title.replace(/[（(].*?[)）]/g,'')+'。'+g.body.map(b=>b.replace(/^【(.+?)】/,'$1。')).join(''), ()=>{ if(JA_PLAY===id){ JA_PLAY=null; rerender(); } });
 }
+
+const grFmt=t=>esc(t).replace(/。(?=.)/g,'。<br>').replace(/／/g,'<br>').replace(/ → ○ /g,'<br>→ ○ ');
 function grammarDetail(g){
   const st = GQ[g.id]||{};
   return `<div class="panel detail">
@@ -3307,7 +3309,7 @@ function grammarDetail(g){
     <h2 style="margin-top:6px">${esc(g.title)}</h2>
     <div class="ja-audio"><button class="btn sm ${JA_PLAY===g.id?'on':''}" data-act="gaudio" data-id="${g.id}" aria-pressed="${JA_PLAY===g.id}">${I.speaker} ${JA_PLAY===g.id?'止める':'解説を聞く（日本語）'}</button>
       <span class="muted small">今は端末の読み上げ機能の音声です。今後、聞き取りやすい音声に入れ替えます。</span></div>
-    ${g.body.map(b=>{ const m=b.match(/^【(.+?)】(.*)$/); return m?`<p class="gr-pt"><b class="gr-lb">${esc(m[1])}</b>${esc(m[2])}</p>`:`<p>${esc(b)}</p>`; }).join('')}
+    ${g.body.map(b=>{ const m=b.match(/^【(.+?)】(.*)$/); return m?`<p class="gr-pt"><b class="gr-lb">${esc(m[1])}</b>${grFmt(m[2])}</p>`:`<p>${grFmt(b)}</p>`; }).join('')}
     <h3 style="margin-top:12px">例文</h3>
     ${g.ex.map(e=>`<div class="ex"><div class="row"><span class="e">${esc(e[0])}</span>${sayBtn(e[0])}</div><div class="muted">${esc(e[1])}</div></div>`).join('')}
     <h3 style="margin-top:12px">確認問題</h3>
