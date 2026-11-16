@@ -12,7 +12,7 @@
 :root{
   --bg:#F2F8F7; --surface:#FFFFFF; --ink:#3D2613; --muted:#6E5A4B; --line:#D5E6E3;
   --teal:#49B0A8; --teal-ink:#2C7A73; --mint:#E7F4F3; --mint2:#CFE8E5;
-  --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --mango-ink:#A9620C; --pink-soft:#FCE6E8; --pink-ink:#BE4552; --st-known:#E8F1FB; --st-unknown:#FDF5F5; --st-none:#EEF7F6; --lv0:#2C7A73; --lv1:#2B64A0; --lv2:#6E4BB0; --lv3:#A9620C; --lv4:#B23A4A; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
+  --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --mango-ink:#A9620C; --pink-soft:#FCE6E8; --pink-ink:#BE4552; --st-known:#E8F1FB; --st-unknown:#FDF5F5; --st-none:#EEF7F6; --sub-ink:#4A4A4A; --lv0:#2C7A73; --lv1:#2B64A0; --lv2:#6E4BB0; --lv3:#A9620C; --lv4:#B23A4A; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
 
   --jp:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
   --en:"M PLUS Rounded 1c","Helvetica Neue",Arial,sans-serif;
@@ -22,14 +22,14 @@
   :root:not([data-theme="light"]){
     --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
     --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
-    --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --lv0:#7FD6CD; --lv1:#8DBDF0; --lv2:#C3A8F2; --lv3:#F7B548; --lv4:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+    --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --sub-ink:#D0D0D0; --lv0:#7FD6CD; --lv1:#8DBDF0; --lv2:#C3A8F2; --lv3:#F7B548; --lv4:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
   --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
-  --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --lv0:#7FD6CD; --lv1:#8DBDF0; --lv2:#C3A8F2; --lv3:#F7B548; --lv4:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+  --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --sub-ink:#D0D0D0; --lv0:#7FD6CD; --lv1:#8DBDF0; --lv2:#C3A8F2; --lv3:#F7B548; --lv4:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -47,7 +47,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 16px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5}
 .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;color:var(--teal-ink);text-decoration:none;background:none;border:0;padding:0;cursor:pointer}
 .brand small{font-weight:500;color:var(--muted);font-size:11px;display:block;line-height:1.2}
-.brand>span{text-align:left}.brand-ic{display:flex;align-items:center;flex:none}.brand-ic svg+svg{margin-left:-8px}@media (max-width:420px){header.top .brand-ic svg+svg{margin-left:-10px}header.top .brand{gap:4px;font-size:14px;letter-spacing:0}header.top .brand small{letter-spacing:0}header.top .brand svg{width:24px;height:24px}}.brand small.sub{color:var(--teal-ink);font-weight:700;opacity:.85}
+.brand>span{text-align:left}.brand-ic{display:flex;align-items:center;flex:none}.brand-ic svg+svg{margin-left:-8px}@media (max-width:420px){header.top .brand-ic svg+svg{margin-left:-10px}header.top .brand{gap:4px;font-size:14px;letter-spacing:0}header.top .brand small{letter-spacing:0}header.top .brand svg{width:24px;height:24px}}.brand small.sub{color:var(--sub-ink);font-weight:700;text-align:center}
 .top-links{display:flex;gap:4px;flex:none}
 .top .brand{min-width:0}.top .brand>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .icon-btn{white-space:nowrap}
@@ -101,7 +101,7 @@ p{margin:0 0 8px}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .btn{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 16px;cursor:pointer}
 .btn.primary{background:var(--teal-ink);border-color:var(--teal-ink);color:#fff;font-weight:700}
-.btn.cta{background:var(--pink);border-color:var(--pink);color:#2B140B;font-weight:700}
+.btn.cta{background:var(--pink);border-color:var(--pink);color:#fff;font-weight:700}
 .btn.mango{background:var(--mango);border-color:var(--mango);color:#2B140B;font-weight:700}
 .btn.sm{padding:5px 11px;font-size:13px;border-radius:10px}
 .btn.on{background:var(--mint2);border-color:var(--teal);color:var(--teal-ink);font-weight:700}
@@ -4903,6 +4903,225 @@ W(4,'vehement','/ˈviːəmənt/','激しい、猛烈な',"He made a vehement pro
 W(4,'verbose','/vɜːrˈboʊs/','言葉数の多い、くどい',"The report is too verbose.",'その報告書は冗長すぎる。',"Try not to be so verbose.",'そんなに回りくどく言わないで。');
 W(4,'vindicate','/ˈvɪndɪkeɪt/','正しさを証明する、潔白を示す',"The results vindicated our decision.",'結果が私たちの判断の正しさを証明した。',"She was vindicated by the evidence.",'証拠によって彼女の潔白が証明された。');
 
+W(0,'bike','/baɪk/','自転車',"I ride my bike to school.",'自転車で学校に行く。',"Can I rent a bike here?",'ここで自転車を借りられますか？');
+W(0,'bird','/bɜːrd/','鳥',"I can hear the birds.",'鳥の声が聞こえる。',"That bird is very colorful.",'あの鳥はとてもカラフルだ。');
+W(0,'black','/blæk/','黒、黒い',"I'll have black coffee.",'ブラックコーヒーにします。',"She has long black hair.",'彼女は長い黒髪だ。');
+W(0,'blue','/bluː/','青、青い',"The sea is so blue.",'海がとても青い。',"I like your blue shirt.",'その青いシャツ、いいね。');
+W(0,'box','/bɑːks/','箱',"Put the books in the box.",'本を箱に入れて。',"This box is heavy.",'この箱は重い。');
+W(0,'brown','/braʊn/','茶色、茶色の',"He has brown eyes.",'彼の目は茶色だ。',"I want the brown bag.",'茶色のかばんがほしい。');
+W(0,'butter','/ˈbʌtər/','バター',"Can I have some butter?",'バターをもらえますか？',"Put butter on the bread.",'パンにバターを塗って。');
+W(0,'chocolate','/ˈtʃɑːklət/','チョコレート',"I love chocolate.",'チョコレートが大好き。',"Do you want some hot chocolate?",'ココアを飲む？');
+W(0,'cool','/kuːl/','涼しい；かっこいい',"It's cool in the morning.",'朝は涼しい。',"Your shoes are cool!",'その靴、かっこいいね！');
+W(0,'cow','/kaʊ/','牛',"There are cows on the farm.",'農場に牛がいる。',"Milk comes from cows.",'牛乳は牛から取れる。');
+W(0,'daughter','/ˈdɔːtər/','娘',"She has two daughters.",'彼女には娘が2人いる。',"My daughter is five years old.",'娘は5歳です。');
+W(0,'fork','/fɔːrk/','フォーク',"Can I have a fork, please?",'フォークをください。',"I eat noodles with a fork.",'フォークで麺を食べる。');
+W(0,'gray','/ɡreɪ/','灰色、灰色の',"The sky is gray today.",'今日は空が灰色だ。',"He's wearing a gray jacket.",'彼はグレーの上着を着ている。');
+W(0,'green','/ɡriːn/','緑、緑の',"Wait for the green light.",'青信号を待って。',"I like green tea.",'緑茶が好き。');
+W(0,'ice','/aɪs/','氷',"No ice, please.",'氷なしでお願いします。',"Can I have some ice?",'氷をもらえますか？');
+W(0,'little','/ˈlɪtəl/','小さい、少し',"I speak a little English.",'英語を少し話します。',"She has a little brother.",'彼女には弟がいる。');
+W(0,'Monday','/ˈmʌndeɪ/','月曜日',"Class starts on Monday.",'授業は月曜日に始まる。',"I'm busy on Mondays.",'月曜日はいつも忙しい。');
+W(0,'pork','/pɔːrk/','豚肉',"I don't eat pork.",'豚肉は食べません。',"Is there pork in this?",'これに豚肉は入っていますか？');
+W(0,'album','/ˈælbəm/','アルバム',"Her new album is great.",'彼女の新しいアルバムはすごくいい。',"I keep photos in an album.",'写真をアルバムに入れている。');
+W(0,'April','/ˈeɪprəl/','4月',"School starts in April in Japan.",'日本では学校は4月に始まる。',"My birthday is in April.",'誕生日は4月です。');
+W(0,'August','/ˈɔːɡəst/','8月',"It's very hot in August.",'8月はとても暑い。',"I'm going to Cebu in August.",'8月にセブへ行きます。');
+W(0,'bee','/biː/','ハチ',"There's a bee on the flower.",'花にハチがいる。',"I was stung by a bee.",'ハチに刺された。');
+W(0,'bell','/bel/','ベル、鐘',"The bell rang.",'ベルが鳴った。',"Ring the bell, please.",'ベルを鳴らしてください。');
+W(0,'bench','/bentʃ/','ベンチ',"Let's sit on the bench.",'ベンチに座ろう。',"He's waiting on a bench.",'彼はベンチで待っている。');
+W(0,'blouse','/blaʊs/','ブラウス',"She's wearing a white blouse.",'彼女は白いブラウスを着ている。',"I bought a new blouse.",'新しいブラウスを買った。');
+W(0,'carrot','/ˈkærət/','にんじん',"I don't like carrots.",'にんじんは苦手。',"Cut the carrots into small pieces.",'にんじんを小さく切って。');
+W(0,'corn','/kɔːrn/','とうもろこし',"I like corn soup.",'コーンスープが好き。',"They grow corn on the farm.",'その農場ではとうもろこしを育てている。');
+W(0,'December','/dɪˈsembər/','12月',"Christmas is in December.",'クリスマスは12月だ。',"I'll go home in December.",'12月に帰国する。');
+W(0,'doll','/dɑːl/','人形',"My sister has a lot of dolls.",'妹は人形をたくさん持っている。',"This doll is from Japan.",'この人形は日本のものだ。');
+W(0,'dolphin','/ˈdɑːlfɪn/','イルカ',"We saw dolphins from the boat.",'ボートからイルカが見えた。',"Dolphins are very smart.",'イルカはとても賢い。');
+W(0,'duck','/dʌk/','アヒル、カモ',"There are ducks on the lake.",'湖にカモがいる。',"I've never eaten duck.",'鴨肉を食べたことがない。');
+W(0,'elephant','/ˈelɪfənt/','ゾウ',"Elephants are very big.",'ゾウはとても大きい。',"We saw elephants at the zoo.",'動物園でゾウを見た。');
+W(0,'eraser','/ɪˈreɪsər/','消しゴム',"Can I borrow your eraser?",'消しゴムを借りてもいい？',"I lost my eraser.",'消しゴムをなくした。');
+W(0,'February','/ˈfebrueri/','2月',"February is the shortest month.",'2月はいちばん短い月だ。',"It snows a lot in February.",'2月は雪がたくさん降る。');
+W(0,'fence','/fens/','フェンス、柵',"The dog jumped over the fence.",'犬が柵を飛び越えた。',"There's a fence around the pool.",'プールの周りにフェンスがある。');
+W(0,'first','/fɜːrst/','最初の、1番目の；まず',"Is this your first time in Cebu?",'セブは初めてですか？',"First, wash your hands.",'まず手を洗って。');
+W(0,'forty','/ˈfɔːrti/','40',"The class has forty students.",'そのクラスには40人の生徒がいる。',"It takes forty minutes by bus.",'バスで40分かかる。');
+W(0,'Friday','/ˈfraɪdeɪ/','金曜日',"Let's go out on Friday.",'金曜日に出かけよう。',"We have a test every Friday.",'毎週金曜日にテストがある。');
+W(0,'giraffe','/dʒəˈræf/','キリン',"Giraffes have long necks.",'キリンは首が長い。',"Look at that giraffe!",'あのキリンを見て！');
+W(0,'glove','/ɡlʌv/','手袋',"Don't forget your gloves.",'手袋を忘れないで。',"I lost one glove.",'手袋を片方なくした。');
+W(0,'hamburger','/ˈhæmbɜːrɡər/','ハンバーガー',"I'll have a hamburger and fries.",'ハンバーガーとポテトをください。',"This hamburger is huge.",'このハンバーガーは巨大だ。');
+W(0,'hundred','/ˈhʌndrəd/','100',"It costs a hundred pesos.",'100ペソです。',"There were hundreds of people.",'何百人もの人がいた。');
+W(0,'January','/ˈdʒænjueri/','1月',"I started studying English in January.",'1月に英語の勉強を始めた。',"January is cold in Japan.",'日本の1月は寒い。');
+W(0,'July','/dʒuˈlaɪ/','7月',"The summer vacation starts in July.",'夏休みは7月に始まる。',"I was born in July.",'7月生まれです。');
+W(0,'June','/dʒuːn/','6月',"It rains a lot in June.",'6月は雨が多い。',"The course ends in June.",'その講座は6月に終わる。');
+W(0,'kangaroo','/ˌkæŋɡəˈruː/','カンガルー',"I want to see kangaroos in Australia.",'オーストラリアでカンガルーを見たい。',"The kangaroo jumped away.",'カンガルーが跳んでいった。');
+W(0,'kite','/kaɪt/','たこ（凧）',"The kids are flying kites.",'子どもたちがたこを揚げている。',"My kite got stuck in a tree.",'たこが木に引っかかった。');
+W(0,'lion','/ˈlaɪən/','ライオン',"The lion is sleeping.",'ライオンが寝ている。',"Lions live in Africa.",'ライオンはアフリカにすんでいる。');
+W(0,'March','/mɑːrtʃ/','3月',"I'll graduate in March.",'3月に卒業します。',"It gets warmer in March.",'3月になると暖かくなる。');
+W(0,'November','/noʊˈvembər/','11月',"I arrived in November.",'11月に着いた。',"The weather is nice in November.",'11月は天気がいい。');
+W(0,'October','/ɑːkˈtoʊbər/','10月',"Halloween is in October.",'ハロウィーンは10月だ。',"The new term starts in October.",'新学期は10月に始まる。');
+W(0,'pear','/per/','洋なし',"This pear is very sweet.",'この洋なしはとても甘い。',"Do you like pears?",'洋なしは好き？');
+W(0,'penguin','/ˈpeŋɡwɪn/','ペンギン',"Penguins can't fly.",'ペンギンは飛べない。',"We saw penguins at the aquarium.",'水族館でペンギンを見た。');
+W(0,'pepper','/ˈpepər/','こしょう；ピーマン',"Pass me the salt and pepper, please.",'塩とこしょうを取ってください。',"I don't like green peppers.",'ピーマンが苦手。');
+W(0,'pineapple','/ˈpaɪnæpəl/','パイナップル',"The pineapple here is so sweet.",'ここのパイナップルはとても甘い。',"I'd like pineapple juice.",'パイナップルジュースをください。');
+W(0,'puppy','/ˈpʌpi/','子犬',"What a cute puppy!",'なんてかわいい子犬！',"We got a new puppy.",'子犬を飼い始めた。');
+W(0,'ruler','/ˈruːlər/','定規',"Can I use your ruler?",'定規を使ってもいい？',"Draw a line with a ruler.",'定規で線を引いて。');
+W(0,'sandal','/ˈsændəl/','サンダル（ふつうは sandals）',"I'll wear sandals to the beach.",'ビーチにはサンダルで行く。',"My sandals broke.",'サンダルが壊れた。');
+W(0,'Saturday','/ˈsætərdeɪ/','土曜日',"Are you free on Saturday?",'土曜日は空いてる？',"We go diving every Saturday.",'毎週土曜日にダイビングに行く。');
+W(0,'scarf','/skɑːrf/','マフラー、スカーフ',"Wear a scarf. It's cold.",'寒いからマフラーをして。',"She bought a silk scarf.",'彼女は絹のスカーフを買った。');
+W(0,'scissors','/ˈsɪzərz/','はさみ',"Do you have scissors?",'はさみはありますか？',"Cut the paper with scissors.",'はさみで紙を切って。');
+W(0,'September','/sepˈtembər/','9月',"The course starts in September.",'その講座は9月に始まる。',"It's still hot in September.",'9月はまだ暑い。');
+W(0,'sheep','/ʃiːp/','羊（複数も sheep）',"There are many sheep in New Zealand.",'ニュージーランドには羊がたくさんいる。',"I counted sheep to fall asleep.",'眠るために羊を数えた。');
+W(0,'shoulder','/ˈʃoʊldər/','肩',"My shoulders are stiff.",'肩がこっている。',"He put his hand on my shoulder.",'彼は私の肩に手を置いた。');
+W(0,'snake','/sneɪk/','ヘビ',"I'm scared of snakes.",'ヘビが怖い。',"There was a snake in the garden.",'庭にヘビがいた。');
+W(0,'spider','/ˈspaɪdər/','クモ',"There's a spider in my room!",'部屋にクモがいる！',"Spiders have eight legs.",'クモは脚が8本ある。');
+W(0,'stair','/ster/','階段（ふつうは stairs）',"Take the stairs to the second floor.",'階段で2階へ行って。',"Be careful on the stairs.",'階段では気をつけて。');
+W(0,'strawberry','/ˈstrɔːberi/','いちご',"I love strawberry ice cream.",'いちごアイスが大好き。',"These strawberries are fresh.",'このいちごは新鮮だ。');
+W(0,'Sunday','/ˈsʌndeɪ/','日曜日',"The shop is closed on Sundays.",'その店は日曜日は休みだ。',"What did you do on Sunday?",'日曜日は何をしたの？');
+W(0,'tail','/teɪl/','しっぽ',"The dog is wagging its tail.",'犬がしっぽを振っている。',"Cats have long tails.",'猫は長いしっぽがある。');
+W(0,'third','/θɜːrd/','3番目の',"This is my third time here.",'ここに来るのは3回目です。',"The office is on the third floor.",'事務所は3階です。');
+W(0,'thirty','/ˈθɜːrti/','30',"Wait thirty minutes.",'30分待って。',"I'm thirty years old.",'30歳です。');
+W(0,'thousand','/ˈθaʊzənd/','1,000',"It costs a thousand pesos.",'千ペソです。',"Thousands of people came.",'何千人もの人が来た。');
+W(0,'Thursday','/ˈθɜːrzdeɪ/','木曜日',"See you on Thursday.",'木曜日にね。',"I have a test on Thursday.",'木曜日にテストがある。');
+W(0,'tiger','/ˈtaɪɡər/','トラ',"Tigers are dangerous.",'トラは危険だ。',"We saw a tiger at the zoo.",'動物園でトラを見た。');
+W(0,'toe','/toʊ/','足の指',"I hurt my toe.",'足の指をけがした。',"My toes are cold.",'足の指が冷たい。');
+W(0,'tongue','/tʌŋ/','舌',"I burned my tongue.",'舌をやけどした。',"Put your tongue between your teeth.",'舌を歯の間に置いて。');
+W(0,'triangle','/ˈtraɪæŋɡəl/','三角形',"Draw a triangle.",'三角形を描いて。',"The roof is shaped like a triangle.",'屋根は三角形をしている。');
+W(0,'truck','/trʌk/','トラック',"A big truck stopped in front of us.",'大きなトラックが前に止まった。',"He drives a truck.",'彼はトラックの運転手だ。');
+W(0,'Tuesday','/ˈtuːzdeɪ/','火曜日',"I have a meeting on Tuesday.",'火曜日に会議がある。',"The museum is closed on Tuesdays.",'博物館は火曜日が休みだ。');
+W(0,'turtle','/ˈtɜːrtəl/','カメ（ウミガメなど）',"We swam with sea turtles.",'ウミガメと一緒に泳いだ。',"The turtle walks slowly.",'カメはゆっくり歩く。');
+W(0,'vase','/veɪs/','花びん',"Put the flowers in a vase.",'花を花びんに挿して。',"I broke the vase.",'花びんを割ってしまった。');
+W(0,'violin','/ˌvaɪəˈlɪn/','バイオリン',"She plays the violin.",'彼女はバイオリンを弾く。',"I want to learn the violin.",'バイオリンを習いたい。');
+W(0,'watermelon','/ˈwɔːtərmelən/','すいか',"Watermelon is great in summer.",'夏はすいかが最高。',"Let's cut the watermelon.",'すいかを切ろう。');
+W(0,'Wednesday','/ˈwenzdeɪ/','水曜日',"Today is Wednesday.",'今日は水曜日だ。',"We have a day off on Wednesday.",'水曜日は休みだ。');
+W(0,'whale','/weɪl/','クジラ',"We went whale watching.",'ホエールウォッチングに行った。',"Whales are huge.",'クジラはとても大きい。');
+W(0,'wing','/wɪŋ/','翼、羽',"The bird hurt its wing.",'鳥が羽をけがした。',"I'd like a window seat over the wing.",'翼の上の窓側の席がいいです。');
+W(0,'wolf','/wʊlf/','オオカミ',"Wolves live in groups.",'オオカミは群れで暮らす。',"I heard a wolf howl.",'オオカミの遠吠えが聞こえた。');
+W(0,'zebra','/ˈziːbrə/','シマウマ',"Zebras have black and white stripes.",'シマウマには白黒のしま模様がある。',"We saw zebras on the safari.",'サファリでシマウマを見た。');
+W(1,'ATM','/ˌeɪ tiː ˈem/','ATM、現金自動預け払い機',"Is there an ATM near here?",'この近くにATMはありますか？',"The ATM ate my card.",'ATMにカードを吸い込まれた。');
+W(1,'boarding','/ˈbɔːrdɪŋ/','搭乗',"Boarding starts at 10:30.",'搭乗は10時半に始まる。',"Here's your boarding pass.",'こちらが搭乗券です。');
+W(1,'cashier','/kæˈʃɪr/','レジ係',"Please pay the cashier.",'レジでお支払いください。',"She works as a cashier.",'彼女はレジ係として働いている。');
+W(1,'charger','/ˈtʃɑːrdʒər/','充電器',"Can I borrow your phone charger?",'スマホの充電器を借りてもいい？',"I forgot my charger.",'充電器を忘れた。');
+W(1,'classmate','/ˈklæsmeɪt/','クラスメート',"My classmates are from Korea and Taiwan.",'クラスメートは韓国と台湾の出身だ。',"I had dinner with my classmates.",'クラスメートと夕食を食べた。');
+W(1,'diarrhea','/ˌdaɪəˈriːə/','下痢',"I have diarrhea.",'下痢をしています。',"Do you have medicine for diarrhea?",'下痢止めの薬はありますか？');
+W(1,'dormitory','/ˈdɔːrmətɔːri/','寮（口語で dorm）',"I live in the school dormitory.",'学校の寮に住んでいる。',"The dormitory has a gym.",'寮にはジムがある。');
+W(1,'homesick','/ˈhoʊmsɪk/','ホームシックの',"I'm a little homesick.",'少しホームシックだ。',"Did you get homesick?",'ホームシックになった？');
+W(1,'part-time','/ˌpɑːrt ˈtaɪm/','パートタイムの、アルバイトの',"I have a part-time job at a café.",'カフェでアルバイトをしている。',"She works part-time.",'彼女はパートで働いている。');
+W(1,'pillow','/ˈpɪloʊ/','まくら',"Can I have another pillow?",'まくらをもう1つもらえますか？',"This pillow is too hard.",'このまくらは固すぎる。');
+W(1,'relaxed','/rɪˈlækst/','くつろいだ、リラックスした',"I feel relaxed on the beach.",'ビーチではくつろげる。',"The class has a relaxed atmosphere.",'そのクラスは和やかな雰囲気だ。');
+W(1,'resume','/ˈrezəmeɪ/','履歴書（résumé とも書く）',"Please send us your resume.",'履歴書をお送りください。',"I updated my resume.",'履歴書を新しくした。');
+W(1,'roommate','/ˈruːmmeɪt/','ルームメート',"My roommate is from Vietnam.",'ルームメートはベトナム出身だ。',"I get along with my roommate.",'ルームメートと仲がいい。');
+W(1,'shampoo','/ʃæmˈpuː/','シャンプー',"I ran out of shampoo.",'シャンプーを切らした。',"Is shampoo provided?",'シャンプーは用意されていますか？');
+W(1,'shift','/ʃɪft/','（仕事の）シフト、勤務時間',"I work the night shift.",'夜勤で働いている。',"Can you cover my shift tomorrow?",'明日のシフトを代わってくれる？');
+W(1,'toothbrush','/ˈtuːθbrʌʃ/','歯ブラシ',"I forgot my toothbrush.",'歯ブラシを忘れた。',"Where can I buy a toothbrush?",'歯ブラシはどこで買えますか？');
+W(1,'vomit','/ˈvɑːmɪt/','吐く',"I feel like I'm going to vomit.",'吐きそうです。',"The child vomited on the bus.",'子どもがバスで吐いた。');
+W(1,'waiter','/ˈweɪtər/','（男性の）給仕係、ウェイター',"Let's ask the waiter.",'店員さんに聞こう。',"The waiter brought our food.",'店員が料理を運んできた。');
+W(1,'Wi-Fi','/ˈwaɪ faɪ/','ワイファイ、無線ネット',"What's the Wi-Fi password?",'Wi-Fiのパスワードは何ですか？',"The Wi-Fi is slow in my room.",'部屋のWi-Fiが遅い。');
+W(1,'wound','/wuːnd/','傷',"Clean the wound first.",'まず傷口をきれいにして。',"It's just a small wound.",'ほんの小さな傷だ。');
+W(1,'avocado','/ˌævəˈkɑːdoʊ/','アボカド',"I'd like avocado toast.",'アボカドトーストをください。',"This avocado isn't ripe yet.",'このアボカドはまだ熟していない。');
+W(1,'barbecue','/ˈbɑːrbɪkjuː/','バーベキュー',"Let's have a barbecue on the beach.",'ビーチでバーベキューをしよう。',"I love Filipino barbecue.",'フィリピンのバーベキューが大好き。');
+W(1,'bunk','/bʌŋk/','（二段ベッドの）寝台',"I sleep on the top bunk.",'二段ベッドの上で寝ている。',"The room has two bunk beds.",'部屋には二段ベッドが2つある。');
+W(1,'cabbage','/ˈkæbɪdʒ/','キャベツ',"Cut the cabbage into thin strips.",'キャベツを千切りにして。',"Cabbage is cheap here.",'ここはキャベツが安い。');
+W(1,'canteen','/kænˈtiːn/','食堂（学校・会社の）',"Let's eat lunch in the canteen.",'食堂でお昼を食べよう。',"The school canteen opens at seven.",'学校の食堂は7時に開く。');
+W(1,'cinnamon','/ˈsɪnəmən/','シナモン',"I'd like a cinnamon roll.",'シナモンロールをください。',"Add a little cinnamon.",'シナモンを少し入れて。');
+W(1,'coconut','/ˈkoʊkənʌt/','ココナッツ',"I drank fresh coconut juice.",'新鮮なココナッツジュースを飲んだ。',"There are coconut trees along the beach.",'ビーチ沿いにヤシの木がある。');
+W(1,'cucumber','/ˈkjuːkʌmbər/','きゅうり',"Put cucumber in the salad.",'サラダにきゅうりを入れて。',"I don't like cucumbers.",'きゅうりは苦手。');
+W(1,'diving','/ˈdaɪvɪŋ/','ダイビング、潜水',"I want to try diving in Cebu.",'セブでダイビングをしてみたい。',"Diving is popular here.",'ここではダイビングが人気だ。');
+W(1,'dumpling','/ˈdʌmplɪŋ/','ぎょうざ、だんご',"I made dumplings with my friends.",'友達とぎょうざを作った。',"These dumplings are delicious.",'このぎょうざはおいしい。');
+W(1,'hammock','/ˈhæmək/','ハンモック',"I relaxed in a hammock.",'ハンモックでくつろいだ。',"There's a hammock on the balcony.",'バルコニーにハンモックがある。');
+W(1,'jellyfish','/ˈdʒelifɪʃ/','クラゲ',"Watch out for jellyfish.",'クラゲに気をつけて。',"I was stung by a jellyfish.",'クラゲに刺された。');
+W(1,'kayak','/ˈkaɪæk/','カヤック',"Let's rent a kayak.",'カヤックを借りよう。',"We went kayaking around the island.",'島の周りをカヤックで回った。');
+W(1,'lime','/laɪm/','ライム',"Squeeze some lime on it.",'ライムを少ししぼって。',"I'd like a lime soda.",'ライムソーダをください。');
+W(1,'pancake','/ˈpænkeɪk/','パンケーキ',"I had pancakes for breakfast.",'朝食にパンケーキを食べた。',"These pancakes are fluffy.",'このパンケーキはふわふわだ。');
+W(1,'papaya','/pəˈpaɪə/','パパイヤ',"Papaya is good for your stomach.",'パパイヤはおなかに良い。',"I bought papaya at the market.",'市場でパパイヤを買った。');
+W(1,'peanut','/ˈpiːnʌt/','ピーナッツ',"I'm allergic to peanuts.",'ピーナッツアレルギーです。',"Does this contain peanuts?",'これにピーナッツは入っていますか？');
+W(1,'pickpocket','/ˈpɪkpɑːkɪt/','すり',"Watch out for pickpockets.",'すりに気をつけて。',"A pickpocket stole my wallet.",'すりに財布を盗まれた。');
+W(1,'pier','/pɪr/','桟橋、埠頭',"The boat leaves from the pier.",'船は桟橋から出る。',"Let's meet at the pier.",'桟橋で会おう。');
+W(1,'pumpkin','/ˈpʌmpkɪn/','かぼちゃ',"I made pumpkin soup.",'かぼちゃのスープを作った。',"Pumpkins are popular at Halloween.",'ハロウィーンにはかぼちゃが人気だ。');
+W(1,'raincoat','/ˈreɪnkoʊt/','レインコート',"Take a raincoat with you.",'レインコートを持っていって。',"I bought a cheap raincoat.",'安いレインコートを買った。');
+W(1,'resort','/rɪˈzɔːrt/','リゾート、行楽地',"We stayed at a beach resort.",'ビーチリゾートに泊まった。',"The resort has three pools.",'そのリゾートにはプールが3つある。');
+W(1,'sauce','/sɔːs/','ソース、たれ',"Can I have more sauce?",'ソースをもう少しもらえますか？',"This sauce is a bit spicy.",'このソースは少し辛い。');
+W(1,'seafood','/ˈsiːfuːd/','魚介類、シーフード',"The seafood here is fresh.",'ここの魚介類は新鮮だ。',"I'm allergic to seafood.",'魚介類のアレルギーがあります。');
+W(1,'shrimp','/ʃrɪmp/','エビ',"I'd like the garlic shrimp.",'ガーリックシュリンプをください。',"I can't eat shrimp.",'エビが食べられません。');
+W(1,'snorkel','/ˈsnɔːrkəl/','シュノーケル；シュノーケリングをする',"We went snorkeling on the island tour.",'島めぐりのツアーでシュノーケリングをした。',"Can I rent a snorkel?",'シュノーケルを借りられますか？');
+W(1,'spinach','/ˈspɪnɪtʃ/','ほうれん草',"Spinach is good for you.",'ほうれん草は体にいい。',"I'd like the spinach pasta.",'ほうれん草のパスタをください。');
+W(1,'squid','/skwɪd/','イカ',"Grilled squid is my favorite.",'イカ焼きが大好き。',"Is this squid or octopus?",'これはイカ？タコ？');
+W(1,'sunburn','/ˈsʌnbɜːrn/','日焼け（ひりひりする）',"I got a bad sunburn.",'ひどく日焼けした。',"Use sunscreen to avoid sunburn.",'日焼けしないように日焼け止めを塗って。');
+W(1,'sunglasses','/ˈsʌnɡlæsɪz/','サングラス',"Don't forget your sunglasses.",'サングラスを忘れないで。',"I left my sunglasses on the bus.",'バスにサングラスを置き忘れた。');
+W(1,'surfing','/ˈsɜːrfɪŋ/','サーフィン',"I want to try surfing in Siargao.",'シアルガオでサーフィンに挑戦したい。',"Surfing is harder than it looks.",'サーフィンは見た目より難しい。');
+W(1,'swimsuit','/ˈswɪmsuːt/','水着',"I need to buy a swimsuit.",'水着を買わないと。',"Bring your swimsuit and a towel.",'水着とタオルを持ってきて。');
+W(1,'tablet','/ˈtæblət/','錠剤；タブレット端末',"Take two tablets after meals.",'食後に2錠飲んでください。',"I study English on my tablet.",'タブレットで英語を勉強している。');
+W(1,'takeout','/ˈteɪkaʊt/','持ち帰り（の料理）',"Is this for here or takeout?",'店内で召し上がりますか、お持ち帰りですか？',"Let's get takeout tonight.",'今夜はテイクアウトにしよう。');
+W(1,'tricycle','/ˈtraɪsɪkəl/','三輪車；（フィリピンの）トライシクル',"We took a tricycle to the beach.",'トライシクルでビーチへ行った。',"How much is a tricycle ride?",'トライシクルはいくらですか？');
+W(1,'vinegar','/ˈvɪnɪɡər/','酢',"Filipino food often uses vinegar.",'フィリピン料理はよく酢を使う。',"Dip it in the vinegar.",'酢につけて食べて。');
+W(1,'volcano','/vɑːlˈkeɪnoʊ/','火山',"We climbed a volcano.",'火山に登った。',"Taal is an active volcano.",'タール山は活火山だ。');
+W(1,'waterfall','/ˈwɔːtərfɔːl/','滝',"We swam under the waterfall.",'滝の下で泳いだ。',"Kawasan Falls is a famous waterfall.",'カワサン滝は有名な滝だ。');
+W(1,'wetsuit','/ˈwetsuːt/','ウェットスーツ',"Put on your wetsuit.",'ウェットスーツを着て。',"The wetsuit is too tight.",'ウェットスーツがきつすぎる。');
+W(1,'yogurt','/ˈjoʊɡərt/','ヨーグルト',"I have yogurt every morning.",'毎朝ヨーグルトを食べる。',"Do you have plain yogurt?",'プレーンヨーグルトはありますか？');
+
+W(3,'administer','/ədˈmɪnɪstər/','管理する、（薬を）投与する',"The test is administered online.",'試験はオンラインで実施される。',"The nurse administered the medicine.",'看護師が薬を投与した。');
+W(3,'affordable','/əˈfɔːrdəbəl/','手ごろな値段の',"Cebu has affordable language schools.",'セブには手ごろな語学学校がある。',"We're looking for affordable housing.",'手ごろな住まいを探している。');
+W(3,'amenity','/əˈmenəti/','（ホテルなどの）設備（ふつうは amenities）',"The hotel has great amenities.",'そのホテルは設備が充実している。',"Amenities include a pool and a gym.",'設備にはプールとジムがある。');
+W(3,'apprentice','/əˈprentɪs/','見習い、弟子',"He works as an apprentice chef.",'彼は見習いシェフとして働いている。',"She started as an apprentice.",'彼女は見習いから始めた。');
+W(3,'consecutive','/kənˈsekjətɪv/','連続した',"It rained for five consecutive days.",'5日連続で雨が降った。',"This is our third consecutive win.",'これで3連勝だ。');
+W(3,'cuisine','/kwɪˈziːn/','料理（ある国・地域の）',"I love Filipino cuisine.",'フィリピン料理が大好き。',"The restaurant serves Thai cuisine.",'その店はタイ料理を出している。');
+W(3,'deduct','/dɪˈdʌkt/','差し引く',"Tax is deducted from your salary.",'税金は給料から差し引かれる。',"They deducted the fee from the refund.",'返金から手数料が差し引かれた。');
+W(3,'disclose','/dɪsˈkloʊz/','明らかにする、開示する',"The company didn't disclose the details.",'会社は詳細を明かさなかった。',"You don't have to disclose your age.",'年齢を明かす必要はない。');
+W(3,'dispute','/dɪˈspjuːt/','論争、紛争；異議を唱える',"There was a dispute over the bill.",'請求をめぐって言い争いがあった。',"Nobody disputes the facts.",'その事実に異議を唱える人はいない。');
+W(3,'enrollment','/ɪnˈroʊlmənt/','入学、登録',"Enrollment closes next Friday.",'申し込みは来週の金曜日に締め切る。',"Please complete the enrollment form.",'入学申込書に記入してください。');
+W(3,'exempt','/ɪɡˈzempt/','免除された',"Students are exempt from this fee.",'学生はこの料金が免除される。',"Some items are exempt from tax.",'一部の品物は非課税だ。');
+W(3,'expenditure','/ɪkˈspendɪtʃər/','支出、出費',"We need to cut our expenditure.",'支出を減らす必要がある。',"Public expenditure on education rose.",'教育への公的支出が増えた。');
+W(3,'grievance','/ˈɡriːvəns/','不満、苦情',"Workers have several grievances.",'労働者にはいくつか不満がある。',"Please submit your grievance in writing.",'苦情は書面でお出しください。');
+W(3,'hygiene','/ˈhaɪdʒiːn/','衛生',"Good hygiene prevents illness.",'清潔にしていれば病気を防げる。',"Food hygiene is very important.",'食品衛生はとても大切だ。');
+W(3,'inclusive','/ɪnˈkluːsɪv/','すべて込みの；包括的な',"The price is inclusive of meals.",'料金は食事込みだ。',"We want an inclusive workplace.",'誰もが受け入れられる職場にしたい。');
+W(3,'inquire','/ɪnˈkwaɪər/','問い合わせる、尋ねる',"I'm calling to inquire about the course.",'講座について問い合わせたくてお電話しました。',"She inquired about the price.",'彼女は値段を尋ねた。');
+W(3,'interim','/ˈɪntərɪm/','暫定の、一時的な',"He's the interim manager.",'彼は暫定の部長だ。',"This is an interim report.",'これは中間報告だ。');
+W(3,'itinerary','/aɪˈtɪnəreri/','旅程、旅行の日程表',"Here's our itinerary for the trip.",'これが旅行の日程表です。',"Let's check the itinerary again.",'旅程をもう一度確認しよう。');
+W(3,'jurisdiction','/ˌdʒʊrɪsˈdɪkʃən/','管轄、権限',"That's outside our jurisdiction.",'それは私たちの管轄外だ。',"Each state has its own jurisdiction.",'州ごとに管轄がある。');
+W(3,'liability','/ˌlaɪəˈbɪləti/','（法的な）責任；負債',"The company accepted liability for the accident.",'会社は事故の責任を認めた。',"He's become a liability to the team.",'彼はチームのお荷物になってしまった。');
+W(3,'mentor','/ˈmentɔːr/','指導者、助言者',"My mentor gave me great advice.",'指導者がいい助言をくれた。',"She mentors new employees.",'彼女は新入社員の指導をしている。');
+W(3,'outsource','/ˈaʊtsɔːrs/','外部に委託する',"Many companies outsource customer service.",'多くの会社が顧客対応を外部に委託している。',"We outsource our web design.",'ウェブデザインは外注している。');
+W(3,'payroll','/ˈpeɪroʊl/','給与（台帳）、従業員名簿',"She works in payroll.",'彼女は給与計算の担当だ。',"The company has 200 people on its payroll.",'その会社は200人を雇っている。');
+W(3,'perseverance','/ˌpɜːrsəˈvɪrəns/','忍耐、粘り強さ',"Learning a language takes perseverance.",'語学の習得には粘り強さが必要だ。',"Her perseverance paid off.",'彼女の粘り強さが実を結んだ。');
+W(3,'pivotal','/ˈpɪvətəl/','極めて重要な、中心的な',"Studying abroad was a pivotal moment in my life.",'留学は人生の大きな転機だった。',"She played a pivotal role in the project.",'彼女はその計画で中心的な役割を果たした。');
+W(3,'punctual','/ˈpʌŋktʃuəl/','時間に正確な',"Please be punctual for class.",'授業には時間どおりに来てください。',"Japanese trains are very punctual.",'日本の電車はとても時間に正確だ。');
+W(3,'quota','/ˈkwoʊtə/','割り当て、ノルマ',"I have a monthly sales quota.",'毎月の販売ノルマがある。',"There's a quota on visas.",'ビザには人数の割り当てがある。');
+W(3,'recruit','/rɪˈkruːt/','採用する；新入社員',"We're recruiting new staff.",'新しいスタッフを募集している。',"The new recruits start on Monday.",'新入社員は月曜日から働き始める。');
+W(3,'redundancy','/rɪˈdʌndənsi/','（人員削減による）解雇；余分',"There were many redundancies last year.",'昨年は多くの人員削減があった。',"Remove any redundancy in your essay.",'作文の余分な部分を削って。');
+W(3,'reimburse','/ˌriːɪmˈbɜːrs/','（立て替えた費用を）払い戻す',"The company will reimburse your travel costs.",'会社が交通費を払い戻してくれる。',"Keep the receipt to be reimbursed.",'払い戻しのためにレシートを取っておいて。');
+W(3,'renovate','/ˈrenəveɪt/','改装する、修復する',"They're renovating the dormitory.",'寮を改装している。',"The old house was beautifully renovated.",'古い家がきれいに改装された。');
+W(3,'resilience','/rɪˈzɪljəns/','回復力、立ち直る力',"Studying abroad builds resilience.",'留学は立ち直る力を育てる。',"The city showed great resilience after the typhoon.",'その町は台風の後、見事に立ち直った。');
+W(3,'tenant','/ˈtenənt/','借家人、入居者',"The tenant pays rent every month.",'入居者は毎月家賃を払う。',"The previous tenant left a mess.",'前の入居者が散らかしたまま出ていった。');
+W(3,'tuition','/tuˈɪʃən/','授業料；指導',"Tuition includes meals and housing.",'授業料には食事と寮費が含まれる。',"How much is the tuition?",'授業料はいくらですか？');
+W(3,'utility','/juːˈtɪləti/','（電気・ガス・水道などの）公共料金（ふつうは utilities）',"Utilities are included in the rent.",'公共料金は家賃に含まれる。',"How much are the utilities per month?",'光熱費は月いくらですか？');
+W(3,'vacancy','/ˈveɪkənsi/','空室；欠員',"Do you have any vacancies?",'空室はありますか？',"There's a vacancy in the sales team.",'営業部に欠員がある。');
+W(3,'warranty','/ˈwɔːrənti/','保証（書）',"The laptop has a one-year warranty.",'そのノートパソコンには1年保証がある。',"Is it still under warranty?",'まだ保証期間内ですか？');
+W(3,'workload','/ˈwɜːrkloʊd/','仕事量',"My workload is heavy this week.",'今週は仕事量が多い。',"We need to share the workload.",'仕事を分担する必要がある。');
+W(3,'accustomed','/əˈkʌstəmd/','慣れている',"I'm getting accustomed to the food here.",'ここの食べ物に慣れてきた。',"She's accustomed to working late.",'彼女は遅くまで働くのに慣れている。');
+W(3,'ample','/ˈæmpəl/','十分な、たっぷりの',"There's ample time to prepare.",'準備する時間は十分ある。',"The room has ample space.",'部屋は十分な広さがある。');
+W(3,'apprehensive','/ˌæprɪˈhensɪv/','不安な、心配した',"I was apprehensive about the interview.",'面接が不安だった。',"Many students feel apprehensive at first.",'最初は不安を感じる学生が多い。');
+W(3,'assertive','/əˈsɜːrtɪv/','自己主張のできる、はっきり意見を言う',"You need to be more assertive.",'もっとはっきり意見を言ったほうがいい。',"She's polite but assertive.",'彼女は礼儀正しいが、主張ははっきりしている。');
+W(3,'astute','/əˈstuːt/','鋭い、抜け目のない',"That's an astute observation.",'鋭い指摘だね。',"He's an astute businessman.",'彼は抜け目のない実業家だ。');
+W(3,'brisk','/brɪsk/','きびきびした、活発な',"We took a brisk walk.",'早足で散歩した。',"Business was brisk today.",'今日は商売が繁盛した。');
+W(3,'concede','/kənˈsiːd/','（しぶしぶ）認める',"He conceded that he was wrong.",'彼は自分が間違っていたと認めた。',"The team conceded two goals.",'そのチームは2点を許した。');
+W(3,'contingency','/kənˈtɪndʒənsi/','不測の事態、万一の備え',"We need a contingency plan.",'万一の時の計画が必要だ。',"Keep some money for contingencies.",'いざという時のためにお金を取っておいて。');
+W(3,'courteous','/ˈkɜːrtiəs/','礼儀正しい、丁寧な',"The staff were very courteous.",'スタッフはとても丁寧だった。',"Please be courteous to other guests.",'ほかのお客様には礼儀正しくお願いします。');
+W(3,'discreet','/dɪˈskriːt/','慎重な、口の堅い',"Don't worry, I'll be discreet.",'心配しないで、口外しないから。',"She made a discreet inquiry.",'彼女はそれとなく問い合わせた。');
+W(3,'dismiss','/dɪsˈmɪs/','退ける、解散させる、解雇する',"Don't dismiss the idea too quickly.",'その考えをすぐに切り捨てないで。',"The class was dismissed early.",'授業が早く終わった。');
+W(3,'embark','/ɪmˈbɑːrk/','乗り出す、（船・飛行機に）乗る',"She embarked on a new career.",'彼女は新しい仕事に乗り出した。',"Passengers will embark at 9 a.m.",'乗客は午前9時に乗船します。');
+W(3,'encompass','/ɪnˈkʌmpəs/','含む、包含する',"The course encompasses speaking and writing.",'その講座は話すことと書くことを含む。',"The park encompasses 500 acres.",'その公園は500エーカーに及ぶ。');
+W(3,'exquisite','/ɪkˈskwɪzɪt/','この上なく美しい、精巧な',"The view from the hotel was exquisite.",'ホテルからの眺めは見事だった。',"She has exquisite taste.",'彼女はとてもセンスがいい。');
+W(3,'gratitude','/ˈɡrætɪtuːd/','感謝',"I'd like to express my gratitude.",'感謝の気持ちを伝えたいです。',"She smiled with gratitude.",'彼女は感謝してほほ笑んだ。');
+W(3,'inadequate','/ɪnˈædɪkwət/','不十分な、不適切な',"The training was inadequate.",'研修が不十分だった。',"I felt inadequate at first.",'最初は自分が力不足だと感じた。');
+W(3,'incur','/ɪnˈkɜːr/','（費用・損失を）負う、招く',"You may incur extra charges.",'追加料金がかかる場合があります。',"The company incurred huge losses.",'会社は大きな損失を出した。');
+W(3,'infer','/ɪnˈfɜːr/','推測する、推論する',"What can you infer from the text?",'文章から何が推測できますか？',"I inferred that he was unhappy.",'彼が不満なのだと察した。');
+W(3,'intact','/ɪnˈtækt/','無傷の、損なわれていない',"The old temple is still intact.",'その古い寺はまだ無傷のまま残っている。',"My luggage arrived intact.",'荷物は無事に届いた。');
+W(3,'intermittent','/ˌɪntərˈmɪtənt/','断続的な',"There will be intermittent rain.",'断続的に雨が降るでしょう。',"The Wi-Fi is intermittent here.",'ここのWi-Fiは途切れ途切れだ。');
+W(3,'oblige','/əˈblaɪdʒ/','義務を負わせる；（be obliged で）感謝する',"You're not obliged to answer.",'答える義務はありません。',"I'd be obliged if you could help.",'手伝っていただけるとありがたいです。');
+W(3,'optimal','/ˈɑːptɪməl/','最適な',"What's the optimal time to study?",'勉強に最適な時間はいつ？',"Find the optimal solution.",'最適な解決策を見つけて。');
+W(3,'overwhelm','/ˌoʊvərˈwelm/','圧倒する、打ちのめす',"I was overwhelmed by the amount of homework.",'宿題の多さに圧倒された。',"Don't let stress overwhelm you.",'ストレスに押しつぶされないで。');
+W(3,'persistent','/pərˈsɪstənt/','しつこい、粘り強い',"I have a persistent cough.",'せきがなかなか止まらない。',"Be persistent and you'll improve.",'粘り強く続ければ上達する。');
+W(3,'prospective','/prəˈspektɪv/','見込みのある、将来の',"We met with prospective students.",'入学希望者と会った。',"She's a prospective buyer.",'彼女は購入を検討している客だ。');
+W(3,'receptive','/rɪˈseptɪv/','受け入れる、理解のある',"The teacher is receptive to new ideas.",'その先生は新しい考えを受け入れてくれる。',"Children are receptive to languages.",'子どもは言葉を吸収しやすい。');
+W(3,'resourceful','/rɪˈsɔːrsfəl/','機転の利く、工夫に富む',"She's a resourceful traveler.",'彼女は機転の利く旅行者だ。',"You have to be resourceful abroad.",'海外では工夫して乗り切る力が必要だ。');
+W(3,'steady','/ˈstedi/','安定した、着実な',"I'm making steady progress.",'着実に上達している。',"Hold the ladder steady.",'はしごをしっかり押さえて。');
+W(3,'stimulate','/ˈstɪmjəleɪt/','刺激する、活発にする',"The class stimulates discussion.",'その授業は議論を活発にする。',"Exercise stimulates the brain.",'運動は脳を刺激する。');
+W(3,'tactful','/ˈtæktfəl/','如才ない、気配りのある',"Try to be tactful when you give feedback.",'意見を伝えるときは気配りを。',"That wasn't very tactful.",'それはあまり気が利かなかったね。');
+
 const CT_ADJN=['heavy rain','strong coffee','bitter cold','fast food','heavy traffic'], CT_ADV=['highly recommend','deeply sorry'], CT_VP=['keep in touch'];
 ITEMS.forEach(x=>{ if(x.cat!=='colloc'||x.scene) return; x.scene = CT_ADJN.includes(x.en)?'形容詞＋名詞' : CT_ADV.includes(x.en)?'副詞との組み合わせ' : CT_VP.includes(x.en)?'動詞＋前置詞' : '動詞＋名詞'; });
 const COLLOC_TYPES=['動詞＋名詞','動詞＋前置詞','形容詞＋前置詞','名詞＋前置詞','形容詞＋名詞','副詞との組み合わせ'];
@@ -6425,7 +6644,8 @@ const PRON_UNITS = {
 };
 let PU = {id:null, i:0, t:0, pick:null, score:0};
 const PRON_FREE = 'pu:rl';
-const puOk = id=> tier()!=='general' || id===PRON_FREE;
+
+const puOk = id=> true;
 V.pron = ()=>{
   if(PU.id) return puDetail(PU.id);
   const done=S.pronDone||{}, nDone=Object.keys(done).length, nAll=PRON_PARTS.reduce((a,p)=>a+p[1].length,0);
