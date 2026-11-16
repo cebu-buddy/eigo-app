@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>ココマンゴー英語 試作2</title>
+<title>ココマンゴー英語 ベータ版</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
@@ -552,7 +552,218 @@ const ITEMS = [
  it('wh',2,"I'm calling in sick today.",'/aɪm ˈkɔːlɪŋ ɪn sɪk təˈdeɪ/','今日は体調不良で休みます（と連絡する）。',"Sorry, I'm calling in sick today.",'すみません、今日は体調不良で休みます。',"She called in sick this morning.",'彼女は今朝、体調不良で休むと連絡してきた。','シフト・休みの連絡'),
  it('wh',1,"What can I get for you?",'/wʌt kæn aɪ ɡet fər ju/','ご注文は何になさいますか？',"Hi there! What can I get for you?",'いらっしゃいませ！ご注文は何になさいますか？',"What can I get for you today?",'今日は何になさいますか？','カフェの接客'),
  it('wh',1,"For here or to go?",'/fər hɪr ɔːr tə ɡoʊ/','店内でお召し上がりですか、お持ち帰りですか？',"Sure. For here or to go?",'かしこまりました。店内ですか、お持ち帰りですか？',"Is that for here or to go?",'こちらは店内ですか、お持ち帰りですか？','カフェの接客'),
- it('wh',1,"It'll be ready in a few minutes.",'/ˈɪtl bi ˈredi ɪn ə fjuː ˈmɪnɪts/','数分でできあがります。',"Your coffee will be ready in a few minutes.",'コーヒーは数分でできあがります。',"It'll be ready in a few minutes. I'll call your name.",'数分でできます。お名前をお呼びしますね。','カフェの接客')
+ it('wh',1,"It'll be ready in a few minutes.",'/ˈɪtl bi ˈredi ɪn ə fjuː ˈmɪnɪts/','数分でできあがります。',"Your coffee will be ready in a few minutes.",'コーヒーは数分でできあがります。',"It'll be ready in a few minutes. I'll call your name.",'数分でできます。お名前をお呼びしますね。','カフェの接客'),
+
+ it('study',0,"What does this word mean?",'','この単語はどういう意味ですか？',"Excuse me, what does this word mean?",'すみません、この単語はどういう意味ですか？',"What does \"deadline\" mean?",'「deadline」はどういう意味ですか？','授業中'),
+ it('study',0,"Could you speak more slowly, please?",'','もう少しゆっくり話していただけますか？',"Sorry, could you speak more slowly, please?",'すみません、もう少しゆっくり話していただけますか？',"Could you speak a little more slowly?",'もう少しだけゆっくり話していただけますか？','授業中'),
+ it('study',0,"How do you say this in English?",'','これは英語で何と言いますか？',"How do you say \"itadakimasu\" in English?",'「いただきます」は英語で何と言いますか？',"Sorry, how do you say this in English?",'すみません、これは英語で何と言いますか？','授業中'),
+ it('study',0,"Can you write it on the board?",'','ボードに書いてもらえますか？',"Can you write that word on the board?",'その単語をボードに書いてもらえますか？',"Sorry, can you write it on the board, please?",'すみません、ボードに書いていただけますか？','授業中'),
+ it('study',0,"I have a question.",'','質問があります。',"Excuse me, I have a question.",'すみません、質問があります。',"I have a question about the homework.",'宿題について質問があります。','授業中'),
+ it('study',0,"I don't know.",'','分かりません。',"Sorry, I don't know the answer.",'すみません、答えが分かりません。',"I don't know this word.",'この単語を知りません。','授業中'),
+ it('study',1,"Could you give me an example?",'','例を挙げていただけますか？',"Could you give me an example of this grammar?",'この文法の例を挙げていただけますか？',"I don't get it. Could you give me another example?",'よく分かりません。別の例を挙げていただけますか？','授業中'),
+ it('study',1,"What's the difference between these two?",'','この2つの違いは何ですか？',"What's the difference between \"say\" and \"tell\"?",'「say」と「tell」の違いは何ですか？',"Sorry, what's the difference between these two words?",'すみません、この2つの単語の違いは何ですか？','授業中'),
+ it('study',1,"Is it OK to say it like this?",'','こういう言い方でも大丈夫ですか？',"Is it OK to say \"I'm boring\" here?",'ここで「I\'m boring」と言っても大丈夫ですか？',"Is it natural to say it like this?",'こういう言い方は自然ですか？','授業中'),
+ it('study',1,"Can I use this in a casual conversation?",'','これは普段の会話で使えますか？',"Can I use this phrase in a casual conversation?",'この表現は普段の会話で使えますか？',"Is this word too formal for a casual conversation?",'この単語は普段の会話にはかたすぎますか？','授業中'),
+ it('study',1,"Let me think for a second.",'','少し考えさせてください。',"Hmm, let me think for a second.",'うーん、少し考えさせてください。',"Good question. Let me think for a second.",'いい質問ですね。少し考えさせてください。','授業中'),
+ it('study',1,"I'm sorry, I didn't do my homework.",'','すみません、宿題をやっていません。',"I'm sorry, I didn't finish my homework.",'すみません、宿題が終わっていません。',"Can I hand in my homework tomorrow?",'宿題は明日出してもいいですか？','授業中'),
+ it('study',1,"Can we take a short break?",'','少し休憩してもいいですか？',"Can we take a five-minute break?",'5分休憩してもいいですか？',"Teacher, can we take a short break?",'先生、少し休憩してもいいですか？','授業中'),
+ it('study',2,"Could you correct my English?",'','私の英語を直していただけますか？',"Could you correct my English if I make a mistake?",'間違えたら、英語を直していただけますか？',"Please correct me when I make mistakes.",'間違えたら直してください。','授業中'),
+ it('study',2,"Is there a more natural way to say this?",'','もっと自然な言い方はありますか？',"Is there a more natural way to say \"I'm very fun\"?",'「I\'m very fun」のもっと自然な言い方はありますか？',"Is there a more casual way to say this?",'これのもっとくだけた言い方はありますか？','授業中'),
+ it('study',2,"I'd like to focus on speaking.",'','スピーキングを重点的にやりたいです。',"In this class, I'd like to focus on speaking.",'この授業では、スピーキングを重点的にやりたいです。',"I'd like to focus more on listening this week.",'今週はもっとリスニングを重点的にやりたいです。','授業中'),
+ it('study',2,"Could you recommend a good textbook?",'','良い教材を教えていただけますか？',"Could you recommend a good textbook for IELTS?",'IELTSに良い教材を教えていただけますか？',"Could you recommend some English podcasts?",'英語のポッドキャストを教えていただけますか？','授業中'),
+ it('study',0,"What's your name?",'','お名前は？',"Hi, I'm Yuki. What's your name?",'こんにちは、ユキです。お名前は？',"Sorry, what's your name again?",'ごめん、もう一回名前を教えて？','学校生活'),
+ it('study',0,"How long are you staying here?",'','ここにはどれくらいいるの？',"How long are you staying in Cebu?",'セブにはどれくらいいるの？',"I'm staying for eight weeks. How about you?",'8週間いるよ。あなたは？','学校生活'),
+ it('study',0,"Do you want to have lunch together?",'','一緒にお昼を食べない？',"Do you want to have lunch together today?",'今日、一緒にお昼を食べない？',"We're having lunch now. Do you want to join us?",'今からお昼を食べるけど、一緒にどう？','学校生活'),
+ it('study',0,"Where is the office?",'','事務所はどこですか？',"Excuse me, where is the school office?",'すみません、学校の事務所はどこですか？',"Where is the clinic?",'保健室（クリニック）はどこですか？','学校生活'),
+ it('study',1,"Which class are you in?",'','どのクラスにいるの？',"Which class are you in this week?",'今週はどのクラス？',"I'm in the intermediate class. Which class are you in?",'中級クラスだよ。どのクラスにいるの？','学校生活'),
+ it('study',1,"Do you have any plans this weekend?",'','今週末、何か予定ある？',"Do you have any plans this weekend? Let's go to the beach.",'今週末、何か予定ある？ビーチに行こうよ。',"No plans yet. Do you have any ideas?",'まだ予定はないよ。何かいい案ある？','学校生活'),
+ it('study',1,"I'd like to change my teacher.",'','先生を変えたいです。',"Excuse me, I'd like to change my teacher for the one-on-one class.",'すみません、マンツーマン授業の先生を変えたいです。',"Is it possible to change my teacher next week?",'来週、先生を変えることはできますか？','学校生活'),
+ it('study',1,"Can I extend my stay?",'','滞在を延長できますか？',"Can I extend my stay for two more weeks?",'あと2週間、滞在を延長できますか？',"How much does it cost to extend my stay?",'滞在を延長すると、いくらかかりますか？','学校生活'),
+ it('study',1,"I'm going to be absent tomorrow.",'','明日は休みます。',"I'm going to be absent tomorrow because I have a fever.",'熱があるので、明日は休みます。',"Who should I tell if I'm going to be absent?",'休むときは、誰に伝えればいいですか？','学校生活'),
+ it('study',1,"Can I borrow your charger?",'','充電器を借りてもいい？',"Sorry, can I borrow your charger for a minute?",'ごめん、ちょっとだけ充電器を借りてもいい？',"Can I borrow your pen?",'ペンを借りてもいい？','学校生活'),
+ it('study',2,"I'm having trouble keeping up with the class.",'','授業についていくのが大変です。',"I'm having trouble keeping up with the group class.",'グループ授業についていくのが大変です。',"I'm having trouble keeping up. Can I move to a lower level?",'ついていくのが大変です。下のレベルに移れますか？','学校生活'),
+ it('study',2,"It was really nice meeting you.",'','会えて本当によかった。',"It was really nice meeting you. Let's keep in touch!",'会えて本当によかった。連絡を取り合おうね！',"Today's my last day. It was really nice meeting you all.",'今日が最後の日です。みんなに会えて本当によかった。','学校生活'),
+ it('study',0,"There's no hot water.",'','お湯が出ません。',"Excuse me, there's no hot water in my shower.",'すみません、シャワーのお湯が出ません。',"There's no hot water again this morning.",'今朝もまたお湯が出ません。','寮・生活'),
+ it('study',0,"The air conditioner is broken.",'','エアコンが壊れています。',"The air conditioner in my room is broken.",'部屋のエアコンが壊れています。',"Could someone fix the air conditioner?",'誰かエアコンを直してもらえますか？','寮・生活'),
+ it('study',0,"Can I change my room?",'','部屋を変えられますか？',"Can I change my room? It's too noisy.",'部屋を変えられますか？うるさすぎるんです。',"Can I change to a single room?",'1人部屋に変えられますか？','寮・生活'),
+ it('study',0,"What time is dinner?",'','夕食は何時ですか？',"Excuse me, what time is dinner?",'すみません、夕食は何時ですか？',"What time does breakfast start on weekends?",'週末の朝食は何時からですか？','寮・生活'),
+ it('study',0,"I lost my key.",'','鍵をなくしました。',"Sorry, I lost my room key.",'すみません、部屋の鍵をなくしました。',"I think I lost my key. Do you have a spare one?",'鍵をなくしたみたいです。予備はありますか？','寮・生活'),
+ it('study',1,"When is the laundry picked up?",'','洗濯物はいつ回収されますか？',"When is the laundry picked up and returned?",'洗濯物はいつ回収されて、いつ戻ってきますか？',"I think one of my shirts is missing from my laundry.",'洗濯物からシャツが1枚なくなっているようです。','寮・生活'),
+ it('study',1,"Could you clean my room today?",'','今日、部屋を掃除してもらえますか？',"Could you clean my room today? I'll be in class until five.",'今日、部屋を掃除してもらえますか？5時まで授業です。',"You don't need to clean my room today.",'今日は部屋の掃除はいりません。','寮・生活'),
+ it('study',1,"Is there a curfew?",'','門限はありますか？',"Is there a curfew on weekdays?",'平日は門限がありますか？',"What time is the curfew on Saturdays?",'土曜日の門限は何時ですか？','寮・生活'),
+ it('study',1,"My roommate is very noisy at night.",'','ルームメイトが夜とてもうるさいです。',"I can't sleep because my roommate is very noisy at night.",'ルームメイトが夜とてもうるさくて眠れません。',"Could you keep it down a little? I'm trying to sleep.",'少し静かにしてもらえる？寝ようとしているんだ。','寮・生活'),
+ it('study',1,"Where can I exchange money?",'','どこで両替できますか？',"Where can I exchange money near the school?",'学校の近くで、どこで両替できますか？',"Is there an ATM near here?",'この近くにATMはありますか？','寮・生活'),
+ it('study',1,"Can you call a taxi for me?",'','タクシーを呼んでもらえますか？',"Can you call a taxi for me? I'm going to the mall.",'タクシーを呼んでもらえますか？モールに行きます。',"How much is it to the airport by taxi?",'空港までタクシーでいくらですか？','寮・生活'),
+ it('study',2,"I think I have food poisoning.",'','食あたりかもしれません。',"I've had a stomachache since last night. I think I have food poisoning.",'昨夜からお腹が痛いです。食あたりかもしれません。',"Could you take me to a clinic? I think I have food poisoning.",'病院に連れて行ってもらえますか？食あたりかもしれません。','寮・生活'),
+ it('study',2,"I'd like to report something stolen.",'','盗まれたものを届け出たいです。',"I'd like to report that my phone was stolen.",'携帯が盗まれたことを届け出たいです。',"Someone took my wallet from my room.",'誰かが部屋から財布を持っていきました。','寮・生活'),
+
+ it('word',0,'classroom','/ˈklæsruːm/','教室',"Where is classroom 3?",'3番教室はどこですか？',"The classroom is on the second floor.",'教室は2階にあります。'),
+ it('word',0,'homework','/ˈhoʊmwɜːrk/','宿題',"I have a lot of homework today.",'今日は宿題がたくさんあります。',"Did you finish your homework?",'宿題は終わった？'),
+ it('word',0,'dinner','/ˈdɪnər/','夕食',"Dinner is at six thirty.",'夕食は6時半です。',"What's for dinner?",'夕食は何？'),
+ it('word',0,'weekend','/ˈwiːkend/','週末',"What did you do last weekend?",'先週末は何をしたの？',"I'm going to the beach this weekend.",'今週末はビーチに行きます。'),
+ it('word',0,'tired','/ˈtaɪərd/','疲れた',"I'm so tired today.",'今日はとても疲れています。',"You look tired. Are you OK?",'疲れているみたい。大丈夫？'),
+ it('word',0,'hungry','/ˈhʌŋɡri/','お腹がすいた',"I'm hungry. Let's eat.",'お腹がすいた。食べよう。',"Are you hungry?",'お腹すいてる？'),
+ it('word',0,'easy','/ˈiːzi/','簡単な',"This test is easy.",'このテストは簡単です。',"English isn't easy, but it's fun.",'英語は簡単じゃないけど、楽しい。'),
+ it('word',0,'difficult','/ˈdɪfɪkəlt/','難しい',"This grammar is difficult.",'この文法は難しいです。',"It's difficult to understand him.",'彼の言うことを理解するのは難しい。'),
+ it('word',0,'friend','/frend/','友達',"She is my friend from school.",'彼女は学校の友達です。',"I made a lot of friends in Cebu.",'セブでたくさん友達ができた。'),
+ it('word',0,'room','/ruːm/','部屋',"My room is on the third floor.",'私の部屋は3階です。',"Can I change my room?",'部屋を変えられますか？'),
+ it('word',0,'water','/ˈwɔːtər/','水',"Can I have some water?",'お水をもらえますか？',"Don't drink tap water here.",'ここでは水道水を飲まないで。'),
+ it('word',0,'money','/ˈmʌni/','お金',"I don't have much money.",'お金があまりありません。',"Where can I exchange money?",'どこで両替できますか？'),
+ it('word',0,'busy','/ˈbɪzi/','忙しい',"I'm busy this week.",'今週は忙しいです。',"The café is busy on Sundays.",'そのカフェは日曜日に混んでいます。'),
+ it('word',0,'early','/ˈɜːrli/','早い、早く',"I get up early every day.",'毎日早く起きます。',"You're early!",'早いね！'),
+ it('word',0,'late','/leɪt/','遅い、遅れて',"Sorry, I'm late.",'遅れてごめんなさい。',"I went to bed late last night.",'昨夜は遅く寝ました。'),
+ it('word',0,'cheap','/tʃiːp/','安い',"This shirt is cheap.",'このシャツは安い。',"Is there a cheap restaurant near here?",'この近くに安いレストランはありますか？'),
+ it('word',0,'favorite','/ˈfeɪvərɪt/','いちばん好きな',"What's your favorite food?",'いちばん好きな食べ物は何？',"Mango is my favorite fruit.",'マンゴーがいちばん好きな果物です。'),
+ it('word',0,'tomorrow','/təˈmɑːroʊ/','明日',"See you tomorrow!",'また明日！',"I have a test tomorrow.",'明日テストがあります。'),
+ it('word',1,'arrive','/əˈraɪv/','着く、到着する',"I arrived in Cebu on Sunday.",'日曜日にセブに着きました。',"What time does the bus arrive?",'バスは何時に着きますか？'),
+ it('word',1,'decide','/dɪˈsaɪd/','決める',"I decided to study abroad.",'留学することに決めました。',"I can't decide what to eat.",'何を食べるか決められない。'),
+ it('word',1,'forget','/fərˈɡet/','忘れる',"Don't forget your passport.",'パスポートを忘れないで。',"I forgot his name.",'彼の名前を忘れてしまった。'),
+ it('word',1,'remember','/rɪˈmembər/','覚えている、思い出す',"Do you remember me?",'私のこと覚えてる？',"I can't remember the word.",'その単語が思い出せない。'),
+ it('word',1,'explain','/ɪkˈspleɪn/','説明する',"Could you explain this again?",'もう一度これを説明していただけますか？',"Let me explain.",'説明させてください。'),
+ it('word',1,'practice','/ˈpræktɪs/','練習する、練習',"I practice speaking every day.",'毎日スピーキングを練習しています。',"Practice makes perfect.",'練習すれば上達する。'),
+ it('word',1,'abroad','/əˈbrɔːd/','海外に、海外で',"I want to study abroad.",'海外に留学したいです。',"Have you ever lived abroad?",'海外に住んだことはある？'),
+ it('word',1,'nervous','/ˈnɜːrvəs/','緊張して、不安で',"I'm nervous about the test.",'テストが不安です。',"Don't be nervous.",'緊張しないで。'),
+ it('word',1,'excited','/ɪkˈsaɪtɪd/','わくわくして',"I'm excited about the trip.",'旅行が楽しみでわくわくしています。',"She was excited to meet new friends.",'彼女は新しい友達に会うのを楽しみにしていた。'),
+ it('word',1,'delicious','/dɪˈlɪʃəs/','とてもおいしい',"This mango is delicious!",'このマンゴー、すごくおいしい！',"The food here is delicious.",'ここの料理はとてもおいしい。'),
+ it('word',1,'crowded','/ˈkraʊdɪd/','混んでいる',"The mall is crowded on weekends.",'週末はモールが混んでいます。',"The bus was really crowded.",'バスがすごく混んでいた。'),
+ it('word',1,'medicine','/ˈmedɪsən/','薬',"Did you take your medicine?",'薬は飲んだ？',"Where can I buy medicine?",'どこで薬を買えますか？'),
+ it('word',1,'receipt','/rɪˈsiːt/','領収書、レシート',"Can I have a receipt?",'レシートをもらえますか？',"Keep the receipt.",'レシートは取っておいてね。'),
+ it('word',1,'traffic','/ˈtræfɪk/','交通（量）、渋滞',"The traffic is bad today.",'今日は道が混んでいます。',"Sorry, I got stuck in traffic.",'ごめん、渋滞につかまった。'),
+ it('word',1,'island','/ˈaɪlənd/','島',"We went to a small island.",'小さな島に行きました。',"The Philippines has more than 7,000 islands.",'フィリピンには7,000以上の島がある。'),
+ it('word',1,'weather','/ˈweðər/','天気',"How's the weather today?",'今日の天気はどう？',"The weather in Cebu is hot all year.",'セブの天気は一年中暑い。'),
+ it('word',1,'prefer','/prɪˈfɜːr/','（〜のほうを）好む',"I prefer tea to coffee.",'コーヒーより紅茶が好きです。',"Which do you prefer?",'どっちがいい？'),
+ it('word',2,'opportunity','/ˌɑːpərˈtuːnəti/','機会、チャンス',"Studying abroad is a great opportunity.",'留学は素晴らしい機会です。',"I didn't have the opportunity to speak English in Japan.",'日本では英語を話す機会がなかった。'),
+ it('word',2,'experience','/ɪkˈspɪriəns/','経験、経験する',"Do you have any work experience?",'仕事の経験はありますか？',"It was a great experience.",'素晴らしい経験でした。'),
+ it('word',2,'confident','/ˈkɑːnfɪdənt/','自信がある',"I feel more confident speaking English now.",'今は英語を話すのに前より自信があります。',"Be confident!",'自信を持って！'),
+ it('word',2,'progress','/ˈprɑːɡres/','進歩、上達',"You've made great progress.",'すごく上達したね。',"I want to check my progress every week.",'毎週、上達ぶりを確認したい。'),
+ it('word',2,'pronunciation','/prəˌnʌnsiˈeɪʃən/','発音',"My pronunciation isn't very good.",'私の発音はあまり良くありません。',"Could you check my pronunciation?",'発音を確認していただけますか？'),
+ it('word',2,'vocabulary','/voʊˈkæbjəleri/','語彙',"I want to increase my vocabulary.",'語彙を増やしたいです。',"Reading helps you build vocabulary.",'読書は語彙を増やすのに役立つ。'),
+ it('word',2,'fluent','/ˈfluːənt/','流ちょうな',"She is fluent in English.",'彼女は英語が流ちょうです。',"I want to be fluent in two years.",'2年で流ちょうに話せるようになりたい。'),
+ it('word',2,'available','/əˈveɪləbəl/','空いている、利用できる',"Are you available on Friday?",'金曜日は空いていますか？',"Is this room available?",'この部屋は空いていますか？'),
+ it('word',2,'convenient','/kənˈviːniənt/','便利な、都合がいい',"What time is convenient for you?",'何時が都合いいですか？',"The dorm is convenient for school.",'その寮は学校に通うのに便利です。'),
+ it('word',2,'suggest','/səɡˈdʒest/','提案する',"I suggest we take a taxi.",'タクシーで行こうよ。',"Can you suggest a good restaurant?",'いいレストランを教えてもらえる？'),
+ it('word',2,'recommend','/ˌrekəˈmend/','すすめる',"Can you recommend a good café?",'いいカフェをすすめてもらえる？',"I recommend this school.",'この学校をおすすめします。'),
+ it('word',2,'compare','/kəmˈper/','比べる',"Don't compare yourself to others.",'自分を他人と比べないで。',"Prices are cheap compared to Japan.",'日本と比べると物価が安い。'),
+ it('word',2,'expect','/ɪkˈspekt/','予想する、期待する',"I didn't expect it to be so hot.",'こんなに暑いとは思わなかった。',"What do you expect from this course?",'このコースに何を期待していますか？'),
+ it('word',2,'environment','/ɪnˈvaɪrənmənt/','環境',"This school has a good study environment.",'この学校は勉強の環境が良い。',"We should protect the environment.",'環境を守るべきだ。'),
+ it('word',2,'solve','/sɑːlv/','解決する、解く',"We need to solve this problem.",'この問題を解決しなければならない。',"I couldn't solve the last question.",'最後の問題が解けなかった。'),
+ it('word',2,'mistake','/mɪˈsteɪk/','間違い',"Don't be afraid of making mistakes.",'間違いを恐れないで。',"Sorry, that was my mistake.",'すみません、私の間違いでした。'),
+ it('word',2,'instead','/ɪnˈsted/','その代わりに',"Let's take the bus instead.",'代わりにバスで行こう。',"I had tea instead of coffee.",'コーヒーの代わりに紅茶を飲んだ。'),
+ it('word',3,'motivation','/ˌmoʊtəˈveɪʃən/','やる気、動機',"My motivation is to work abroad.",'私のやる気の源は、海外で働くことです。',"It's hard to keep my motivation.",'やる気を保つのは難しい。'),
+ it('word',3,'efficient','/ɪˈfɪʃənt/','効率のよい',"This is an efficient way to learn words.",'これは単語を覚える効率のよい方法です。',"She's very efficient at work.",'彼女は仕事がとても手際がいい。'),
+ it('word',3,'responsible','/rɪˈspɑːnsəbəl/','責任がある',"I was responsible for training new staff.",'新人スタッフの指導を担当していました。',"Who is responsible for this?",'これは誰の担当ですか？'),
+ it('word',3,'flexible','/ˈfleksəbəl/','柔軟な、融通がきく',"I'm flexible with my schedule.",'スケジュールは融通がききます。',"We need a flexible plan.",'柔軟な計画が必要だ。'),
+ it('word',3,'reliable','/rɪˈlaɪəbəl/','信頼できる',"He is a reliable coworker.",'彼は信頼できる同僚です。',"Is this information reliable?",'この情報は信頼できる？'),
+ it('word',3,'appreciate','/əˈpriːʃieɪt/','ありがたく思う',"I really appreciate your help.",'助けていただいて本当に感謝しています。',"I'd appreciate it if you could reply soon.",'早めにお返事いただけるとありがたいです。'),
+ it('word',3,'consider','/kənˈsɪdər/','よく考える、検討する',"I'm considering a working holiday.",'ワーホリを検討しています。',"Please consider my application.",'私の応募をご検討ください。'),
+ it('word',3,'require','/rɪˈkwaɪər/','必要とする',"This job requires good English.",'この仕事には十分な英語力が必要です。',"Is a visa required?",'ビザは必要ですか？'),
+ it('word',3,'deadline','/ˈdedlaɪn/','締め切り',"The deadline is next Friday.",'締め切りは来週の金曜日です。',"I missed the deadline.",'締め切りに間に合わなかった。'),
+ it('word',3,'opinion','/əˈpɪnjən/','意見',"In my opinion, it's too expensive.",'私の意見では、それは高すぎる。',"What's your opinion?",'あなたの意見は？'),
+ it('word',3,'advantage','/ədˈvæntɪdʒ/','利点、長所',"What are the advantages of studying in Cebu?",'セブで勉強する利点は何ですか？',"Speaking two languages is a big advantage.",'2か国語を話せるのは大きな強みだ。'),
+ it('word',3,'disadvantage','/ˌdɪsədˈvæntɪdʒ/','欠点、不利な点',"One disadvantage is the heat.",'欠点の一つは暑さです。',"There are advantages and disadvantages.",'良い点も悪い点もある。'),
+ it('word',3,'eventually','/ɪˈventʃuəli/','最終的には、結局',"Eventually, I got used to the food.",'結局、食事に慣れました。',"I want to eventually work overseas.",'最終的には海外で働きたい。'),
+ it('word',3,'gradually','/ˈɡrædʒuəli/','だんだんと',"My English is gradually improving.",'私の英語はだんだん上達しています。',"It gradually got dark.",'だんだん暗くなった。'),
+ it('word',3,'persuade','/pərˈsweɪd/','説得する',"I persuaded my parents to let me study abroad.",'両親を説得して留学させてもらった。',"She's good at persuading people.",'彼女は人を説得するのがうまい。'),
+ it('word',3,'struggle','/ˈstrʌɡəl/','苦労する、もがく',"I struggled with listening at first.",'最初はリスニングに苦労した。',"Many students struggle with grammar.",'多くの学生が文法に苦労する。'),
+ it('word',4,'articulate','/ɑːrˈtɪkjələt/','考えをはっきり言える',"She's very articulate in meetings.",'彼女は会議で考えをとてもはっきり言える。',"It's hard to be articulate in a second language.",'第二言語で考えをはっきり伝えるのは難しい。'),
+ it('word',4,'ambiguous','/æmˈbɪɡjuəs/','あいまいな',"The question was a bit ambiguous.",'その質問は少しあいまいだった。',"Let's avoid ambiguous words in the contract.",'契約書ではあいまいな言葉を避けよう。'),
+ it('word',4,'substantial','/səbˈstænʃəl/','かなりの、相当な',"There was a substantial increase in prices.",'物価がかなり上がった。',"She made a substantial contribution to the project.",'彼女はプロジェクトに大きく貢献した。'),
+ it('word',4,'feasible','/ˈfiːzəbəl/','実行可能な',"Is this plan feasible?",'この計画は実行可能ですか？',"It's not feasible to finish it by tomorrow.",'明日までに終えるのは無理だ。'),
+ it('word',4,'comprehensive','/ˌkɑːmprɪˈhensɪv/','包括的な、総合的な',"This is a comprehensive guide to IELTS.",'これはIELTSの総合ガイドです。',"We need comprehensive insurance.",'包括的な保険が必要だ。'),
+ it('word',4,'inevitable','/ɪˈnevɪtəbəl/','避けられない',"Mistakes are inevitable when you learn a language.",'語学を学ぶとき、間違いは避けられない。',"Change is inevitable.",'変化は避けられない。'),
+ it('word',4,'compromise','/ˈkɑːmprəmaɪz/','妥協（する）',"We reached a compromise.",'私たちは妥協点に達した。',"I'm willing to compromise on the price.",'値段は歩み寄ってもいいです。'),
+ it('word',4,'elaborate','/ɪˈlæbəreɪt/','詳しく述べる',"Could you elaborate on that?",'それについて詳しく話していただけますか？',"He didn't elaborate on his plans.",'彼は計画について詳しく語らなかった。'),
+ it('word',4,'nuance','/ˈnuːɑːns/','微妙な違い、ニュアンス',"It's hard to understand the nuance.",'ニュアンスを理解するのは難しい。',"There's a slight nuance between the two words.",'2つの単語にはわずかなニュアンスの違いがある。'),
+ it('word',4,'perspective','/pərˈspektɪv/','見方、視点',"Living abroad changed my perspective.",'海外生活で物の見方が変わった。',"Let's look at it from a different perspective.",'違う視点から見てみよう。'),
+ it('word',4,'resilient','/rɪˈzɪliənt/','立ち直りが早い、たくましい',"Kids are very resilient.",'子どもはとてもたくましい。',"You need to be resilient when you live abroad.",'海外で暮らすには、へこたれない強さが必要だ。'),
+ it('word',4,'proficient','/prəˈfɪʃənt/','熟達した',"She is proficient in three languages.",'彼女は3か国語に堪能だ。',"You need to be proficient in English for this job.",'この仕事には高い英語力が必要だ。'),
+ it('word',4,'diligent','/ˈdɪlɪdʒənt/','勤勉な',"He's a diligent student.",'彼は勤勉な学生だ。',"Diligent practice pays off.",'こつこつ練習すれば報われる。'),
+
+ it('phrasal',0,'get up','','起きる',"I get up at six every day.",'毎日6時に起きます。',"What time did you get up?",'何時に起きたの？'),
+ it('phrasal',0,'sit down','','座る',"Please sit down.",'どうぞ座ってください。',"Can I sit down here?",'ここに座ってもいいですか？'),
+ it('phrasal',0,'turn on','','（電気・機械を）つける',"Can you turn on the light?",'電気をつけてくれる？',"I turned on the air conditioner.",'エアコンをつけました。'),
+ it('phrasal',0,'turn off','','（電気・機械を）消す',"Please turn off your phone.",'携帯の電源を切ってください。',"Don't forget to turn off the fan.",'扇風機を消すのを忘れないで。'),
+ it('phrasal',1,'wake up','','目を覚ます',"I woke up at five this morning.",'今朝は5時に目が覚めた。',"Wake up! You'll be late.",'起きて！遅刻するよ。'),
+ it('phrasal',1,'go out','','出かける、外出する',"Do you want to go out tonight?",'今夜出かけない？',"I don't go out on weekdays.",'平日は出かけません。'),
+ it('phrasal',1,'check in','','チェックインする',"What time can I check in?",'何時にチェックインできますか？',"We checked in at the hotel at three.",'3時にホテルにチェックインした。'),
+ it('phrasal',1,'try on','','試着する',"Can I try this on?",'これを試着してもいいですか？',"She tried on three dresses.",'彼女はドレスを3着試着した。'),
+ it('phrasal',1,'fill out','','（用紙に）記入する',"Please fill out this form.",'この用紙に記入してください。',"I filled out the application.",'申込書に記入しました。'),
+ it('phrasal',1,'hang out','','（友達と）遊ぶ、ぶらぶらする',"Do you want to hang out this weekend?",'今週末遊ばない？',"We hung out at the mall.",'モールでぶらぶらした。'),
+ it('phrasal',2,'figure out','','（考えて）分かる、解決する',"I can't figure out this problem.",'この問題が分からない。',"We'll figure it out.",'なんとかなるよ。'),
+ it('phrasal',2,'catch up','','追いつく、近況を話す',"I need to catch up on my homework.",'たまった宿題を片付けないと。',"Let's catch up over coffee.",'コーヒーでも飲みながら近況を話そう。'),
+ it('phrasal',2,'run out of','','〜を切らす、使い果たす',"We ran out of water.",'水がなくなった。',"I'm running out of money.",'お金が残り少ない。'),
+ it('phrasal',2,'get along with','','〜と仲良くやる',"I get along with my roommate.",'ルームメイトとうまくやっています。',"Do you get along with your classmates?",'クラスメートとは仲良くやってる？'),
+ it('phrasal',2,'look forward to','','〜を楽しみにする',"I'm looking forward to the trip.",'旅行を楽しみにしています。',"I look forward to hearing from you.",'お返事をお待ちしています。'),
+ it('phrasal',2,'show up','','現れる、来る',"He didn't show up to class.",'彼は授業に来なかった。',"She showed up late.",'彼女は遅れてやって来た。'),
+ it('phrasal',2,'drop by','','ちょっと立ち寄る',"Drop by anytime.",'いつでも寄ってね。',"I'll drop by the office after class.",'授業のあと、事務所に寄ります。'),
+ it('phrasal',3,'bring up','','（話題を）持ち出す',"Don't bring up that topic.",'その話題は出さないで。',"She brought up a good point.",'彼女はいい点を指摘した。'),
+ it('phrasal',3,'turn down','','断る',"I turned down the job offer.",'その仕事のオファーを断った。',"He turned down my invitation.",'彼は私の誘いを断った。'),
+ it('phrasal',3,'carry on','','続ける',"Carry on with your work.",'作業を続けてください。',"We carried on talking for hours.",'私たちは何時間も話し続けた。'),
+ it('phrasal',3,'end up','','結局〜することになる',"We ended up staying at home.",'結局、家にいることになった。',"I ended up working there for a year.",'結局そこで1年働くことになった。'),
+ it('phrasal',3,'look into','','調べる',"I'll look into it.",'調べてみます。',"The school is looking into the problem.",'学校がその問題を調べています。'),
+ it('phrasal',4,'brush up on','','（さびついた技能を）磨き直す',"I need to brush up on my English before the interview.",'面接の前に英語を磨き直さないと。',"She's brushing up on her grammar.",'彼女は文法をおさらいしている。'),
+ it('phrasal',4,'come across','','たまたま見つける、〜という印象を与える',"I came across an old photo.",'古い写真をたまたま見つけた。',"He comes across as a bit shy.",'彼は少し内気な印象だ。'),
+ it('phrasal',4,'live up to','','（期待に）応える',"The trip lived up to my expectations.",'旅行は期待どおりだった。',"I want to live up to my parents' expectations.",'両親の期待に応えたい。'),
+
+ it('colloc',0,'have breakfast','','朝食をとる',"I have breakfast at seven.",'7時に朝食をとります。',"Did you have breakfast?",'朝ごはんは食べた？'),
+ it('colloc',0,'take a picture','','写真を撮る',"Can I take a picture here?",'ここで写真を撮ってもいいですか？',"Could you take a picture of us?",'私たちの写真を撮っていただけますか？'),
+ it('colloc',0,'do homework','','宿題をする',"I do my homework after dinner.",'夕食のあとに宿題をします。',"Have you done your homework?",'宿題はやった？'),
+ it('colloc',1,'catch a cold','','風邪をひく',"I caught a cold last week.",'先週風邪をひいた。',"Be careful not to catch a cold.",'風邪をひかないように気をつけて。'),
+ it('colloc',1,'make friends','','友達をつくる',"I made friends with people from Korea.",'韓国の人たちと友達になった。',"It's easy to make friends at this school.",'この学校では友達をつくりやすい。'),
+ it('colloc',1,'take a bus','','バスに乗る',"Let's take a bus to the mall.",'モールまでバスに乗ろう。',"I took a taxi because it was raining.",'雨だったのでタクシーに乗った。'),
+ it('colloc',1,'have a good time','','楽しく過ごす',"We had a good time at the beach.",'ビーチで楽しく過ごした。',"Have a good time!",'楽しんできてね！'),
+ it('colloc',1,'make a reservation','','予約する',"I'd like to make a reservation for two.",'2名で予約したいのですが。',"Did you make a reservation?",'予約はした？'),
+ it('colloc',1,'pay attention','','注意を払う',"Please pay attention.",'よく聞いてください。',"I wasn't paying attention.",'ちゃんと聞いていなかった。'),
+ it('colloc',2,'make progress','','進歩する、上達する',"You're making good progress.",'順調に上達しているね。',"I made a lot of progress in speaking.",'スピーキングがかなり上達した。'),
+ it('colloc',2,'make a decision','','決断する',"I need to make a decision by Friday.",'金曜日までに決めなければならない。',"It was a hard decision to make.",'難しい決断だった。'),
+ it('colloc',2,'strong coffee','','濃いコーヒー',"I like strong coffee.",'濃いコーヒーが好きです。',"This coffee is too strong for me.",'このコーヒーは私には濃すぎる。'),
+ it('colloc',2,'keep in touch','','連絡を取り合う',"Let's keep in touch.",'連絡を取り合おうね。',"We still keep in touch after ten years.",'10年たった今も連絡を取り合っている。'),
+ it('colloc',2,'save money','','お金をためる、節約する',"I'm saving money for my trip.",'旅行のためにお金をためています。',"Cooking at home saves money.",'自炊はお金の節約になる。'),
+ it('colloc',2,'do your best','','最善を尽くす',"Just do your best.",'とにかくベストを尽くして。',"I did my best on the test.",'テストでベストを尽くした。'),
+ it('colloc',2,'make an effort','','努力する',"I'm making an effort to speak more.",'もっと話すように努力しています。',"She made an effort to remember everyone's names.",'彼女はみんなの名前を覚えようと努力した。'),
+ it('colloc',3,'gain experience','','経験を積む',"I want to gain experience working abroad.",'海外で働く経験を積みたい。',"I gained a lot of experience at my last job.",'前の仕事でたくさんの経験を積んだ。'),
+ it('colloc',3,'meet a deadline','','締め切りに間に合わせる',"We need to meet the deadline.",'締め切りに間に合わせなければ。',"I worked all night to meet the deadline.",'締め切りに間に合わせるため徹夜した。'),
+ it('colloc',3,'raise a question','','疑問を投げかける',"This raises an important question.",'これは重要な疑問を投げかけている。',"She raised a good question in class.",'彼女は授業でいい質問をした。'),
+ it('colloc',3,'bitter cold','','厳しい寒さ',"It was bitter cold in Toronto.",'トロントは厳しい寒さだった。',"I'm not used to the bitter cold.",'厳しい寒さに慣れていない。'),
+ it('colloc',3,'heavy traffic','','ひどい渋滞',"We were stuck in heavy traffic.",'ひどい渋滞につかまった。',"There's always heavy traffic at this time.",'この時間はいつもひどく混んでいる。'),
+ it('colloc',4,'draw a conclusion','','結論を導く',"It's too early to draw a conclusion.",'結論を出すのはまだ早い。',"What conclusion did you draw from the data?",'データからどんな結論を導いた？'),
+ it('colloc',4,'take responsibility','','責任をとる',"I'll take responsibility for the mistake.",'その間違いの責任は私がとります。',"You need to take responsibility for your actions.",'自分の行動に責任をもたなければならない。'),
+ it('colloc',4,'conduct research','','研究・調査を行う',"We conducted research on student needs.",'学生のニーズについて調査を行った。',"She is conducting research in the Philippines.",'彼女はフィリピンで研究を行っている。'),
+
+ it('idiom',1,'Take it easy.','','気楽にね／無理しないで',"Take it easy. You'll be fine.",'気楽にね。大丈夫だよ。',"I'm going to take it easy this weekend.",'今週末はのんびりするつもり。'),
+ it('idiom',2,'call it a day','','今日はこれで終わりにする',"Let's call it a day.",'今日はこれで終わりにしよう。',"I'm tired. I'm going to call it a day.",'疲れた。今日はもう終わりにする。'),
+ it('idiom',2,'on the same page','','同じ認識でいる',"Let's make sure we're on the same page.",'認識がそろっているか確認しよう。',"We're not on the same page about the plan.",'計画について認識がずれている。'),
+ it('idiom',2,'cost an arm and a leg','','とても高くつく',"That bag cost an arm and a leg.",'あのバッグはものすごく高かった。',"Living in Sydney costs an arm and a leg.",'シドニーでの生活はとても高くつく。'),
+ it('idiom',2,'get the hang of','','〜のコツをつかむ',"You'll get the hang of it.",'すぐにコツがつかめるよ。',"I'm getting the hang of the coffee machine.",'コーヒーマシンのコツがつかめてきた。'),
+ it('idiom',2,'in the middle of nowhere','','へんぴな場所で',"The resort was in the middle of nowhere.",'そのリゾートはへんぴな所にあった。',"We got lost in the middle of nowhere.",'何もない所で道に迷った。'),
+ it('idiom',3,'see eye to eye','','意見が一致する',"We don't always see eye to eye.",'私たちはいつも意見が合うわけではない。',"My parents and I finally saw eye to eye.",'両親とようやく意見が一致した。'),
+ it('idiom',3,'the last straw','','我慢の限界（最後の一押し）',"That was the last straw.",'それで我慢の限界だった。',"Being late again was the last straw.",'また遅刻したのが決定打になった。'),
+ it('idiom',3,'beat around the bush','','遠回しに言う',"Stop beating around the bush.",'遠回しに言うのはやめて。',"He didn't beat around the bush and told me the truth.",'彼は遠回しにせず本当のことを言った。'),
+ it('idiom',3,'out of the blue','','突然、思いがけず',"She called me out of the blue.",'彼女から突然電話があった。',"The idea came out of the blue.",'そのアイデアは突然ひらめいた。'),
+ it('idiom',3,'keep an eye on','','〜から目を離さない、見張る',"Can you keep an eye on my bag?",'カバンを見ていてもらえる？',"Keep an eye on the time.",'時間に気をつけて。'),
+ it('idiom',4,'a blessing in disguise','','不幸に見えて実は幸運なこと',"Missing the flight was a blessing in disguise.",'飛行機に乗り遅れたのは、結果的に幸運だった。',"Losing that job was a blessing in disguise.",'あの仕事を失ったのは、かえって良かった。'),
+ it('idiom',4,'cut corners','','手を抜く',"Don't cut corners on safety.",'安全面で手を抜かないで。',"The company cut corners to save money.",'その会社はお金を節約するために手を抜いた。'),
+ it('idiom',4,'go the extra mile','','期待以上の努力をする',"She always goes the extra mile for customers.",'彼女はいつもお客さんのために一歩踏み込んだ努力をする。',"Go the extra mile, and people will notice.",'もうひと頑張りすれば、人は気づいてくれる。'),
+
+ it('pattern',0,"Can I ~?",'','～してもいいですか？',"Can I sit here?",'ここに座ってもいいですか？',"Can I use the bathroom?",'お手洗いを使ってもいいですか？'),
+ it('pattern',0,"Do you have ~?",'','～はありますか？',"Do you have a smaller size?",'もっと小さいサイズはありますか？',"Do you have Wi-Fi here?",'ここにWi-Fiはありますか？'),
+ it('pattern',0,"I want to ~",'','～したい',"I want to go to the beach.",'ビーチに行きたい。',"I want to improve my English.",'英語を上達させたい。'),
+ it('pattern',0,"Let's ~",'','～しよう',"Let's eat lunch together.",'一緒にお昼を食べよう。',"Let's take a break.",'休憩しよう。'),
+ it('pattern',1,"How about ~?",'','～はどう？',"How about going to the mall?",'モールに行くのはどう？',"How about tomorrow?",'明日はどう？'),
+ it('pattern',1,"Do you mind if I ~?",'','～してもかまいませんか？',"Do you mind if I open the window?",'窓を開けてもかまいませんか？',"Do you mind if I sit here?",'ここに座ってもかまいませんか？'),
+ it('pattern',1,"I'm thinking of ~ing",'','～しようかと考えている',"I'm thinking of extending my stay.",'滞在を延長しようかと考えています。',"I'm thinking of going to Bohol this weekend.",'今週末ボホールに行こうかと考えています。'),
+ it('pattern',1,"Is it OK to ~?",'','～しても大丈夫ですか？',"Is it OK to pay by card?",'カードで払っても大丈夫ですか？',"Is it OK to drink the tap water?",'水道水を飲んでも大丈夫ですか？'),
+ it('pattern',1,"I'm used to ~ing",'','～するのに慣れている',"I'm used to getting up early.",'早起きには慣れています。',"I'm not used to the heat yet.",'まだ暑さに慣れていない。'),
+ it('pattern',2,"It takes ~ to ...",'','…するのに～かかる',"It takes 30 minutes to get to the mall.",'モールまで30分かかります。',"How long does it take to get there?",'そこまでどれくらいかかる？'),
+ it('pattern',2,"I'm not sure if ~",'','～かどうか分からない',"I'm not sure if this is correct.",'これが正しいかどうか分かりません。',"I'm not sure if I can come.",'行けるかどうか分からない。'),
+ it('pattern',2,"The more ~, the more ...",'','～すればするほど…',"The more you practice, the better you get.",'練習すればするほど上手になる。',"The more I learn, the more I want to know.",'学べば学ぶほど、もっと知りたくなる。'),
+ it('pattern',2,"I used to ~",'','以前は～していた',"I used to be shy.",'以前は人見知りだった。',"I used to work at a café.",'以前カフェで働いていた。'),
+ it('pattern',2,"You should ~",'','～したほうがいい',"You should see a doctor.",'医者に診てもらったほうがいい。',"You should try the mango shake.",'マンゴーシェイクを飲んでみるべきだよ。'),
+ it('pattern',3,"I should have ~",'','～すればよかった',"I should have studied harder.",'もっと勉強すればよかった。',"I should have brought an umbrella.",'傘を持ってくればよかった。'),
+ it('pattern',3,"It's worth ~ing",'','～する価値がある',"This book is worth reading.",'この本は読む価値がある。',"Is it worth visiting Oslob?",'オスロブは行く価値がある？'),
+ it('pattern',3,"What if ~?",'','もし～だったらどうする？',"What if it rains tomorrow?",'もし明日雨が降ったらどうする？',"What if we take a taxi instead?",'代わりにタクシーにしたらどう？'),
+ it('pattern',4,"No matter what ~",'','たとえ何が～でも',"No matter what happens, don't give up.",'何が起きても、あきらめないで。',"No matter what you say, I'm going.",'あなたが何と言おうと、私は行く。'),
+ it('pattern',4,"It wasn't until ~ that ...",'','～して初めて…した',"It wasn't until I came to Cebu that I started speaking English.",'セブに来て初めて英語を話し始めた。',"It wasn't until later that I understood.",'あとになってようやく分かった。')
 ];
 const INTERVIEW = [
  {id:'iv:about',q:"Tell me about yourself.",ja:'自己紹介をしてください。',tip:'名前よりも「どんな人で、何ができるか」を30秒ほどで。仕事の経験を1つ入れる。',a:"I'm Yuki from Japan. I worked at a café for two years, so I'm used to busy shifts. I'm friendly and I learn quickly.",aja:'日本から来たユキです。カフェで2年間働いたので、忙しいシフトには慣れています。人と話すのが好きで、覚えるのが早いです。'},
@@ -627,6 +838,80 @@ const SCENE_DL = {
   ['mango',"Of course. You paid last time.",'もちろん。前回払ってくれたし。']]},
 };
 
+const SC=(scene,lv,en,ja,ex,dl)=>{ ITEMS.push(it('scene',lv,en,'',ja,ex[0],ex[1],ex[2],ex[3],scene)); SCENE_DL['scene:'+en]={roles:dl[0],lines:dl[1]}; };
+const FR={coco:'友達',mango:'あなた'};
+SC('初対面',0,"Nice to meet you.",'はじめまして。',["Hi, I'm Yuki. Nice to meet you.",'こんにちは、ユキです。はじめまして。',"Nice to meet you too!",'こちらこそ、はじめまして！'],[{coco:'クラスメート',mango:'あなた'},[
+ ['coco',"Hi, I'm Coco.",'こんにちは、ココです。'],['mango',"I'm Mango. [[Nice to meet you.|はじめまして。]]",'マンゴーです。はじめまして。'],['coco',"Nice to meet you too! Is this your first day?",'こちらこそ！今日が初日？']]]);
+SC('初対面',0,"What do you do?",'お仕事は何をしていますか？',["So, what do you do?",'それで、お仕事は何を？',"I'm a nurse. What do you do?",'看護師です。あなたは何を？'],[{coco:'クラスメート',mango:'あなた'},[
+ ['coco',"[[What do you do?|お仕事は何をしているの？]]",'お仕事は何をしているの？'],['mango',"I'm a student. I study economics.",'学生です。経済学を勉強しています。'],['coco',"Oh, nice! I'm an office worker.",'へえ、いいね！私は会社員だよ。']]]);
+SC('初対面',1,"What brings you here?",'ここに来たきっかけは？',["So, what brings you to Cebu?",'それで、セブに来たきっかけは？',"What brings you to this school?",'この学校に来たきっかけは？'],[{coco:'クラスメート',mango:'あなた'},[
+ ['coco',"[[What brings you to Cebu?|セブに来たきっかけは？]]",'セブに来たきっかけは？'],['mango',"I want to work in Australia next year, so I'm studying English first.",'来年オーストラリアで働きたいので、まず英語を勉強しています。'],['coco',"That's exciting! Good luck.",'わくわくするね！がんばって。']]]);
+SC('買い物',0,"How much is this?",'これはいくらですか？',["Excuse me, how much is this?",'すみません、これはいくらですか？',"How much is this T-shirt?",'このTシャツはいくらですか？'],[{coco:'店員',mango:'あなた'},[
+ ['mango',"Excuse me, [[how much is this?|これはいくらですか？]]",'すみません、これはいくらですか？'],['coco',"It's 350 pesos.",'350ペソです。'],['mango',"OK, I'll take it.",'じゃあ、それにします。']]]);
+SC('買い物',0,"I'm just looking.",'見ているだけです。',["No, thanks. I'm just looking.",'いえ、大丈夫です。見ているだけです。',"I'm just looking, thank you.",'見ているだけです、ありがとう。'],[{coco:'店員',mango:'あなた'},[
+ ['coco',"Hi! Can I help you find something?",'いらっしゃいませ！何かお探しですか？'],['mango',"[[I'm just looking,|見ているだけです、]] thanks.",'見ているだけです、ありがとう。'],['coco',"Sure. Let me know if you need anything.",'かしこまりました。何かあれば声をかけてください。']]]);
+SC('買い物',1,"Can I get a discount?",'安くしてもらえますか？',["If I buy two, can I get a discount?",'2つ買ったら、安くしてもらえますか？',"Can I get a student discount?",'学生割引はありますか？'],[{coco:'お店の人',mango:'あなた'},[
+ ['mango',"These are nice. [[Can I get a discount|安くしてもらえますか]] if I buy three?",'これいいですね。3つ買ったら安くしてもらえますか？'],['coco',"OK, 500 pesos for three.",'いいよ、3つで500ペソ。'],['mango',"Deal! Thank you.",'それで！ありがとう。']]]);
+SC('車内や乗り物',0,"Please take me to ~.",'～までお願いします。',["Please take me to the airport.",'空港までお願いします。',"Please take me to this address.",'この住所までお願いします。'],[{coco:'運転手',mango:'あなた'},[
+ ['coco',"Where to?",'どちらまで？'],['mango',"[[Please take me to|～までお願いします]] Ayala Center.",'アヤラ・センターまでお願いします。'],['coco',"Sure. It'll take about twenty minutes.",'はい。20分くらいかかります。']]]);
+SC('車内や乗り物',1,"Does this bus go to ~?",'このバスは～に行きますか？',["Does this bus go to SM City?",'このバスはSMシティに行きますか？',"Excuse me, does this jeepney go to Mandaue?",'すみません、このジプニーはマンダウエに行きますか？'],[{coco:'運転手',mango:'あなた'},[
+ ['mango',"Excuse me, [[does this bus go to|このバスは～に行きますか]] the airport?",'すみません、このバスは空港に行きますか？'],['coco',"No, you need to take the next one.",'いいえ、次のに乗ってください。'],['mango',"Got it. Thanks.",'分かりました。ありがとう。']]]);
+SC('車内や乗り物',1,"Could you stop here?",'ここで止めてもらえますか？',["Could you stop here, please?",'ここで止めていただけますか？',"Could you stop in front of that building?",'あの建物の前で止めてもらえますか？'],[{coco:'運転手',mango:'あなた'},[
+ ['mango',"[[Could you stop here?|ここで止めてもらえますか？]]",'ここで止めてもらえますか？'],['coco',"Sure. That's 180 pesos.",'はい。180ペソです。'],['mango',"Here you go. Keep the change.",'どうぞ。おつりは結構です。']]]);
+SC('身体と健康、病気',0,"I have a headache.",'頭が痛いです。',["I have a headache, so I'll go to bed early.",'頭が痛いので早く寝ます。',"I have a terrible headache.",'ひどく頭が痛いです。'],[{coco:'先生',mango:'あなた'},[
+ ['coco',"Are you OK? You look pale.",'大丈夫？顔色が悪いよ。'],['mango',"[[I have a headache.|頭が痛いんです。]]",'頭が痛いんです。'],['coco',"You should rest. Do you need some medicine?",'休んだほうがいいよ。薬はいる？']]]);
+SC('身体と健康、病気',1,"I've had a fever since yesterday.",'昨日から熱があります。',["I've had a fever since yesterday morning.",'昨日の朝から熱があります。',"I've had a cough since last week.",'先週からせきが出ています。'],[{coco:'医者',mango:'あなた'},[
+ ['coco',"What seems to be the problem?",'どうされましたか？'],['mango',"[[I've had a fever since yesterday.|昨日から熱があります。]]",'昨日から熱があります。'],['coco',"Let me check your temperature.",'体温を測りましょう。']]]);
+SC('身体と健康、病気',1,"Get well soon.",'お大事に／早く良くなってね。',["I heard you're sick. Get well soon!",'具合が悪いって聞いたよ。早く良くなってね！',"Get well soon. Let me know if you need anything.",'お大事に。何かいるものがあったら言ってね。'],[{coco:'友達',mango:'あなた'},[
+ ['coco',"I won't come to class today. I have a cold.",'今日は授業に行かないね。風邪をひいたんだ。'],['mango',"Oh no! [[Get well soon.|早く良くなってね。]]",'えー！早く良くなってね。'],['coco',"Thanks. I'll see you tomorrow.",'ありがとう。また明日ね。']]]);
+SC('感謝する時',0,"Thank you so much.",'本当にありがとう。',["Thank you so much for your help.",'助けてくれて本当にありがとう。',"Thank you so much for everything.",'いろいろと本当にありがとう。'],[{coco:'友達',mango:'あなた'},[
+ ['coco',"Here's your phone. You left it in the classroom.",'はい、携帯。教室に忘れてたよ。'],['mango',"Oh! [[Thank you so much.|本当にありがとう。]]",'あっ！本当にありがとう。'],['coco',"No problem.",'どういたしまして。']]]);
+SC('感謝する時',1,"I really appreciate it.",'本当に感謝しています。',["Thanks for waiting. I really appreciate it.",'待ってくれてありがとう。本当に感謝しています。',"I really appreciate your help.",'助けてくれて本当に感謝しています。'],[{coco:'先生',mango:'あなた'},[
+ ['coco',"I checked your essay. Here are some notes.",'エッセイを見たよ。コメントを書いておいたね。'],['mango',"Thank you. [[I really appreciate it.|本当に感謝しています。]]",'ありがとうございます。本当に感謝しています。'],['coco',"You're welcome. Keep it up!",'どういたしまして。その調子で！']]]);
+SC('感謝する時',2,"I owe you one.",'借りができたね／恩に着るよ。',["Thanks for covering my shift. I owe you one.",'シフトを代わってくれてありがとう。恩に着るよ。',"You saved me. I owe you one!",'助かった。借りができたね！'],[{coco:'友達',mango:'あなた'},[
+ ['coco',"I printed your homework for you.",'宿題、印刷しておいたよ。'],['mango',"Really? Thanks! [[I owe you one.|恩に着るよ。]]",'本当？ありがとう！恩に着るよ。'],['coco',"Ha ha, buy me a coffee sometime.",'はは、今度コーヒーおごってね。']]]);
+SC('道案内',0,"Where is the restroom?",'お手洗いはどこですか？',["Excuse me, where is the restroom?",'すみません、お手洗いはどこですか？',"Where is the nearest restroom?",'いちばん近いお手洗いはどこですか？'],[{coco:'店員',mango:'あなた'},[
+ ['mango',"Excuse me, [[where is the restroom?|お手洗いはどこですか？]]",'すみません、お手洗いはどこですか？'],['coco',"It's at the end of the hall, on the left.",'廊下の突き当たりの左です。'],['mango',"Thank you.",'ありがとう。']]]);
+SC('道案内',1,"How do I get to ~?",'～へはどう行けばいいですか？',["How do I get to the station?",'駅へはどう行けばいいですか？',"How do I get to IT Park from here?",'ここからITパークへはどう行けばいいですか？'],[{coco:'通行人',mango:'あなた'},[
+ ['mango',"Excuse me, [[how do I get to|～へはどう行けばいいですか]] the mall?",'すみません、モールへはどう行けばいいですか？'],['coco',"Go straight and turn right at the second corner.",'まっすぐ行って、2つ目の角を右です。'],['mango',"Is it far from here?",'ここから遠いですか？'],['coco',"No, it's about a five-minute walk.",'いいえ、歩いて5分くらいです。']]]);
+SC('道案内',1,"Is it within walking distance?",'歩いて行ける距離ですか？',["Is the beach within walking distance?",'ビーチは歩いて行ける距離ですか？',"It's within walking distance of the school.",'学校から歩いて行ける距離です。'],[{coco:'学校のスタッフ',mango:'あなた'},[
+ ['mango',"I want to go to the supermarket. [[Is it within walking distance?|歩いて行ける距離ですか？]]",'スーパーに行きたいんです。歩いて行ける距離ですか？'],['coco',"Yes, it's about ten minutes on foot.",'はい、歩いて10分くらいです。'],['mango',"Great, thanks.",'よかった、ありがとう。']]]);
+SC('待ち合わせ',0,"Where should we meet?",'どこで待ち合わせる？',["Where should we meet tomorrow?",'明日はどこで待ち合わせる？',"Where should we meet? In the lobby?",'どこで会う？ロビー？'],[{coco:'友達',mango:'あなた'},[
+ ['coco',"Let's go to the beach on Saturday!",'土曜日にビーチに行こうよ！'],['mango',"Sure! [[Where should we meet?|どこで待ち合わせる？]]",'いいね！どこで待ち合わせる？'],['coco',"How about the school entrance at nine?",'9時に学校の入り口はどう？']]]);
+SC('待ち合わせ',1,"I'm running a bit late.",'少し遅れそう。',["Sorry, I'm running a bit late.",'ごめん、少し遅れそう。',"I'm running about ten minutes late.",'10分くらい遅れそう。'],[{coco:'友達',mango:'あなた'},[
+ ['mango',"Hi, sorry. [[I'm running a bit late.|少し遅れそう。]]",'もしもし、ごめん。少し遅れそう。'],['coco',"No problem. How long will you be?",'大丈夫。どれくらいかかる？'],['mango',"About ten minutes.",'10分くらい。']]]);
+SC('待ち合わせ',1,"I'm here.",'着いたよ。',["I'm here. Where are you?",'着いたよ。どこにいる？',"I'm here at the entrance.",'入り口に着いたよ。'],[{coco:'友達',mango:'あなた'},[
+ ['mango',"[[I'm here.|着いたよ。]] Where are you?",'着いたよ。どこにいる？'],['coco',"I'm in front of the coffee shop.",'コーヒー屋さんの前にいるよ。'],['mango',"OK, I see you!",'あ、見えた！']]]);
+SC('旅行',0,"I'd like to check in.",'チェックインをお願いします。',["Hi, I'd like to check in. My name is Yuki.",'こんにちは、チェックインをお願いします。ユキです。',"Can I check in early?",'早めにチェックインできますか？'],[{coco:'ホテルのスタッフ',mango:'あなた'},[
+ ['mango',"Hi, [[I'd like to check in.|チェックインをお願いします。]]",'こんにちは、チェックインをお願いします。'],['coco',"Sure. May I see your passport?",'かしこまりました。パスポートを拝見できますか？'],['mango',"Here you are.",'はい、どうぞ。']]]);
+SC('旅行',1,"Is breakfast included?",'朝食は付いていますか？',["Is breakfast included in the price?",'朝食は料金に含まれていますか？',"Breakfast is included.",'朝食付きです。'],[{coco:'ホテルのスタッフ',mango:'あなた'},[
+ ['mango',"[[Is breakfast included?|朝食は付いていますか？]]",'朝食は付いていますか？'],['coco',"Yes, it's served from six to ten on the first floor.",'はい、1階で6時から10時までです。'],['mango',"Great, thank you.",'よかった、ありがとう。']]]);
+SC('旅行',1,"What do you recommend?",'おすすめは何ですか？',["What do you recommend around here?",'このあたりのおすすめは何ですか？',"What do you recommend on the menu?",'メニューのおすすめは何ですか？'],[{coco:'ツアーガイド',mango:'あなた'},[
+ ['mango',"We have one free day. [[What do you recommend?|おすすめは何ですか？]]",'1日空いているんです。おすすめは何ですか？'],['coco',"You should go island hopping. The water is beautiful.",'アイランドホッピングに行くといいですよ。海がきれいです。'],['mango',"Sounds great!",'いいですね！']]]);
+SC('天気',0,"It's so hot today.",'今日はすごく暑いね。',["It's so hot today. Let's get some ice cream.",'今日はすごく暑いね。アイスを食べよう。',"It's so hot today, isn't it?",'今日はすごく暑いですね。'],[{coco:'友達',mango:'あなた'},[
+ ['mango',"[[It's so hot today.|今日はすごく暑いね。]]",'今日はすごく暑いね。'],['coco',"I know. Let's stay inside.",'だよね。中にいよう。'],['mango',"Good idea.",'いいね。']]]);
+SC('天気',1,"It looks like it's going to rain.",'雨が降りそうだね。',["It looks like it's going to rain. Take an umbrella.",'雨が降りそう。傘を持って行って。',"It looks like it's going to rain this afternoon.",'午後は雨が降りそうだ。'],[{coco:'友達',mango:'あなた'},[
+ ['coco',"[[It looks like it's going to rain.|雨が降りそうだね。]]",'雨が降りそうだね。'],['mango',"Oh no. I don't have an umbrella.",'うそ。傘を持ってないよ。'],['coco',"You can share mine.",'私の傘に入りなよ。']]]);
+SC('天気',1,"What's the weather like in ~?",'～の天気はどう？',["What's the weather like in Japan now?",'今、日本の天気はどう？',"What's the weather like in Sydney in winter?",'シドニーの冬の天気はどんな感じ？'],[{coco:'先生',mango:'あなた'},[
+ ['coco',"[[What's the weather like in|～の天気はどう]] Tokyo now?",'今、東京の天気はどう？'],['mango',"It's getting cold. It's about ten degrees.",'寒くなってきています。10度くらいです。'],['coco',"Wow, that's cold for me!",'わあ、私には寒いな！']]]);
+SC('電話',1,"Can I speak to ~?",'～さんをお願いできますか？',["Hello, can I speak to the manager?",'もしもし、店長さんをお願いできますか？',"Can I speak to someone in the office?",'事務所の方とお話しできますか？'],[{coco:'学校の受付',mango:'あなた'},[
+ ['coco',"Hello, this is the school office.",'はい、学校の事務所です。'],['mango',"Hi, [[can I speak to|～さんをお願いできますか]] the student manager?",'こんにちは、学生担当の方をお願いできますか？'],['coco',"Just a moment, please.",'少々お待ちください。']]]);
+SC('電話',1,"Sorry, you're breaking up.",'ごめん、声が途切れてる。',["Sorry, you're breaking up. Can you hear me?",'ごめん、声が途切れてる。聞こえる？',"You're breaking up. I'll call you back.",'声が途切れてるね。かけ直すよ。'],[{coco:'友達',mango:'あなた'},[
+ ['coco',"So tomorrow we'll... at...",'それで明日は…で…'],['mango',"[[Sorry, you're breaking up.|ごめん、声が途切れてる。]] Can you say that again?",'ごめん、声が途切れてる。もう一回言ってくれる？'],['coco',"Can you hear me now?",'今は聞こえる？']]]);
+SC('電話',2,"Could you ask him to call me back?",'折り返し電話をくれるよう伝えていただけますか？',["Could you ask her to call me back?",'彼女に折り返し電話をくれるよう伝えていただけますか？',"Please ask him to call me back when he's free.",'手が空いたら折り返し電話をくれるよう伝えてください。'],[{coco:'お店の人',mango:'あなた'},[
+ ['coco',"Sorry, the manager is out right now.",'すみません、店長は今外出しています。'],['mango',"OK. [[Could you ask him to call me back?|折り返し電話をくれるよう伝えていただけますか？]]",'分かりました。折り返し電話をくれるよう伝えていただけますか？'],['coco',"Sure. Can I have your name and number?",'はい。お名前と番号をいただけますか？']]]);
+SC('意見',1,"I think so too.",'私もそう思う。',["\"This class is really useful.\" \"I think so too.\"",'「この授業すごく役に立つね」「私もそう思う」',"I think so too. Let's do it.",'私もそう思う。そうしよう。'],[{coco:'クラスメート',mango:'あなた'},[
+ ['coco',"I think we should start the project early.",'プロジェクトは早めに始めたほうがいいと思う。'],['mango',"[[I think so too.|私もそう思う。]]",'私もそう思う。'],['coco',"Great. Let's meet after class.",'よかった。授業のあとに集まろう。']]]);
+SC('意見',2,"I see your point, but ~",'言いたいことは分かるけど、～',["I see your point, but I think it's too expensive.",'言いたいことは分かるけど、高すぎると思う。',"I see your point, but let's think about it again.",'言いたいことは分かるけど、もう一度考えよう。'],[{coco:'クラスメート',mango:'あなた'},[
+ ['coco',"Let's take a taxi. It's faster.",'タクシーにしよう。速いから。'],['mango',"[[I see your point, but|言いたいことは分かるけど]] the bus is much cheaper.",'言いたいことは分かるけど、バスのほうがずっと安いよ。'],['coco',"True. OK, let's take the bus.",'確かに。じゃあバスにしよう。']]]);
+SC('意見',2,"It depends.",'場合によるね。',["\"Is Cebu expensive?\" \"It depends.\"",'「セブって物価高い？」「場合によるね」',"It depends on the school.",'学校によるよ。'],[{coco:'友達',mango:'あなた'},[
+ ['coco',"Is it better to study for one month or three months?",'1か月と3か月、どっちで勉強するのがいい？'],['mango',"[[It depends.|場合によるね。]] What's your goal?",'場合によるね。目標は何？'],['coco',"I want to pass IELTS.",'IELTSに受かりたいんだ。']]]);
+SC('褒める時',0,"Good job!",'よくやったね！',["Good job on your presentation!",'発表、よくやったね！',"You passed? Good job!",'受かったの？よくやったね！'],[{coco:'先生',mango:'あなた'},[
+ ['mango',"I got 80 points on the test!",'テストで80点取ったよ！'],['coco',"[[Good job!|よくやったね！]] Your hard work paid off.",'よくやったね！努力が実ったね。'],['mango',"Thank you!",'ありがとう！']]]);
+SC('褒める時',1,"I like your ~.",'その～、いいね。',["I like your shirt.",'そのシャツいいね。',"I like your idea.",'そのアイデアいいね。'],[{coco:'友達',mango:'あなた'},[
+ ['mango',"[[I like your|その～、いいね]] bag. Where did you get it?",'そのバッグいいね。どこで買ったの？'],['coco',"Thanks! I got it at the night market.",'ありがとう！ナイトマーケットで買ったんだ。'],['mango',"I want to go there too.",'私も行きたい。']]]);
+SC('褒める時',1,"Your English is getting better.",'英語がうまくなってきたね。',["Your English is getting better every week.",'毎週、英語がうまくなってきているね。',"Your pronunciation is getting better.",'発音が良くなってきたね。'],[{coco:'先生',mango:'あなた'},[
+ ['coco',"[[Your English is getting better.|英語がうまくなってきたね。]]",'英語がうまくなってきたね。'],['mango',"Really? Thank you! I've been practicing a lot.",'本当ですか？ありがとうございます！たくさん練習しています。'],['coco',"It shows. Keep going!",'よく分かるよ。その調子！']]]);
 const GEN_SCENES = ['あいさつ','初対面','食べる時','カジュアル','車内や乗り物','買い物','恋愛','好き嫌い','身体と健康、病気','感情','励ます時','怒る時','待ち合わせ','感謝する時','アドバイス','褒める時','言い訳をする時','旅行','性格','フォーマル','パソコン、スマホ','仕事、ビジネス','意見','電話','天気','注意する時','接客','道案内','スポーツ','スラング'];
 const GRAMMAR = [
  {id:'gr:be',lv:0,title:'be動詞（am / is / are）',body:['「〜です」「〜にいます」を表すのがbe動詞です。主語によって形が変わります。','I には am、you と複数には are、he・she・it と単数には is を使います。','否定は be動詞のあとに not（I\'m not / isn\'t / aren\'t）。疑問文は be動詞を前に出します（Are you ~?）。'],
@@ -895,7 +1180,8 @@ const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 const TIER_NAME = {general:'一般（面談前）', counseled:'面談実施者（お試し）', customer:'成約者'};
 const TRIAL_DAYS = 30;
 const LIMIT = {general:{ask:0,vault:0}, counseled:{ask:3,vault:30}, customer:{ask:20,vault:Infinity}};
-const CODES = {MENDAN:'counseled', SEIYAKU:'customer'};
+const CODES = {'MANGO4821':'counseled', 'COCO9375':'customer'};
+const DEBUG = /[?&]debug\b/.test(location.search);
 const STUDY_SCENES = ['授業中','学校生活','寮・生活'];
 function trialLeft(){ if(!S.trialStart) return TRIAL_DAYS; return TRIAL_DAYS - Math.floor((Date.now()-new Date(S.trialStart+'T00:00:00').getTime())/86400000); }
 function tier(){ if(S.tier==='counseled' && trialLeft()<=0) return 'general'; return S.tier||'general'; }
@@ -937,7 +1223,7 @@ function shell(){
   const FEAT = {ask:'ask',vault:'vault',talk:'talk',resume:'resume'};
   const lk = v=> FEAT[v] && !feature(FEAT[v]) ? `<span class="lockmark" aria-label="鍵">${I.lock}</span>` : '';
   const side =`<nav class="side" aria-label="メニュー">
-    <button class="brand" data-act="go" data-v="home">${mango(34)}<span>ココマンゴー英語<small>試作2（名前は仮）</small></span></button>
+    <button class="brand" data-act="go" data-v="home">${mango(34)}<span>ココマンゴー英語<small>ベータ版（名前は仮）</small></span></button>
     ${NAV.filter(n=>n[0]!=='ask').map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
     <div class="grp">ほかの機能</div>
     ${NAV2.map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
@@ -945,7 +1231,7 @@ function shell(){
     <button class="ask-cta" data-act="go" data-v="ask">${I.chat}<span>言えなかった表現を<br>AIに聞く</span></button>
     ${producedBy('side-pb')}
   </nav>`;
-  const top = `<header class="top"><button class="brand" data-act="go" data-v="home">${mango(30)}<span>ココマンゴー英語<small>試作2（名前は仮）</small></span></button>
+  const top = `<header class="top"><button class="brand" data-act="go" data-v="home">${mango(30)}<span>ココマンゴー英語<small>ベータ版（名前は仮）</small></span></button>
     <div class="top-links"><button class="icon-btn" data-act="go" data-v="guide">手引書</button><button class="icon-btn" data-act="go" data-v="me">マイページ</button></div></header>`;
   const tab = `<nav class="tabbar" aria-label="メインメニュー">${NAV.map(n=> n[0]==='ask'
      ? `<button class="ask ${R.v==='ask'?'on':''}" data-act="go" data-v="ask"><span class="bubble">${n[2]}</span>${n[1]}</button>`
@@ -978,13 +1264,12 @@ const V = {};
 V.welcome = ()=>`<div style="padding-top:8vh">
   <div class="row" style="gap:4px">${coco(84)}${mango(84)}</div>
   <h1>留学で「言えなかった」を、次は言えるように。</h1>
-  <p class="muted">フィリピン留学の前と留学中に使う英語アプリの試作です。ココ（先生役）とマンゴー（一緒に学ぶ仲間）が案内します。キャラクターの名前と絵は仮です。</p>
+  <p class="muted">フィリピン留学の前と留学中に使う英語アプリのベータ版です。ココ（先生役）とマンゴー（一緒に学ぶ仲間）が案内します。キャラクターの名前と絵は仮です。</p>
   <div class="panel stack" style="margin-top:16px">
     <div><label class="f" for="w-name">ニックネーム</label><input type="text" id="w-name" placeholder="例: ユキ" autocomplete="nickname"></div>
     <div><label class="f" for="w-code">招待コード（面談・成約のときにお渡しします）</label><input type="text" id="w-code" placeholder="お持ちでなければ空欄のまま"></div>
-    <p class="muted small" style="margin:0">試作用のコード: 空欄＝一般（面談前）、MENDAN＝面談実施者（${TRIAL_DAYS}日のお試し）、SEIYAKU＝成約者。</p>
     <button class="btn primary" data-act="login">はじめる</button>
-    <p class="muted small">試作では、ニックネームと学習記録をこの端末の中にだけ保存します。本番は、メールアドレスかGoogleでログインし、招待した人だけが使えるようにします。</p>
+    <p class="muted small">ニックネームと学習記録は、この端末の中にだけ保存されます（まだログインはありません）。別の端末では引き継げず、ブラウザのデータを消すと記録も消えます。</p>
   </div>${producedBy('center')}</div>`;
 
 V.home = ()=>{
@@ -1048,7 +1333,7 @@ V.level = ()=>{
 const fmtD = d=>{ const [y,m,dd]=d.split('-'); return `${+m}/${+dd}`; };
 function growthHTML(){
   const H=S.lvHist||[];
-  if(!H.length) return `<div class="panel empty muted">診断を受けると、ここに日付ごとの記録とグラフが出ます。<br><button class="btn sm" style="margin-top:10px" data-act="lvsample">試作用：見本の記録を入れる</button></div>`;
+  if(!H.length) return `<div class="panel empty muted">診断を受けると、ここに日付ごとの記録とグラフが出ます。${DEBUG?`<br><button class="btn sm" style="margin-top:10px" data-act="lvsample">確認用：見本の記録を入れる</button>`:''}</div>`;
   const dates=[...new Set(H.map(h=>h.d))].sort();
   const ser = LQ_SERIES==='all' ? dates.map(d=>({d,v:lqOverall(d)})) : dates.map(d=>{const h=lqLatest(d)[LQ_SERIES];return h?{d,v:h.lv}:null}).filter(Boolean);
   const name = LQ_SERIES==='all'?'総合（受けたカテゴリーの平均）':lqCat(LQ_SERIES).name;
@@ -1181,7 +1466,7 @@ V.learn = ()=>{
   if(R.cat==='dialog'){
     groups = list.length ? `<h3 style="margin:4px 0 6px">フレーズ（${list.length}）</h3><div class="list">${list.map(liRow).join('')}</div>
       <p class="muted small" style="margin-top:10px">選ぶと、そのフレーズを使った2〜3往復の会話で覚えられます。本番は、1つの場面にフレーズ10〜20個を入れます。</p>`
-      : `<div class="panel empty">${coco(52)}<p style="margin-top:8px">「${esc(R.scene)}」は準備中です。試作では「あいさつ」と「食べる時」だけ中身があります。</p></div>`;
+      : `<div class="panel empty">${coco(52)}<p style="margin-top:8px">「${esc(R.scene)}」は準備中です。順番に追加していきます。</p></div>`;
   }
   if(R.cat==='wh'){
     const sims=list.filter(x=>x.steps), ph=list.filter(x=>x.cat==='wh'), iv=list.filter(x=>x.cat==='interview');
@@ -1190,7 +1475,7 @@ V.learn = ()=>{
       ${ph.length?`<h3 style="margin:14px 0 6px">フレーズ（${ph.length}）</h3><div class="list">${ph.map(liRow).join('')}</div>`:''}
       ${iv.length?`<h3 style="margin:14px 0 6px">よく聞かれる質問</h3><div class="list">${iv.map(liRow).join('')}</div>`:''}
       <p class="muted small" style="margin-top:10px">シミュレーションは、相手の言葉に返事を選んで進めます。フレーズは、短い会話の中で覚えます。</p>`
-      : `<div class="panel empty">${coco(52)}<p style="margin-top:8px">「${esc(R.whScene)}」は準備中です。試作では「仕事探し」「面接」「シフト・休みの連絡」「カフェの接客」だけ中身があります。</p></div>`;
+      : `<div class="panel empty">${coco(52)}<p style="margin-top:8px">「${esc(R.whScene)}」は準備中です。順番に追加していきます。</p></div>`;
   }
   if(R.cat==='grammar'){
     const gch=R.gch==null?'all':R.gch;
@@ -1310,7 +1595,7 @@ function grammarDetail(g){
     <div class="row" style="justify-content:space-between"><div>${lvTag(g.lv)}</div>${favBtn(g.id)}</div>
     <h2 style="margin-top:6px">${esc(g.title)}</h2>
     <div class="ja-audio"><button class="btn sm ${JA_PLAY===g.id?'on':''}" data-act="gaudio" data-id="${g.id}" aria-pressed="${JA_PLAY===g.id}">${I.speaker} ${JA_PLAY===g.id?'止める':'解説を聞く（日本語）'}</button>
-      <span class="muted small">試作は端末の読み上げです。本番は収録した音声を流します。</span></div>
+      <span class="muted small">今は端末の読み上げ機能の音声です。今後、聞き取りやすい音声に入れ替えます。</span></div>
     ${g.body.map(b=>`<p>${esc(b)}</p>`).join('')}
     <h3 style="margin-top:12px">例文</h3>
     ${g.ex.map(e=>`<div class="ex"><div class="row"><span class="e">${esc(e[0])}</span>${sayBtn(e[0])}</div><div class="muted">${esc(e[1])}</div></div>`).join('')}
@@ -1318,8 +1603,8 @@ function grammarDetail(g){
     ${g.quiz.map((q,qi)=>{const pk=st[qi];return `<div style="margin-bottom:12px"><p class="en">${esc(q.q)}</p>${q.o.map((o,i)=>`<button class="opt en ${pk!=null?(i===q.a?'right':(i===pk?'wrong':'')):''}" data-act="gq" data-id="${g.id}" data-q="${qi}" data-i="${i}" ${pk!=null?'disabled':''}>${esc(o)}</button>`).join('')}${pk!=null?`<p class="small">${pk===q.a?'正解！':'おしい。'} ${esc(q.why)}</p>`:''}</div>`}).join('')}
     <h3 style="margin-top:12px">自分のノート</h3>
     <textarea class="note" data-note="${g.id}" aria-label="${esc(g.title)}のノート" placeholder="授業で習ったこと、先生に言われたこと、自分がした間違いなどをメモ">${esc((S.notes||{})[g.id]||'')}</textarea>
-    <p class="muted small">書いた内容は自動で保存されます（試作ではこの端末だけ）。</p>
-    <p class="muted small">解説と例文は試作用に書いたもので、正式版は監修してから載せます。</p></div>`;
+    <p class="muted small">書いた内容は、この端末に自動で保存されます。</p>
+    <p class="muted small">ベータ版のため、解説や例文に間違いがあるかもしれません。見つけたら教えてください。</p></div>`;
 }
 function interviewDetail(v){
   return `<div class="panel detail">
@@ -1377,9 +1662,9 @@ V.ask = ()=>{
   <div class="panel stack">
     <form class="ask-box" data-form="ask"><input type="text" id="ask-q" value="${esc(ASK.q)}" placeholder="例: 「割り勘にしよう」は英語で？" aria-label="AIへの質問" data-autofocus><button class="btn primary" type="submit">聞く</button></form>
     <div class="chips">${Object.keys(AI_DEMO).map(k=>`<button class="chip" data-act="askdemo" data-q="${esc(k)}">${esc(k)}</button>`).join('')}</div>
-    <p class="muted small">名前や連絡先は書かないでください。試作では、上の4つの例だけ答えが出ます。単語1語を聞いたときは、答えに発音記号も出ます。本番はClaude（Haiku 5.5から）がその場で答えます。</p>
+    <p class="muted small">AI即答は準備中です。今は、上の4つの例だけ見本の答えが出ます（単語1語のときは発音記号つき）。名前や連絡先は書かないでください。</p>
   </div>
-  ${a? (a.none ? `<div class="panel" style="margin-top:12px"><p>試作のため、AIはまだつながっていません。本番では、ここに答え（表現・発音記号・解説・例文2つ）が出ます。</p><button class="btn sm" data-act="askmemo">質問をメモとして保存庫に入れる</button></div>`
+  ${a? (a.none ? `<div class="panel" style="margin-top:12px"><p>AI即答は準備中です。使えるようになると、ここに答え（表現・解説・例文2つ）が出ます。今は、質問をメモとして保存庫に入れておけます。</p><button class="btn sm" data-act="askmemo">質問をメモとして保存庫に入れる</button></div>`
    : `<div class="panel answer" style="margin-top:12px">
       <h3>英語の表現</h3><div class="row"><span class="word en" style="font-size:24px;font-weight:600">${esc(a.en)}</span>${sayBtn(a.en)}</div>${ipaHTML(a.en,a.ipa)}<p>${esc(a.ja)}</p>
       <h3>解説</h3><p>${esc(a.ex)}</p>
@@ -1487,13 +1772,13 @@ V.talk = ()=>{
     return `<h1>AI英会話</h1><p class="muted">場面を選んで、AIと英語で話します。終わると、直しの一覧が出て、保存庫に入れられます。</p>
     ${tier()==='counseled'?`<p class="tier note">お試し中: AI英会話は1回だけ体験できます。好きな場面を1つ選んでください。</p>`:''}
     <div class="home-grid">${TALKS.map(t=>`<button class="tile" data-act="talkstart" data-id="${t.id}"><div class="row">${CH[t.who].svg(44)}<div><b>${esc(t.name)}</b><span>相手: ${esc(t.role)}</span></div></div></button>`).join('')}</div>
-    <p class="note" style="margin-top:14px">試作では、AIの話す内容は台本です。本番はClaude（Haiku 5.5から）があなたの答えに合わせて話し、終わったあと、あなたの英語を直します。1日の回数か時間に上限を付けます。</p>`;
+    <p class="note" style="margin-top:14px">AI英会話は準備中です。今は見本として、AIの話す内容が決まった台本になっています。使えるようになると、AIがあなたの答えに合わせて話し、終わったあとに英語を直します。</p>`;
   }
   const t = TALKS.find(x=>x.id===TALK.id);
   return `<div class="row" style="justify-content:space-between"><h1 style="margin:0">${esc(t.name)}</h1><button class="btn sm" data-act="talkend">終わる</button></div>
   <p class="muted small">相手: ${esc(t.role)}（${CH[t.who].name}）</p>
   <div class="chat" style="margin-top:10px">${TALK.msgs.map(m=>m.ai?`<div class="row" style="align-items:flex-end;gap:6px">${CH[t.who].svg(36)}<div class="msg ai"><span class="en">${esc(m.t)}</span> ${sayBtn(m.t)}</div></div>`:`<div class="msg me en">${esc(m.t)}</div>`).join('')}</div>
-  ${TALK.done ? `<div class="panel" style="margin-top:14px"><h2 style="margin-top:0">ふりかえり</h2><p class="muted small">試作では、よくある直しの例を出しています。本番は、あなたの実際の英語を直します。</p>
+  ${TALK.done ? `<div class="panel" style="margin-top:14px"><h2 style="margin-top:0">ふりかえり</h2><p class="muted small">今は見本として、よくある直しの例を出しています。</p>
      ${t.fix.map(f=>{const inV=S.vault.some(v=>v.en===f[1]);return `<div class="ex"><div class="muted small"><s>${esc(f[0])}</s></div><div class="row"><span class="e">${esc(f[1])}</span>${sayBtn(f[1])}<button class="btn sm" data-act="exvault" data-en="${esc(f[1])}" data-ja="${esc(f[2])}" data-scene="AI英会話" ${inV?'disabled':''}>${inV?'保存済み':'保存庫に入れる'}</button></div><div class="small">${esc(f[2])}</div></div>`}).join('')}
      <div class="row" style="margin-top:8px"><button class="btn primary" data-act="talkstart" data-id="${t.id}">もう一度</button><button class="btn" data-act="talkend">場面を選び直す</button></div></div>`
    : `<form class="ask-box" data-form="talk" style="margin-top:14px"><input type="text" id="talk-in" placeholder="英語で答える" aria-label="あなたの答え" data-autofocus>${SR?`<button type="button" class="btn mic" data-act="talkmic" aria-label="話して入力">${I.mic}</button>`:''}<button class="btn primary" type="submit">送る</button></form>`}`;
@@ -1582,7 +1867,7 @@ V.resume = ()=>{
   const del=(list,i)=>`<button class="btn sm" data-act="cvdel" data-l="${list}" data-i="${i}">この欄を消す</button>`;
   const [ac,dc]=cvColors(r);
   return `<h1>履歴書をつくる</h1>
-  <p class="note">試作では、入力した内容と画像はこの端末にだけ保存されます。本物の個人情報は入れずに試してください。本番では、本人だけが見られて、いつでも削除できるようにします。</p>
+  <p class="note">入力した内容と画像は、この端末にだけ保存されます。ほかの人やサーバーには送られません。共用の端末では入力しないでください。</p>
   <div class="split cv-split" style="margin-top:14px">
    <div class="stack">
     <div class="panel"><h3>AIと一問一答で強みを見つける</h3>
@@ -1607,7 +1892,7 @@ V.resume = ()=>{
       ${r.showPersonal?f('dob','生年月日','例: March 13, 2000')+f('nationality','国籍','例: Japanese')+f('gender','性別（書かなくてもよい）','例: Female'):''}
     </div>
     <div class="panel"><h3>連絡先・自己紹介</h3>
-      ${f('phone','電話番号','例: 現地の番号（試作では仮のものを）')}${f('email','メールアドレス','例: 仮のアドレスで試してください')}${f('location','住んでいる地域（市まで）','例: Sydney, NSW')}
+      ${f('phone','電話番号','例: 現地の番号')}${f('email','メールアドレス','例: name@example.com')}${f('location','住んでいる地域（市まで）','例: Sydney, NSW')}
       ${f('about','自己紹介（About Me・英語）','例: Friendly and hardworking barista ...',1)}
       ${f('traits','人柄（Characteristics・1行に1つ）','例:\nHardworking\nPunctual',1)}
       ${f('skills','スキル・資格（Skills・1行に1つ）','例:\nCoffee making\nCustomer service',1)}
@@ -1749,7 +2034,7 @@ function puDetail(id){
   const title=PRON_PARTS.flatMap(p=>p[1]).find(u=>u[0]===id)[1], u=PRON_UNITS[id];
   const back=`<button class="btn sm back" data-act="puclose" style="display:inline-flex">← 単元の一覧に戻る</button>`;
   if(!puOk(id)) return `${back}<h1>${esc(title)}</h1>${upsell('発音講座のこの単元は、無料カウンセリング（面談）を受けると使えます。')}`;
-  if(!u) return `${back}<h1>${esc(title)}</h1><div class="panel empty muted">この単元は準備中です。試作では「/r/ と /l/」「th」「つながる音」の3つに中身があります。</div>`;
+  if(!u) return `${back}<h1>${esc(title)}</h1><div class="panel empty muted">この単元は準備中です。順番に追加していきます。</div>`;
   const q=u.pairs[PU.i], quizDone=PU.i>=u.pairs.length;
   return `${back}<h1>${esc(title)}</h1>
   <div class="panel"><p class="filter-l" style="margin:0">ひとことで言うと</p><p style="font-size:18px;margin:2px 0 0;font-weight:700;color:var(--teal-ink)">${esc(u.one)}</p></div>
@@ -1781,13 +2066,14 @@ V.me = ()=>{
   </div>
   <div class="panel" style="margin-top:14px"><h3>利用区分</h3>
     <p>${TIER_NAME[tier()]}${expired()?'（お試しの期限切れ）':tier()==='counseled'?`（あと${trialLeft()}日）`:''}</p>
-    <p class="muted small">試作用: 区分を切り替えて、見え方を確かめられます。本番は、運営（代表）だけが切り替えます。</p>
-    <div class="row"><button class="btn sm ${S.tier==='general'?'on':''}" data-act="settier" data-t="general">一般（面談前）</button><button class="btn sm ${S.tier==='counseled'&&!expired()?'on':''}" data-act="settier" data-t="counseled">面談実施者</button><button class="btn sm ${S.tier==='customer'?'on':''}" data-act="settier" data-t="customer">成約者</button><button class="btn sm ${expired()?'on':''}" data-act="expire">お試しを期限切れにする</button></div></div>
+${tier()!=='customer'?`<div class="filter" style="margin-top:8px"><label class="filter-l" for="me-code">招待コードをお持ちの方</label><div class="ask-box"><input type="text" id="me-code" placeholder="面談・成約のときにお渡しするコード" autocomplete="off"><button class="btn" data-act="code">使う</button></div></div>`:''}
+${DEBUG?`    <p class="muted small">確認用: 区分を切り替えて、見え方を確かめられます（URLに ?debug を付けたときだけ表示）。</p>
+    <div class="row"><button class="btn sm ${S.tier==='general'?'on':''}" data-act="settier" data-t="general">一般（面談前）</button><button class="btn sm ${S.tier==='counseled'&&!expired()?'on':''}" data-act="settier" data-t="counseled">面談実施者</button><button class="btn sm ${S.tier==='customer'?'on':''}" data-act="settier" data-t="customer">成約者</button><button class="btn sm ${expired()?'on':''}" data-act="expire">お試しを期限切れにする</button></div>`:''}</div>
   <div class="panel" style="margin-top:14px"><h3>このアプリについて</h3>
-    <p class="small" style="margin:0 0 6px">フィリピン留学・セブ島留学のエージェント「${PRODUCER.name}」が作っている、留学の前と留学中に使う英語アプリです（試作版）。</p>
+    <p class="small" style="margin:0 0 6px">フィリピン留学・セブ島留学のエージェント「${PRODUCER.name}」が作っている、留学の前と留学中に使う英語アプリです（ベータ版）。</p>
     ${producedBy()}</div>
   <div class="row" style="margin-top:16px"><button class="btn" data-act="logout">ログアウト</button><button class="btn" data-act="wipe">この端末の学習データを消す</button></div>
-  <p class="muted small" style="margin-top:10px">本番では、ここにアカウントの削除、プライバシーポリシー、利用規約を置きます。</p>`;
+  <p class="muted small" style="margin-top:10px">今後、ここにアカウントの削除、プライバシーポリシー、利用規約を置きます。</p>`;
 };
 
 document.addEventListener('click', e=>{
@@ -1801,7 +2087,10 @@ document.addEventListener('click', e=>{
       save(); go('home'); break; }
     case 'settier': S.tier=d.t; S.trialStart = d.t==='counseled'?today():''; S.talkTrialUsed=false; S.askCount={d:'',n:0}; save(); render(); toast(`区分を「${TIER_NAME[d.t]}」にしました。`); break;
     case 'expire': S.tier='counseled'; S.trialStart=addDays(-(TRIAL_DAYS+1)); save(); render(); toast('お試しを期限切れにしました（一般と同じ範囲になります）。'); break;
-    case 'upsell': { const m=b.parentElement.querySelector('.upsell-msg'); if(COUNSEL_URL){ window.open(COUNSEL_URL,'_blank','noopener'); } else if(m){ m.textContent='試作のため、申し込み先はまだつながっていません。'; } break; }
+    case 'upsell': { const m=b.parentElement.querySelector('.upsell-msg'); if(COUNSEL_URL){ window.open(COUNSEL_URL,'_blank','noopener'); } else if(m){ m.textContent='申し込み先を準備中です。セブ島留学バディーのサイトからご相談ください。'; } break; }
+    case 'code': { const c=($('#me-code')?.value||'').trim().toUpperCase(); const tt=CODES[c];
+      if(!tt){ toast('招待コードが見つかりませんでした。もう一度ご確認ください。'); break; }
+      S.trialStart = tt==='counseled' ? (S.tier==='counseled'&&S.trialStart ? S.trialStart : today()) : ''; S.tier=tt; S.talkTrialUsed=false; save(); render(); toast(`「${TIER_NAME[tt]}」になりました。`); break; }
     case 'logout': S.user=''; save(); render(); break;
     case 'wipe': if(confirm('この端末に保存した学習記録・保存庫・履歴書の入力を消します。元に戻せません。消しますか？')){ S=Object.assign(S0(),{user:S.user,tier:S.tier,trialStart:S.trialStart}); save(); render(); } break;
     case 'say': say(d.t); break;
@@ -1849,7 +2138,7 @@ document.addEventListener('click', e=>{
     case 'lvsample': lvSample(); rerender(); break;
     case 'lvnext': LQS.i++; LQS.pick=null; if(LQS.i>=LQS.qs.length) lvFinish(); rerender(); break;
     case 'lvreset': LQS={cat:null,i:0,score:0,pick:null,qs:[],done:false}; rerender(); break;
-    case 'counsel': { const m=$('#cmsg'); if(m) m.textContent='試作のため、申し込み先はまだつながっていません。'; break; }
+    case 'counsel': { const m=$('#cmsg'); if(m) m.textContent='申し込み先を準備中です。セブ島留学バディーのサイトからご相談ください。'; break; }
     case 'askdemo': if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[tier()].ask}回）を使い切りました。${tier()==='counseled'?'成約すると1日'+LIMIT.customer.ask+'回まで使えます。':''}`); break; } useAsk(); ASK={q:d.q,a:AI_DEMO[d.q],fb:null}; rerender(); break;
     case 'askvault': if(ASK.a&&!ASK.a.none){ addVault(ASK.a.en,ASK.a.ja,'AIに聞いた','ai'); rerender(); } break;
     case 'askmemo': if(addVault('',ASK.q,'メモ','ai')){ ASK={q:'',a:null,fb:null}; go('vault'); } break;
