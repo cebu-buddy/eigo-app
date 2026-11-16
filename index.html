@@ -188,6 +188,24 @@ svg.growth{width:100%;max-width:640px;height:auto;margin-top:6px;display:block}
 .cat-hd{display:flex;align-items:center;gap:8px;margin-bottom:2px}.cat-ic{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none}.cat-ic svg{width:18px;height:18px}
 .cat-ic.g0{background:var(--mint);color:var(--teal-ink)}.cat-ic.g1{background:var(--mango-soft);color:var(--mango-ink)}.cat-ic.g2{background:var(--pink-soft);color:var(--pink-ink)}
 .cbar{display:block;width:100%;height:5px;background:var(--mint);border-radius:9px;margin-top:auto;overflow:hidden}.cbar i{display:block;height:100%;background:var(--teal)}
+.cat-desc{display:none}
+
+@media (min-width:960px){
+ .catgrid{gap:14px}
+ .cat-gl{font-size:13px;margin:22px 0 8px}
+ .catcard{min-height:168px;padding:18px 18px 16px;gap:6px;border-radius:18px}
+ .catwrap>.catcard{padding-right:44px}
+ .catwrap>.catinfo{top:10px;right:10px}
+ .catcard .cat-hd{flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:2px}
+ .catgrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .catcard b{letter-spacing:-.01em}
+ .catcard .cat-ic{width:44px;height:44px;border-radius:12px}.catcard .cat-ic svg{width:24px;height:24px}
+ .catcard b{font-size:18px}
+ .cat-desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:12.5px;line-height:1.6;color:var(--muted)}
+ .catcard .n{font-size:12.5px;font-weight:700;color:var(--teal-ink);margin-top:auto}
+ .catcard .cbar{height:6px;margin-top:6px}
+}
+@media (min-width:960px) and (max-width:1199px){ .catgrid{gap:10px} .catcard{padding:14px 12px 12px} .catwrap>.catcard{padding-right:12px} .catcard b{font-size:15px} .cat-desc{font-size:12px} .catcard .cat-ic{width:38px;height:38px} }
 .crumbrow{margin:4px 0 2px}
 .cat-title{font-size:24px}
 .catswitch{display:inline-flex;flex-wrap:wrap;align-items:center;gap:4px 8px;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;text-align:left}
@@ -9509,7 +9527,7 @@ const CAT_INFO = {
  idiom:{one:'直訳では意味が通らない、決まった言い回しです。全体でひとつの意味として覚えます。',ex:[['a piece of cake','とても簡単なこと（直訳は「ケーキ1切れ」）'],['break the ice','初対面の緊張をほぐす（直訳は「氷を割る」）']],point:'単語が全部分かっても、直訳すると意味を取り違えます。',gain:'ネイティブらしい表現を理解する力'},
  pattern:{one:'単語を入れ替えるだけで、たくさんの文が作れる「文の型」です。',ex:[["I'd like to ~",'〜したいのですが（I\'d like to book a table.）']],gain:'言いたいことを、すぐに文にする力'},
  starter:{one:'文の頭に置くだけで話し始めやすくなる表現と、会話の間をつなぐ言葉です。気持ちや話の流れを自然に伝えられます。',ex:[['Actually, ...','実は…'],['To be honest, ...','正直に言うと…']],gain:'会話をなめらかに始める・つなぐ力'},
- dialog:{one:'あいさつ・食べる時・買い物など30の場面ごとに、ネイティブが実際に使う自然なフレーズを、2〜3往復の会話の中で覚えます。',ex:[["How's it going?",'調子はどう？']],gain:'教科書ではない、自然な言い方'},
+ dialog:{one:'あいさつ・食べる時・買い物など33の場面ごとに、ネイティブが実際に使う自然なフレーズを、1往復か1.5往復の短い会話の中で覚えます。',ex:[["How's it going?",'調子はどう？']],gain:'教科書ではない、自然な言い方'},
  grammar:{one:'英語のルールを、内容ごと（時制・助動詞・受け身など17章）に、シンプルな日本語の解説・例文・確認問題で学びます。',ex:[['I have lived here for two years.','ここに2年住んでいます（現在完了）']],gain:'正しい文を組み立てる力'},
  wh:{one:'仕事探し・面接・職場・接客など、ワーホリで出会う場面ごとに、フレーズと、返事を選んで進めるシミュレーションで練習します。',ex:[['Are you hiring?','人を募集していますか？']],gain:'現地で仕事を見つけて、働く力'}
 };
@@ -9537,7 +9555,7 @@ function openCatInfo(k){
 const INFO_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="7.5" r="1.4" fill="currentColor"/><path d="M12 11v6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
 const infoBtn = k=>`<button class="catinfo" data-act="catinfo" data-cat="${k}" aria-label="${esc(CATS[k].replace('（付録）',''))}とは（説明を開く）">${INFO_ICON}</button>`;
 function catCard(k){ const s=catStats(k), pct=s.total?Math.round(s.known/s.total*100):0;
-  return `<div class="catwrap"><button class="catcard" data-act="learn" data-cat="${k}"><span class="cat-hd">${catIcon(k,CAT_GROUPS.findIndex(g=>g[1].includes(k)))}<b>${esc(CATS[k].replace('（付録）',''))}</b></span><span class="n">${esc(s.label)}</span><span class="cbar" aria-hidden="true"><i style="width:${pct}%"></i></span></button>${infoBtn(k)}</div>`; }
+  return `<div class="catwrap"><button class="catcard" data-act="learn" data-cat="${k}"><span class="cat-hd">${catIcon(k,CAT_GROUPS.findIndex(g=>g[1].includes(k)))}<b>${esc(CATS[k].replace('（付録）',''))}</b></span>${CAT_INFO[k]?`<span class="cat-desc">${esc(CAT_INFO[k].one)}</span>`:''}<span class="n">${esc(s.label)}</span><span class="cbar" aria-hidden="true"><i style="width:${pct}%"></i></span></button>${infoBtn(k)}</div>`; }
 function myListBtns(){
   const nKnown = allItems().filter(x=>P(x.id).state==='known').length, nUnknown = allItems().filter(x=>P(x.id).state==='unknown').length, nFav = Object.values(S.prog).filter(v=>v.fav).length;
   return `<div class="mylist" aria-label="自分のリスト"><button class="mybtn ${R.cat==='known'?'on':''}" data-act="learn" data-cat="known" aria-pressed="${R.cat==='known'}">記憶 <b>${nKnown}</b></button><button class="mybtn ${R.cat==='unknown'?'on':''}" data-act="learn" data-cat="unknown" aria-pressed="${R.cat==='unknown'}">未記憶 <b>${nUnknown}</b></button><button class="mybtn ${R.cat==='fav'?'on':''}" data-act="learn" data-cat="fav" aria-pressed="${R.cat==='fav'}">★ お気に入り <b>${nFav}</b></button></div>`;
