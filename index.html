@@ -173,6 +173,11 @@ dialog.sheet[open]{animation:sheetUp .26s cubic-bezier(.16,1,.3,1)}
 @keyframes sheetUp{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
 dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
 .sheet-grip{width:40px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 10px}
+.fg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:10px 0 8px}
+.fg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column}
+.fg-h{display:flex;align-items:center;gap:10px}.fg-h h3{margin:0;font-size:16px;display:flex;align-items:center;gap:6px}
+.fg .cat-ic{flex:none}.fg-role{font-weight:700;font-size:14px;margin:10px 0 4px}.fg-how{font-size:13px;line-height:1.75;color:var(--muted);margin:0 0 10px}
+.fg .linkbtn{margin-top:auto;align-self:flex-start;padding:0}
 
 @media (min-width:960px){dialog.sheet{inset:0;margin:auto;height:fit-content;max-height:85vh;border-radius:22px;padding:18px 20px 20px;box-shadow:0 12px 40px rgba(61,38,19,.25)}dialog.sheet .sheet-grip{display:none}dialog.sheet[open]{animation:sheetPop .2s ease-out}@keyframes sheetPop{from{transform:scale(.97);opacity:.4}to{transform:none;opacity:1}}}
 .sheetgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
@@ -6009,6 +6014,16 @@ V.resume = ()=>{
   </div>`;
 };
 
+const GUIDE_FEATS = [
+ ['learn','book','g0','学ぶ','英語の中身を覚える場所です。','単語・句動詞・イディオム・場面別フレーズ・文法などから選びます。レベルで絞り込み、「覚えた」「まだ」で仕分けると、復習する日が自動で決まります。'],
+ ['vault','vault','g1','保存庫','言えなかった表現をためる、自分だけの単語帳です。','授業や会話で言えなかったことをAIに聞いて、ここに入れます。復習して、実際に使えたら「実際に使えた！」を押します。'],
+ ['test','test','g2','テスト','覚えたかどうかを確かめます。','範囲を選んで、4択で答えます。正解は「覚えた」、不正解は「まだ」に入り、復習する日が自動で決まります。'],
+ ['level','level','g0','レベル診断','今の自分のレベルを知ります。','カテゴリーごとに5問の簡単な判定です。結果を見て、「学ぶ」で自分のレベルから始めましょう（正式なCEFRの判定ではありません）。'],
+ ['pron','mic','g1','発音講座','通じる発音の基本を身につけます。','発音記号の読み方、日本人が苦手な音、音のつながり、リズムを、ルール → 聞き分け → 言ってみる の順で練習します。'],
+ ['talk','chat','g2','AI英会話','AIを相手に、英語で話す練習をします。','場面を選んで話します。終わると直しの一覧が出て、そのまま保存庫に入れられます。'],
+ ['resume','doc','g0','履歴書','ワーホリの仕事探しに使う、英文の履歴書をつくります。','質問に日本語で答えると、AIがアピールポイントを英文にまとめます。できた履歴書はPDFで保存（印刷）できます。入力した内容は、この端末にだけ保存されます。'],
+];
+const FEAT_LOCK = v=>{ const F={vault:'vault',talk:'talk',resume:'resume'}; return F[v] && !feature(F[v]) ? `<span class="lockmark" aria-label="鍵（今の区分では使えません）">${I.lock}</span>` : ''; };
 V.guide = ()=>`<h1>手引書</h1>
   <div class="greet" style="margin-top:0">${coco(56)}<div class="speech"><b>ココ（仮）</b>時期ごとのおすすめの使い方です。留学前・留学中だけでなく、帰国したあとも続けて使えます。各カテゴリーの説明は下にあります。</div></div>
   <div class="home-grid">
@@ -6017,6 +6032,12 @@ V.guide = ()=>`<h1>手引書</h1>
     <div class="panel"><h3>ワーホリの前</h3><p class="small">ワーホリ対策の表現 → 面接対策 → AIと面接練習 → 履歴書づくり。</p></div>
     <div class="panel"><h3>留学のあと（帰国してからも）</h3><p class="small">留学で伸びた英語は、使わないと少しずつ落ちていきます。帰国後もこのアプリで続けられます。保存庫の復習で、留学中に覚えた表現を忘れないようにする → 単語・句動詞・イディオムを一つ上のレベルへ → AI英会話で、話す機会を毎日少しずつ。仕事や旅行の英語、次の留学やワーホリの準備にも使えます。</p></div>
   </div>
+  <h2>それぞれの機能の使い方</h2>
+  <p class="muted small" style="margin-top:-4px">左のメニュー（スマホは下のメニュー）にある機能の、役割と使い方です。</p>
+  <div class="fg-grid">${GUIDE_FEATS.map(([v,ic,g,name,role,how])=>`<div class="fg">
+    <div class="fg-h"><span class="cat-ic ${g}" aria-hidden="true">${I[ic]}</span><h3>${name}${FEAT_LOCK(v)}</h3></div>
+    <p class="fg-role">${role}</p><p class="fg-how">${how}</p>
+    <button class="linkbtn" data-act="go" data-v="${v}">${name}を開く</button></div>`).join('')}</div>
   <h2>レベルの目安</h2>
   ${lvGuideHTML()}
   <h2>このアプリの方針</h2>
