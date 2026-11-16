@@ -12,7 +12,7 @@
 :root{
   --bg:#F2F8F7; --surface:#FFFFFF; --ink:#3D2613; --muted:#6E5A4B; --line:#D5E6E3;
   --teal:#49B0A8; --teal-ink:#2C7A73; --mint:#E7F4F3; --mint2:#CFE8E5;
-  --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --mango-ink:#A9620C; --pink-soft:#FCE6E8; --pink-ink:#BE4552; --st-known:#E8F1FB; --st-unknown:#FDF5F5; --st-none:#EEF7F6; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
+  --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --mango-ink:#A9620C; --pink-soft:#FCE6E8; --pink-ink:#BE4552; --st-known:#E8F1FB; --st-unknown:#FDF5F5; --st-none:#EEF7F6; --lv0:#2C7A73; --lv1:#2B64A0; --lv2:#6E4BB0; --lv3:#A9620C; --lv4:#B23A4A; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
   --jp:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
   --en:"Lexend","Helvetica Neue",Arial,sans-serif;
   --ipa:"Charis SIL","Doulos SIL","Lucida Grande","Segoe UI",sans-serif;
@@ -21,14 +21,14 @@
   :root:not([data-theme="light"]){
     --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
     --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
-    --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+    --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --lv0:#7FD6CD; --lv1:#8DBDF0; --lv2:#C3A8F2; --lv3:#F7B548; --lv4:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
   --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
-  --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+  --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --lv0:#7FD6CD; --lv1:#8DBDF0; --lv2:#C3A8F2; --lv3:#F7B548; --lv4:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -230,7 +230,8 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 #toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50;max-width:90vw}
 #toast.show{opacity:1}
 @media (min-width: 960px){#toast{bottom:32px}}
-.lvtable{width:100%;border-collapse:collapse;font-size:13px}
+.lvtable{width:100%;min-width:520px;border-collapse:collapse;font-size:13px;table-layout:fixed}.lvtable thead th{width:20%}
+.lvtable tbody th.lvc0{color:var(--lv0)}.lvtable tbody th.lvc1{color:var(--lv1)}.lvtable tbody th.lvc2{color:var(--lv2)}.lvtable tbody th.lvc3{color:var(--lv3)}.lvtable tbody th.lvc4{color:var(--lv4)}
 .lvtable th,.lvtable td{padding:9px 8px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
 @media (min-width: 600px){.lvtable{font-size:14px}.lvtable th,.lvtable td{padding:10px 12px}}
 .lvtable thead th{font-size:12px;color:var(--muted);font-weight:500}
@@ -6083,7 +6084,7 @@ function lvGuideHTML(){ return `
   <p class="muted">このアプリのレベルは、国際的な基準のCEFR（セファール）に合わせています。英検・TOEIC・IELTSでのおおよその目安も並べました。</p>
   <div class="panel" style="padding:0;overflow-x:auto"><table class="lvtable">
     <thead><tr><th scope="col">レベル</th><th scope="col">CEFR</th><th scope="col">英検</th><th scope="col">TOEIC</th><th scope="col">IELTS</th></tr></thead>
-    <tbody>${LV.map((l,i)=>`<tr><th scope="row">${l}<span class="lvsub">${LV_SUB[i]}</span></th><td class="en">${LV_CEFR[i]}</td><td>${LV_MAP[i][0]}</td><td>${LV_MAP[i][1]}</td><td>${LV_MAP[i][2]}</td></tr><tr class="def"><td colspan="5">${esc(LV_DEF[i])}</td></tr>`).join('')}<tr class="ref"><th scope="row">最上級<span class="lvsub">参考・対象外</span></th><td class="en">C2</td><td>対応する級なし</td><td>目安なし</td><td>8.5〜9.0</td></tr></tbody>
+    <tbody>${LV.map((l,i)=>`<tr><th scope="row" class="lvc${i}">${l}<span class="lvsub">${LV_SUB[i]}</span></th><td class="en">${LV_CEFR[i]}</td><td>${LV_MAP[i][0]}</td><td>${LV_MAP[i][1]}</td><td>${LV_MAP[i][2]}</td></tr><tr class="def"><td colspan="5">${esc(LV_DEF[i])}</td></tr>`).join('')}<tr class="ref"><th scope="row">最上級<span class="lvsub">参考・対象外</span></th><td class="en">C2</td><td>対応する級なし</td><td>目安なし</td><td>8.5〜9.0</td></tr></tbody>
   </table></div>
   <div class="muted small stack" style="margin-top:8px">
     <p>どれも大まかな目安です。試験ごとに測る技能や問題の形が違うので、点数どうしをぴったり換算することはできません。</p>
