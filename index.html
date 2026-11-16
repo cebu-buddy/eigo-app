@@ -6025,7 +6025,7 @@ const GUIDE_FEATS = [
 ];
 const FEAT_LOCK = v=>{ const F={vault:'vault',talk:'talk',resume:'resume'}; return F[v] && !feature(F[v]) ? `<span class="lockmark" aria-label="鍵（今の区分では使えません）">${I.lock}</span>` : ''; };
 V.guide = ()=>`<h1>手引書</h1>
-  <div class="greet" style="margin-top:0">${coco(56)}<div class="speech"><b>ココ（仮）</b>時期ごとのおすすめの使い方です。留学前・留学中だけでなく、帰国したあとも続けて使えます。各カテゴリーの説明は下にあります。</div></div>
+  <div class="greet" style="margin-top:0">${coco(56)}<div class="speech"><b>ココ（仮）</b>時期ごと・機能ごとの使い方です。帰国後も続けて使えます。</div></div>
   <div class="home-grid">
     <div class="panel"><h3>留学前（出発の1〜3か月前）</h3><p class="small">① レベル診断 → ②「留学で使う英語」の授業中・学校生活 → ③ 自分のレベルの単語と構文 → ④ AI英会話の「授業の始まりの雑談」。</p></div>
     <div class="panel"><h3>留学中</h3><p class="small">授業で言えなかったことは、その日のうちにAIに聞いて保存庫へ。「実際に使えた！」を押して、使える表現を増やす。寮・生活の表現も役立ちます。</p></div>
