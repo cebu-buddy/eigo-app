@@ -173,6 +173,8 @@ dialog.sheet[open]{animation:sheetUp .26s cubic-bezier(.16,1,.3,1)}
 @keyframes sheetUp{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
 dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
 .sheet-grip{width:40px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 10px}
+
+@media (min-width:960px){dialog.sheet{inset:0;margin:auto;height:fit-content;max-height:85vh;border-radius:22px;padding:18px 20px 20px;box-shadow:0 12px 40px rgba(61,38,19,.25)}dialog.sheet .sheet-grip{display:none}dialog.sheet[open]{animation:sheetPop .2s ease-out}@keyframes sheetPop{from{transform:scale(.97);opacity:.4}to{transform:none;opacity:1}}}
 .sheetgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .sheetgrid button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:10px;text-align:left;font-size:14px;cursor:pointer}
 .sheetgrid button.on{border:2px solid var(--teal);background:var(--mint);font-weight:700}
