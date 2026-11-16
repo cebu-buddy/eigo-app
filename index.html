@@ -1,0 +1,1939 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>ココマンゴー英語 試作2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F8F7; --surface:#FFFFFF; --ink:#3D2613; --muted:#6E5A4B; --line:#D5E6E3;
+  --teal:#49B0A8; --teal-ink:#2C7A73; --mint:#E7F4F3; --mint2:#CFE8E5;
+  --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
+  --jp:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
+  --en:"Lexend","Helvetica Neue",Arial,sans-serif;
+  --ipa:"Charis SIL","Doulos SIL","Lucida Grande","Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
+    --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
+    --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
+  --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
+  --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--jp);font-size:16px;line-height:1.7}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--mango);outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+.app{min-height:100vh;padding-bottom:84px}
+.side{display:none}
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 16px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5}
+.brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;color:var(--teal-ink);text-decoration:none;background:none;border:0;padding:0;cursor:pointer}
+.brand small{font-weight:500;color:var(--muted);font-size:11px;display:block;line-height:1.2}
+.top-links{display:flex;gap:4px;flex:none}
+.top .brand{min-width:0}.top .brand>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.icon-btn{white-space:nowrap}
+@media (max-width:380px){
+  .top{padding:10px 12px;gap:6px}
+  .top .brand{font-size:15px;gap:6px}.top .brand svg{width:28px;height:28px}
+  .top .brand small{font-size:10px}
+  .icon-btn{padding:5px 9px;font-size:12px}
+}
+@media (max-width:345px){
+  .top{padding:10px 10px}.top .brand{font-size:14px;gap:5px}.top .brand svg{width:24px;height:24px}
+  .icon-btn{padding:4px 7px;font-size:11.5px}.top-links{gap:3px}
+}
+.icon-btn{border:0;background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;border:1px solid var(--line)}
+main{padding:4px 16px 24px;max-width:1080px;margin:0 auto}
+.tabbar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:10}
+.tabbar button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;padding:4px 0;border-radius:12px;cursor:pointer;color:var(--muted)}
+.tabbar button svg{width:22px;height:22px}
+.tabbar button.on{color:var(--teal-ink);font-weight:700}
+.tabbar button.ask{color:var(--ink)}
+.tabbar button.ask .bubble{background:var(--mango);border-radius:14px;padding:4px 12px;margin-top:-14px;box-shadow:0 2px 0 rgba(61,38,19,.18)}
+.tabbar button.ask.on .bubble{background:var(--teal);color:#fff}
+
+@media (min-width: 960px){
+  .app{display:grid;grid-template-columns:236px 1fr;padding-bottom:0}
+  .tabbar,.top{display:none}
+  .side{display:flex;flex-direction:column;gap:2px;position:sticky;top:0;height:100vh;padding:20px 14px;border-right:1px solid var(--line);background:var(--surface);overflow:auto}
+  .side .brand{margin:0 6px 18px}
+  .side button.nav{display:flex;align-items:center;gap:10px;border:0;background:none;text-align:left;padding:9px 12px;border-radius:12px;cursor:pointer;color:var(--ink)}
+  .side button.nav svg{width:20px;height:20px;flex:none}
+  .side button.nav:hover{background:var(--mint)}
+  .side button.nav.on{background:var(--mint2);font-weight:700;color:var(--teal-ink)}
+  .side .grp{font-size:12px;color:var(--muted);margin:14px 12px 4px}
+  .side .ask-cta{margin-top:auto;background:var(--mango);border:0;border-radius:16px;padding:12px 14px;font-weight:700;font-size:14px;line-height:1.4;cursor:pointer;display:flex;align-items:center;gap:8px;text-align:left;color:#2B140B}
+  .side .ask-cta svg{width:20px;height:20px;flex:none}
+  main{padding:28px 36px 48px}
+}
+
+h1{font-size:24px;line-height:1.35;margin:8px 0 14px}
+h2{font-size:18px;margin:22px 0 10px}
+h3{font-size:16px;margin:0 0 6px}
+p{margin:0 0 8px}
+.muted{color:var(--muted);font-size:14px}
+.small{font-size:13px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}
+.stack>*+*{margin-top:12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 16px;cursor:pointer}
+.btn.primary{background:var(--teal-ink);border-color:var(--teal-ink);color:#fff;font-weight:700}
+.btn.cta{background:var(--pink);border-color:var(--pink);color:#2B140B;font-weight:700}
+.btn.mango{background:var(--mango);border-color:var(--mango);color:#2B140B;font-weight:700}
+.btn.sm{padding:5px 11px;font-size:13px;border-radius:10px}
+.btn.on{background:var(--mint2);border-color:var(--teal);color:var(--teal-ink);font-weight:700}
+.btn:disabled{opacity:.5;cursor:default}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;position:relative}
+.chip{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:14px;white-space:nowrap}
+.chip.on{background:var(--teal-ink);border-color:var(--teal-ink);color:#fff;font-weight:700}
+
+.ja-audio{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:4px 0 10px}
+.stepnav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}
+.stepnav .btn{flex:1;max-width:220px;white-space:nowrap;padding:9px 8px;font-size:clamp(11px,3.3vw,15px);letter-spacing:-.02em}
+.stepnav>span{white-space:nowrap}
+.gsel{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.gsel select{flex:1 1 100%;min-width:0;max-width:460px;font-size:16px;font-weight:600;color:var(--ink);border:1.5px solid var(--teal);background:var(--surface);appearance:none;-webkit-appearance:none;padding-right:36px;background-image:linear-gradient(45deg,transparent 50%,var(--teal-ink) 50%),linear-gradient(135deg,var(--teal-ink) 50%,transparent 50%);background-position:calc(100% - 18px) 55%,calc(100% - 13px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+.gsel .chip{flex:none}
+.swipe-wrap{position:relative;touch-action:pan-y;overflow-x:clip}
+.swipe-wrap .detail{will-change:transform}
+.sw-hint{position:absolute;top:12px;z-index:2;display:none;flex-direction:column;gap:2px;max-width:46%;color:var(--teal-ink);opacity:0;pointer-events:none}
+.sw-hint.prev{left:6px;align-items:flex-start;text-align:left}.sw-hint.next{right:6px;align-items:flex-end;text-align:right}
+.sw-hint span{font-size:22px;line-height:1;font-family:var(--en);font-weight:600}
+.sw-hint small{font-size:11px;color:var(--muted);white-space:nowrap}
+.sw-hint small b{display:block;font-family:var(--en);font-size:15px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;max-width:40vw}
+.sw-hint.off{display:none!important}
+@media (max-width:959px){.sw-hint{display:flex}}
+.seltop{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.seltop .back{margin-bottom:0!important}
+.mininav{display:none;align-items:center;gap:2px;margin-left:auto}
+.mininav button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--teal-ink);font-size:20px;line-height:1;font-family:var(--en);cursor:pointer;opacity:.75}
+.mininav button:disabled{opacity:.25;cursor:default}
+.mininav span{font-size:12px;color:var(--muted);min-width:44px;text-align:center;font-family:var(--en)}
+@media (max-width:959px){.split.has-sel .mininav{display:flex}}
+@media (min-width:960px){.seltop{display:none}}
+.swipe-wrap.nudge .detail{animation:nudge 1.2s .6s cubic-bezier(.45,0,.25,1)}
+@keyframes nudge{0%,100%{transform:none}30%{transform:translateX(-22px)}55%{transform:translateX(0)}72%{transform:translateX(-7px)}86%{transform:none}}
+.detail.in-next{animation:inNext .34s cubic-bezier(.16,1,.3,1)}.detail.in-prev{animation:inPrev .34s cubic-bezier(.16,1,.3,1)}
+@keyframes inNext{from{opacity:.2;transform:translateX(38%)}to{opacity:1;transform:none}}
+@keyframes inPrev{from{opacity:.2;transform:translateX(-38%)}to{opacity:1;transform:none}}
+.ipa-big{font-family:var(--ipa);font-size:30px}
+.lq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:14px 0 8px}
+.lq-cell{border:1px solid var(--line);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.lq-name{font-size:13px;color:var(--muted)}
+.lq-lv{font-weight:700;color:var(--teal-ink)}
+.lq-bar{display:flex;gap:3px}.lq-bar i{width:18px;height:6px;border-radius:3px;background:var(--line)}.lq-bar i.on{background:var(--teal)}
+svg.growth{width:100%;max-width:640px;height:auto;margin-top:6px;display:block}
+.g-grid{stroke:var(--line);stroke-width:1}
+.g-axis{fill:var(--muted);font-size:11.5px;font-family:var(--jp)}
+.g-line{fill:none;stroke:var(--teal-ink);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.g-dot{fill:var(--teal-ink);stroke:var(--surface);stroke-width:2}
+.g-val{fill:var(--ink);font-size:12.5px;font-weight:700;font-family:var(--jp)}
+.up{color:var(--ok)}
+.cat-gl{font-size:12px;font-weight:700;color:var(--muted);margin:14px 0 6px}
+.catgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media (min-width:700px){.catgrid{grid-template-columns:repeat(4,1fr)}}
+.catwrap{position:relative;display:flex}.catwrap>.catcard{flex:1;padding-right:36px}
+.catinfo{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:0;background:transparent;color:var(--teal-ink);border-radius:50%;cursor:pointer;padding:0;flex:none;vertical-align:middle}
+.catinfo svg{width:20px;height:20px}.catinfo:hover{background:var(--mint)}
+.catwrap>.catinfo{position:absolute;top:4px;right:4px;opacity:.75}
+.ci-cmp td,.ci-cmp th{font-size:13px}.ci-cmp tr.here{background:var(--mango-soft)}.ci-cmp tr.here th{font-weight:700}
+.catcard{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 12px 10px;min-height:78px;cursor:pointer;color:var(--ink)}
+.catcard:hover{border-color:var(--teal)}
+.catcard b{font-size:15px}.catcard .n{font-size:11.5px;color:var(--muted)}
+.cbar{display:block;width:100%;height:5px;background:var(--mint);border-radius:9px;margin-top:auto;overflow:hidden}.cbar i{display:block;height:100%;background:var(--teal)}
+.crumbrow{margin:4px 0 2px}
+.cat-title{font-size:24px}
+.catswitch{display:inline-flex;flex-wrap:wrap;align-items:center;gap:4px 8px;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;text-align:left}
+.catswitch .sw{font-size:12px;font-weight:700;border:1.5px solid var(--teal);color:var(--teal-ink);border-radius:999px;padding:2px 10px;white-space:nowrap}
+dialog.sheet{position:fixed;inset:auto 0 0 0;margin:0 auto;width:100%;max-width:560px;max-height:85vh;border:0;border-radius:22px 22px 0 0;padding:10px 16px calc(18px + env(safe-area-inset-bottom));background:var(--surface);color:var(--ink);box-shadow:0 -8px 30px rgba(61,38,19,.2)}
+dialog.sheet[open]{animation:sheetUp .26s cubic-bezier(.16,1,.3,1)}
+@keyframes sheetUp{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
+.sheet-grip{width:40px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 10px}
+.sheetgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sheetgrid button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:10px;text-align:left;font-size:14px;cursor:pointer}
+.sheetgrid button.on{border:2px solid var(--teal);background:var(--mint);font-weight:700}
+.learn-head{display:flex;justify-content:space-between;align-items:center;gap:8px 12px;flex-wrap:wrap;margin-bottom:6px}
+.learn-head h1{margin:8px 0}
+.mylist{display:flex;gap:6px}
+.mybtn{border:1.5px solid var(--mango);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer;white-space:nowrap}
+.mybtn b{font-family:var(--en);margin-left:2px}
+.mybtn.on{background:var(--mango);color:#2B140B;font-weight:700}
+.filter-l{font-size:12px;color:var(--muted);margin:0 0 4px;font-weight:500}
+.chips.cats .chip{border-radius:12px;padding:9px 16px;font-size:15px;font-weight:500;border-width:1.5px}
+.chips.cats .chip.on{font-weight:700}
+.filter{margin-top:10px;padding:10px 12px 6px;background:var(--mint);border-radius:14px}
+.chips.sub .chip{font-size:13px;padding:3px 12px;background:var(--surface);border-color:transparent}
+.chips.sub .chip.on{background:var(--mango-soft);border-color:var(--mango);color:var(--ink)}
+.linkbtn{flex:none;border:0;background:none;color:var(--teal-ink);text-decoration:underline;font-size:13px;cursor:pointer;padding:3px 6px}
+dialog.modal{width:calc(100% - 32px);max-width:680px;max-height:86vh;border:0;border-radius:20px;padding:0 18px 18px;background:var(--bg);color:var(--ink);box-shadow:0 12px 40px rgba(61,38,19,.25)}
+dialog.modal::backdrop{background:rgba(30,40,38,.5)}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:8px;position:sticky;top:0;background:var(--bg);padding:16px 0 10px;z-index:1}
+.phrase-card{margin:14px 0 12px;padding:14px 16px;border-radius:16px;background:var(--mint);border:1px solid var(--mint2)}
+textarea.note{width:100%;min-height:110px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--mango-soft);line-height:1.7}
+.st.note{background:var(--mango-soft);color:var(--ink);border-radius:999px;padding:1px 8px}
+.tag{display:inline-block;font-size:12px;padding:1px 9px;border-radius:999px;background:var(--mint);color:var(--teal-ink);vertical-align:middle}
+.tag.lv{background:var(--mango-soft);color:var(--ink)}
+.en{font-family:var(--en);letter-spacing:.005em}
+.ipa{font-family:var(--ipa);color:var(--muted);font-size:15px}
+.syn{font-size:13px;margin:-2px 0 10px;line-height:1.8}
+.syn-l{display:inline-block;font-size:11px;color:var(--teal-ink);background:var(--mint);border-radius:999px;padding:0 8px;margin-right:6px}
+.say{border:0;background:var(--mint);color:var(--teal-ink);border-radius:999px;width:34px;height:34px;display:inline-grid;place-items:center;cursor:pointer;flex:none;vertical-align:middle}
+.say svg{width:16px;height:16px}
+.btn svg{width:16px;height:16px;vertical-align:-3px}
+mark{background:var(--hl);color:inherit;border-radius:4px;padding:0 3px}
+input[type=text],input[type=email],textarea,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+textarea{min-height:84px;resize:vertical}
+label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
+.note{background:var(--mango-soft);border-radius:12px;padding:10px 14px;font-size:13px}
+.empty{text-align:center;padding:28px 12px}
+.empty .chara{margin:0 auto}
+.bar{height:8px;background:var(--mint2);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.chara{display:block;flex:none}
+.lock{display:flex;gap:14px;align-items:flex-start;border:2px dashed var(--mango)}
+.lockmark{display:inline-flex;color:var(--muted)}
+.lockmark svg{width:15px;height:15px}
+.side .lockmark{margin-left:auto}
+.tier{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:14px}
+#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50;max-width:90vw}
+#toast.show{opacity:1}
+@media (min-width: 960px){#toast{bottom:32px}}
+.lvtable{width:100%;border-collapse:collapse;font-size:13px}
+.lvtable th,.lvtable td{padding:9px 8px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+@media (min-width: 600px){.lvtable{font-size:14px}.lvtable th,.lvtable td{padding:10px 12px}}
+.lvtable thead th{font-size:12px;color:var(--muted);font-weight:500}
+.lvtable tbody th{color:var(--teal-ink);white-space:nowrap}
+.lvsub{display:block;font-size:11px;font-weight:500;color:var(--muted)}
+.lvtable tr.ref th,.lvtable tr.ref td{color:var(--muted);border-bottom:0}
+.lvtable tr.def td{font-size:13px;color:var(--muted);padding-top:0;border-bottom:1px solid var(--mint2)}
+.lvtable tr:has(+ .def) th,.lvtable tr:has(+ .def) td{border-bottom:0}
+
+.greet{display:flex;align-items:flex-end;gap:10px;margin:6px 0 18px}
+.speech{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:18px 18px 18px 6px;padding:12px 16px;max-width:520px}
+.speech b{display:block;font-size:13px;color:var(--teal-ink)}
+.hero-study{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--teal-ink);color:#fff;border-radius:22px;padding:20px;border:0;width:100%;text-align:left;cursor:pointer}
+.hero-study h2{margin:0 0 4px;font-size:20px;color:#fff}
+.hero-study p{margin:0;color:#DDF1EE;font-size:14px}
+.hero-study .pair{display:flex;gap:2px}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
+@media (min-width: 960px){.home-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}}
+.tile{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:14px 16px;text-align:left;cursor:pointer}
+.tile b{display:block;font-size:15px}
+.tile span{font-size:13px;color:var(--muted)}
+.today{display:flex;gap:16px;align-items:center}
+.today .num{font-family:var(--en);font-size:34px;font-weight:600;color:var(--teal-ink);line-height:1}
+
+.split{display:grid;gap:14px}
+.list{display:flex;flex-direction:column;gap:6px}
+.li{display:flex;justify-content:space-between;gap:8px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:10px 14px;cursor:pointer;width:100%}
+.li.sel{border-color:var(--teal);box-shadow:inset 3px 0 0 var(--teal)}
+.li .t{font-family:var(--en);font-weight:600}
+.li .s{font-size:13px;color:var(--muted)}
+.li.soon{cursor:default;background:transparent;border-style:dashed;padding:8px 14px}.li.soon .t{font-family:var(--ja,inherit);font-weight:500;color:var(--muted)}
+.gch-h{margin:16px 0 6px;font-size:16px}.gch-h small{font-size:12px;color:var(--muted);font-weight:400}
+.sim-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.sim-opt{display:flex;flex-direction:column;gap:2px;text-align:left;border:1.5px solid var(--mint2);background:var(--surface);border-radius:14px;padding:10px 14px;cursor:pointer;color:var(--ink)}
+.sim-opt:hover{border-color:var(--teal)}.sim-opt .en{font-weight:600}
+.sim-fb{margin:8px 0 0;font-size:13px;padding:6px 10px;border-radius:10px;background:var(--surface)}
+.sim-fb.g3 b{color:var(--ok)}.sim-fb.g2 b{color:var(--teal-ink)}.sim-fb.g1 b{color:var(--mango)}.sim-fb.g0 b{color:var(--ng)}
+.sim-end{border-top:1px solid var(--line);padding-top:12px;margin-top:6px}
+.li.sim{border-color:var(--mint2)}.sim-badge{font-size:12px;background:var(--mango-soft);border-radius:999px;padding:2px 10px;white-space:nowrap}
+.li .st{font-size:12px;white-space:nowrap}
+.st.known{color:var(--ok)} .st.unknown{color:var(--ng)}
+.detail .word{font-family:var(--en);font-size:28px;font-weight:600;line-height:1.25}
+.ex{border-left:3px solid var(--mint2);padding:2px 0 2px 12px;margin:10px 0}
+.ex .e{font-family:var(--en)}
+.back{display:none}
+.split.has-sel .list-col{display:none}
+.split.has-sel .back{display:inline-block;margin-bottom:8px}
+@media (min-width: 960px){
+  .split{grid-template-columns:340px 1fr;align-items:start}
+  .split.has-sel .list-col{display:block}
+  .split.has-sel .back{display:none}
+  .detail{position:sticky;top:20px}
+}
+.dlg-line{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px}
+.dlg-line.right{flex-direction:row-reverse}
+.dlg-line .bub{background:var(--mint);border-radius:16px;padding:10px 14px;max-width:85%}
+.dlg-line.right .bub{background:var(--mango-soft)}
+.dlg-line .who{font-size:12px;color:var(--muted)}
+.fav{border:0;background:none;cursor:pointer;font-size:22px;line-height:1;color:var(--mango);padding:4px}
+.fav[aria-pressed="false"]{color:var(--muted)}
+
+.opt{display:flex;gap:10px;align-items:center;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 14px;margin-bottom:8px;cursor:pointer}
+.opt kbd{font-family:var(--en);font-size:12px;border:1px solid var(--line);border-radius:6px;padding:0 6px;color:var(--muted)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--surface))}
+.opt.wrong{border-color:var(--ng);background:color-mix(in srgb,var(--ng) 14%,var(--surface))}
+.q-big{font-size:22px;font-weight:700;margin:6px 0 14px}
+
+.chat{display:flex;flex-direction:column;gap:10px}
+.msg{max-width:88%;padding:10px 14px;border-radius:16px}
+.msg.ai{background:var(--surface);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:6px}
+.msg.me{background:var(--teal-ink);color:#fff;align-self:flex-end;border-bottom-right-radius:6px}
+.msg.me .en{color:#fff}
+.answer h3{font-size:14px;color:var(--teal-ink);margin:12px 0 4px}
+.ask-box{display:flex;gap:8px}
+.ask-box input{flex:1}
+.mic.rec{background:var(--pink);border-color:var(--pink)}
+
+.designs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.design-pick{border:2px solid var(--line);border-radius:10px;padding:6px 4px;background:var(--surface);cursor:pointer;font-size:12px}
+.design-pick.on{border-color:var(--teal-ink);font-weight:700}
+.design-pick i{display:block;height:34px;border-radius:6px;margin-bottom:4px}
+.cv-fit{position:relative;width:100%;overflow:hidden;min-height:200px}
+.cv-prevcol,.cv-split>*{min-width:0}
+.cv-fit>.cv{position:absolute;left:0;top:0}
+.cv{width:794px;transform-origin:0 0;font-family:"Lexend","Helvetica Neue",Arial,sans-serif;color:#555;--cv-ink:#555}
+.cv-page{position:relative;width:794px;min-height:1123px;background:#fff;display:grid;grid-template-columns:286px 1fr;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.12);margin-bottom:18px}
+.cv-deco{position:absolute;left:0;top:0;width:300px;height:300px;background:var(--cv-dc);clip-path:polygon(0 0,100% 0,0 100%);z-index:0}
+.cv-side{position:relative;z-index:1;background:linear-gradient(transparent,transparent);padding:40px 26px 30px 30px;background-color:rgba(245,245,245,.0)}
+.cv-page::before{content:"";position:absolute;left:0;top:0;bottom:0;width:286px;background:#F5F5F5;z-index:-1}
+.cv-page{isolation:isolate}
+.cv-photo{width:176px;height:176px;border-radius:50%;border:6px solid #fff;margin:0 auto 14px;overflow:hidden;background:#ddd;display:flex;align-items:center;justify-content:center;color:#999;font-size:12px;letter-spacing:.1em}
+.cv-photo img{width:100%;height:100%;object-fit:cover}
+.cv-name{color:var(--cv-ac);font-size:40px;line-height:1.05;text-align:center;text-transform:uppercase;letter-spacing:.02em;word-break:break-word}
+.cv-title{font-weight:600;color:#555;text-align:center;font-size:15px;margin-top:8px}
+.cv-personal{font-size:11.5px;margin-top:8px;line-height:1.6;padding-left:6px}
+.cv-h{display:flex;align-items:center;gap:12px;font-size:21px;font-weight:600;color:#555;margin:20px 0 12px;padding-bottom:9px;border-bottom:1.5px solid var(--cv-ac);letter-spacing:0}
+.cv-h svg{width:20px;height:20px;fill:#555;flex:none}
+.cv-contact{list-style:none;padding:0;margin:0;font-size:11.5px}.cv-contact li{display:flex;align-items:center;gap:10px;margin:8px 0;word-break:break-all}
+.cv-contact svg{width:18px;height:18px;fill:var(--cv-ac);flex:none}
+.cv-about{font-size:13px;line-height:1.6;margin:0;white-space:pre-wrap}
+.cv-list{margin:0;padding-left:20px;font-size:13px;line-height:1.7}
+.cv-main{position:relative;z-index:1;padding:40px 34px 30px 30px}
+.cv-main .cv-h:first-child{margin-top:4px}
+.cv-tl{position:relative;padding-left:22px}
+.cv-tl::before{content:"";position:absolute;left:5px;top:8px;bottom:6px;width:1.5px;background:var(--cv-ac)}
+.cv-item{position:relative;margin-bottom:14px}
+.cv-item::before{content:"";position:absolute;left:-21px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--cv-ac)}
+.cv-row{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.cv-row b{font-size:14.5px;color:#555}.cv-bar{color:#aaa;font-weight:400}.cv-len{font-weight:600}
+.cv-yr{font-size:12px;white-space:nowrap;color:#555}
+.cv-org{font-style:italic;font-size:13px;margin:2px 0 4px;color:#666}
+.cv-item p{margin:0;font-size:11.5px;line-height:1.55;text-align:justify;white-space:pre-wrap}
+.cv-refs{display:grid;grid-template-columns:1fr 1fr;gap:16px}.cv-refs b{font-size:16px;color:#555}.cv-org2{font-size:13px;margin:2px 0 6px}.cv-refs small{display:block;font-size:11px;color:#777;margin-top:3px;word-break:break-all}
+.cv-req{font-size:13px;font-style:italic;margin:0}
+.cv-p2{display:block}.cv-p2::before{display:none}.cv-p2{background:#F7F7F7}
+.cv-p2in{position:relative;z-index:1;padding:50px 56px}
+.cv-p2in .cv-h{margin-top:10px}
+.cv-certs{display:grid;grid-template-columns:1fr 1fr;gap:26px 30px;margin-top:20px}
+.cv-certs figure{margin:0;text-align:center}.cv-certs img{width:100%;max-height:330px;object-fit:contain;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.cv-certs figcaption{font-size:15px;color:#666;margin-top:10px}
+.cv-ph{height:220px;border:2px dashed #ccc;display:flex;align-items:center;justify-content:center;color:#aaa;background:#fff}
+.cv-colors{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.cv-sw{border:2px solid var(--line);border-radius:10px;padding:6px 4px;background:var(--surface);cursor:pointer;font-size:11.5px;color:var(--ink)}
+.cv-sw.on{border-color:var(--teal-ink);font-weight:700}.cv-sw i{display:block;height:28px;border-radius:6px;margin-bottom:4px}
+.cv-thumb{width:72px;height:72px;border-radius:50%;background:var(--mint);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);flex:none}
+.cv-thumb.wide{width:100%;height:120px;border-radius:10px;margin-bottom:6px}
+.cv-thumb img{width:100%;height:100%;object-fit:cover}.cv-thumb.wide img{object-fit:contain}
+.cv-entry{border:1px dashed var(--line);border-radius:12px;padding:8px 10px 10px;margin:8px 0}
+.cv-entry>.btn{margin-top:8px}
+.resume{background:#fff;color:#222;border-radius:6px;padding:28px;font-family:var(--en);font-size:13px;line-height:1.55;border:1px solid var(--line)}
+.resume h4{margin:14px 0 4px;font-size:12px;letter-spacing:.04em;color:#555;border-bottom:1px solid #ddd;padding-bottom:2px}
+.resume .rn{font-size:24px;font-weight:600;color:#111}
+.resume .rc{color:#666}
+.resume p{white-space:pre-wrap;margin:0}
+.rs-teal{display:grid;grid-template-columns:150px 1fr;padding:0;overflow:hidden}
+.rs-teal .ra{background:#2C7A73;color:#fff;padding:22px 14px}.rs-teal .ra .rn{color:#fff;font-size:20px}.rs-teal .ra .rc{color:#DDF1EE}
+.rs-teal .rb{padding:22px}
+.rs-mango{border-top:14px solid #F5A524}
+.rs-mango h4{color:#B26A00;border-color:#F5D08A}
+.rs-minimal{padding:40px 44px}.rs-minimal h4{border:0;color:#999;font-weight:400}.rs-minimal .rn{font-weight:400;font-size:28px}
+.rs-compact{display:grid;grid-template-columns:1fr 1fr;column-gap:20px}.rs-compact .rh{grid-column:1/-1}
+@media print{
+  body *{visibility:hidden}
+  #resume-print,#resume-print *{visibility:visible}
+  #resume-print{position:absolute;left:0;top:0;transform:none!important}
+  .cv-page{box-shadow:none;margin:0;page-break-after:always;break-after:page}
+  .cv-page:last-child{page-break-after:auto;break-after:auto}
+  @page{size:A4;margin:0}
+  .cv,.cv *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<script>
+
+const COUNSEL_URL = '';
+const LV = ['入門','初級','中級','中上級','上級'];
+const LV_SUB = ['はじめの一歩','日常会話','留学で困らない','意見が言える','仕事で使える'];
+const LV_CEFR = ['A1','A2','B1','B2','C1'];
+
+let _g = 0;
+function coco(s=56){
+  return `<svg class="chara" width="${s}" height="${s}" viewBox="0 0 64 64" aria-hidden="true">
+  <path d="M33 11c3-6 11-8 16-5-5 1-9 3-11 8z" fill="#3E9B5B"/><path d="M31 12c-3-6-10-8-15-5 5 1 8 3 10 8z" fill="#58B36E"/>
+  <circle cx="32" cy="37" r="23" fill="#8A5A3B"/>
+  <path d="M15 31c4-3 8-4 12-3M39 27c4 0 8 2 11 5M19 50c3 2 6 3 9 3" stroke="#6E452C" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <circle cx="24" cy="37" r="2.8" fill="#2A1A10"/><circle cx="40" cy="37" r="2.8" fill="#2A1A10"/>
+  <g stroke="#2A1A10" stroke-width="1.6" fill="none"><circle cx="24" cy="37" r="6"/><circle cx="40" cy="37" r="6"/><path d="M30 37h4"/></g>
+  <circle cx="18" cy="45" r="3" fill="#D98A6E" opacity=".7"/><circle cx="46" cy="45" r="3" fill="#D98A6E" opacity=".7"/>
+  <path d="M27 46c3 3 7 3 10 0" stroke="#2A1A10" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>`;
+}
+function mango(s=56){
+  const id = 'mg' + (++_g);
+  return `<svg class="chara" width="${s}" height="${s}" viewBox="0 0 64 64" aria-hidden="true">
+  <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD15A"/><stop offset="1" stop-color="#F07F2E"/></linearGradient></defs>
+  <path d="M33 12c2-6 9-9 15-7-3 5-8 7-15 7z" fill="#4CAF62"/><path d="M32 13v-4" stroke="#6E452C" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M32 12c14 0 25 13 25 28 0 12-10 19-25 19S7 52 7 40C7 25 18 12 32 12z" fill="url(#${id})"/>
+  <circle cx="24" cy="38" r="2.8" fill="#2A1A10"/><circle cx="40" cy="38" r="2.8" fill="#2A1A10"/>
+  <circle cx="25" cy="37" r="1" fill="#fff"/><circle cx="41" cy="37" r="1" fill="#fff"/>
+  <circle cx="18" cy="45" r="3.2" fill="#F26D5B" opacity=".55"/><circle cx="46" cy="45" r="3.2" fill="#F26D5B" opacity=".55"/>
+  <path d="M27 45c3 3.5 7 3.5 10 0" stroke="#2A1A10" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>`;
+}
+const CH = {coco:{name:'ココ（仮）',svg:coco}, mango:{name:'マンゴー（仮）',svg:mango}};
+
+const I = {
+ home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>',
+ book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>',
+ vault:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v17l-7-4-7 4z"/></svg>',
+ test:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><rect x="4" y="3" width="16" height="18" rx="2"/></svg>',
+ chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4a8 8 0 1 1 16-4z"/></svg>',
+ level:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 20v-6M12 20V9M19 20V4"/></svg>',
+ doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg>',
+ guide:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>',
+ me:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
+ plane:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16l20-7-8 13-3-6z"/></svg>',
+ speaker:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg>',
+ lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>',
+ mic:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>'
+};
+
+const CATS = {study:'留学で使う英語', word:'単語', phrasal:'句動詞（熟語）', colloc:'コロケーション', idiom:'イディオム', pattern:'構文', starter:'文頭フレーズ（付録）', dialog:'場面別フレーズ', grammar:'文法', wh:'ワーホリ対策'};
+
+const ipaHTML = (en,ipa)=> (ipa && !/\s/.test(String(en||'').trim())) ? `<div class="ipa">${esc(ipa)}</div>` : '';
+const it = (cat,lv,en,ipa,ja,e1,j1,e2,j2,scene)=>({id:cat+':'+en,cat,lv,en,ipa,ja,ex:[[e1,j1],[e2,j2]],scene});
+
+const SYN = {
+ "scene:How's it going?":[["How are you doing?",''],["How's everything?",'']],
+ "scene:What's up?":[["What's new?",'最近どう？の意味'],["What's wrong?",'どうしたの？の意味']],
+ "scene:Long time no see!":[["It's been a while!",'']],
+ "scene:Can't complain.":[["Not bad.",''],["Pretty good.",'']],
+ "scene:I'm starving.":[["I'm so hungry.",'普通の言い方']],
+ "scene:This is so good!":[["This is delicious!",'少していねい'],["This is amazing!",'']],
+ "scene:Can I get the check, please?":[["Check, please.",'短く'],["Can I get the bill, please?",'イギリス英語']],
+ "scene:I'm stuffed.":[["I'm full.",'普通の言い方']],
+ "scene:Let's split the bill.":[["Let's go Dutch.",'少し古い言い方'],["Let's split it.",'']],
+ 'word:breakfast':[['morning meal','かたい言い方']],
+ 'word:teacher':[['instructor','講師。習い事やジムでも'],['tutor','個人指導の先生']],
+ 'word:borrow':[['use','Can I use ~? のほうが気軽']],
+ 'word:expensive':[['pricey','カジュアル'],['costly','かたい言い方']],
+ 'word:improve':[['get better','会話向き']],
+ 'word:schedule':[['timetable','時間割・時刻表'],['plan','予定']],
+ 'word:accomplish':[['achieve',''],['complete','やり終える']],
+ 'word:meticulous':[['careful','普通の言い方'],['thorough','抜けがない']],
+ 'word:reluctant':[['unwilling','より強い拒否'],['hesitant','ためらう']],
+ 'phrasal:pick up':[['collect','迎えに行く・受け取る（イギリス英語寄り）']],
+ 'phrasal:look for':[['search for','かたい言い方']],
+ 'phrasal:give up':[['quit','やめる'],['stop trying','']],
+ 'phrasal:find out':[['discover','かたい言い方'],['learn','知る']],
+ 'phrasal:put off':[['postpone','かたい言い方'],['delay','遅らせる']],
+ 'phrasal:come up with':[['think of','気軽な言い方']],
+ 'colloc:make a mistake':[['make an error','かたい言い方']],
+ 'colloc:take a shower':[['have a shower','イギリス英語']],
+ 'colloc:heavy rain':[['a downpour','どしゃ降り']],
+ 'colloc:take a break':[['have a break','イギリス英語'],['take five','5分休憩（カジュアル）']],
+ 'colloc:reach a conclusion':[['come to a conclusion','']],
+ 'idiom:a piece of cake':[['a breeze','カジュアル'],['super easy','']],
+ 'idiom:break the ice':[['warm up the room','']],
+ 'idiom:under the weather':[['not feeling well','普通の言い方']],
+ 'idiom:hit the books':[['study hard','普通の言い方'],['cram','一夜漬け']],
+ 'idiom:once in a blue moon':[['very rarely','普通の言い方'],['hardly ever','']],
+ "study:Could you say that again, please?":[['Sorry?','短く聞き返す'],['Pardon?','ていねい']],
+ "study:I'm not sure I understand.":[["I don't quite get it.",'カジュアル']],
+ "study:The Wi-Fi isn't working.":[["The Wi-Fi is down.",'']],
+ "study:I don't feel well.":[["I feel sick.",''],["I'm not feeling well.",'']],
+ "pattern:I'd like to ~":[['I want to ~','友達どうし向き'],["Could I ~?",'お願いの形']],
+ "pattern:If I were you, I would ~":[["You should ~",'より直接的'],["Why don't you ~?",'提案']],
+ "starter:Actually, ...":[['In fact, ...','かたい言い方'],['As a matter of fact, ...','強めに訂正']],
+ "starter:By the way, ...":[['Oh, ...','くだけた話題転換'],['Speaking of which, ...','関連した話題へ']],
+ "starter:To be honest, ...":[['Honestly, ...','短く気軽'],['To tell you the truth, ...','']],
+ "starter:The thing is, ...":[['The problem is, ...','']],
+ "starter:I was wondering if ...":[['Would it be possible to ...?',''],['Could you ...?','より短い']],
+ "starter:Come to think of it, ...":[['Now that I think about it, ...','']],
+ "starter:Needless to say, ...":[['Of course, ...','気軽'],['It goes without saying that ...','かたい言い方']],
+ "wh:Are you hiring?":[['Do you have any openings?','ていねい']],
+};
+
+const ITEMS = [
+ it('study',0,"Could you say that again, please?",'/kʊd ju seɪ ðæt əˈɡen pliːz/','もう一度言っていただけますか？',"Sorry, could you say that again, please?",'すみません、もう一度言っていただけますか？',"Could you say that again more slowly?",'もう一度、ゆっくり言っていただけますか？','授業中'),
+ it('study',0,"How do you spell that?",'/haʊ du ju spel ðæt/','それはどうつづりますか？',"How do you spell your name?",'お名前はどうつづりますか？',"Sorry, how do you spell that word?",'すみません、その単語はどうつづりますか？','授業中'),
+ it('study',1,"I'm not sure I understand.",'/aɪm nɑːt ʃʊr aɪ ˌʌndərˈstænd/','よく分かっていないかもしれません。',"I'm not sure I understand this part.",'この部分がよく分かっていないかもしれません。',"Sorry, I'm not sure I understand the question.",'すみません、質問がよく分かっていないかもしれません。','授業中'),
+ it('study',1,"I'll be late for class.",'/aɪl bi leɪt fər klæs/','授業に遅れます。',"Sorry, I'll be late for class today.",'すみません、今日は授業に遅れます。',"I'll be about ten minutes late for class.",'授業に10分ほど遅れます。','授業中'),
+ it('study',0,"Where are you from?",'/wer ɑːr ju frʌm/','どこの出身ですか？',"Hi! Where are you from?",'こんにちは！どこの出身？',"Where are you from in Japan?",'日本のどこの出身？','学校生活'),
+ it('study',1,"Can I change my class schedule?",'/kæn aɪ tʃeɪndʒ maɪ klæs ˈskedʒuːl/','授業の時間割を変えられますか？',"Excuse me, can I change my class schedule?",'すみません、授業の時間割を変えられますか？',"Can I change my class schedule next week?",'来週、時間割を変えられますか？','学校生活'),
+ it('study',0,"The Wi-Fi isn't working.",'/ðə ˈwaɪ faɪ ˈɪzənt ˈwɜːrkɪŋ/','Wi-Fiがつながりません。',"The Wi-Fi isn't working in my room.",'部屋のWi-Fiがつながりません。',"The Wi-Fi isn't working again.",'またWi-Fiがつながりません。','寮・生活'),
+ it('study',0,"I don't feel well.",'/aɪ doʊnt fiːl wel/','体調がよくありません。',"I don't feel well, so I'll stay in my room today.",'体調がよくないので、今日は部屋にいます。',"I don't feel well. Is there a clinic nearby?",'体調がよくありません。近くに病院はありますか？','寮・生活'),
+
+ it('word',0,'breakfast','/ˈbrekfəst/','朝食',"I eat breakfast at seven.",'私は7時に朝食を食べます。',"Breakfast is ready.",'朝食ができたよ。'),
+ it('word',0,'teacher','/ˈtiːtʃər/','先生',"My teacher is very kind.",'私の先生はとても優しいです。',"The teacher asked a question.",'先生が質問をしました。'),
+ it('word',1,'borrow','/ˈbɑːroʊ/','借りる',"Can I borrow your pen?",'ペンを借りてもいい？',"She borrowed a book from the library.",'彼女は図書館で本を借りました。'),
+ it('word',1,'expensive','/ɪkˈspensɪv/','高価な',"This bag is too expensive.",'このバッグは高すぎます。',"Living in Tokyo is expensive.",'東京での生活はお金がかかります。'),
+ it('word',2,'improve','/ɪmˈpruːv/','上達する、改善する',"I want to improve my English.",'英語を上達させたい。',"Her speaking has improved a lot.",'彼女のスピーキングはずいぶん上達しました。'),
+ it('word',2,'schedule','/ˈskedʒuːl/','予定、時間割',"What's your schedule for tomorrow?",'明日の予定は？',"The class schedule has changed.",'授業の時間割が変わりました。'),
+ it('word',3,'accomplish','/əˈkɑːmplɪʃ/','成し遂げる',"She accomplished her goal in six months.",'彼女は半年で目標を達成しました。',"We accomplished a lot today.",'今日は多くのことをやり遂げました。'),
+ it('word',3,'reluctant','/rɪˈlʌktənt/','気が進まない',"He was reluctant to speak in class.",'彼は授業で話すのに気が進みませんでした。',"I'm reluctant to change my plans.",'予定を変えるのは気が進みません。'),
+ it('word',4,'meticulous','/məˈtɪkjələs/','細心の、きわめて丁寧な',"She is meticulous about her notes.",'彼女はノートをとても丁寧にとる。',"The project needs meticulous planning.",'その計画には細心の準備が必要だ。'),
+
+ it('phrasal',1,'pick up','/pɪk ʌp/','迎えに行く、拾う',"I'll pick you up at the airport.",'空港に迎えに行くよ。',"Please pick up your bag.",'かばんを拾ってください。'),
+ it('phrasal',1,'look for','/lʊk fɔːr/','探す',"I'm looking for my phone.",'スマホを探しています。',"What are you looking for?",'何を探しているの？'),
+ it('phrasal',2,'give up','/ɡɪv ʌp/','あきらめる、やめる',"Don't give up!",'あきらめないで！',"He gave up smoking last year.",'彼は昨年禁煙しました。'),
+ it('phrasal',2,'find out','/faɪnd aʊt/','調べて分かる',"I found out the answer.",'答えが分かりました。',"Let me find out when the shop opens.",'お店が何時に開くか調べてみます。'),
+ it('phrasal',3,'put off','/pʊt ɔːf/','延期する、先延ばしにする',"Don't put off your homework.",'宿題を先延ばしにしないで。',"They put off the meeting until Friday.",'会議は金曜日まで延期されました。'),
+ it('phrasal',3,'come up with','/kʌm ʌp wɪð/','思いつく',"She came up with a great idea.",'彼女は素晴らしいアイデアを思いつきました。',"Can you come up with a better plan?",'もっと良い案を思いつけますか？'),
+
+ it('colloc',1,'make a mistake','/meɪk ə mɪˈsteɪk/','間違える',"I made a mistake on the test.",'テストで間違えました。',"Everyone makes mistakes.",'誰でも間違えるものです。'),
+ it('colloc',1,'take a shower','/teɪk ə ˈʃaʊər/','シャワーを浴びる',"I take a shower every morning.",'毎朝シャワーを浴びます。',"She is taking a shower now.",'彼女は今シャワーを浴びています。'),
+ it('colloc',2,'heavy rain','/ˈhevi reɪn/','大雨',"We had heavy rain last night.",'昨夜は大雨でした。',"Heavy rain is expected tomorrow.",'明日は大雨が予想されています。'),
+ it('colloc',2,'take a break','/teɪk ə breɪk/','休憩する',"Let's take a break.",'休憩しよう。',"I took a short break after lunch.",'昼食のあとに少し休憩しました。'),
+ it('colloc',3,'reach a conclusion','/riːtʃ ə kənˈkluːʒən/','結論に達する',"We reached a conclusion after a long discussion.",'長い議論の末、結論に達しました。',"It's hard to reach a conclusion without data.",'データなしで結論を出すのは難しい。'),
+
+ it('idiom',2,'a piece of cake','/ə piːs əv keɪk/','朝飯前、とても簡単',"The test was a piece of cake.",'テストは朝飯前でした。',"Don't worry. It's a piece of cake.",'心配しないで。簡単だよ。'),
+ it('idiom',2,'break the ice','/breɪk ði aɪs/','打ち解ける、場をなごませる',"He told a joke to break the ice.",'彼は場をなごませるために冗談を言いました。',"Small talk can help break the ice.",'雑談は打ち解けるのに役立ちます。'),
+ it('idiom',2,'under the weather','/ˈʌndər ðə ˈweðər/','体調がすぐれない',"I'm feeling under the weather.",'ちょっと体調が悪いです。',"She stayed home because she was under the weather.",'彼女は体調が悪くて家にいました。'),
+ it('idiom',3,'hit the books','/hɪt ðə bʊks/','猛勉強する',"I need to hit the books tonight.",'今夜は猛勉強しなきゃ。',"He's hitting the books for the exam.",'彼は試験に向けて猛勉強中です。'),
+ it('idiom',3,'once in a blue moon','/wʌns ɪn ə bluː muːn/','めったにない',"I eat out once in a blue moon.",'外食はめったにしません。',"We see each other once in a blue moon.",'私たちはめったに会いません。'),
+
+ it('pattern',1,"I'd like to ~",'/aɪd laɪk tuː/','～したいのですが',"I'd like to order a coffee.",'コーヒーを注文したいのですが。',"I'd like to book a room.",'部屋を予約したいのですが。'),
+ it('pattern',2,"It's too ... to ~",'/ɪts tuː ... tuː/','…すぎて～できない',"It's too hot to study.",'暑すぎて勉強できない。',"The box is too heavy to carry.",'その箱は重すぎて運べない。'),
+ it('pattern',2,"If I were you, I would ~",'/ɪf aɪ wɜːr juː, aɪ wʊd/','私があなたなら～する',"If I were you, I would call him.",'私があなたなら、彼に電話するよ。',"If I were you, I would take the job.",'私があなたなら、その仕事を受けるよ。'),
+ it('pattern',3,"Not only ... but also ...",'/nɑːt ˈoʊnli ... bʌt ˈɔːlsoʊ/','…だけでなく…も',"She is not only smart but also kind.",'彼女は賢いだけでなく優しい。',"He not only came but also helped us.",'彼は来てくれただけでなく、手伝ってもくれた。'),
+ it('pattern',3,"I wish I could ~",'/aɪ wɪʃ aɪ kʊd/','～できたらいいのに',"I wish I could speak English fluently.",'英語を流暢に話せたらいいのに。',"I wish I could travel more.",'もっと旅行できたらいいのに。'),
+ it('starter',0,"Actually, ...",'/ˈæktʃuəli/','実は…／いや、実は…',"Actually, I'm from Osaka, not Tokyo.",'実は、東京じゃなくて大阪出身なんです。',"Actually, I changed my mind.",'実は、気が変わったんだ。'),
+ it('starter',0,"By the way, ...",'/baɪ ðə weɪ/','ところで…',"By the way, where are you staying?",'ところで、どこに泊まっているの？',"By the way, thanks for yesterday.",'ところで、昨日はありがとう。'),
+ it('starter',1,"To be honest, ...",'/tə bi ˈɑːnɪst/','正直に言うと…',"To be honest, I didn't understand the lesson.",'正直に言うと、授業が分かりませんでした。',"To be honest, I prefer tea.",'正直に言うと、紅茶のほうが好きです。'),
+ it('starter',1,"The thing is, ...",'/ðə θɪŋ ɪz/','実はね…（言いにくいことの前置き）',"The thing is, I don't have enough money.",'実はね、お金が足りないんだ。',"The thing is, I already have plans.",'実はね、もう予定があるんだ。'),
+ it('starter',2,"I was wondering if ...",'/aɪ wəz ˈwʌndərɪŋ ɪf/','…していただけないかと思いまして（ていねいなお願い）',"I was wondering if you could help me.",'手伝っていただけないかと思いまして。',"I was wondering if I could change my class.",'クラスを変えられないかと思いまして。'),
+ it('starter',2,"It's not that ..., it's just that ...",'/ɪts nɑːt ðæt ... ɪts dʒʌst ðæt/','…というわけじゃなくて、ただ…なだけ',"It's not that I don't like it, it's just that I'm full.",'嫌いなわけじゃなくて、ただお腹いっぱいなだけ。',"It's not that I'm angry, it's just that I'm tired.",'怒ってるわけじゃなくて、ただ疲れてるだけ。'),
+ it('starter',3,"Come to think of it, ...",'/kʌm tə θɪŋk əv ɪt/','そういえば…／考えてみると…',"Come to think of it, I haven't eaten all day.",'そういえば、一日何も食べてないや。',"Come to think of it, you're right.",'考えてみると、あなたの言う通りだね。'),
+ it('starter',3,"Needless to say, ...",'/ˈniːdləs tə seɪ/','言うまでもなく…',"Needless to say, I was really nervous.",'言うまでもなく、すごく緊張しました。',"Needless to say, we missed the bus.",'言うまでもなく、バスには乗り遅れました。'),
+ it('scene',0,"How's it going?",'/haʊz ɪt ˈɡoʊɪŋ/','調子はどう？',"Hey, how's it going?",'やあ、調子はどう？',"How's it going with your classes?",'授業の調子はどう？','あいさつ'),
+ it('scene',0,"What's up?",'/wʌts ʌp/','最近どう？／どうしたの？',"Hey, what's up?",'やあ、最近どう？',"What's up? You look tired.",'どうしたの？疲れてるみたい。','あいさつ'),
+ it('scene',0,"Long time no see!",'/lɔːŋ taɪm noʊ siː/','久しぶり！',"Long time no see! How have you been?",'久しぶり！元気だった？',"Wow, long time no see!",'わあ、久しぶり！','あいさつ'),
+ it('scene',1,"Can't complain.",'/kænt kəmˈpleɪn/','まあまあだよ（悪くない）',"How are you? —Can't complain.",'元気？—まあまあだよ。',"Work is busy, but I can't complain.",'仕事は忙しいけど、悪くないよ。','あいさつ'),
+ it('scene',0,"I'm doing great, thanks.",'/aɪm ˈduːɪŋ ɡreɪt θæŋks/','元気だよ、ありがとう',"I'm doing great, thanks. And you?",'元気だよ、ありがとう。そっちは？',"I'm doing great, thanks for asking.",'元気だよ、聞いてくれてありがとう。','あいさつ'),
+ it('scene',1,"I'm starving.",'/aɪm ˈstɑːrvɪŋ/','お腹ペコペコ',"I'm starving. Let's eat.",'お腹ペコペコ。食べよう。',"I skipped lunch, so I'm starving.",'お昼を抜いたから、お腹ペコペコ。','食べる時'),
+ it('scene',0,"This is so good!",'/ðɪs ɪz soʊ ɡʊd/','これすごくおいしい！',"Wow, this is so good!",'わあ、これすごくおいしい！',"This is so good! What is it?",'これすごくおいしい！何これ？','食べる時'),
+ it('scene',1,"Can I get the check, please?",'/kən aɪ ɡet ðə tʃek pliːz/','お会計お願いします',"Excuse me, can I get the check, please?",'すみません、お会計お願いします。',"We're done. Can I get the check, please?",'食べ終わりました。お会計お願いします。','食べる時'),
+ it('scene',1,"I'm stuffed.",'/aɪm stʌft/','お腹いっぱい',"No more for me. I'm stuffed.",'もういらない。お腹いっぱい。',"I'm stuffed, but I want dessert.",'お腹いっぱいだけど、デザートは食べたい。','食べる時'),
+ it('scene',1,"Let's split the bill.",'/lets splɪt ðə bɪl/','割り勘にしよう',"Let's split the bill this time.",'今回は割り勘にしよう。',"Do you want to split the bill?",'割り勘にする？','食べる時'),
+
+ it('wh',1,"Are you hiring?",'/ɑːr ju ˈhaɪərɪŋ/','人を募集していますか？',"Hi, are you hiring at the moment?",'こんにちは、今スタッフを募集していますか？',"Excuse me, are you hiring kitchen staff?",'すみません、キッチンのスタッフは募集していますか？','仕事探し'),
+ it('wh',1,"I'd like to drop off my resume.",'/aɪd laɪk tə drɑːp ɔːf maɪ ˈrezəmeɪ/','履歴書を置いていきたいのですが。',"I'd like to drop off my resume for the barista job.",'バリスタの仕事に、履歴書を置いていきたいのですが。',"Can I drop off my resume here?",'ここに履歴書を置いていってもいいですか？','仕事探し'),
+ it('wh',1,"I'm available on weekends.",'/aɪm əˈveɪləbəl ɑːn ˈwiːkendz/','週末は働けます。',"I'm available on weekends and Monday evenings.",'週末と月曜の夜は働けます。',"Are you available on weekends?",'週末は働けますか？','面接'),
+ it('wh',2,"I have experience working in a café.",'/aɪ hæv ɪkˈspɪriəns ˈwɜːrkɪŋ ɪn ə kæˈfeɪ/','カフェで働いた経験があります。',"I have two years of experience working in a café.",'カフェで2年間働いた経験があります。',"Do you have any experience working in a café?",'カフェで働いた経験はありますか？','面接'),
+ it('wh',1,"Is the manager around?",'/ɪz ðə ˈmænɪdʒər əˈraʊnd/','店長さんはいらっしゃいますか？',"Hi, is the manager around?",'こんにちは、店長さんはいらっしゃいますか？',"Is the manager around this afternoon?",'今日の午後、店長さんはいますか？','仕事探し'),
+ it('wh',1,"I can start right away.",'/aɪ kæn stɑːrt raɪt əˈweɪ/','すぐに働き始められます。',"I can start right away if you need someone.",'人が必要なら、すぐに働き始められます。',"Can you start right away?",'すぐに働き始められますか？','面接'),
+ it('wh',1,"Can I get Friday off?",'/kæn aɪ ɡet ˈfraɪdeɪ ɔːf/','金曜日に休みをもらえますか？',"Can I get Friday off next week?",'来週の金曜日に休みをもらえますか？',"Is it okay if I get Friday off?",'金曜日に休んでも大丈夫ですか？','シフト・休みの連絡'),
+ it('wh',2,"Could I swap shifts with you?",'/kʊd aɪ swɑːp ʃɪfts wɪð ju/','シフトを代わってもらえますか？',"Could I swap shifts with you on Sunday?",'日曜日のシフトを代わってもらえますか？',"Do you want to swap shifts this week?",'今週、シフトを交換しない？','シフト・休みの連絡'),
+ it('wh',2,"I'm calling in sick today.",'/aɪm ˈkɔːlɪŋ ɪn sɪk təˈdeɪ/','今日は体調不良で休みます（と連絡する）。',"Sorry, I'm calling in sick today.",'すみません、今日は体調不良で休みます。',"She called in sick this morning.",'彼女は今朝、体調不良で休むと連絡してきた。','シフト・休みの連絡'),
+ it('wh',1,"What can I get for you?",'/wʌt kæn aɪ ɡet fər ju/','ご注文は何になさいますか？',"Hi there! What can I get for you?",'いらっしゃいませ！ご注文は何になさいますか？',"What can I get for you today?",'今日は何になさいますか？','カフェの接客'),
+ it('wh',1,"For here or to go?",'/fər hɪr ɔːr tə ɡoʊ/','店内でお召し上がりですか、お持ち帰りですか？',"Sure. For here or to go?",'かしこまりました。店内ですか、お持ち帰りですか？',"Is that for here or to go?",'こちらは店内ですか、お持ち帰りですか？','カフェの接客'),
+ it('wh',1,"It'll be ready in a few minutes.",'/ˈɪtl bi ˈredi ɪn ə fjuː ˈmɪnɪts/','数分でできあがります。',"Your coffee will be ready in a few minutes.",'コーヒーは数分でできあがります。',"It'll be ready in a few minutes. I'll call your name.",'数分でできます。お名前をお呼びしますね。','カフェの接客')
+];
+const INTERVIEW = [
+ {id:'iv:about',q:"Tell me about yourself.",ja:'自己紹介をしてください。',tip:'名前よりも「どんな人で、何ができるか」を30秒ほどで。仕事の経験を1つ入れる。',a:"I'm Yuki from Japan. I worked at a café for two years, so I'm used to busy shifts. I'm friendly and I learn quickly.",aja:'日本から来たユキです。カフェで2年間働いたので、忙しいシフトには慣れています。人と話すのが好きで、覚えるのが早いです。'},
+ {id:'iv:why',q:"Why do you want to work here?",ja:'なぜここで働きたいのですか？',tip:'お店の良いところと、自分がしたいことをつなげる。',a:"I love the atmosphere of this café, and I want to improve my English by talking with customers.",aja:'このカフェの雰囲気が好きで、お客さんと話して英語を上達させたいからです。'},
+ {id:'iv:strength',q:"What are your strengths?",ja:'あなたの強みは何ですか？',tip:'強みを1つ言って、それを示す具体的な出来事を続ける。',a:"I'm hardworking and good at teamwork. In my last job, I often trained new staff.",aja:'まじめに働けて、チームで動くのが得意です。前の職場では、よく新人の指導をしていました。'}
+];
+const DIALOGS = [
+ {id:'dl:class',scene:'授業中',title:'先生に聞き返す',lv:0,roles:{coco:'先生',mango:'あなた'},lines:[
+  ['mango',"Excuse me, [[could you say that again, please?|もう一度言っていただけますか？]]",'すみません、もう一度言っていただけますか？'],
+  ['coco',"Of course. [[Which part didn't you catch?|どの部分が聞き取れませんでしたか？]]",'もちろん。どの部分が聞き取れませんでしたか？'],
+  ['mango',`[[What does "reluctant" mean?|「reluctant」はどういう意味ですか？]]`,'「reluctant」はどういう意味ですか？']]},
+ {id:'dl:dorm',scene:'寮・生活',title:'寮のWi-Fiがつながらない',lv:1,roles:{coco:'寮のスタッフ',mango:'あなた'},lines:[
+  ['mango',"Hi, [[the Wi-Fi in my room isn't working.|部屋のWi-Fiがつながりません。]]",'こんにちは、部屋のWi-Fiがつながりません。'],
+  ['coco',"Oh, sorry about that. [[Have you tried restarting it?|再起動してみましたか？]]",'あら、ごめんなさい。再起動してみましたか？'],
+  ['mango',"Yes, but it's still not working. [[Could someone check it?|誰か見てもらえますか？]]",'はい、でもまだつながりません。誰か見てもらえますか？']]},
+ {id:'dl:first',scene:'学校生活',title:'クラスメートと初対面',lv:0,roles:{coco:'クラスメート',mango:'あなた'},lines:[
+  ['coco',"Hi! I'm Coco. [[Is this your first week here?|ここに来て最初の週？]]",'こんにちは！ココです。ここに来て最初の週？'],
+  ['mango',"Yes, I just arrived on Sunday. [[Where are you from?|どこの出身？]]",'うん、日曜日に着いたばかり。どこの出身？'],
+  ['coco',"I'm from Korea. [[Let me know if you need anything.|何かあったら言ってね。]]",'韓国だよ。何かあったら言ってね。']]},
+];
+
+const SCENE_DL = {
+ "scene:How's it going?":{roles:{coco:'友達',mango:'あなた'},lines:[
+  ['coco',"Hey, Mango! [[How's it going?|調子はどう？]]",'やあ、マンゴー！調子はどう？'],
+  ['mango',"Pretty good! I just finished my exams.",'いい感じ！試験が終わったところ。'],
+  ['coco',"Nice! You must be relieved.",'いいね！ほっとしたでしょ。'],
+  ['mango',"Totally. How about you?",'ほんとに。そっちは？']]},
+ "scene:What's up?":{roles:{coco:'友達',mango:'あなた'},lines:[
+  ['coco',"[[What's up?|どうしたの？]] You look tired.",'どうしたの？疲れてるみたい。'],
+  ['mango',"I stayed up late studying.",'遅くまで勉強してたんだ。'],
+  ['coco',"Take a break, OK?",'少し休みなよ。'],
+  ['mango',"Thanks, I will.",'ありがとう、そうする。']]},
+ "scene:Long time no see!":{roles:{coco:'友達',mango:'あなた'},lines:[
+  ['mango',"Coco? [[Long time no see!|久しぶり！]]",'ココ？久しぶり！'],
+  ['coco',"Mango! How have you been?",'マンゴー！元気だった？'],
+  ['mango',"Great! I just came back from Cebu.",'元気！セブから帰ってきたばかり。'],
+  ['coco',"No way! Tell me everything.",'うそ！全部聞かせて。']]},
+ "scene:Can't complain.":{roles:{coco:'友達',mango:'あなた'},lines:[
+  ['coco',"How's your new job?",'新しい仕事はどう？'],
+  ['mango',"[[Can't complain.|まあまあだよ。]] The people are nice.",'まあまあだよ。職場の人がいいんだ。'],
+  ['coco',"That's good to hear.",'それはよかった。'],
+  ['mango',"Yeah, it's busy, but I like it.",'うん、忙しいけど気に入ってる。']]},
+ "scene:I'm doing great, thanks.":{roles:{coco:'クラスメート',mango:'あなた'},lines:[
+  ['coco',"Hi, Mango. How are you?",'おはよう、マンゴー。元気？'],
+  ['mango',"[[I'm doing great, thanks.|元気だよ、ありがとう。]] And you?",'元気だよ、ありがとう。そっちは？'],
+  ['coco',"Good! Ready for class?",'元気！授業の準備はできた？'],
+  ['mango',"Almost. Let's go!",'ほぼね。行こう！']]},
+ "scene:I'm starving.":{roles:{coco:'友達',mango:'あなた'},lines:[
+  ['mango',"[[I'm starving.|お腹ペコペコ。]] I skipped lunch.",'お腹ペコペコ。お昼を抜いたんだ。'],
+  ['coco',"Let's grab something to eat.",'何か食べに行こう。'],
+  ['mango',"Good idea. How about pizza?",'いいね。ピザはどう？'],
+  ['coco',"Sounds good!",'いいね！']]},
+ "scene:This is so good!":{roles:{coco:'友達',mango:'あなた'},lines:[
+  ['mango',"Wow, [[this is so good!|これすごくおいしい！]]",'わあ、これすごくおいしい！'],
+  ['coco',"Right? It's called adobo.",'でしょ？アドボっていう料理だよ。'],
+  ['mango',"I want to learn how to make it.",'作り方を覚えたいな。'],
+  ['coco',"I'll teach you sometime.",'今度教えてあげる。']]},
+ "scene:Can I get the check, please?":{roles:{coco:'店員',mango:'あなた'},lines:[
+  ['mango',"Excuse me, [[can I get the check, please?|お会計お願いします。]]",'すみません、お会計お願いします。'],
+  ['coco',"Sure. Together or separate?",'かしこまりました。ご一緒ですか、別々ですか？'],
+  ['mango',"Together, please.",'一緒でお願いします。'],
+  ['coco',"OK, I'll be right back.",'はい、すぐお持ちします。']]},
+ "scene:I'm stuffed.":{roles:{coco:'友達',mango:'あなた'},lines:[
+  ['coco',"Do you want some dessert?",'デザートいる？'],
+  ['mango',"No, thanks. [[I'm stuffed.|お腹いっぱい。]]",'ううん、いらない。お腹いっぱい。'],
+  ['coco',"Me too. That was a lot of food.",'私も。量が多かったね。'],
+  ['mango',"Yeah, but it was worth it.",'うん、でも来たかいがあった。']]},
+ "scene:Let's split the bill.":{roles:{coco:'友達',mango:'あなた'},lines:[
+  ['coco',"I can pay for this.",'ここは私が払うよ。'],
+  ['mango',"No, no. [[Let's split the bill.|割り勘にしよう。]]",'いやいや。割り勘にしよう。'],
+  ['coco',"Are you sure?",'いいの？'],
+  ['mango',"Of course. You paid last time.",'もちろん。前回払ってくれたし。']]},
+};
+
+const GEN_SCENES = ['あいさつ','初対面','食べる時','カジュアル','車内や乗り物','買い物','恋愛','好き嫌い','身体と健康、病気','感情','励ます時','怒る時','待ち合わせ','感謝する時','アドバイス','褒める時','言い訳をする時','旅行','性格','フォーマル','パソコン、スマホ','仕事、ビジネス','意見','電話','天気','注意する時','接客','道案内','スポーツ','スラング'];
+const GRAMMAR = [
+ {id:'gr:be',lv:0,title:'be動詞（am / is / are）',body:['「〜です」「〜にいます」を表すのがbe動詞です。主語によって形が変わります。','I には am、you と複数には are、he・she・it と単数には is を使います。','否定は be動詞のあとに not（I\'m not / isn\'t / aren\'t）。疑問文は be動詞を前に出します（Are you ~?）。'],
+  ex:[["I'm a student.",'私は学生です。'],["She is in Cebu now.",'彼女は今セブにいます。'],["Are you ready?",'準備はできた？']],
+  quiz:[{q:'They ___ from Japan.',o:['is','am','are'],a:2,why:'They（複数）には are を使います。'},{q:'___ he your teacher?',o:['Is','Are','Am'],a:0,why:'he には is。疑問文なので前に出します。'}]},
+ {id:'gr:perfect',lv:2,title:'現在完了の継続（have been ~ for / since）',body:['過去に始まって、今も続いていることを表します。「〜からずっと」「〜の間ずっと」。','形は have / has ＋ 過去分詞。be動詞なら have been。','期間には for（for two weeks）、始まった時点には since（since Monday）を使います。','「セブに来て2週間」は I have been in Cebu for two weeks. です。been to は「行ったことがある」で、意味が変わります。'],
+  ex:[["I have been in Cebu for two weeks.",'セブに来て2週間になります。'],["She has studied English since April.",'彼女は4月から英語を勉強しています。']],
+  quiz:[{q:"I've lived here ___ 2024.",o:['for','since','during'],a:1,why:'始まった時点（2024年）には since を使います。'},{q:'今セブにいて2週間: I have been ___ Cebu for two weeks.',o:['to','in','at'],a:1,why:'今もセブにいるので in。been to は「行ったことがある」です。'}]}
+];
+
+const LQ_CATS = [
+ {cat:'word',name:'単語',how:'英語の意味を選んでください',qs:[
+  {q:'breakfast',o:['朝食','昼食','夕食']},{q:'borrow',o:['借りる','貸す','返す']},{q:'improve',o:['上達する','減らす','あきらめる']},
+  {q:'reluctant',o:['気が進まない','とても熱心な','怒っている']},{q:'meticulous',o:['細心の','大ざっぱな','気難しい']}]},
+ {cat:'phrasal',name:'句動詞',how:'英語の意味を選んでください',qs:[
+  {q:'get up',o:['起きる','寝る','座る']},{q:'look for',o:['探す','世話をする','楽しみにする']},{q:'give up',o:['あきらめる','始める','続ける']},
+  {q:'put off',o:['延期する','火を消す','服を着る']},{q:'come up with',o:['思いつく','追いつく','我慢する']}]},
+ {cat:'colloc',name:'コロケーション',how:'空いているところに入る語を選んでください',qs:[
+  {q:'___ breakfast（朝食を食べる）',o:['have','do','make']},{q:'___ a mistake（間違える）',o:['make','do','take']},{q:'___ rain（大雨）',o:['heavy','strong','big']},
+  {q:'___ a conclusion（結論に達する）',o:['reach','arrive','get']},{q:'a ___ decision（即決）',o:['snap','fast','rapid']}]},
+ {cat:'idiom',name:'イディオム',how:'英語の意味を選んでください',qs:[
+  {q:'Take care.',o:['気をつけてね','注意して聞いて','世話をして']},{q:'a piece of cake',o:['とても簡単なこと','ケーキ1切れ','少しだけ']},{q:'under the weather',o:['体調がすぐれない','天気が悪い','外にいる']},
+  {q:'break the ice',o:['場をなごませる','氷を割る','約束を破る']},{q:'once in a blue moon',o:['めったにない','月に一度','満月の夜に']}]},
+ {cat:'pattern',name:'構文',how:'空いているところに入る語を選んでください',qs:[
+  {q:"I'd like ___ order, please.",o:['to','for','at']},{q:"It's too hot ___ study.",o:['to','for','that']},{q:'If I ___ you, I would call him.',o:['were','am','be']},
+  {q:'I wish I ___ studied harder.',o:['had','have','would']},{q:"It wasn't until I came here ___ I realized it.",o:['that','when','which']}]},
+ {cat:'grammar',name:'文法',how:'空いているところに入る語を選んでください',qs:[
+  {q:'She ___ a student.',o:['is','am','are']},{q:'We ___ to the beach last weekend.',o:['went','go','going']},{q:"I've lived here ___ 2019.",o:['since','for','during']},
+  {q:'He suggested ___ the meeting.',o:['postponing','to postpone','postpone']},{q:'Hardly ___ the door when the phone rang.',o:['had he opened','he had opened','he opened']}]}
+];
+
+const lqCat = c=>LQ_CATS.find(x=>x.cat===c);
+const lqLevel = score=>Math.max(0, score-1);
+function lqLatest(upTo){
+  const m={}; (S.lvHist||[]).filter(h=>!upTo||h.d<=upTo).forEach(h=>{ m[h.cat]=h; }); return m; }
+function lqOverall(upTo){ const v=Object.values(lqLatest(upTo)); if(!v.length) return null; return v.reduce((a,h)=>a+h.lv,0)/v.length; }
+
+const LV_DEF = [
+ 'できること: ゆっくり話してもらえれば、自己紹介や身近なことについて簡単なやり取りができる。',
+ 'できること: 買い物や道を聞くなど、日常の決まった場面で必要なやり取りができる。',
+ 'できること: 旅行や身近な話題なら、言いたいことをだいたい伝えられる。',
+ 'できること: 幅広い話題で、英語を話す人と無理なくやり取りができる。',
+ 'できること: 複雑な話題でも、言葉を探さずに自然に話せる。授業・仕事・ディスカッションで英語を使いこなせる。'
+];
+const LV_MAP = [
+ ['3級','120〜220','—'],
+ ['準2級・準2級プラス','225〜545','—'],
+ ['2級','550〜780','4.0〜5.0'],
+ ['準1級','785〜940','5.5〜6.5'],
+ ['1級','945〜990','7.0〜8.0']
+];
+const LV_TEXT = ['英語の基礎から。まずは「留学で使う英語」のあいさつと授業中の表現を固めましょう。','簡単な会話ができる段階。留学で話す量を増やすと、大きく伸びるレベルです。','日常会話の土台があります。言えなかった表現を保存庫にためて、使える表現を増やしましょう。','幅広い話題で話せる段階。ワーホリの面接練習や、より自然な言い回しに挑戦できます。','高度な英語が使える段階。ディスカッションやプレゼン、仕事の英語で、より正確で自然な表現を磨きましょう。'];
+
+const AI_DEMO = {
+ '「reluctant」ってどういう意味？':{en:'reluctant',ipa:'/rɪˈlʌktənt/',ja:'気が進まない、乗り気でない',ex:'やりたくない気持ちがあって、ためらっている様子を表します。be reluctant to ~ で「〜するのに気が進まない」。unwilling よりも、迷いやためらいの気持ちが強く出ます。',ex2:[['She was reluctant to leave.','彼女は帰るのに気が進まなかった。'],["I'm a little reluctant to ask him.",'彼に頼むのは少し気が引ける。']]},
+ '「割り勘にしよう」は英語で？':{en:"Let's split the bill.",ipa:'/lets splɪt ðə bɪl/',ja:'割り勘にしよう。',ex:'split は「分ける」、the bill は「お会計」。友達同士の食事でよく使う、自然でカジュアルな言い方です。',ex2:[["Let's split the bill this time.",'今回は割り勘にしよう。'],["Do you want to split the bill?",'割り勘にする？']]},
+ '友達が言った "I\'m down" ってどういう意味？':{en:"I'm down.",ipa:'/aɪm daʊn/',ja:'いいね、乗った！',ex:'誘いに「いいね、行く！」と乗るときのカジュアルな表現です。友達同士で使います。先生や目上の人には I\'d love to. の方が無難です。',ex2:[["A: Wanna get pizza? B: I'm down!",'A: ピザ食べに行かない？ B: いいね、行く！'],["I'm down for a movie tonight.",'今夜の映画、いいね。']]},
+ 'タクシーで「ここで降ります」は？':{en:"You can drop me off here.",ipa:'/ju kən drɑːp mi ɔːf hɪr/',ja:'ここで降ろしてください。',ex:'drop off は「（車から）降ろす」。運転手に伝える自然な言い方で、Grabでも使えます。Here is fine. だけでも通じます。',ex2:[["You can drop me off here, thanks.",'ここで降ろしてください、ありがとう。'],["Could you drop me off at the next corner?",'次の角で降ろしてもらえますか？']]}
+};
+
+const TALKS = [
+ {id:'interview',name:'ワーホリの面接練習',who:'coco',role:'カフェの店長',lines:["Hi, thanks for coming in. Could you tell me about yourself?","Nice to meet you. Why do you want to work at our café?","Great. When are you available to work?","Thank you! We'll be in touch soon."],
+  fix:[["I am work in café.","I worked at a café.",'過去の経験は過去形で。a café の a も忘れずに。'],["I can work everyday.","I can work every day.",'「毎日」は every day の2語。everyday は「日常の」。'],["I want to study English.","I want to improve my English by talking with customers.",'理由を具体的にすると、熱意が伝わります。']]},
+ {id:'class',name:'授業の始まりの雑談',who:'coco',role:'先生',lines:["Good morning! How was your weekend?","Sounds fun. What do you want to practice today?","Okay, let's start with some speaking practice.","Good job today. See you tomorrow!"],
+  fix:[["I go to beach.","I went to the beach.",'週末のことは過去形。the beach の the も。'],["I want to practice speak.","I want to practice speaking.",'practice のあとは -ing の形。']]},
+ {id:'dorm',name:'新しいルームメイト',who:'mango',role:'ルームメイト',lines:["Hey, I'm your new roommate! Where are you from?","Cool! Do you want to grab dinner together later?","Great, see you at six!"],
+  fix:[["I'm from Japan. And you?","I'm from Japan. How about you?",'And you? でも通じますが、How about you? の方が自然です。']]}
+];
+
+const KEY = 'cocomango_proto2';
+const S0 = ()=>({user:'',tier:'general',trialStart:'',askCount:{d:'',n:0},talkTrialUsed:false,level:null,levelDate:'',prog:{},vault:[],tests:0,resume:{},rdesign:'classic',talkLog:0,notes:{},lvHist:[],pronDone:{}});
+let S = S0();
+try{ const raw = localStorage.getItem(KEY); if(raw) S = Object.assign(S, JSON.parse(raw)); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const today = ()=>new Date().toISOString().slice(0,10);
+const addDays = n=>{const d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+const STEPS = [1,3,7,14,30];
+const P = id=>S.prog[id]||{};
+function setProg(id,patch){ S.prog[id]=Object.assign({},P(id),patch); save(); }
+function review(obj,ok){
+  if(ok){ const st=Math.min((obj.step??-1)+1,STEPS.length-1); return {state:'known',step:st,next:addDays(STEPS[st])}; }
+  return {state:'unknown',step:-1,next:addDays(1)};
+}
+function mark(id,ok){ setProg(id,review(P(id),ok)); }
+const plain = s=>s.replace(/\[\[(.+?)\|.+?\]\]/g,'$1');
+const hl = s=>esc(s).replace(/\[\[(.+?)\|(.+?)\]\]/g,'<mark>$1</mark>');
+function say(t){ try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t.replace(/\.\.\./g,' ').replace(/~/g,'')); u.lang='en-US'; u.rate=.92; speechSynthesis.speak(u);}catch(e){} }
+const sayBtn = t=>`<button class="say" data-act="say" data-t="${esc(t)}" aria-label="音声を聞く">${I.speaker}</button>`;
+const lvTag = lv=>lv==null?'':`<span class="tag lv">${LV[lv]} <span class="en">${LV_CEFR[lv]}</span></span>`;
+const lvName = lv=>`${LV[lv]}（${LV_CEFR[lv]}）`;
+const allItems = ()=>ITEMS.concat(INTERVIEW.map(v=>({id:v.id,cat:'interview',en:v.q,ja:v.ja})));
+
+const WH_SCENES = ['仕事探し','応募の電話・メール','面接','トライアル（試し勤務）','職場の初日','シフト・休みの連絡','カフェの接客','レストランの接客','キッチン・裏方の仕事','給料・契約の確認','家探し・シェアハウス','銀行・携帯の手続き','病院・薬局','仕事を辞める・推薦状'];
+Object.assign(SCENE_DL, {
+ "wh:Are you hiring?":{roles:{coco:'カフェのスタッフ',mango:'あなた'},lines:[
+  ['mango',"Hi! Sorry to bother you. [[Are you hiring?|人を募集していますか？]]",'こんにちは！お忙しいところすみません。人を募集していますか？'],
+  ['coco',"Actually, yes. We're looking for weekend staff.",'実はそうなんです。週末のスタッフを探しています。'],
+  ['mango',"Great! I'd love to apply.",'よかった！ぜひ応募したいです。']]},
+ "wh:I'd like to drop off my resume.":{roles:{coco:'カフェのスタッフ',mango:'あなた'},lines:[
+  ['coco',"Hi, what can I do for you?",'こんにちは、どうしましたか？'],
+  ['mango',"Hi! [[I'd like to drop off my resume.|履歴書を置いていきたいのですが。]]",'こんにちは！履歴書を置いていきたいのですが。'],
+  ['coco',"Sure, I'll give it to the manager.",'わかりました、店長に渡しておきますね。'],
+  ['mango',"Thank you so much!",'ありがとうございます！']]},
+ "wh:Is the manager around?":{roles:{coco:'カフェのスタッフ',mango:'あなた'},lines:[
+  ['mango',"Hi, [[is the manager around?|店長さんはいらっしゃいますか？]]",'こんにちは、店長さんはいらっしゃいますか？'],
+  ['coco',"She's on a break right now. Can I help?",'今、休憩中なんです。代わりにご用件を聞きましょうか？'],
+  ['mango',"No worries. What time would be good to come back?",'大丈夫です。何時ごろ来れば会えますか？'],
+  ['coco',"Try around three.",'3時ごろに来てみてください。']]},
+ "wh:I'm available on weekends.":{roles:{coco:'店長',mango:'あなた'},lines:[
+  ['coco',"So, when can you work?",'それで、いつ働けますか？'],
+  ['mango',"[[I'm available on weekends.|週末は働けます。]] I can also do some weekday evenings.",'週末は働けます。平日の夜も何日かは入れます。'],
+  ['coco',"Perfect. That's exactly what we need.",'ちょうどいい。まさにそれが必要なんです。']]},
+ "wh:I have experience working in a café.":{roles:{coco:'店長',mango:'あなた'},lines:[
+  ['coco',"Have you worked in hospitality before?",'飲食・接客の仕事をしたことはありますか？'],
+  ['mango',"Yes, [[I have experience working in a café.|カフェで働いた経験があります。]] About two years in Tokyo.",'はい、カフェで働いた経験があります。東京で2年ほどです。'],
+  ['coco',"Great. Can you make coffee?",'いいですね。コーヒーはいれられますか？'],
+  ['mango',"Yes, I was a barista there.",'はい、そこではバリスタでした。']]},
+ "wh:I can start right away.":{roles:{coco:'店長',mango:'あなた'},lines:[
+  ['coco',"If we offer you the job, when could you start?",'もし採用したら、いつから働けますか？'],
+  ['mango',"[[I can start right away.|すぐに働き始められます。]]",'すぐに働き始められます。'],
+  ['coco',"Wonderful. How about a trial shift tomorrow?",'すばらしい。明日、試しにシフトに入ってみませんか？']]},
+ "wh:Can I get Friday off?":{roles:{coco:'店長',mango:'あなた'},lines:[
+  ['mango',"Hey Sam, [[can I get Friday off?|金曜日に休みをもらえますか？]] My friend is visiting from Japan.",'サム、金曜日に休みをもらえますか？日本から友達が来るんです。'],
+  ['coco',"Hmm, Fridays are busy. Can you find someone to cover?",'うーん、金曜は忙しいんだ。代わりの人を見つけられる？'],
+  ['mango',"Sure, I'll ask around and let you know.",'はい、みんなに聞いてみて連絡します。']]},
+ "wh:Could I swap shifts with you?":{roles:{coco:'同僚',mango:'あなた'},lines:[
+  ['mango',"Hey Mia, [[could I swap shifts with you?|シフトを代わってもらえますか？]] I need Friday off.",'ねえミア、シフトを代わってもらえる？金曜に休みが欲しくて。'],
+  ['coco',"Sure. Can you take my Sunday morning?",'いいよ。代わりに私の日曜の朝に入ってくれる？'],
+  ['mango',"Deal. Thanks so much!",'決まり。本当にありがとう！']]},
+ "wh:I'm calling in sick today.":{roles:{coco:'店長',mango:'あなた'},lines:[
+  ['mango',"Hi Sam, it's Yuki. Sorry, but [[I'm calling in sick today.|今日は体調不良で休みます。]]",'サム、ユキです。すみませんが、今日は体調不良で休みます。'],
+  ['coco',"Oh no. Are you okay?",'あら、大丈夫？'],
+  ['mango',"I have a fever. I'll let you know about tomorrow.",'熱があるんです。明日のことは、また連絡します。'],
+  ['coco',"Okay. Get some rest.",'わかった。ゆっくり休んでね。']]},
+ "wh:What can I get for you?":{roles:{coco:'お客さん',mango:'あなた（店員）'},lines:[
+  ['mango',"Hi there! [[What can I get for you?|ご注文は何になさいますか？]]",'いらっしゃいませ！ご注文は何になさいますか？'],
+  ['coco',"Can I get a medium cappuccino?",'カプチーノのMサイズをください。'],
+  ['mango',"Sure thing.",'かしこまりました。']]},
+ "wh:For here or to go?":{roles:{coco:'お客さん',mango:'あなた（店員）'},lines:[
+  ['coco',"A small latte, please.",'ラテのSサイズをお願いします。'],
+  ['mango',"Sure. [[For here or to go?|店内ですか、お持ち帰りですか？]]",'かしこまりました。店内ですか、お持ち帰りですか？'],
+  ['coco',"To go, please.",'持ち帰りで。']]},
+ "wh:It'll be ready in a few minutes.":{roles:{coco:'お客さん',mango:'あなた（店員）'},lines:[
+  ['coco',"How long will it take?",'どのくらいかかりますか？'],
+  ['mango',"[[It'll be ready in a few minutes.|数分でできあがります。]] I'll call your name.",'数分でできあがります。お名前をお呼びしますね。'],
+  ['coco',"Great, thanks.",'わかりました、ありがとう。']]}
+});
+Object.assign(SYN, {
+ "wh:I'd like to drop off my resume.":[["I'd like to hand in my CV.",'オーストラリア・イギリスでは resume より CV をよく使う']],
+ "wh:For here or to go?":[["Eat in or take away?",'オーストラリア・イギリスでの言い方']],
+ "wh:I'm calling in sick today.":[["I can't come in today. I'm not feeling well.",'くわしく言うとき']],
+ "wh:Could I swap shifts with you?":[["Could you cover my shift?",'相手に代わりに入ってもらうだけのとき']]
+});
+
+const WH_SIMS = [
+ {id:'sim:walkin',scene:'仕事探し',title:'カフェに履歴書を配りに行く',roles:{coco:'カフェのスタッフ',mango:'あなた'},
+  setup:'あなたは仕事を探していて、近所のカフェに履歴書を持って入りました。カウンターのスタッフが話しかけてきます。',
+  steps:[
+   {en:"Hi there, what can I do for you?",ja:'こんにちは、どうしましたか？',opts:[
+    ["Give me a job, please.",'仕事をください。',0,'直接すぎて、失礼に聞こえます。'],
+    ["Hi! I was wondering if you're hiring at the moment.",'こんにちは！今、人を募集しているかなと思いまして。',3,'I was wondering if ~ で、やわらかく丁寧に聞けています。'],
+    ["Are you hiring?",'募集していますか？',2,'通じます。最初に Hi! を付けると、ぐっと感じが良くなります。']]},
+   {en:"We might be. What kind of work are you looking for?",ja:'募集するかもしれません。どんな仕事を探していますか？',opts:[
+    ["Anything is OK.",'何でもいいです。',1,'やる気がないように聞こえることがあります。具体的に言いましょう。'],
+    ["I want money.",'お金が欲しいです。',0,'本音でも、言わないほうがいい一言です。'],
+    ["I'm looking for a barista or floor staff position.",'バリスタか、ホールスタッフの仕事を探しています。',3,'やりたい仕事がはっきり伝わります。']]},
+   {en:"Okay. Do you have a resume with you?",ja:'なるほど。履歴書は持っていますか？',opts:[
+    ["Yes, here you go. My availability is on the back.",'はい、どうぞ。働ける曜日は裏に書いてあります。',3,'here you go と、働ける曜日まで伝えられて満点です。'],
+    ["Yes.",'はい。',2,'通じますが、渡すときは here you go を添えましょう。'],
+    ["No resume.",'履歴書はないです。',0,'持っていないなら "Not with me, but I can email it to you." のように代わりを伝えます。']]},
+   {en:"Great. I'll pass it on to the manager.",ja:'ありがとう。店長に渡しておきますね。',opts:[
+    ["When will you call me? Today?",'いつ電話をくれますか？今日？',1,'急かしすぎです。聞くなら "When would be a good time to follow up?" と。'],
+    ["Thank you so much. Have a great day!",'ありがとうございます。良い一日を！',3,'最後の印象が良くなる、自然な締めくくりです。'],
+    ["OK.",'わかりました。',2,'通じますが、お礼を一言添えたいところです。']]}]},
+ {id:'sim:interview',scene:'面接',title:'カフェの面接を受ける',roles:{coco:'店長',mango:'あなた'},
+  setup:'履歴書を渡したカフェから連絡があり、面接に来ました。店長と向かい合って座っています。',
+  steps:[
+   {en:"Thanks for coming in. Could you tell me a bit about yourself?",ja:'来てくれてありがとう。少し自己紹介をしてもらえますか？',opts:[
+    ["I'm Yuki from Japan. I'm here on a working holiday.",'日本から来たユキです。ワーホリで来ています。',2,'通じます。仕事の経験や強みを一言足すと、印象が上がります。'],
+    ["Sure. I'm Yuki from Japan. I worked at a café for two years, so I'm used to busy shifts.",'はい。日本から来たユキです。カフェで2年働いたので、忙しいシフトには慣れています。',3,'仕事に関係する経験を入れられていて、とても良い答えです。'],
+    ["I'm Yuki. I'm 24 years old. I like sushi.",'ユキです。24歳です。お寿司が好きです。',1,'年齢や好きな食べ物より、仕事に関係することを話しましょう。']]},
+   {en:"Why do you want to work here?",ja:'なぜここで働きたいのですか？',opts:[
+    ["Because I need money.",'お金が必要だからです。',0,'本音でも、面接では言わないほうがいい答えです。'],
+    ["Because it's close to my house.",'家から近いからです。',1,'理由として弱く聞こえます。お店の良いところを挙げましょう。'],
+    ["I love the atmosphere here, and I'd like to improve my English by talking with customers.",'ここの雰囲気が好きで、お客さんと話して英語を上達させたいからです。',3,'お店の良いところと、自分の目的をつなげられています。']]},
+   {en:"When are you available?",ja:'いつ働けますか？',opts:[
+    ["I'm available on weekdays and weekends, and I can start right away.",'平日も週末も働けて、すぐに始められます。',3,'働ける日と、始められる時期まで伝えられています。'],
+    ["Anytime.",'いつでも。',1,'短すぎて、少しぶっきらぼうに聞こえます。具体的な曜日を言いましょう。'],
+    ["I'm free on weekends.",'週末はひまです。',2,'通じます。仕事の場面では free より available の方が自然です。']]},
+   {en:"Do you have any questions for us?",ja:'何か質問はありますか？',opts:[
+    ["No.",'ないです。',1,'何も聞かないと、興味がないように見えることがあります。'],
+    ["Yes. What would a typical shift look like?",'はい。ふだんのシフトはどんな感じですか？',3,'仕事への関心が伝わる、良い質問です。'],
+    ["How much is the pay? When is payday?",'給料はいくらですか？給料日はいつ？',1,'お金のことだけを聞くのは避けます。聞くなら、ほかの質問のあとに一言で。']]}]},
+ {id:'sim:sick',scene:'シフト・休みの連絡',title:'体調が悪く、店長に電話で休みを伝える',roles:{coco:'店長',mango:'あなた'},
+  setup:'朝起きたら熱があります。今日は午後からシフトです。店長のサムに電話をかけました。',
+  steps:[
+   {en:"Hello, this is Sam.",ja:'もしもし、サムです。',opts:[
+    ["Hi Sam, it's Yuki. I'm sorry, but I'm not feeling well today.",'サム、ユキです。すみませんが、今日は体調が悪くて。',3,'名乗って、お詫びと用件をすぐに伝えられています。'],
+    ["I can't come today. Bye.",'今日は行けません。じゃあ。',0,'名乗らず一方的に切るのは、職場では大きなマイナスです。'],
+    ["Hi, it's Yuki. I'm sick.",'ユキです。病気です。',2,'通じます。I\'m sorry を添えると、ずっと丁寧です。']]},
+   {en:"Oh no. What's wrong?",ja:'あら。どうしたの？',opts:[
+    ["I have a headache.",'頭が痛いです。',2,'通じます。働けないことまで言うと、より伝わります。'],
+    ["I have a fever and a sore throat, so I don't think I can work today.",'熱とのどの痛みがあって、今日は働けそうにありません。',3,'症状と、働けないことがはっきり伝わります。'],
+    ["I'm just sick.",'ただ具合が悪いだけです。',1,'少し投げやりに聞こえます。症状を一言入れましょう。']]},
+   {en:"Okay. Can you find someone to cover your shift?",ja:'わかった。代わりにシフトに入れる人を探せる？',opts:[
+    ["That's not my job.",'それは私の仕事じゃないです。',0,'職場によっては、自分で代わりを探すのが決まりです。'],
+    ["Sure, I'll ask Mia if she can cover for me and let you know.",'はい、ミアに代われるか聞いて、連絡します。',3,'具体的に動くことと、あとで連絡することまで言えています。'],
+    ["I'll try.",'やってみます。',2,'通じます。結果を連絡すると一言足すと安心されます。']]},
+   {en:"Thanks. Get some rest.",ja:'ありがとう。ゆっくり休んで。',opts:[
+    ["OK, see you tomorrow maybe.",'じゃあ、たぶん明日。',1,'あいまいです。"I\'ll let you know about tomorrow." と言いましょう。'],
+    ["Thanks.",'ありがとう。',2,'通じます。急な連絡へのお詫びを添えるとより良いです。'],
+    ["Thank you. I'm really sorry for the short notice.",'ありがとうございます。急な連絡で本当にすみません。',3,'急に休むことへのお詫びまで言えて、信頼につながります。']]}]},
+ {id:'sim:cafe',scene:'カフェの接客',title:'レジで注文を受ける',roles:{coco:'お客さん',mango:'あなた（店員）'},
+  setup:'あなたはカフェのレジに立っています。お客さんがやって来ました。',
+  steps:[
+   {en:"Hi there!",ja:'こんにちは！',opts:[
+    ["Order?",'注文？',0,'ぶっきらぼうすぎます。'],
+    ["What do you want?",'何が欲しいの？',1,'意味は通じますが、店員の言い方としては失礼に聞こえます。'],
+    ["Hi! What can I get for you?",'いらっしゃいませ！ご注文は何になさいますか？',3,'カフェで一番よく使う、自然な聞き方です。']]},
+   {en:"Can I get a large latte?",ja:'ラテのLサイズをください。',opts:[
+    ["Sure. For here or to go?",'かしこまりました。店内ですか、お持ち帰りですか？',3,'次に必要なことをすぐ確認できています。'],
+    ["OK.",'はい。',2,'通じます。店内か持ち帰りかも確認しましょう。'],
+    ["Large latte. That's all?",'ラテL。それだけ？',1,'急かすように聞こえます。聞くなら "Anything else?" と。']]},
+   {en:"To go, please. Oh, and could I get it with oat milk?",ja:'持ち帰りで。あ、オーツミルクにできますか？',opts:[
+    ["Yes.",'はい。',2,'通じます。追加料金があるなら、ここで伝えます。'],
+    ["No problem. Oat milk is an extra 80 cents. Is that okay?",'大丈夫ですよ。オーツミルクは80セント追加ですが、よろしいですか？',3,'追加料金まで先に伝えて、確認できています。'],
+    ["No oat milk.",'オーツミルクないです。',0,'ないときは "Sorry, we don\'t have oat milk." と丁寧に。']]},
+   {en:"That's fine.",ja:'大丈夫です。',opts:[
+    ["Wait, please.",'待ってください。',1,'命令のように聞こえます。'],
+    ["Great. It'll be ready in a few minutes. I'll call your name.",'ありがとうございます。数分でできます。お名前をお呼びしますね。',3,'どれくらい待つか、どう受け取るかまで伝えられています。'],
+    ["Thank you!",'ありがとうございます！',2,'感じは良いです。待ち時間も伝えるとさらに親切です。']]}]}
+];
+const SIM_MARK = ['×','△','○','◎'], SIM_WORD = ['避けたい','もう一歩','通じる','とても自然'];
+let SIM = {id:null,i:0,picks:[]};
+function simDetail(x){
+  if(SIM.id!==x.id) SIM={id:x.id,i:0,picks:[]};
+  const done=SIM.picks.length, end=done>=x.steps.length;
+  const bub=(who,en,ja,extra='')=>`<div class="dlg-line ${who==='mango'?'right':''}">${CH[who].svg(44)}<div class="bub"><div class="who">${esc(x.roles[who])}</div><div class="row"><span class="en">${esc(en)}</span>${sayBtn(en)}</div><div class="muted small">${esc(ja)}</div>${extra}</div></div>`;
+  let h='';
+  x.steps.forEach((s,i)=>{ if(i>done) return;
+    h+=bub('coco',s.en,s.ja);
+    if(i<done){ const o=s.opts[SIM.picks[i]], best=s.opts.find(p=>p[2]===3);
+      h+=bub('mango',o[0],o[1],`<p class="sim-fb g${o[2]}"><b>${SIM_MARK[o[2]]} ${SIM_WORD[o[2]]}</b>　${esc(o[3])}</p>${o[2]<3?`<p class="small" style="margin:4px 0 0">おすすめ: <span class="en">${esc(best[0])}</span> ${sayBtn(best[0])}</p>`:''}`); }
+    else h+=`<p class="filter-l" style="margin:4px 0 6px">あなたの返事を選んでください</p><div class="sim-opts">${s.opts.map((o,k)=>`<button class="sim-opt" data-act="simpick" data-k="${k}"><span class="en">${esc(o[0])}</span><span class="muted small">${esc(o[1])}</span></button>`).join('')}</div>`;
+  });
+  const score=SIM.picks.filter((p,i)=>x.steps[i].opts[p][2]===3).length;
+  return `<div class="panel detail">
+    <div class="row" style="justify-content:space-between"><div><span class="tag">シミュレーション</span> <span class="tag">${esc(x.scene)}</span></div>${favBtn(x.id)}</div>
+    <h2 style="margin:6px 0 4px">${esc(x.title)}</h2>
+    <div class="note" style="margin-bottom:12px"><b>場面</b><br>${esc(x.setup)}</div>
+    ${h}
+    ${end?`<div class="sim-end"><p style="margin:0"><b>結果: ◎ ${score} / ${x.steps.length}</b></p><p class="small muted" style="margin:4px 0 8px">${score===x.steps.length?'すべて自然な返事でした。実際の場面でも、そのまま使えます。':'◎以外の返事には、おすすめの言い方を出しています。もう一度やると、身につきます。'}</p><button class="btn primary sm" data-act="simretry">もう一度</button></div>`:''}
+  </div>`;
+}
+
+const GR_CH = [{"n": "入門の基礎", "u": [["基1", "be動詞（am / is / are）と、その疑問文", "A1"], ["基3", "人称代名詞（I / my / me / mine）", "A1"], ["基4", "命令文と Let's", "A1"], ["基5", "疑問詞（what / where / when / who / why / how）", "A1"], ["基6", "数・時刻・日付の言い方", "A1"], ["基7", "否定文のまとめ（isn't / don't / can't など）", "A1"]]}, {"n": "時制（現在と過去）", "u": [["1", "現在進行形（I am doing）", "A1"], ["2", "現在形（I do / he does）と、否定文・疑問文", "A1"], ["101", "be動詞の過去形（was / were）", "A1"], ["3", "現在形と現在進行形の使い分け", "A2"], ["4", "過去形（I did）と、否定文・疑問文（didn't / Did you ~?）", "A1"], ["102", "規則動詞と不規則動詞", "A1"], ["5", "過去進行形（I was doing）と、過去形との使い分け", "A2"]]}, {"n": "現在完了と過去", "u": [["6", "現在完了（I have done）と、経験を聞く Have you ever ~?", "A2"], ["7", "現在完了進行形（I have been doing）", "B1"], ["8", "期間の言い方（how long / for / since / ago）", "A2"], ["9", "現在完了と過去形の違い", "B1"], ["10", "過去完了（I had done）", "B1"], ["11", "過去完了進行形（I had been doing）", "B2"], ["12", "have と have got", "A2"], ["13", "used to", "A2"]]}, {"n": "未来", "u": [["14", "現在形・進行形で未来を言う", "A2"], ["15", "be going to", "A1"], ["16", "will と shall", "A2"], ["17", "will と be going to の違い", "B1"], ["18", "未来進行形・未来完了（will be doing / will have done）", "B2"], ["19", "when・if のあとは現在形", "A2"]]}, {"n": "助動詞", "u": [["20", "can / could / be able to", "A2"], ["21", "could と could have done", "B1"], ["22", "must と can't（推量）", "B1"], ["23", "may と might", "A2"], ["24", "have to と must", "A2"], ["25", "mustn't と don't have to / don't need to", "A2"], ["26", "should", "A2"], ["27", "had better と it's time", "B1"], ["28", "would", "B1"], ["29", "お願い・申し出・許可・誘い", "A2"]]}, {"n": "if と wish（仮定法）", "u": [["30", "if I do と if I did の違い", "B1"], ["31", "今の「もしも」（if I knew / I wish I knew）", "B1"], ["32", "過去の「もしも」（if I had known）", "B2"], ["33", "wish の使い方", "B2"]]}, {"n": "受け身", "u": [["34", "受け身（is done / was done）", "A2"], ["35", "受け身のいろいろな形", "B1"], ["36", "It is said that ~ / be supposed to", "B2"], ["37", "have something done", "B2"]]}, {"n": "人の言ったことを伝える", "u": [["38", "人の言ったことを伝える（He said that ~）", "B1"]]}, {"n": "疑問文と助動詞", "u": [["39", "疑問文の作り方", "A1"], ["103", "疑問詞の疑問文のいろいろ（Who saw you? / What is it like?）", "A2"], ["40", "文の中の疑問文（Do you know where ~?）", "A2"], ["41", "短い返事（I think so / So do I / Neither do I）", "A2"], ["42", "付加疑問（~, isn't it?）", "B1"], ["104", "be / have / do の使い分け", "A2"]]}, {"n": "-ing と to", "u": [["43", "動詞 ＋ -ing（enjoy doing）", "A2"], ["44", "動詞 ＋ to（decide to）", "A2"], ["45", "動詞 ＋ 人 ＋ to（I want you to ~）", "A2"], ["46", "-ing と to で意味が変わる動詞", "B1"], ["47", "prefer と would rather", "B1"], ["48", "前置詞 ＋ -ing", "B1"], ["49", "be used to と get used to", "B1"], ["50", "動詞 ＋ 前置詞 ＋ -ing", "B2"], ["51", "There's no point in ~ing / It's worth ~ing", "B2"], ["52", "目的を言う（to / for / so that）", "A2"], ["53", "形容詞 ＋ to（easy to ~ / afraid to ~）", "B1"], ["54", "see 人 do と see 人 doing", "B2"], ["55", "-ing で始まるかたまり", "B2"]]}, {"n": "よく使う動詞（go / get / do / make / have）", "u": [["112", "go の使い方（go to / go for / go ~ing）", "A1"], ["113", "get の使い方", "A2"], ["114", "do と make", "A2"], ["115", "have の使い方（have breakfast など）", "A1"]]}, {"n": "名詞と冠詞", "u": [["56", "数えられる名詞と数えられない名詞", "A2"], ["57", "a / an と some", "A1"], ["58", "a / an と the", "A1"], ["59", "the を付けるとき・付けないとき", "A2"], ["60", "地名・固有名詞と the", "A2"], ["61", "名詞の複数形と、単数・複数の使い分け", "A1"], ["62", "名詞 ＋ 名詞（a bus driver）", "B1"], ["63", "'s と of", "A2"]]}, {"n": "代名詞と数量を表す言葉", "u": [["64", "myself / yourself など", "A2"], ["105", "this / that / these / those", "A1"], ["106", "one / ones", "A2"], ["107", "there is / there are（〜がある）", "A1"], ["65", "a friend of mine / on my own", "B1"], ["66", "there と it", "A2"], ["67", "some と any", "A1"], ["68", "no / none / nothing、somebody / anything など", "A2"], ["69", "much / many / few / little / a lot", "A2"], ["70", "all / most / none of など", "A2"], ["71", "both / neither / either", "A2"], ["72", "all / every / whole / each", "A2"]]}, {"n": "関係詞（名詞を後ろから説明する）", "u": [["73", "who / that / which", "A2"], ["74", "whose / whom / where", "B1"], ["75", "コンマ付きの説明（, who ~）", "B2"], ["76", "-ing と -ed で名詞を説明する", "B2"]]}, {"n": "形容詞と副詞", "u": [["77", "-ing と -ed の形容詞（boring と bored）", "A2"], ["78", "形容詞の使い方と並べ方（look tired など）", "A2"], ["79", "形容詞と副詞（quick と quickly）", "A2"], ["80", "so と such", "B1"], ["81", "enough と too", "A2"], ["82", "quite / pretty / rather / fairly", "B2"], ["83", "比較級（cheaper / more ~ than / as ~ as）", "A2"], ["84", "最上級（the cheapest / the most ~）", "A2"], ["85", "語順（動詞・目的語・場所・時、副詞の位置）", "A2"], ["108", "give 人 物 と give 物 to 人", "A2"], ["86", "still / yet / already（現在完了と一緒に使う）", "A2"], ["87", "even", "B2"]]}, {"n": "接続詞と前置詞", "u": [["94", "from ~ to / until / by / by the time", "A2"], ["88", "although / in spite of / despite", "B1"], ["109", "and / but / or / so / because", "A1"], ["89", "in case", "B2"], ["90", "unless / as long as", "B2"], ["91", "as のいろいろな意味", "B2"], ["92", "like と as / as if", "B1"], ["93", "before / after / during / while", "A2"]]}, {"n": "前置詞", "u": [["95", "時を表す at / on / in", "A1"], ["96", "on time と in time / at the end と in the end", "B1"], ["97", "場所を表す in / at / on", "A2"], ["110", "位置を表す前置詞（under / behind / next to など）", "A1"], ["98", "to / at / in / into", "A2"], ["111", "動きを表す前置詞（up / over / through など）", "A2"], ["99", "in / on / at のそのほかの使い方と by", "A2"], ["100", "名詞・形容詞・動詞と前置詞の組み合わせ", "A2"]]}];
+const GR_LINK = {'基1':'gr:be','8':'gr:perfect'};
+const findAny = id=>WH_SIMS.find(x=>x.id===id)||ITEMS.find(x=>x.id===id)||DIALOGS.find(x=>x.id===id)||GRAMMAR.find(x=>x.id===id)||INTERVIEW.find(x=>x.id===id);
+function dueCount(){ const t=today(); let n=0; for(const k in S.prog){ if(S.prog[k].next && S.prog[k].next<=t) n++; } n+=S.vault.filter(v=>v.next && v.next<=t).length; return n; }
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+const TIER_NAME = {general:'一般（面談前）', counseled:'面談実施者（お試し）', customer:'成約者'};
+const TRIAL_DAYS = 30;
+const LIMIT = {general:{ask:0,vault:0}, counseled:{ask:3,vault:30}, customer:{ask:20,vault:Infinity}};
+const CODES = {MENDAN:'counseled', SEIYAKU:'customer'};
+const STUDY_SCENES = ['授業中','学校生活','寮・生活'];
+function trialLeft(){ if(!S.trialStart) return TRIAL_DAYS; return TRIAL_DAYS - Math.floor((Date.now()-new Date(S.trialStart+'T00:00:00').getTime())/86400000); }
+function tier(){ if(S.tier==='counseled' && trialLeft()<=0) return 'general'; return S.tier||'general'; }
+const expired = ()=>S.tier==='counseled' && trialLeft()<=0;
+function allowed(x){
+  const t=tier(); if(t==='customer') return true;
+  if(t==='general'){ if(x.lines) return x.id==='dl:class'; return x.cat==='word' && x.lv===0; }
+  if(String(x.id).startsWith('iv:')) return true;
+  if(x.steps) return x.id==='sim:walkin';
+  if(x.quiz) return x.id==='gr:be';
+  if(x.lines) return STUDY_SCENES.includes(x.scene) ? x.scene==='授業中' : x.lv<=1;
+  if(x.cat==='study') return x.scene==='授業中';
+  if(x.cat==='wh') return false;
+  return x.lv<=1;
+}
+function feature(f){
+  const t=tier(); if(t==='customer') return true; if(t==='general') return false; return f!=='resume';
+}
+function askLeft(){ const max=LIMIT[tier()].ask; return S.askCount.d!==today() ? max : Math.max(0,max-S.askCount.n); }
+function useAsk(){ if(S.askCount.d!==today()) S.askCount={d:today(),n:0}; S.askCount.n++; save(); }
+const vaultRoom = ()=>LIMIT[tier()].vault - S.vault.length;
+function lockMsg(){ return tier()==='general' ? 'この機能・内容は、無料カウンセリング（面談）を受けると使えます。' : 'この機能・内容は、成約すると使えます。'; }
+function upsell(title){ return `<div class="panel lock">${coco(56)}<div><h3>${esc(title||lockMsg())}</h3><p class="muted small">${tier()==='general'?`面談を受けた方は、${TRIAL_DAYS}日間のお試しで多くの機能を使えます。`:'成約すると、すべての機能を、留学が終わったあとも使えます。'}</p><button class="btn cta" data-act="upsell">無料カウンセリングで相談する</button><p class="muted small upsell-msg" role="status"></p></div></div>`; }
+function toast(m){ let el=document.getElementById('toast'); if(!el){ el=document.createElement('div'); el.id='toast'; el.setAttribute('role','status'); document.body.appendChild(el);} el.textContent=m; el.classList.add('show'); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('show'),3500); }
+
+let R = {v:'home', cat:null, lv:'all', sel:null, scene:'あいさつ'};
+let LQS = {cat:null,i:0,score:0,pick:null,qs:[],done:false};
+let LQ_SERIES = 'all';
+let T = {setup:{src:'study',lv:'all',dir:'ja2en'}, qs:null, i:0, score:0, pick:null};
+let ASK = {q:'',a:null,fb:null};
+let TALK = {id:null,msgs:[],step:0,done:false};
+let PRON = {id:null,url:null,rec:null,result:''};
+let GQ = {};
+let RQ = {i:-1,answers:[]};
+
+const NAV = [['home','ホーム',I.home],['learn','学ぶ',I.book],['ask','AIに聞く',I.chat],['vault','保存庫',I.vault],['test','テスト',I.test]];
+const NAV2 = [['level','レベル診断',I.level],['pron','発音講座',I.mic],['talk','AI英会話',I.chat],['resume','履歴書',I.doc],['guide','手引書',I.guide],['me','マイページ',I.me]];
+function shell(){
+  const FEAT = {ask:'ask',vault:'vault',talk:'talk',resume:'resume'};
+  const lk = v=> FEAT[v] && !feature(FEAT[v]) ? `<span class="lockmark" aria-label="鍵">${I.lock}</span>` : '';
+  const side =`<nav class="side" aria-label="メニュー">
+    <button class="brand" data-act="go" data-v="home">${mango(34)}<span>ココマンゴー英語<small>試作2（名前は仮）</small></span></button>
+    ${NAV.filter(n=>n[0]!=='ask').map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
+    <div class="grp">ほかの機能</div>
+    ${NAV2.map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
+    <div class="grp">利用区分: ${TIER_NAME[tier()]}</div>
+    <button class="ask-cta" data-act="go" data-v="ask">${I.chat}<span>言えなかった表現を<br>AIに聞く</span></button>
+  </nav>`;
+  const top = `<header class="top"><button class="brand" data-act="go" data-v="home">${mango(30)}<span>ココマンゴー英語<small>試作2（名前は仮）</small></span></button>
+    <div class="top-links"><button class="icon-btn" data-act="go" data-v="guide">手引書</button><button class="icon-btn" data-act="go" data-v="me">マイページ</button></div></header>`;
+  const tab = `<nav class="tabbar" aria-label="メインメニュー">${NAV.map(n=> n[0]==='ask'
+     ? `<button class="ask ${R.v==='ask'?'on':''}" data-act="go" data-v="ask"><span class="bubble">${n[2]}</span>${n[1]}</button>`
+     : `<button class="${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}</button>`).join('')}</nav>`;
+  return side + `<div>${top}<main id="main"></main></div>` + tab;
+}
+function render(){
+  if(!S.user){ $('#app').innerHTML = `<main id="main" style="max-width:560px">${V.welcome()}</main>`; return; }
+  $('#app').innerHTML = shell();
+  $('#main').innerHTML = (V[R.v]||V.home)();
+  after();
+}
+function go(v,extra){ R = Object.assign({}, R, {v}, extra||{}); render(); window.scrollTo(0,0); }
+function rerender(){ const y=window.scrollY;
+  const xs=[...document.querySelectorAll('#main .chips')].map(c=>c.scrollLeft);
+  $('#main').innerHTML=(V[R.v]||V.home)(); after(); window.scrollTo(0,y);
+  document.querySelectorAll('#main .chips').forEach((c,i)=>{ if(xs[i]!=null) c.scrollLeft=xs[i];
+    const on=c.querySelector('.chip.on'); if(!on) return;
+    const l=on.offsetLeft-c.offsetLeft, r=l+on.offsetWidth;
+    if(l<c.scrollLeft+8 || r>c.scrollLeft+c.clientWidth-8) c.scrollLeft=Math.max(0,l-(c.clientWidth-on.offsetWidth)/2); });
+}
+function after(){ const f=$('[data-autofocus]'); if(f) f.focus(); if(typeof fitCV==='function') requestAnimationFrame(fitCV); }
+
+const V = {};
+
+V.welcome = ()=>`<div style="padding-top:8vh">
+  <div class="row" style="gap:4px">${coco(84)}${mango(84)}</div>
+  <h1>留学で「言えなかった」を、次は言えるように。</h1>
+  <p class="muted">フィリピン留学の前と留学中に使う英語アプリの試作です。ココ（先生役）とマンゴー（一緒に学ぶ仲間）が案内します。キャラクターの名前と絵は仮です。</p>
+  <div class="panel stack" style="margin-top:16px">
+    <div><label class="f" for="w-name">ニックネーム</label><input type="text" id="w-name" placeholder="例: ユキ" autocomplete="nickname"></div>
+    <div><label class="f" for="w-code">招待コード（面談・成約のときにお渡しします）</label><input type="text" id="w-code" placeholder="お持ちでなければ空欄のまま"></div>
+    <p class="muted small" style="margin:0">試作用のコード: 空欄＝一般（面談前）、MENDAN＝面談実施者（${TRIAL_DAYS}日のお試し）、SEIYAKU＝成約者。</p>
+    <button class="btn primary" data-act="login">はじめる</button>
+    <p class="muted small">試作では、ニックネームと学習記録をこの端末の中にだけ保存します。本番は、メールアドレスかGoogleでログインし、招待した人だけが使えるようにします。</p>
+  </div></div>`;
+
+V.home = ()=>{
+  const due = dueCount(), known = Object.values(S.prog).filter(p=>p.state==='known').length;
+  const lvLine = S.level==null ? 'まずはレベル診断から。カテゴリーごとに5問で、今のレベルが分かります。' : `今のレベルは「${lvName(S.level)}」。${esc(LV_TEXT[S.level])}`;
+  const latest = S.vault.slice(-2).reverse();
+  const t = tier();
+  const banner = t==='customer' ? ''
+    : t==='counseled' ? `<div class="note tier"><span>お試し中（あと${trialLeft()}日）: AI即答は今日あと${askLeft()}回、保存庫はあと${Math.max(0,vaultRoom())}件。成約すると、すべての機能を留学のあとも使えます。</span><button class="btn sm cta" data-act="upsell">相談する</button><span class="upsell-msg small"></span></div>`
+    : `<div class="note tier"><span>${expired()?`お試しの期限が切れました。保存庫の${S.vault.length}件は残っています。成約すると続きから使えます。`:`面談前は、レベル診断・テスト・一部の内容だけ使えます。無料カウンセリングを受けると、${TRIAL_DAYS}日間のお試しで多くの機能が使えます。`}</span><button class="btn sm cta" data-act="upsell">無料カウンセリングを相談する</button><span class="upsell-msg small"></span></div>`;
+  return `<div class="greet">${coco(64)}<div class="speech"><b>ココ（仮）</b>${esc(S.user)}さん、${lvLine}</div></div>
+  ${banner}
+  <button class="hero-study" data-act="learn" data-cat="study"><div><h2>留学で使う英語</h2><p>授業中・学校生活・寮と生活で、そのまま使える表現と会話</p></div><div class="pair">${coco(52)}${mango(52)}</div></button>
+  <div class="home-grid">
+    <div class="tile today"><div class="num">${due}</div><div><b>今日の復習</b><span>覚えた ${known}件・保存庫 ${S.vault.length}件</span></div></div>
+    <button class="tile" data-act="go" data-v="level"><b>レベル診断</b><span>${S.level==null?'カテゴリーごとに5問':'記録とグラフを見る'}</span></button>
+    <button class="tile" data-act="go" data-v="pron"><b>発音講座</b><span>発音記号・ルール・聞き分け・言ってみる</span></button>
+    <button class="tile" data-act="go" data-v="talk"><b>AI英会話</b><span>面接・授業・ルームメイトと練習</span></button>
+    <button class="tile" data-act="learn" data-cat="wh"><b>ワーホリ対策</b><span>場面ごとのフレーズとシミュレーション</span></button>
+    <button class="tile" data-act="go" data-v="resume"><b>履歴書をつくる</b><span>AIと一問一答で強みを見つける</span></button>
+    <button class="tile" data-act="learn" data-cat="grammar"><b>文法</b><span>レベル別の単元と確認問題</span></button>
+  </div>
+  <h2>保存庫の新着</h2>
+  ${latest.length ? `<div class="list">${latest.map(v=>`<button class="li" data-act="go" data-v="vault"><span><span class="t">${esc(v.en||'（メモ）')}</span><br><span class="s">${esc(v.ja)}</span></span><span class="tag">${esc(v.scene||'未分類')}</span></button>`).join('')}</div>`
+   : `<div class="panel empty">${mango(56)}<p style="margin-top:8px">言えなかった表現は、AIに聞いて保存庫へ。<br>次に使えるように、復習で何度も出てきます。</p><button class="btn mango" data-act="go" data-v="ask">AIに聞いてみる</button></div>`}`;
+};
+
+V.level = ()=>{
+  const cta = COUNSEL_URL ? `<a class="btn cta" href="${esc(COUNSEL_URL)}" target="_blank" rel="noopener">この結果で無料カウンセリングを申し込む</a>`
+    : `<button class="btn cta" data-act="counsel">この結果で無料カウンセリングを申し込む</button><p class="muted small" id="cmsg" role="status"></p>`;
+  if(LQS.cat && !LQS.done){
+    const c=lqCat(LQS.cat), q=LQS.qs[LQS.i], ans=LQS.pick!==null, isEn=!/[ぁ-んァ-ン一-龥]/.test(q.o[0]);
+    return `<h1>レベル診断：${c.name}</h1><div class="bar" aria-hidden="true"><i style="width:${LQS.i/LQS.qs.length*100}%"></i></div>
+    <div class="panel" style="margin-top:12px"><p class="muted small">${LQS.i+1} / ${LQS.qs.length}　${c.how}</p><p class="q-big en">${esc(q.q)}</p>
+    ${q.opts.map((o,i)=>`<button class="opt ${isEn?'en':''} ${ans?(o===q.o[0]?'right':(i===LQS.pick?'wrong':'')):''}" data-act="lvpick" data-i="${i}" ${ans?'disabled':''}><kbd>${i+1}</kbd>${esc(o)}</button>`).join('')}
+    ${ans?`<button class="btn primary" data-act="lvnext" data-autofocus>${LQS.i+1<LQS.qs.length?'次へ':'結果を見る'}</button>`:''}</div>
+    <button class="btn sm" style="margin-top:10px" data-act="lvreset">やめて一覧に戻る</button>`;
+  }
+  const latest=lqLatest(), ov=lqOverall(), taken=Object.keys(latest).length;
+  let head='';
+  if(LQS.done){ const c=lqCat(LQS.cat), lv=lqLevel(LQS.score);
+    head=`<div class="panel" style="margin-bottom:12px"><p class="muted small" style="margin:0">${c.name}の結果（${LQS.score} / 5問正解）</p>
+      <div style="font-size:26px;font-weight:700;color:var(--teal-ink)">${LV[lv]} <span class="en" style="font-size:16px">${LV_CEFR[lv]}</span></div>
+      <p class="small" style="margin:0">${esc(LV_SUB[lv])}</p></div>`; }
+  const olv = ov==null?null:Math.round(ov);
+  return `<h1>レベル診断</h1>${head}
+  <div class="panel"><div class="greet" style="margin:0">${olv!=null&&olv>=2?mango(64):coco(64)}<div>
+    <p class="muted small" style="margin:0">今の総合レベル${taken?`（${taken} / ${LQ_CATS.length}カテゴリーの平均）`:''}</p>
+    ${olv==null?`<div style="font-size:20px;font-weight:700">まだ診断していません</div><p class="small" style="margin:0">カテゴリーを1つ選んで、5問から始めましょう。</p>`
+      :`<div style="font-size:30px;font-weight:700;color:var(--teal-ink)">${LV[olv]} <span class="en" style="font-size:18px">${LV_CEFR[olv]}</span></div><p class="small" style="margin:0;color:var(--teal-ink)">${LV_SUB[olv]}</p>`}
+  </div></div>
+  ${olv!=null?`<p class="small" style="margin-top:10px">${esc(LV_TEXT[olv])}　<button class="linkbtn" data-act="lvguide">レベルの目安</button></p>`:''}
+  <div class="lq-grid">${LQ_CATS.map(c=>{const h=latest[c.cat];return `<div class="lq-cell"><div class="lq-name">${c.name}</div>
+    ${h?`<div class="lq-lv">${LV[h.lv]} <span class="en">${LV_CEFR[h.lv]}</span></div><div class="lq-bar" aria-hidden="true">${LV.map((_,i)=>`<i class="${i<=h.lv?'on':''}"></i>`).join('')}</div><div class="muted small">${fmtD(h.d)}</div>`:`<div class="muted small" style="margin:6px 0">未診断</div>`}
+    <button class="btn sm ${h?'':'primary'}" data-act="lvstart" data-cat="${c.cat}">${h?'もう一度':'5問で診断'}</button></div>`}).join('')}</div>
+  <p class="muted small">各カテゴリー5問の簡易判定です。正式なCEFRの判定ではありません。</p>
+  </div>
+  <h2>成長の記録</h2>${growthHTML()}
+  ${olv!=null?`<div class="panel stack" style="margin-top:14px"><h3>このレベルからの留学プランを相談しませんか？</h3><p class="muted">レベルに合う学校と期間を、無料でご案内します。</p>${cta}</div>`:''}`;
+};
+const fmtD = d=>{ const [y,m,dd]=d.split('-'); return `${+m}/${+dd}`; };
+function growthHTML(){
+  const H=S.lvHist||[];
+  if(!H.length) return `<div class="panel empty muted">診断を受けると、ここに日付ごとの記録とグラフが出ます。<br><button class="btn sm" style="margin-top:10px" data-act="lvsample">試作用：見本の記録を入れる</button></div>`;
+  const dates=[...new Set(H.map(h=>h.d))].sort();
+  const ser = LQ_SERIES==='all' ? dates.map(d=>({d,v:lqOverall(d)})) : dates.map(d=>{const h=lqLatest(d)[LQ_SERIES];return h?{d,v:h.lv}:null}).filter(Boolean);
+  const name = LQ_SERIES==='all'?'総合（受けたカテゴリーの平均）':lqCat(LQ_SERIES).name;
+  const W=380,Hh=230,L=72,R=22,T=18,B=30, n=Math.max(dates.length,1);
+  const x=i=>L+(n===1?(W-L-R)/2:i*(W-L-R)/(n-1)), y=v=>T+(4-v)*(Hh-T-B)/4;
+  const xi=d=>dates.indexOf(d);
+  const step=Math.ceil(n/5);
+  const grid=LV.map((l,i)=>`<line x1="${L}" x2="${W-R}" y1="${y(i)}" y2="${y(i)}" class="g-grid"/><text x="${L-10}" y="${y(i)+4}" text-anchor="end" class="g-axis">${l} ${LV_CEFR[i]}</text>`).join('');
+  const xl=dates.map((d,i)=>i%step===0||i===n-1?`<text x="${x(i)}" y="${Hh-10}" text-anchor="middle" class="g-axis">${fmtD(d)}</text>`:'').join('');
+  const pts=ser.map(s=>[x(xi(s.d)),y(s.v),s]);
+  const path=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const last=pts[pts.length-1], first=pts[0];
+  const lab=v=>{const r=Math.round(v);return `${LV[r]} ${LV_CEFR[r]}`};
+  const diff = ser.length>1 ? ser[ser.length-1].v-ser[0].v : 0;
+  return `<div class="panel">
+   <div class="chips sub" role="group" aria-label="グラフに出すもの">${[['all','総合'],...LQ_CATS.map(c=>[c.cat,c.name])].map(([k,n])=>`<button class="chip ${LQ_SERIES===k?'on':''}" data-act="lqser" data-k="${k}" aria-pressed="${LQ_SERIES===k}">${n}</button>`).join('')}</div>
+   <p class="small" style="margin:10px 0 0"><b>${esc(name)}</b>${ser.length>1?`　${fmtD(ser[0].d)}から ${diff>0?`<b class="up">${diff.toFixed(diff%1?1:0)}段階アップ</b>`:diff<0?'少し下がりました':'変わらず'}`:''}</p>
+   <div style="overflow-x:auto"><svg class="growth" viewBox="0 0 ${W} ${Hh}" role="img" aria-label="${esc(name)}のレベルの推移">
+    ${grid}${xl}
+    ${pts.length>1?`<path d="${path}" class="g-line"/>`:''}
+    ${pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="5" class="g-dot"><title>${p[2].d}　${lab(p[2].v)}</title></circle><circle cx="${p[0]}" cy="${p[1]}" r="14" fill="transparent"><title>${p[2].d}　${lab(p[2].v)}</title></circle>`).join('')}
+    ${last?`<text x="${Math.min(last[0],W-R-4)}" y="${last[1]-12}" text-anchor="${last[0]>W-R-60?'end':'middle'}" class="g-val">${lab(last[2].v)}</text>`:''}
+   </svg></div>
+   <details style="margin-top:6px"><summary class="small">記録を表で見る（${H.length}件）</summary>
+    <table class="lvtable" style="margin-top:6px"><thead><tr><th scope="col">実施日</th><th scope="col">カテゴリー</th><th scope="col">結果</th><th scope="col">正解</th></tr></thead>
+    <tbody>${H.slice().reverse().map(h=>`<tr><td>${h.d}</td><td>${lqCat(h.cat).name}</td><td>${LV[h.lv]} <span class="en">${LV_CEFR[h.lv]}</span></td><td>${h.sc} / 5</td></tr>`).join('')}</tbody></table></details>
+  </div>`;
+}
+function lvStart(cat){ const c=lqCat(cat); LQS={cat,i:0,score:0,pick:null,done:false,qs:c.qs.map(q=>({...q,opts:shuffle(q.o.slice())}))}; R.v='level'; render(); }
+function lvFinish(){ const lv=lqLevel(LQS.score); S.lvHist=S.lvHist||[]; const d=today();
+  S.lvHist=S.lvHist.filter(h=>!(h.d===d&&h.cat===LQS.cat)); S.lvHist.push({d,cat:LQS.cat,lv,sc:LQS.score}); S.lvHist.sort((a,b)=>a.d<b.d?-1:a.d>b.d?1:0);
+  S.level=Math.round(lqOverall()); S.levelDate=d; LQS.done=true; save(); }
+function lvSample(){ const plan={'2026-08-20':[0,1,0,0,1,0],'2026-09-25':[1,1,1,0,1,1],'2026-10-30':[2,1,1,1,2,1],'2026-11-15':[2,2,2,1,2,2]};
+  S.lvHist=[]; Object.entries(plan).forEach(([d,a])=>LQ_CATS.forEach((c,i)=>S.lvHist.push({d,cat:c.cat,lv:a[i],sc:a[i]+1})));
+  S.level=Math.round(lqOverall()); S.levelDate='2026-11-15'; save(); }
+
+function listFor(){
+  if(R.cat==='unknown') return allItems().filter(x=>P(x.id).state==='unknown');
+  if(R.cat==='known') return allItems().filter(x=>P(x.id).state==='known');
+  if(R.cat==='fav') return [...ITEMS,...DIALOGS,...INTERVIEW.map(v=>({...v,cat:'interview',en:v.q}))].filter(x=>P(x.id).fav);
+  if(R.cat==='dialog') return ITEMS.filter(x=>x.cat==='scene'&&x.scene===R.scene);
+  if(R.cat==='grammar') return GR_CH.flatMap((c,ci)=>(R.gch==null||R.gch==='all'||+R.gch===ci)?c.u.map(u=>GRAMMAR.find(g=>g.id===GR_LINK[u[0]])).filter(Boolean):[]).filter(g=>!R.noteOnly || (S.notes||{})[g.id]);
+  if(R.cat==='wh'){ const sc=R.whScene||WH_SCENES[0]; return WH_SIMS.filter(s=>s.scene===sc).concat(ITEMS.filter(x=>x.cat==='wh'&&x.scene===sc), sc==='面接'?INTERVIEW.map(v=>({...v,cat:'interview',en:v.q})):[]); }
+  return ITEMS.filter(x=>x.cat===R.cat && (R.lv==='all'||x.lv===+R.lv));
+}
+function liRow(x){
+  const p=P(x.id), title=x.title||x.en, sub=x.title?x.scene:(x.ja||'');
+  const st = p.state==='known'?'<span class="st known">覚えた</span>':p.state==='unknown'?'<span class="st unknown">まだ</span>':'';
+  const lk = allowed(x) ? '' : `<span class="lockmark" aria-label="鍵（今の区分では使えません）">${I.lock}</span>`;
+  const nt = (S.notes||{})[x.id] ? '<span class="st note">ノート</span> ' : '';
+  return `<button class="li ${R.sel===x.id?'sel':''}" data-act="sel" data-id="${esc(x.id)}"><span><span class="t">${esc(title)}</span><br><span class="s">${esc(sub)}</span></span><span>${nt}${p.fav?'<span aria-label="お気に入り" style="color:var(--mango)">★</span> ':''}${st}${lk}</span></button>`;
+}
+
+const CAT_GROUPS = [['語彙',['word','phrasal','colloc','idiom']],['表現',['study','dialog','pattern','starter']],['文法・ワーホリ',['grammar','wh']]];
+function catStats(k){
+  const kn=xs=>xs.filter(x=>P(x.id).state==='known').length;
+  if(k==='grammar'){ const n=GR_CH.reduce((a,c)=>a+c.u.length,0); return {label:`${GR_CH.length}章・${n}単元`,total:n,known:kn(GRAMMAR)}; }
+  if(k==='wh'){ const xs=ITEMS.filter(x=>x.cat==='wh'); return {label:`${WH_SCENES.length}場面`,total:xs.length+WH_SIMS.length,known:kn(xs)+WH_SIMS.filter(s=>P(s.id).simBest>=s.steps.length).length}; }
+  if(k==='dialog'){ const xs=ITEMS.filter(x=>x.cat==='scene'); return {label:`${GEN_SCENES.length}場面`,total:xs.length,known:kn(xs)}; }
+  const xs = k==='study' ? ITEMS.filter(x=>x.cat==='study').concat(DIALOGS) : ITEMS.filter(x=>x.cat===k);
+  const unit={word:'語',study:'個'}[k]||'個';
+  return {label:`${xs.length}${unit}・覚えた ${kn(xs)}`,total:xs.length,known:kn(xs)};
+}
+
+const CAT_INFO = {
+ study:{one:'フィリピンの語学学校の授業中、学校生活、寮と生活で、そのまま使える表現と会話。',ex:[["Could you say that again, please?",'もう一度言っていただけますか？']],gain:'留学の初日から困らずに話せる力'},
+ word:{one:'1語の基本の単語。レベル別に、発音記号・音声・例文2つ付きで覚えます。',ex:[['borrow','借りる'],['schedule','予定']],gain:'英語を聞く・読む・話す、すべての土台'},
+ phrasal:{one:'動詞と、up・off・out などの短い語を組み合わせると、もとの単語からは想像しにくい「別の意味」になる表現です。',ex:[['give up','あきらめる（give＝与える ＋ up からは想像しにくい）'],['pick up','拾う／車で迎えに行く']],point:'単語を知っていても意味が分からない、ネイティブが会話でいちばんよく使う表現です。',gain:'ネイティブの会話を聞いて分かる力'},
+ colloc:{one:'英語ならではの語呂合わせです。英語でよく一緒に使う、自然な単語の組み合わせを覚えます。',ex:[['make a mistake','間違える（× do a mistake）'],['heavy rain','大雨（× strong rain）']],point:'意味は分かるのに、日本語から直訳すると組み合わせを間違えやすい表現です。',gain:'自然な英語を話す・書く力'},
+ idiom:{one:'直訳では意味が通らない、決まった言い回しです。全体でひとつの意味として覚えます。',ex:[['a piece of cake','とても簡単なこと（直訳は「ケーキ1切れ」）'],['break the ice','初対面の緊張をほぐす（直訳は「氷を割る」）']],point:'単語が全部分かっても、直訳すると意味を取り違えます。',gain:'ネイティブらしい表現を理解する力'},
+ pattern:{one:'単語を入れ替えるだけで、たくさんの文が作れる「文の型」です。',ex:[["I'd like to ~",'〜したいのですが（I\'d like to book a table.）']],gain:'言いたいことを、すぐに文にする力'},
+ starter:{one:'文の頭に置くだけで、話し始めやすくなり、気持ちやつなぎを伝えられる表現です。',ex:[['Actually, ...','実は…'],['To be honest, ...','正直に言うと…']],gain:'会話をなめらかに始める・つなぐ力'},
+ dialog:{one:'あいさつ・食べる時・買い物など30の場面ごとに、ネイティブが実際に使う自然なフレーズを、2〜3往復の会話の中で覚えます。',ex:[["How's it going?",'調子はどう？']],gain:'教科書ではない、自然な言い方'},
+ grammar:{one:'英語のルールを、内容ごと（時制・助動詞・受け身など17章）に、シンプルな日本語の解説・例文・確認問題で学びます。',ex:[['I have lived here for two years.','ここに2年住んでいます（現在完了）']],gain:'正しい文を組み立てる力'},
+ wh:{one:'仕事探し・面接・職場・接客など、ワーホリで出会う場面ごとに、フレーズと、返事を選んで進めるシミュレーションで練習します。',ex:[['Are you hiring?','人を募集していますか？']],gain:'現地で仕事を見つけて、働く力'}
+};
+function catInfoHTML(k){ const c=CAT_INFO[k]; if(!c) return '';
+  const cmp = ['phrasal','colloc','idiom'].includes(k) ? `<h3 style="margin:16px 0 6px;font-size:15px">似ているものとの違い</h3>
+    <div style="overflow-x:auto"><table class="lvtable cmp ci-cmp"><thead><tr><th scope="col"></th><th scope="col">どんなもの</th><th scope="col">例</th></tr></thead><tbody>
+     <tr class="${k==='phrasal'?'here':''}"><th scope="row">句動詞（熟語）</th><td>動詞＋短い語で<b>別の意味</b>になる</td><td class="en">give up</td></tr>
+     <tr class="${k==='colloc'?'here':''}"><th scope="row">コロケーション</th><td>英語ならではの<b>語呂合わせ</b>（よく一緒に使う自然な組み合わせ）</td><td class="en">make a mistake</td></tr>
+     <tr class="${k==='idiom'?'here':''}"><th scope="row">イディオム</th><td>直訳では意味が通らない<b>決まった言い回し</b></td><td class="en">a piece of cake</td></tr>
+    </tbody></table></div>` : '';
+  return `<p style="font-size:16px;line-height:1.7;margin:4px 0 10px">${esc(c.one)}</p>
+    <p class="filter-l" style="margin:0 0 4px">例</p>
+    ${c.ex.map(e=>`<div class="ex"><div class="row"><span class="en" style="font-weight:600">${esc(e[0])}</span>${sayBtn(e[0])}</div><div class="muted small">${esc(e[1])}</div></div>`).join('')}
+    ${c.point?`<p class="note" style="margin-top:10px">${esc(c.point)}</p>`:''}
+    <p class="small" style="margin:10px 0 0"><b>身につく力：</b>${esc(c.gain)}</p>${cmp}`;
+}
+function openCatInfo(k){
+  let d=document.getElementById('cidlg');
+  if(!d){ d=document.createElement('dialog'); d.id='cidlg'; d.className='modal ci-modal'; d.setAttribute('aria-labelledby','cidlg-t'); document.body.appendChild(d);
+    d.addEventListener('click',e=>{ if(e.target===d) d.close(); }); }
+  d.innerHTML=`<div class="modal-head"><h2 id="cidlg-t" style="margin:0">${esc(CATS[k].replace('（付録）',''))}とは</h2><button class="btn sm" data-act="ciclose" autofocus>閉じる</button></div>${catInfoHTML(k)}
+    ${R.cat!==k?`<button class="btn primary" style="margin-top:14px;width:100%" data-act="learn" data-cat="${k}">${esc(CATS[k].replace('（付録）',''))}を学ぶ</button>`:''}`;
+  d.showModal();
+}
+const INFO_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="7.5" r="1.4" fill="currentColor"/><path d="M12 11v6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+const infoBtn = k=>`<button class="catinfo" data-act="catinfo" data-cat="${k}" aria-label="${esc(CATS[k].replace('（付録）',''))}とは（説明を開く）">${INFO_ICON}</button>`;
+function catCard(k){ const s=catStats(k), pct=s.total?Math.round(s.known/s.total*100):0;
+  return `<div class="catwrap"><button class="catcard" data-act="learn" data-cat="${k}"><b>${esc(CATS[k].replace('（付録）',''))}</b><span class="n">${esc(s.label)}</span><span class="cbar" aria-hidden="true"><i style="width:${pct}%"></i></span></button>${infoBtn(k)}</div>`; }
+function myListBtns(){
+  const nKnown = allItems().filter(x=>P(x.id).state==='known').length, nUnknown = allItems().filter(x=>P(x.id).state==='unknown').length, nFav = Object.values(S.prog).filter(v=>v.fav).length;
+  return `<div class="mylist" aria-label="自分のリスト"><button class="mybtn ${R.cat==='known'?'on':''}" data-act="learn" data-cat="known" aria-pressed="${R.cat==='known'}">記憶 <b>${nKnown}</b></button><button class="mybtn ${R.cat==='unknown'?'on':''}" data-act="learn" data-cat="unknown" aria-pressed="${R.cat==='unknown'}">未記憶 <b>${nUnknown}</b></button><button class="mybtn ${R.cat==='fav'?'on':''}" data-act="learn" data-cat="fav" aria-pressed="${R.cat==='fav'}">★ お気に入り <b>${nFav}</b></button></div>`;
+}
+function learnMenu(){
+  return `<div class="learn-head"><h1>学ぶ</h1>${myListBtns()}</div>
+  <p class="muted small" style="margin:0 0 4px">学びたいものを選んでください。</p>
+  ${CAT_GROUPS.map(([g,ks])=>`<p class="cat-gl">${g}</p><div class="catgrid">${ks.map(catCard).join('')}</div>`).join('')}`;
+}
+function openCatSheet(){
+  let d=document.getElementById('catdlg');
+  if(!d){ d=document.createElement('dialog'); d.id='catdlg'; d.className='sheet'; d.setAttribute('aria-labelledby','catdlg-t'); document.body.appendChild(d);
+    d.addEventListener('click',e=>{ if(e.target===d) d.close(); }); }
+  d.innerHTML=`<div class="sheet-grip" aria-hidden="true"></div><div class="row" style="justify-content:space-between;margin-bottom:8px"><h2 id="catdlg-t" style="margin:0;font-size:17px">カテゴリーを切り替える</h2><button class="btn sm" data-act="catclose">閉じる</button></div>
+    ${CAT_GROUPS.map(([g,ks])=>`<p class="cat-gl">${g}</p><div class="sheetgrid">${ks.map(k=>`<button class="${R.cat===k?'on':''}" data-act="learn" data-cat="${k}" ${R.cat===k?'aria-current="true"':''}>${esc(CATS[k].replace('（付録）',''))}</button>`).join('')}</div>`).join('')}`;
+  d.showModal();
+}
+V.learn = ()=>{
+  if(!R.cat) return learnMenu();
+  const list = listFor();
+  const showLv = ['word','phrasal','colloc','idiom','pattern','starter'].includes(R.cat);
+  const sel = R.sel ? (list.find(x=>x.id===R.sel) || findAny(R.sel)) : null;
+  const titles = {known:'記憶の一覧',unknown:'未記憶の一覧',fav:'お気に入り'};
+  let groups = '';
+  if(R.cat==='study'){
+    const sc = ['授業中','学校生活','寮・生活'];
+    groups = sc.map(s=>{const xs=list.filter(x=>x.scene===s); const ds=DIALOGS.filter(d=>d.scene===s); return `<h3 style="margin:14px 0 6px">${s}</h3><div class="list">${ds.map(liRow).join('')}${xs.map(liRow).join('')}</div>`}).join('');
+  }
+  if(R.cat==='dialog'){
+    groups = list.length ? `<h3 style="margin:4px 0 6px">フレーズ（${list.length}）</h3><div class="list">${list.map(liRow).join('')}</div>
+      <p class="muted small" style="margin-top:10px">選ぶと、そのフレーズを使った2〜3往復の会話で覚えられます。本番は、1つの場面にフレーズ10〜20個を入れます。</p>`
+      : `<div class="panel empty">${coco(52)}<p style="margin-top:8px">「${esc(R.scene)}」は準備中です。試作では「あいさつ」と「食べる時」だけ中身があります。</p></div>`;
+  }
+  if(R.cat==='wh'){
+    const sims=list.filter(x=>x.steps), ph=list.filter(x=>x.cat==='wh'), iv=list.filter(x=>x.cat==='interview');
+    const simRow=s=>{ const p=P(s.id); return `<button class="li sim ${R.sel===s.id?'sel':''}" data-act="sel" data-id="${esc(s.id)}"><span><span class="t">${esc(s.title)}</span><br><span class="s">シミュレーション・${s.steps.length}往復${p.simBest!=null?`・前回 ◎${p.simBest}`:''}</span></span><span class="sim-badge">練習</span>${allowed(s)?'':`<span class="lockmark">${I.lock}</span>`}</button>`; };
+    groups = list.length ? `${sims.length?`<h3 style="margin:4px 0 6px">シミュレーション</h3><div class="list">${sims.map(simRow).join('')}</div>`:''}
+      ${ph.length?`<h3 style="margin:14px 0 6px">フレーズ（${ph.length}）</h3><div class="list">${ph.map(liRow).join('')}</div>`:''}
+      ${iv.length?`<h3 style="margin:14px 0 6px">よく聞かれる質問</h3><div class="list">${iv.map(liRow).join('')}</div>`:''}
+      <p class="muted small" style="margin-top:10px">シミュレーションは、相手の言葉に返事を選んで進めます。フレーズは、短い会話の中で覚えます。</p>`
+      : `<div class="panel empty">${coco(52)}<p style="margin-top:8px">「${esc(R.whScene)}」は準備中です。試作では「仕事探し」「面接」「シフト・休みの連絡」「カフェの接客」だけ中身があります。</p></div>`;
+  }
+  if(R.cat==='grammar'){
+    const gch=R.gch==null?'all':R.gch;
+    groups = GR_CH.map((c,ci)=>{ if(gch!=='all'&&+gch!==ci) return '';
+      const rows=c.u.map(u=>{ const g=GRAMMAR.find(x=>x.id===GR_LINK[u[0]]);
+        if(g){ if(R.noteOnly && !(S.notes||{})[g.id]) return ''; return liRow(g).replace('<span class="s"></span>',`<span class="s">目安 ${esc(u[2])}</span>`); }
+        if(R.noteOnly) return '';
+        return `<div class="li soon"><span><span class="t">${esc(u[1])}</span><br><span class="s">準備中・目安 ${esc(u[2])}</span></span></div>`; }).join('');
+      return rows?`<h3 class="gch-h">${esc(c.n)} <small>${c.u.length}単元</small></h3><div class="list">${rows}</div>`:''; }).join('')
+      || `<div class="panel empty">${coco(52)}<p style="margin-top:8px">ノートを書いた単元はまだありません。</p></div>`;
+  }
+  const isMy = R.cat==='known'||R.cat==='unknown'||R.cat==='fav';
+  return `<div class="crumbrow"><button class="btn sm" data-act="learnmenu">← カテゴリー</button></div>
+  <div class="learn-head"><h1 class="cat-title">${isMy?titles[R.cat]:`<button class="catswitch" data-act="catsheet" aria-haspopup="dialog">${esc(CATS[R.cat]||'学ぶ')}<span class="sw">カテゴリ切替え ▾</span></button>${infoBtn(R.cat)}`}</h1>
+    ${myListBtns()}</div>
+  ${R.cat==='grammar'?`<div class="filter"><label class="filter-l" for="gch-sel">学習したい内容</label><div class="gsel"><select id="gch-sel" data-change="gch"><option value="all" ${(R.gch==null||R.gch==='all')?'selected':''}>すべての内容（${GR_CH.reduce((n,c)=>n+c.u.length,0)}単元）</option>${GR_CH.map((c,ci)=>`<option value="${ci}" ${String(R.gch)===String(ci)?'selected':''}>${esc(c.n)}（${c.u.length}単元）</option>`).join('')}</select><button class="chip ${R.noteOnly?'on':''}" data-act="noteonly" aria-pressed="${!!R.noteOnly}">ノートを書いた単元</button></div></div><p class="muted small" style="margin:8px 0 0">文法は、レベルではなく内容ごとに並べています。各単元の「目安 A1」などは、難しさの参考です。</p>`:''}
+  ${R.cat==='wh'?`<p class="muted small" style="margin:10px 0 0">ワーホリで実際に出会う場面ごとに、フレーズと、返事を選んで進めるシミュレーションで練習します。</p><div class="filter"><label class="filter-l" for="wh-sel">場面</label><div class="gsel"><select id="wh-sel" data-change="whscene">${WH_SCENES.map((s,i)=>{ const n=WH_SIMS.filter(x=>x.scene===s).length+ITEMS.filter(x=>x.cat==='wh'&&x.scene===s).length; return `<option value="${esc(s)}" ${(R.whScene||WH_SCENES[0])===s?'selected':''}>${i+1}. ${esc(s)}${n?'':'（準備中）'}</option>`; }).join('')}</select></div></div>`:''}
+  ${R.cat==='dialog'?`<p class="muted small" style="margin:10px 0 0">教科書の英語ではなく、ネイティブが実際に使う自然な言い方を、場面ごとに覚えます。</p><div class="filter"><label class="filter-l" for="sc-sel">場面</label><div class="gsel"><select id="sc-sel" data-change="scene">${GEN_SCENES.map(s=>{ const n=ITEMS.filter(x=>x.cat==='scene'&&x.scene===s).length; return `<option value="${esc(s)}" ${R.scene===s?'selected':''}>${esc(s)}${n?`（${n}フレーズ）`:'（準備中）'}</option>`; }).join('')}</select></div></div>`:''}
+  ${showLv?`<div class="filter"><p class="filter-l">レベル</p><div class="chips sub"><button class="chip ${R.lv==='all'?'on':''}" data-act="lv" data-lv="all">全レベル</button>${LV.map((l,i)=>`<button class="chip ${String(R.lv)===String(i)?'on':''}" data-act="lv" data-lv="${i}">${l} <span class="en">${LV_CEFR[i]}</span></button>`).join('')}<button class="linkbtn" data-act="lvguide" aria-haspopup="dialog">レベルの目安</button></div></div>`:''}
+  <div class="split ${sel?'has-sel':''}" style="margin-top:14px">
+    <div class="list-col">${(R.cat==='study'||R.cat==='dialog'||R.cat==='grammar'||R.cat==='wh')?groups:(list.length?`<div class="list">${list.map(liRow).join('')}</div>`:`<div class="panel empty">${coco(52)}<p style="margin-top:8px">${R.cat==='known'?'「覚えた」にした項目はありません。テストで正解するか「覚えた」を押すと、ここに集まります。':R.cat==='unknown'?'「まだ」にした項目はありません。テストや学習で「まだ」にすると、ここに集まります。':R.cat==='fav'?'★を付けた項目はありません。気に入った表現に★を付けると、ここから見返せます。':'このレベルの内容はまだありません。'}</p></div>`)}</div>
+    <div>${sel?`<div class="seltop"><button class="btn sm back" data-act="unsel">← 一覧に戻る</button>${miniNav(sel.id)}</div>`+swipeWrap(sel)+stepNav(sel.id):`<div class="panel empty muted">一覧から選ぶと、ここに詳しく出ます。</div>`}</div>
+  </div>`;
+};
+
+const NOUN = {word:'単語',phrasal:'句動詞',colloc:'コロケーション',idiom:'イディオム',pattern:'構文',starter:'フレーズ',dialog:'フレーズ',grammar:'単元',study:'表現',wh:'項目',known:'項目',unknown:'項目',fav:'項目'};
+function navList(){
+  const list=listFor();
+  if(R.cat==='study') return ['授業中','学校生活','寮・生活'].flatMap(s=>DIALOGS.filter(d=>d.scene===s).concat(list.filter(x=>x.scene===s)));
+  return list;
+}
+function stepTo(dir){ const L=navList(), i=L.findIndex(x=>x.id===R.sel), j=i+dir; if(i<0||j<0||j>=L.length) return false;
+  R.sel=L[j].id; PRON={id:null,url:null,rec:null,result:''}; try{speechSynthesis.cancel();}catch(e){} JA_PLAY=null; rerender();
+  const d=document.querySelector('.detail'); if(d){ d.classList.add(dir>0?'in-next':'in-prev'); if(window.innerWidth<960){ const top=document.querySelector('.seltop'), y=top?top.getBoundingClientRect().top:0; if(y<60) window.scrollTo(0, Math.max(0, window.scrollY+y-70)); } }
+  return true; }
+function swipeWrap(sel){
+  const L=navList(), i=L.findIndex(x=>x.id===sel.id), n=NOUN[R.cat]||'項目';
+  const nm=x=>x?esc(x.title||x.en||x.q||''):'';
+  const h=(cls,ok,ch,lab,x)=>`<div class="sw-hint ${cls} ${ok?'':'off'}" aria-hidden="true"><span>${ch}</span><small>${lab}<b>${nm(x)}</b></small></div>`;
+  const nudge = (!window._swNudged && i>=0 && i<L.length-1) ? (window._swNudged=true, ' nudge') : '';
+  return `<div class="swipe-wrap${nudge}">${detail(sel)}${i<0?'':h('prev',i>0,'‹','前の'+n,L[i-1])+h('next',i<L.length-1,'›','次の'+n,L[i+1])}</div>`;
+}
+function miniNav(id){
+  const L=navList(), i=L.findIndex(x=>x.id===id); if(i<0||L.length<2) return '';
+  const n=NOUN[R.cat]||'項目';
+  return `<div class="mininav"><button data-act="step" data-d="-1" aria-label="前の${n}" ${i>0?'':'disabled'}>‹</button><span>${i+1} / ${L.length}</span><button data-act="step" data-d="1" aria-label="次の${n}" ${i<L.length-1?'':'disabled'}>›</button></div>`;
+}
+function stepNav(id){
+  const L=navList(), i=L.findIndex(x=>x.id===id); if(i<0||L.length<2) return '';
+  const n=NOUN[R.cat]||'項目', prev=L[i-1], next=L[i+1];
+  return `<div class="stepnav">
+    <button class="btn" data-act="step" data-d="-1" ${prev?'':'disabled'}>← 前の${n}</button>
+    <span class="muted small en">${i+1} / ${L.length}</span>
+    <button class="btn primary" data-act="step" data-d="1" ${next?'':'disabled'}>次の${n} →</button></div>
+    <p class="muted small" style="text-align:center;margin:4px 0 0">スマホは左右にスワイプ、パソコンは ← → キーでも移れます</p>`;
+}
+function favBtn(id){ if(!feature('fav')) return ''; const on=!!P(id).fav; return `<button class="fav" data-act="fav" data-id="${esc(id)}" aria-pressed="${on}" aria-label="お気に入り">${on?'★':'☆'}</button>`; }
+function knowBtns(id){ const st=P(id).state; return `<div class="row"><button class="btn sm ${st==='known'?'on':''}" data-act="know" data-id="${esc(id)}" data-ok="1">覚えた</button><button class="btn sm ${st==='unknown'?'on':''}" data-act="know" data-id="${esc(id)}" data-ok="0">まだ</button></div>`; }
+function detail(x){
+  if(!allowed(x)) return `<div class="panel detail"><h2 style="margin-top:0">${esc(x.title||x.en||x.q)}</h2>${upsell()}</div>`;
+  if(x.steps) return simDetail(x);
+  if(x.lines) return dialogDetail(x);
+  if(x.quiz) return grammarDetail(x);
+  if(x.q && x.tip) return interviewDetail(x);
+  if(SCENE_DL[x.id]) return sceneDetail(x);
+  const inVault = S.vault.some(v=>v.en===x.en);
+  return `<div class="panel detail">
+    <div class="row" style="justify-content:space-between"><div>${lvTag(x.lv)} ${x.scene?`<span class="tag">${esc(x.scene)}</span>`:''}</div>${favBtn(x.id)}</div>
+    <div class="row" style="margin-top:8px"><span class="word">${esc(x.en)}</span>${sayBtn(x.en)}</div>
+    ${ipaHTML(x.en,x.ipa)}
+    <p style="font-size:18px;margin-top:6px">${esc(x.ja)}</p>
+    ${SYN[x.id]?`<p class="syn"><span class="syn-l">似た意味</span>${SYN[x.id].map(s=>`<span class="en">${esc(s[0])}</span>${s[1]?`<span class="muted">（${esc(s[1])}）</span>`:''}`).join('<span class="muted">、</span>')}</p>`:''}
+    ${x.ex.map(e=>`<div class="ex"><div class="row"><span class="e">${esc(e[0])}</span>${sayBtn(e[0])}</div><div class="muted">${esc(e[1])}</div></div>`).join('')}
+    ${knowBtns(x.id)}
+    ${feature('pron')?`<div class="row" style="margin-top:10px"><button class="btn sm" data-act="pron" data-id="${esc(x.id)}">${I.mic} 発音をチェック</button><button class="btn sm" data-act="tovault" data-id="${esc(x.id)}" ${inVault?'disabled':''}>${inVault?'保存庫に入っています':'保存庫に入れる'}</button></div>`:`<p class="muted small" style="margin-top:10px">${I.lock.replace('<svg','<svg width="14" height="14" style="vertical-align:-2px"')} 発音チェック・保存庫・お気に入りは、面談を受けると使えます。</p>`}
+    ${PRON.id===x.id?pronPanel(x.en):''}
+  </div>`;
+}
+function sceneDetail(x){
+  const d=SCENE_DL[x.id], inVault=S.vault.some(v=>v.en===x.en);
+  return `<div class="panel detail">
+    <div class="row" style="justify-content:space-between"><div>${lvTag(x.lv)} <span class="tag">${esc(x.scene)}</span></div>${favBtn(x.id)}</div>
+    <div class="row" style="justify-content:space-between;margin-top:8px"><h3 style="margin:0">会話で覚える</h3><button class="btn sm" data-act="sayall" data-id="${esc(x.id)}">${I.play||'▶'} 会話を通して聞く</button></div>
+    ${d.lines.map(l=>`<div class="dlg-line ${l[0]==='mango'?'right':''}">${CH[l[0]].svg(44)}<div class="bub"><div class="who">${esc(d.roles[l[0]])}</div><div class="row"><span class="en">${hl(l[1])}</span>${sayBtn(plain(l[1]))}</div><div class="muted small">${esc(l[2])}</div></div></div>`).join('')}
+    <div class="phrase-card">
+      <p class="filter-l" style="margin:0">このフレーズ</p>
+      <div class="row"><span class="word">${esc(x.en)}</span>${sayBtn(x.en)}</div>
+      ${ipaHTML(x.en,x.ipa)}
+      <p style="font-size:18px;margin:6px 0">${esc(x.ja)}</p>
+      ${SYN[x.id]?`<p class="syn"><span class="syn-l">似た意味</span>${SYN[x.id].map(s=>`<span class="en">${esc(s[0])}</span>${s[1]?`<span class="muted">（${esc(s[1])}）</span>`:''}`).join('<span class="muted">、</span>')}</p>`:''}
+    </div>
+    ${knowBtns(x.id)}
+    ${feature('pron')?`<div class="row" style="margin-top:10px"><button class="btn sm" data-act="pron" data-id="${esc(x.id)}">${I.mic} 発音をチェック</button><button class="btn sm" data-act="tovault" data-id="${esc(x.id)}" ${inVault?'disabled':''}>${inVault?'保存庫に入っています':'保存庫に入れる'}</button></div>`:''}
+    ${PRON.id===x.id?pronPanel(x.en):''}
+  </div>`;
+}
+function dialogDetail(d){
+  const exprs=[]; d.lines.forEach(l=>l[1].replace(/\[\[(.+?)\|(.+?)\]\]/g,(m,a,b)=>exprs.push([a,b])));
+  return `<div class="panel detail">
+    <div class="row" style="justify-content:space-between"><div>${lvTag(d.lv)} <span class="tag">${esc(d.scene)}</span></div>${favBtn(d.id)}</div>
+    <h2 style="margin-top:6px">${esc(d.title)}</h2>
+    ${d.lines.map(l=>`<div class="dlg-line ${l[0]==='mango'?'right':''}">${CH[l[0]].svg(44)}<div class="bub"><div class="who">${esc(d.roles[l[0]])}</div><div class="row"><span class="en">${hl(l[1])}</span>${sayBtn(plain(l[1]))}</div><div class="muted small">${esc(l[2])}</div></div></div>`).join('')}
+    <h3 style="margin-top:6px">覚える表現</h3>
+    ${exprs.map(e=>{const inV=S.vault.some(v=>v.en===e[0]);return `<div class="ex"><div class="row"><mark class="en">${esc(e[0])}</mark>${sayBtn(e[0])}<button class="btn sm" data-act="exvault" data-en="${esc(e[0])}" data-ja="${esc(e[1])}" data-scene="${esc(d.scene)}" ${inV?'disabled':''}>${inV?'保存済み':'保存庫に入れる'}</button></div><div class="muted">${esc(e[1])}</div></div>`}).join('')}
+    ${knowBtns(d.id)}</div>`;
+}
+let JA_PLAY = null;
+function sayJa(text, onend){ try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang='ja-JP'; u.rate=1; u.onend=onend; u.onerror=onend; speechSynthesis.speak(u);}catch(e){ onend&&onend(); } }
+function grammarAudio(id){
+  if(JA_PLAY===id){ try{speechSynthesis.cancel();}catch(e){} JA_PLAY=null; rerender(); return; }
+  const g=GRAMMAR.find(x=>x.id===id); JA_PLAY=id; rerender();
+  sayJa(g.title.replace(/[（(].*?[)）]/g,'')+'。'+g.body.join(''), ()=>{ if(JA_PLAY===id){ JA_PLAY=null; rerender(); } });
+}
+function grammarDetail(g){
+  const st = GQ[g.id]||{};
+  return `<div class="panel detail">
+    <div class="row" style="justify-content:space-between"><div>${lvTag(g.lv)}</div>${favBtn(g.id)}</div>
+    <h2 style="margin-top:6px">${esc(g.title)}</h2>
+    <div class="ja-audio"><button class="btn sm ${JA_PLAY===g.id?'on':''}" data-act="gaudio" data-id="${g.id}" aria-pressed="${JA_PLAY===g.id}">${I.speaker} ${JA_PLAY===g.id?'止める':'解説を聞く（日本語）'}</button>
+      <span class="muted small">試作は端末の読み上げです。本番は収録した音声を流します。</span></div>
+    ${g.body.map(b=>`<p>${esc(b)}</p>`).join('')}
+    <h3 style="margin-top:12px">例文</h3>
+    ${g.ex.map(e=>`<div class="ex"><div class="row"><span class="e">${esc(e[0])}</span>${sayBtn(e[0])}</div><div class="muted">${esc(e[1])}</div></div>`).join('')}
+    <h3 style="margin-top:12px">確認問題</h3>
+    ${g.quiz.map((q,qi)=>{const pk=st[qi];return `<div style="margin-bottom:12px"><p class="en">${esc(q.q)}</p>${q.o.map((o,i)=>`<button class="opt en ${pk!=null?(i===q.a?'right':(i===pk?'wrong':'')):''}" data-act="gq" data-id="${g.id}" data-q="${qi}" data-i="${i}" ${pk!=null?'disabled':''}>${esc(o)}</button>`).join('')}${pk!=null?`<p class="small">${pk===q.a?'正解！':'おしい。'} ${esc(q.why)}</p>`:''}</div>`}).join('')}
+    <h3 style="margin-top:12px">自分のノート</h3>
+    <textarea class="note" data-note="${g.id}" aria-label="${esc(g.title)}のノート" placeholder="授業で習ったこと、先生に言われたこと、自分がした間違いなどをメモ">${esc((S.notes||{})[g.id]||'')}</textarea>
+    <p class="muted small">書いた内容は自動で保存されます（試作ではこの端末だけ）。</p>
+    <p class="muted small">解説と例文は試作用に書いたもので、正式版は監修してから載せます。</p></div>`;
+}
+function interviewDetail(v){
+  return `<div class="panel detail">
+    <div class="row" style="justify-content:space-between"><span class="tag">面接対策</span>${favBtn(v.id)}</div>
+    <div class="row" style="margin-top:8px"><span class="word" style="font-size:24px">${esc(v.q)}</span>${sayBtn(v.q)}</div>
+    <p>${esc(v.ja)}</p>
+    <div class="note"><b>答え方のコツ</b><br>${esc(v.tip)}</div>
+    <h3 style="margin-top:12px">答えの例</h3>
+    <div class="ex"><div class="row"><span class="e">${esc(v.a)}</span>${sayBtn(v.a)}</div><div class="muted">${esc(v.aja)}</div></div>
+    ${knowBtns(v.id)}
+    ${tier()==='customer'?`<div class="row" style="margin-top:10px"><button class="btn mango" data-act="talkstart" data-id="interview">AIと面接を練習する</button></div>`:`<p class="muted small" style="margin-top:10px">お試しでは、面接対策は見本だけ見られます。AIとの面接練習は、成約すると使えます。</p>`}</div>`;
+}
+
+function pronPanel(target){
+  return `<div class="note" style="margin-top:12px">
+    <b>発音チェック</b><p class="small" style="margin:2px 0 8px">お手本を聞いてから、録音して聞き比べます。録音はこの画面を閉じると消えます（保存しません）。</p>
+    <div class="row"><button class="btn sm" data-act="say" data-t="${esc(target)}">お手本を聞く</button>
+    <button class="btn sm mic ${PRON.rec?'rec':''}" data-act="rec">${I.mic} ${PRON.rec?'録音を止める':'録音する'}</button>
+    ${PRON.url?`<audio controls src="${PRON.url}" style="height:34px"></audio>`:''}
+    ${SR?`<button class="btn sm" data-act="judge" data-t="${esc(target)}">判定する</button>`:''}</div>
+    <p class="small" role="status" style="margin:8px 0 0">${esc(PRON.result || (SR?'':'この端末のブラウザでは判定ができません。本番では判定の仕組みを別に用意します。'))}</p></div>`;
+}
+async function toggleRec(){
+  if(PRON.rec){ PRON.rec.stop(); return; }
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+    const mr = new MediaRecorder(stream), chunks=[];
+    mr.ondataavailable = e=>chunks.push(e.data);
+    mr.onstop = ()=>{ stream.getTracks().forEach(t=>t.stop()); if(PRON.url) URL.revokeObjectURL(PRON.url); PRON.url = URL.createObjectURL(new Blob(chunks,{type:mr.mimeType})); PRON.rec=null; rerender(); };
+    mr.start(); PRON.rec = mr; PRON.result=''; rerender();
+  }catch(e){ PRON.result='マイクが使えませんでした。ブラウザのマイクの許可を確認してください。'; rerender(); }
+}
+function judge(target){
+  try{
+    const r = new SR(); r.lang='en-US'; r.interimResults=false; r.maxAlternatives=3;
+    PRON.result='聞いています。お手本を読んでください…'; rerender();
+    r.onresult = e=>{
+      const norm = s=>s.toLowerCase().replace(/[^a-z' ]/g,'').replace(/\s+/g,' ').trim();
+      const heard = Array.from(e.results[0]).map(a=>a.transcript);
+      const ok = heard.some(h=>norm(h)===norm(target.replace(/~|\.\.\./g,'')));
+      PRON.result = ok ? `うまく言えました！（聞き取れた英語: ${heard[0]}）` : `聞き取れた英語: 「${heard[0]}」。お手本と聞き比べて、もう一度どうぞ。`;
+      rerender();
+    };
+    r.onerror = ()=>{ PRON.result='うまく聞き取れませんでした。静かな場所で、もう一度どうぞ。'; rerender(); };
+    r.start();
+  }catch(e){ PRON.result='この端末では判定ができません。'; rerender(); }
+}
+
+V.ask = ()=>{
+  if(!feature('ask')) return `<h1>AIに聞く</h1>${upsell('AIに聞く機能は、無料カウンセリング（面談）を受けると使えます。')}`;
+  const a = ASK.a;
+  return `<h1>AIに聞く</h1>
+  ${tier()!=='customer'?`<p class="tier note">お試し中: 今日あと${askLeft()}回聞けます（1日${LIMIT.counseled.ask}回まで）。成約すると1日${LIMIT.customer.ask}回まで使えます。</p>`:''}
+  <div class="greet" style="margin-top:0">${mango(52)}<div class="speech"><b>マンゴー（仮）</b>言いたいのに言えなかった表現、分からなかった単語を聞いてね。答えは保存庫に入れて、次に使えるようにしよう。</div></div>
+  <div class="panel stack">
+    <form class="ask-box" data-form="ask"><input type="text" id="ask-q" value="${esc(ASK.q)}" placeholder="例: 「割り勘にしよう」は英語で？" aria-label="AIへの質問" data-autofocus><button class="btn primary" type="submit">聞く</button></form>
+    <div class="chips">${Object.keys(AI_DEMO).map(k=>`<button class="chip" data-act="askdemo" data-q="${esc(k)}">${esc(k)}</button>`).join('')}</div>
+    <p class="muted small">名前や連絡先は書かないでください。試作では、上の4つの例だけ答えが出ます。単語1語を聞いたときは、答えに発音記号も出ます。本番はClaude（Haiku 5.5から）がその場で答えます。</p>
+  </div>
+  ${a? (a.none ? `<div class="panel" style="margin-top:12px"><p>試作のため、AIはまだつながっていません。本番では、ここに答え（表現・発音記号・解説・例文2つ）が出ます。</p><button class="btn sm" data-act="askmemo">質問をメモとして保存庫に入れる</button></div>`
+   : `<div class="panel answer" style="margin-top:12px">
+      <h3>英語の表現</h3><div class="row"><span class="word en" style="font-size:24px;font-weight:600">${esc(a.en)}</span>${sayBtn(a.en)}</div>${ipaHTML(a.en,a.ipa)}<p>${esc(a.ja)}</p>
+      <h3>解説</h3><p>${esc(a.ex)}</p>
+      <h3>例文</h3>${a.ex2.map(e=>`<div class="ex"><div class="row"><span class="e">${esc(e[0])}</span>${sayBtn(e[0])}</div><div class="muted">${esc(e[1])}</div></div>`).join('')}
+      <div class="row" style="margin-top:12px"><button class="btn mango" data-act="askvault" ${S.vault.some(v=>v.en===a.en)?'disabled':''}>${S.vault.some(v=>v.en===a.en)?'保存庫に入れました':'保存庫に入れる'}</button>
+      <span class="muted small">この答えは</span><button class="btn sm ${ASK.fb==='good'?'on':''}" data-act="askfb" data-v="good">役に立った</button><button class="btn sm ${ASK.fb==='meh'?'on':''}" data-act="askfb" data-v="meh">微妙</button></div>
+    </div>`) : ''}`;
+};
+
+let VF = 'all';
+V.vault = ()=>{
+  if(!feature('vault')) return `<h1>保存庫</h1><p class="muted">言えなかった表現をためて、次に使えるようにする、あなただけの場所です。</p>${upsell(expired()&&S.vault.length?`お試しの期限が切れました。保存した${S.vault.length}件は残っています。成約すると、続きから使えます。`:'保存庫は、無料カウンセリング（面談）を受けると使えます。')}`;
+  const t = today();
+  const scenes = [...new Set(S.vault.map(v=>v.scene).filter(Boolean))];
+  let list = S.vault.slice().reverse();
+  if(VF==='due') list = list.filter(v=>v.next && v.next<=t);
+  else if(VF==='unknown') list = list.filter(v=>v.state!=='known');
+  else if(VF!=='all') list = list.filter(v=>v.scene===VF);
+  return `<h1>保存庫</h1>
+  <p class="muted">言えなかった表現をためて、次に使えるようにする、あなただけの場所です。</p>
+  ${tier()!=='customer'?`<p class="tier note">お試し中: 保存庫は${LIMIT.counseled.vault}件まで（あと${Math.max(0,vaultRoom())}件）。成約すると上限なしで使えます。</p>`:''}
+  <div class="chips"><button class="chip ${VF==='all'?'on':''}" data-act="vf" data-f="all">すべて（${S.vault.length}）</button><button class="chip ${VF==='due'?'on':''}" data-act="vf" data-f="due">今日の復習</button><button class="chip ${VF==='unknown'?'on':''}" data-act="vf" data-f="unknown">まだ覚えていない</button>${scenes.map(s=>`<button class="chip ${VF===s?'on':''}" data-act="vf" data-f="${esc(s)}">${esc(s)}</button>`).join('')}</div>
+  <details class="panel" style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">自分で追加する（授業で出た単語など）</summary>
+    <form data-form="vadd" class="stack" style="margin-top:8px">
+      <div><label class="f" for="va-en">英語</label><input type="text" id="va-en" placeholder="例: reluctant"></div>
+      <div><label class="f" for="va-ja">意味</label><input type="text" id="va-ja" placeholder="例: 気が進まない"></div>
+      <div><label class="f" for="va-sc">場面</label><select id="va-sc"><option>授業中</option><option>学校生活</option><option>寮・生活</option><option>ワーホリ</option><option>その他</option></select></div>
+      <button class="btn primary" type="submit">追加する</button>
+      <p class="muted small">本番では、追加した表現にもAIが発音記号と例文を付けます。</p></form></details>
+  <div class="list" style="margin-top:12px">
+  ${list.length? list.map(v=>`<div class="panel" style="padding:14px">
+     <div class="row" style="justify-content:space-between"><div><span class="en" style="font-weight:600;font-size:18px">${esc(v.en||'（メモ）')}</span> ${v.en?sayBtn(v.en):''}</div><span class="tag">${esc(v.scene||'未分類')}</span></div>
+     <p style="margin:4px 0">${esc(v.ja)}</p>
+     <div class="row small muted"><span>${v.src==='ai'?'AIに聞いた':v.src==='item'?'学習から':'自分で追加'}・${esc(v.created)}</span><span>使えた ${v.used||0}回</span>${v.next?`<span>次の復習 ${esc(v.next)}</span>`:''}</div>
+     <div class="row" style="margin-top:8px"><button class="btn sm" data-act="vused" data-id="${v.id}">実際に使えた！</button><button class="btn sm" data-act="vknow" data-id="${v.id}" data-ok="1">覚えた</button><button class="btn sm" data-act="vknow" data-id="${v.id}" data-ok="0">まだ</button><button class="btn sm" data-act="vask" data-id="${v.id}">AIに別の言い方を聞く</button><button class="btn sm" data-act="vdel" data-id="${v.id}">削除</button></div></div>`).join('')
+   : `<div class="panel empty">${mango(60)}<p style="margin-top:8px">${S.vault.length?'この条件の表現はありません。':'まだ何も入っていません。AIに聞いた答えや、学習中の表現を入れていきましょう。'}</p>${S.vault.length?'':'<button class="btn mango" data-act="go" data-v="ask">AIに聞いてみる</button>'}</div>`}
+  </div>
+  ${S.vault.length>=4?`<div class="row" style="margin-top:12px"><button class="btn primary" data-act="testfrom" data-src="vault">保存庫の表現でテストする</button></div>`:''}`;
+};
+function addVault(en,ja,scene,src){
+  if(!feature('vault')){ toast('保存庫は、無料カウンセリング（面談）を受けると使えます。'); return false; }
+  if(vaultRoom()<=0){ toast(`お試しの保存庫は${LIMIT.counseled.vault}件までです。成約すると上限なしで使えます。`); return false; }
+  S.vault.push({id:Date.now()+Math.floor(Math.random()*1000),en,ja,scene,src,created:today(),used:0,state:null,step:-1,next:addDays(1)}); save(); return true; }
+
+const TSRC = {study:'留学で使う英語',word:'単語',phrasal:'句動詞（熟語）',colloc:'コロケーション',idiom:'イディオム',pattern:'構文',starter:'文頭フレーズ',scene:'場面別フレーズ',wh:'ワーホリ対策',vault:'保存庫',known:'記憶',unknown:'未記憶',fav:'お気に入り'};
+function pool(src,lv){
+  if(src==='vault') return feature('vault') ? S.vault.filter(v=>v.en&&v.ja).map(v=>({id:'v:'+v.id,en:v.en,ja:v.ja})) : [];
+  let xs;
+  if(src==='unknown') xs = allItems().filter(x=>P(x.id).state==='unknown');
+  else if(src==='known') xs = allItems().filter(x=>P(x.id).state==='known');
+  else if(src==='fav') xs = allItems().filter(x=>P(x.id).fav);
+  else xs = ITEMS.filter(x=>x.cat===src && (lv==='all'||x.lv===+lv));
+  return xs.filter(allowed);
+}
+V.test = ()=>{
+  if(!T.qs){
+    const s=T.setup;
+    return `<h1>テスト</h1><div class="panel stack">
+      <div><label class="f" for="t-src">出題の範囲</label><select id="t-src">${Object.entries(TSRC).map(([k,n])=>`<option value="${k}" ${s.src===k?'selected':''}>${n}（${pool(k,'all').length}件）</option>`).join('')}</select></div>
+      <div><label class="f" for="t-lv">レベル</label><select id="t-lv"><option value="all">全レベル</option>${LV.map((l,i)=>`<option value="${i}" ${String(s.lv)===String(i)?'selected':''}>${lvName(i)}</option>`).join('')}</select></div>
+      <div><label class="f" for="t-dir">方向</label><select id="t-dir"><option value="ja2en" ${s.dir==='ja2en'?'selected':''}>日本語 → 英語</option><option value="en2ja" ${s.dir==='en2ja'?'selected':''}>英語 → 日本語</option><option value="blank" ${s.dir==='blank'?'selected':''}>穴埋め（コロケーション向け）</option></select></div>
+      <button class="btn primary" data-act="tstart">スタート</button>
+      <p class="muted small">正解は「覚えた」、不正解は「まだ」に入り、復習の日が自動で決まります。パソコンでは 1〜4 のキーでも答えられます。</p></div>`;
+  }
+  if(T.i>=T.qs.length){
+    const good = T.score>=Math.ceil(T.qs.length*.7);
+    return `<h1>テストの結果</h1><div class="panel"><div class="greet" style="margin:0">${good?mango(72):coco(72)}<div class="speech"><b>${good?'マンゴー（仮）':'ココ（仮）'}</b>${T.score} / ${T.qs.length}問正解！${good?'この調子！':'「まだ」の表現は、未記憶の一覧から復習できます。'}</div></div></div>
+    <div class="row" style="margin-top:12px"><button class="btn primary" data-act="tstart">同じ範囲でもう一度</button><button class="btn" data-act="treset">範囲を選び直す</button><button class="btn" data-act="learn" data-cat="unknown">未記憶の一覧へ</button></div>`;
+  }
+  const q=T.qs[T.i], ans=T.pick!==null, ja2en=T.setup.dir!=='en2ja';
+  return `<h1>テスト</h1><div class="bar" aria-hidden="true"><i style="width:${T.i/T.qs.length*100}%"></i></div>
+  <div class="panel" style="margin-top:12px"><p class="muted small">${T.i+1} / ${T.qs.length}</p>
+  ${q.stem ? `<p class="muted small" style="margin:0">空いている所に入る語を選んでください（${esc(q.it.ja)}）</p>
+  <div class="row q-big"><span class="en">${esc(ans?q.it.en:q.stem)}</span>${ans?sayBtn(q.it.en):''}</div>` : `<div class="row q-big"><span class="${ja2en?'':'en'}">${esc(ja2en?q.it.ja:q.it.en)}</span>${ja2en?'':sayBtn(q.it.en)}</div>`}
+  ${q.opts.map((o,i)=>`<button class="opt ${ja2en?'en':''} ${ans?(o.id===q.it.id?'right':(i===T.pick?'wrong':'')):''}" data-act="tpick" data-i="${i}" ${ans?'disabled':''}><kbd>${i+1}</kbd>${esc(ja2en?o.en:o.ja)}</button>`).join('')}
+  ${ans?`<button class="btn primary" data-act="tnext" data-autofocus>${T.i+1<T.qs.length?'次へ':'結果を見る'}</button>`:''}</div>`;
+};
+
+const BLANK_WORDS = [['make','do','take','have','get','give','reach','catch','keep','pay'],['heavy','strong','big','hard','high','deep','fast','strict']];
+function blankQ(x){
+  const w=x.en.split(' '), a=w[0], group=BLANK_WORDS.find(g=>g.includes(a.toLowerCase()))||BLANK_WORDS[0];
+  const opts=[a].concat(shuffle(group.filter(g=>g!==a.toLowerCase())).slice(0,3));
+  return {it:x, stem:'___ '+w.slice(1).join(' '), opts:shuffle(opts).map(o=>({id:o===a?x.id:'d:'+o, en:o, ja:o}))};
+}
+function startTest(){
+  const blank = T.setup.dir==='blank';
+  const p = shuffle(pool(T.setup.src,T.setup.lv).filter(x=>!blank || x.en.trim().includes(' '))).slice(0,10);
+  if(p.length<2){ alert('この範囲で出せる問題が足りません（2問以上必要です）。範囲を変えてください。'); return; }
+  if(blank){ T.qs=p.map(blankQ); T.i=0; T.score=0; T.pick=null; S.tests++; save(); return; }
+  const others = allItems().filter(allowed).concat(S.vault.filter(v=>v.en&&v.ja).map(v=>({id:'v:'+v.id,en:v.en,ja:v.ja})));
+  const key = T.setup.dir==='ja2en'?'en':'ja';
+  T.qs = p.map(x=>({it:x,opts:shuffle([x].concat(shuffle(others.filter(o=>o.id!==x.id && o[key]!==x[key])).slice(0,3)))}));
+  T.i=0; T.score=0; T.pick=null; S.tests++; save();
+}
+function tpick(i){
+  const q=T.qs[T.i]; if(T.pick!==null) return; T.pick=i; const ok = q.opts[i].id===q.it.id; if(ok) T.score++;
+  if(q.it.id.startsWith('v:')){ const v=S.vault.find(x=>'v:'+x.id===q.it.id); if(v){ Object.assign(v,review(v,ok)); save(); } } else mark(q.it.id,ok);
+  rerender();
+}
+
+V.talk = ()=>{
+  if(!feature('talk')) return `<h1>AI英会話</h1>${upsell('AI英会話は、無料カウンセリング（面談）を受けると、1回体験できます。')}`;
+  if(!TALK.id && tier()==='counseled' && S.talkTrialUsed) return `<h1>AI英会話</h1>${upsell('お試しのAI英会話（1回）は使い終わりました。成約すると、すべての場面で練習できます。')}`;
+  if(!TALK.id){
+    return `<h1>AI英会話</h1><p class="muted">場面を選んで、AIと英語で話します。終わると、直しの一覧が出て、保存庫に入れられます。</p>
+    ${tier()==='counseled'?`<p class="tier note">お試し中: AI英会話は1回だけ体験できます。好きな場面を1つ選んでください。</p>`:''}
+    <div class="home-grid">${TALKS.map(t=>`<button class="tile" data-act="talkstart" data-id="${t.id}"><div class="row">${CH[t.who].svg(44)}<div><b>${esc(t.name)}</b><span>相手: ${esc(t.role)}</span></div></div></button>`).join('')}</div>
+    <p class="note" style="margin-top:14px">試作では、AIの話す内容は台本です。本番はClaude（Haiku 5.5から）があなたの答えに合わせて話し、終わったあと、あなたの英語を直します。1日の回数か時間に上限を付けます。</p>`;
+  }
+  const t = TALKS.find(x=>x.id===TALK.id);
+  return `<div class="row" style="justify-content:space-between"><h1 style="margin:0">${esc(t.name)}</h1><button class="btn sm" data-act="talkend">終わる</button></div>
+  <p class="muted small">相手: ${esc(t.role)}（${CH[t.who].name}）</p>
+  <div class="chat" style="margin-top:10px">${TALK.msgs.map(m=>m.ai?`<div class="row" style="align-items:flex-end;gap:6px">${CH[t.who].svg(36)}<div class="msg ai"><span class="en">${esc(m.t)}</span> ${sayBtn(m.t)}</div></div>`:`<div class="msg me en">${esc(m.t)}</div>`).join('')}</div>
+  ${TALK.done ? `<div class="panel" style="margin-top:14px"><h2 style="margin-top:0">ふりかえり</h2><p class="muted small">試作では、よくある直しの例を出しています。本番は、あなたの実際の英語を直します。</p>
+     ${t.fix.map(f=>{const inV=S.vault.some(v=>v.en===f[1]);return `<div class="ex"><div class="muted small"><s>${esc(f[0])}</s></div><div class="row"><span class="e">${esc(f[1])}</span>${sayBtn(f[1])}<button class="btn sm" data-act="exvault" data-en="${esc(f[1])}" data-ja="${esc(f[2])}" data-scene="AI英会話" ${inV?'disabled':''}>${inV?'保存済み':'保存庫に入れる'}</button></div><div class="small">${esc(f[2])}</div></div>`}).join('')}
+     <div class="row" style="margin-top:8px"><button class="btn primary" data-act="talkstart" data-id="${t.id}">もう一度</button><button class="btn" data-act="talkend">場面を選び直す</button></div></div>`
+   : `<form class="ask-box" data-form="talk" style="margin-top:14px"><input type="text" id="talk-in" placeholder="英語で答える" aria-label="あなたの答え" data-autofocus>${SR?`<button type="button" class="btn mic" data-act="talkmic" aria-label="話して入力">${I.mic}</button>`:''}<button class="btn primary" type="submit">送る</button></form>`}`;
+};
+function talkStart(id){ if(!feature('talk') || (tier()==='counseled' && S.talkTrialUsed)){ TALK={id:null,msgs:[],step:0,done:false}; go('talk'); return; } const t=TALKS.find(x=>x.id===id); TALK={id,msgs:[{ai:true,t:t.lines[0]}],step:1,done:false}; R.v='talk'; render(); say(t.lines[0]); }
+function talkSend(text){
+  const t=TALKS.find(x=>x.id===TALK.id); if(!text.trim()) return;
+  TALK.msgs.push({t:text.trim()});
+  if(TALK.step<t.lines.length){ const line=t.lines[TALK.step++]; TALK.msgs.push({ai:true,t:line}); setTimeout(()=>say(line),150); }
+  if(TALK.step>=t.lines.length){ TALK.done=true; S.talkLog++; if(tier()==='counseled') S.talkTrialUsed=true; save(); }
+  rerender();
+}
+
+const RQS = ['これまでのアルバイトや仕事で、いちばん長く続けたものは何ですか？','そこで、人から褒められたことや、任されたことはありますか？','ワーホリ先で、どんな仕事をしてみたいですか？'];
+
+const CV_COLORS = [['blue','ブルー×ピンク','#5B85C2','#FBDDE1'],['teal','ティール','#2C9A91','#D5EEEA'],['navy','ネイビー','#2F4A7A','#E2E7F1'],['green','グリーン','#4C8C5A','#E3EFDD'],['bordeaux','ボルドー','#8E3B4A','#F3DFE3'],['mango','マンゴー','#D9822B','#FCE9CF'],['charcoal','チャコール','#4A4A4A','#E4E4E4']];
+const CV_EMPTY = ()=>({photo:'',name:'',title:'',dob:'',nationality:'',gender:'',showPersonal:false,phone:'',email:'',location:'',about:'',traits:'',skills:'',edu:[{title:'',major:'',school:'',years:'',desc:''}],exp:[{role:'',length:'',company:'',place:'',years:'',desc:''}],refs:[],refsOnRequest:true,certs:[],color:'blue',accent:'',decor:''});
+const RESUME_SAMPLE = {photo:'',name:'Yamada Hanako',title:'Barista / Café Staff',dob:'',nationality:'',gender:'',showPersonal:false,phone:'+61 400 000 000',email:'hanako.yamada@example.com',location:'Sydney, NSW',
+  about:'Friendly and hardworking barista with two years of café experience in Tokyo. Calm under pressure and quick to learn new menus.',
+  traits:'Hardworking\nPunctual\nFriendly\nQuick learner',skills:'Coffee making (latte art)\nCustomer service\nCash handling\nJapanese (native), English (B1)',
+  edu:[{title:'Bachelor of Arts',major:'English',school:'Sample University, Tokyo',years:'2018 - 2022',desc:'Studied English language and communication. Joined the international exchange club.'}],
+  exp:[{role:'Barista',length:'2 yrs.',company:'Sample Café',place:'Tokyo, Japan',years:'2022 - 2024',desc:'Made espresso drinks for 300+ customers a day, trained three new staff members, and kept the bar clean and organized.'},
+       {role:'Kitchen Hand',length:'6 months',company:'Sample Restaurant',place:'Tokyo, Japan',years:'2021 - 2022',desc:'Prepared ingredients, washed dishes, and helped the chefs during busy dinner service.'}],
+  refs:[],refsOnRequest:true,certs:[{img:'',cap:'Barista Certificate'},{img:'',cap:'Employee of the Month'}],color:'teal',accent:'',decor:''};
+function cvData(){
+  const r=S.resume||{}; if(r.v===2) return r;
+  const n=Object.assign(CV_EMPTY(),{name:r.name||'',title:r.title||'',email:r.contact||'',about:r.summary||'',skills:(r.skills||'').split(/,\s*/).filter(Boolean).join('\n'),v:2});
+  if(r.exp) n.exp=[{role:'',length:'',company:'',place:'',years:'',desc:r.exp}]; if(r.edu) n.edu=[{title:'',major:'',school:'',years:'',desc:r.edu}];
+  S.resume=n; save(); return n;
+}
+function cvColors(r){ const p=CV_COLORS.find(c=>c[0]===r.color)||CV_COLORS[0]; return r.color==='custom'?[r.accent||'#5B85C2',r.decor||'#FBDDE1']:[p[2],p[3]]; }
+const CVI = {
+ phone:'<path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/>',
+ user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/>',
+ star:'<path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.6 5.7 21l1.5-7L2 9.3l7-.8z"/>',
+ tool:'<path d="M3 13h4v-2a2 2 0 1 1 4 0v2h2v-4h2a2 2 0 1 0 0-4h-2V3H3z"/><path d="M3 15h10v6H3z"/>',
+ cap:'<path d="M12 3L1 9l11 6 9-4.9V17h2V9z"/><path d="M5 13.2v4L12 21l7-3.8v-4L12 17z"/>',
+ bag:'<path d="M9 4h6a1 1 0 0 1 1 1v2h4a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h4V5a1 1 0 0 1 1-1zm1 3h4V6h-4z"/>',
+ book:'<path d="M3 5c3-1 6-1 9 1 3-2 6-2 9-1v14c-3-1-6-1-9 1-3-2-6-2-9-1z"/>',
+ award:'<circle cx="12" cy="9" r="6"/><path d="M8 14l-2 8 6-3 6 3-2-8z"/>'};
+const cvIcon = k=>`<svg viewBox="0 0 24 24" aria-hidden="true">${CVI[k]}</svg>`;
+function resumeHTML(r=cvData()){
+  const [ac,dc]=cvColors(r), L=s=>String(s||'').split('\n').map(x=>x.trim()).filter(Boolean);
+  const H=(ic,txt)=>`<h4 class="cv-h">${cvIcon(ic)}${txt}</h4>`;
+  const has=x=>Object.values(x).some(v=>String(v||'').trim());
+  const edu=(r.edu||[]).filter(has), exp=(r.exp||[]).filter(has), refs=(r.refs||[]).filter(has), certs=(r.certs||[]).filter(c=>c.img||c.cap);
+  const contact=[['phone',r.phone],['mail',r.email],['pin',r.location]].filter(c=>c[1]);
+  const cIcon={phone:CVI.phone,mail:'<path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/>',pin:'<path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>'};
+  const nameParts=String(r.name||'Your Name').trim().split(/\s+/);
+  const p1=`<section class="cv-page">
+    <div class="cv-deco"></div>
+    <aside class="cv-side">
+      <div class="cv-photo">${r.photo?`<img src="${r.photo}" alt="">`:`<span>PHOTO</span>`}</div>
+      <div class="cv-name">${nameParts.map(esc).join('<br>')}</div>
+      ${r.title?`<div class="cv-title">${esc(r.title)}</div>`:''}
+      ${r.showPersonal?`<div class="cv-personal">${r.dob?`<div>Date of Birth: ${esc(r.dob)}</div>`:''}${r.nationality?`<div>Nationality: ${esc(r.nationality)}</div>`:''}${r.gender?`<div>Gender: ${esc(r.gender)}</div>`:''}</div>`:''}
+      ${contact.length?`${H('phone','Contact')}<ul class="cv-contact">${contact.map(c=>`<li><svg viewBox="0 0 24 24" aria-hidden="true">${cIcon[c[0]]}</svg>${esc(c[1])}</li>`).join('')}</ul>`:''}
+      ${r.about?`${H('user','About Me')}<p class="cv-about">${esc(r.about)}</p>`:''}
+      ${L(r.traits).length?`${H('star','Characteristics')}<ul class="cv-list">${L(r.traits).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}
+      ${L(r.skills).length?`${H('tool','Skills')}<ul class="cv-list">${L(r.skills).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}
+    </aside>
+    <main class="cv-main">
+      ${edu.length?`${H('cap','Education')}<div class="cv-tl">${edu.map(x=>`<div class="cv-item"><div class="cv-row"><b>${esc(x.title)}${x.major?` <span class="cv-bar">|</span> ${esc(x.major)}`:''}</b><span class="cv-yr">${esc(x.years)}</span></div>${x.school?`<div class="cv-org">${esc(x.school)}</div>`:''}${x.desc?`<p>${esc(x.desc)}</p>`:''}</div>`).join('')}</div>`:''}
+      ${exp.length?`${H('bag','Experience')}<div class="cv-tl">${exp.map(x=>`<div class="cv-item"><div class="cv-row"><b>${esc(x.role)}${x.length?` <span class="cv-len">・・・ ${esc(x.length)}</span>`:''}</b><span class="cv-yr">${esc(x.years)}</span></div>${x.company||x.place?`<div class="cv-org">${esc(x.company)}${x.place?` @${esc(x.place)}`:''}</div>`:''}${x.desc?`<p>${esc(x.desc)}</p>`:''}</div>`).join('')}</div>`:''}
+      ${refs.length||r.refsOnRequest?`${H('book','References')}${refs.length?`<div class="cv-refs">${refs.map(x=>`<div><b>${esc(x.name)}</b><div class="cv-org2">${esc(x.org)}${x.org&&x.position?' / ':''}${esc(x.position)}</div>${x.phone?`<small>Phone: ${esc(x.phone)}</small>`:''}${x.email?`<small>Email: ${esc(x.email)}</small>`:''}</div>`).join('')}</div>`:`<p class="cv-req">Available upon request.</p>`}`:''}
+    </main></section>`;
+  const p2=certs.length?`<section class="cv-page cv-p2"><div class="cv-deco"></div><div class="cv-p2in">${H('award','Achievements &amp; Certificates')}
+    <div class="cv-certs">${certs.map(c=>`<figure>${c.img?`<img src="${c.img}" alt="">`:`<div class="cv-ph">画像</div>`}${c.cap?`<figcaption>${esc(c.cap)}</figcaption>`:''}</figure>`).join('')}</div></div></section>`:'';
+  return `<div class="cv" id="resume-print" style="--cv-ac:${ac};--cv-dc:${dc}">${p1}${p2}</div>`;
+}
+function fitCV(){ document.querySelectorAll('.cv-fit').forEach(w=>{ const cv=w.querySelector('.cv'); if(!cv) return; const s=Math.min(1,w.clientWidth/794); cv.style.transform=`scale(${s})`; w.style.height=(cv.scrollHeight*s)+'px'; }); }
+window.addEventListener('resize',()=>fitCV());
+document.addEventListener('load',e=>{ if(e.target.closest && e.target.closest('.cv')) fitCV(); },true);
+function cvImage(file,maxW,cb){
+  const rd=new FileReader(); rd.onload=()=>{ const im=new Image(); im.onload=()=>{ const s=Math.min(1,maxW/Math.max(im.width,im.height)); const c=document.createElement('canvas'); c.width=Math.round(im.width*s); c.height=Math.round(im.height*s); c.getContext('2d').drawImage(im,0,0,c.width,c.height); cb(c.toDataURL('image/jpeg',0.82)); }; im.src=rd.result; }; rd.readAsDataURL(file);
+}
+function cvSave(){
+  try{ localStorage.setItem(KEY, JSON.stringify(S)); return true; }catch(e){ if(e && (e.name==='QuotaExceededError'||e.code===22)){ toast('保存できる容量を超えました。画像の数を減らすか、小さい画像にしてください。'); return false; } return true; } }
+function cvRefresh(){ const p=document.getElementById('cv-preview'); if(p){ p.innerHTML=resumeHTML(); fitCV(); } }
+V.resume = ()=>{
+  if(!feature('resume')) return `<h1>履歴書をつくる</h1>${upsell(tier()==='general'?lockMsg():'履歴書の作成は、成約すると使えます。お試しでは見本を見られます。')}
+    <h2>見本</h2><div class="cv-fit">${resumeHTML(RESUME_SAMPLE)}</div>`;
+  const r=cvData();
+  const f=(k,label,ph,area,extra='')=>`<div><label class="f" for="r-${k}">${label}</label>${area?`<textarea id="r-${k}" data-r="${k}" placeholder="${esc(ph)}" ${extra}>${esc(r[k])}</textarea>`:`<input type="text" id="r-${k}" data-r="${k}" value="${esc(r[k])}" placeholder="${esc(ph)}">`}</div>`;
+  const lf=(list,i,k,label,ph,area)=>`<div><label class="f">${label}</label>${area?`<textarea data-rl="${list}" data-i="${i}" data-k="${k}" placeholder="${esc(ph)}">${esc(r[list][i][k])}</textarea>`:`<input type="text" data-rl="${list}" data-i="${i}" data-k="${k}" value="${esc(r[list][i][k])}" placeholder="${esc(ph)}">`}</div>`;
+  const del=(list,i)=>`<button class="btn sm" data-act="cvdel" data-l="${list}" data-i="${i}">この欄を消す</button>`;
+  const [ac,dc]=cvColors(r);
+  return `<h1>履歴書をつくる</h1>
+  <p class="note">試作では、入力した内容と画像はこの端末にだけ保存されます。本物の個人情報は入れずに試してください。本番では、本人だけが見られて、いつでも削除できるようにします。</p>
+  <div class="split cv-split" style="margin-top:14px">
+   <div class="stack">
+    <div class="panel"><h3>AIと一問一答で強みを見つける</h3>
+      ${RQ.i<0?`<p class="muted small">質問に日本語で答えると、AIがアピールポイントを英文にまとめます。</p><button class="btn mango" data-act="rqstart">はじめる</button>`
+       : RQ.i<RQS.length?`<div class="greet" style="margin:6px 0">${coco(44)}<div class="speech"><b>ココ（仮）</b>${esc(RQS[RQ.i])}</div></div><form data-form="rq" class="ask-box"><input type="text" id="rq-a" aria-label="答え" data-autofocus><button class="btn primary">答える</button></form><p class="muted small">${RQ.i+1} / ${RQS.length}</p>`
+       : `<p>まとめた例を「自己紹介」に入れました。本番は、あなたの答えからAIが英文を作ります。</p><button class="btn sm" data-act="rqstart">もう一度</button>`}
+    </div>
+    <div class="panel"><h3>色を選ぶ</h3>
+      <div class="cv-colors">${CV_COLORS.map(c=>`<button class="cv-sw ${r.color===c[0]?'on':''}" data-act="cvcolor" data-c="${c[0]}" aria-pressed="${r.color===c[0]}"><i style="background:linear-gradient(135deg,${c[3]} 50%,${c[2]} 50%)"></i>${c[1]}</button>`).join('')}
+        <button class="cv-sw ${r.color==='custom'?'on':''}" data-act="cvcolor" data-c="custom" aria-pressed="${r.color==='custom'}"><i style="background:conic-gradient(#e66,#eb4,#5b5,#4ac,#66e,#c5c,#e66)"></i>自分で選ぶ</button></div>
+      ${r.color==='custom'?`<div class="row" style="margin-top:10px;gap:16px"><label class="small">メインの色 <input type="color" data-rc="accent" value="${ac}"></label><label class="small">飾りの色 <input type="color" data-rc="decor" value="${dc}"></label></div>`:''}
+      <p class="muted small" style="margin:8px 0 0">メインの色は名前・線・点に、飾りの色は左上の三角に使います。配置は1種類で、色だけ変えられます。</p>
+    </div>
+    <div class="panel"><h3>写真と基本情報</h3>
+      <div class="row" style="gap:12px;align-items:center">
+        <div class="cv-thumb">${r.photo?`<img src="${r.photo}" alt="選んだ写真">`:'写真'}</div>
+        <div class="stack" style="gap:6px"><label class="btn sm">写真を選ぶ<input type="file" accept="image/*" data-file="photo" hidden></label>${r.photo?`<button class="btn sm" data-act="cvphotodel">写真を外す</button>`:''}</div>
+      </div>
+      ${f('name','名前（ローマ字）','例: Yamada Hanako')}${f('title','希望する仕事・肩書き','例: Barista / Café Staff')}
+      <label class="row small" style="gap:6px;margin-top:10px"><input type="checkbox" data-rb="showPersonal" ${r.showPersonal?'checked':''}> 生年月日・国籍・性別も載せる</label>
+      <p class="muted small" style="margin:4px 0 0">オーストラリアやカナダなどでは、差別を防ぐため、履歴書に写真・年齢・性別を書かないのがふつうです。応募先の国の習慣に合わせてください。</p>
+      ${r.showPersonal?f('dob','生年月日','例: March 13, 2000')+f('nationality','国籍','例: Japanese')+f('gender','性別（書かなくてもよい）','例: Female'):''}
+    </div>
+    <div class="panel"><h3>連絡先・自己紹介</h3>
+      ${f('phone','電話番号','例: 現地の番号（試作では仮のものを）')}${f('email','メールアドレス','例: 仮のアドレスで試してください')}${f('location','住んでいる地域（市まで）','例: Sydney, NSW')}
+      ${f('about','自己紹介（About Me・英語）','例: Friendly and hardworking barista ...',1)}
+      ${f('traits','人柄（Characteristics・1行に1つ）','例:\nHardworking\nPunctual',1)}
+      ${f('skills','スキル・資格（Skills・1行に1つ）','例:\nCoffee making\nCustomer service',1)}
+    </div>
+    <div class="panel"><h3>学歴（Education）</h3>
+      ${r.edu.map((x,i)=>`<div class="cv-entry">${lf('edu',i,'title','学校の種類・学位','例: Bachelor of Arts')}${lf('edu',i,'major','専攻（なければ空欄）','例: English')}${lf('edu',i,'school','学校名','例: ○○ University, Tokyo')}${lf('edu',i,'years','期間','例: 2018 - 2022')}${lf('edu',i,'desc','学んだこと（英語）','例: Studied ...',1)}${del('edu',i)}</div>`).join('')}
+      <button class="btn sm" data-act="cvadd" data-l="edu">＋ 学歴を足す</button>
+    </div>
+    <div class="panel"><h3>職歴（Experience）</h3>
+      ${r.exp.map((x,i)=>`<div class="cv-entry">${lf('exp',i,'role','仕事の名前','例: Barista')}${lf('exp',i,'length','働いた長さ','例: 2 yrs. / 6 months')}${lf('exp',i,'company','会社・お店の名前','例: ○○ Café')}${lf('exp',i,'place','場所','例: Tokyo, Japan')}${lf('exp',i,'years','期間','例: 2022 - 2024 / 2024 - Present')}${lf('exp',i,'desc','したこと（英語）','例: Made espresso drinks ...',1)}${del('exp',i)}</div>`).join('')}
+      <button class="btn sm" data-act="cvadd" data-l="exp">＋ 職歴を足す</button>
+    </div>
+    <div class="panel"><h3>推薦者（References）</h3>
+      <label class="row small" style="gap:6px"><input type="checkbox" data-rb="refsOnRequest" ${r.refsOnRequest?'checked':''}> 名前を書かず「Available upon request.（求めがあれば出します）」とだけ書く</label>
+      <p class="muted small" style="margin:4px 0 8px">推薦者の電話番号やメールは、その人の個人情報です。載せる前に、本人の了解をもらってください。</p>
+      ${r.refsOnRequest?'':r.refs.map((x,i)=>`<div class="cv-entry">${lf('refs',i,'name','名前','例: 前の職場の店長')}${lf('refs',i,'org','会社・お店','')}${lf('refs',i,'position','役職','例: Manager')}${lf('refs',i,'phone','電話','')}${lf('refs',i,'email','メール','')}${del('refs',i)}</div>`).join('')+(r.refs.length<2?`<button class="btn sm" data-act="cvadd" data-l="refs">＋ 推薦者を足す（2人まで）</button>`:'')}
+    </div>
+    <div class="panel"><h3>資格・受賞（2ページ目）</h3>
+      <p class="muted small" style="margin:0 0 8px">賞状や修了証などの画像を、自由に入れられます。入れると2ページ目ができます（6枚まで）。</p>
+      <div class="cv-certin">${r.certs.map((c,i)=>`<div class="cv-entry"><div class="cv-thumb wide">${c.img?`<img src="${c.img}" alt="">`:'画像なし'}</div><label class="btn sm">画像を選ぶ<input type="file" accept="image/*" data-file="cert" data-i="${i}" hidden></label>${lf('certs',i,'cap','画像の下に出す説明','例: TESOL Certificate')}${del('certs',i)}</div>`).join('')}</div>
+      ${r.certs.length<6?`<label class="btn sm">＋ 画像を足す<input type="file" accept="image/*" data-file="certnew" hidden></label>`:''}
+    </div>
+   </div>
+   <div class="stack cv-prevcol"><div class="row" style="justify-content:space-between"><h3 style="margin:0">プレビュー</h3><button class="btn primary" data-act="rprint">PDFで保存（印刷）</button></div>
+     <div class="cv-fit" id="cv-preview">${resumeHTML()}</div></div>
+  </div>`;
+};
+
+V.guide = ()=>`<h1>手引書</h1>
+  <div class="greet" style="margin-top:0">${coco(56)}<div class="speech"><b>ココ（仮）</b>時期ごとのおすすめの使い方です。各カテゴリーの説明は下にあります。</div></div>
+  <div class="home-grid">
+    <div class="panel"><h3>留学前（出発の1〜3か月前）</h3><p class="small">① レベル診断 → ②「留学で使う英語」の授業中・学校生活 → ③ 自分のレベルの単語と構文 → ④ AI英会話の「授業の始まりの雑談」。</p></div>
+    <div class="panel"><h3>留学中</h3><p class="small">授業で言えなかったことは、その日のうちにAIに聞いて保存庫へ。「実際に使えた！」を押して、使える表現を増やす。寮・生活の表現も役立ちます。</p></div>
+    <div class="panel"><h3>ワーホリの前</h3><p class="small">ワーホリ対策の表現 → 面接対策 → AIと面接練習 → 履歴書づくり。</p></div>
+  </div>
+  <h2>レベルの目安</h2>
+  ${lvGuideHTML()}
+  <h2>このアプリの方針</h2>
+  <div class="stack">
+   <div class="panel"><h3>発音はアメリカ英語を基準にしています</h3>
+    <p class="small" style="margin:0 0 6px">発音記号・音声・発音講座は、アメリカ英語に合わせています。理由は3つです。</p>
+    <ul class="small" style="margin:0;padding-left:1.2em">
+     <li>フィリピンの英語は、アメリカ英語の影響を強く受けています。留学先の先生の発音に近いので、授業がそのまま聞き取りやすくなります。</li>
+     <li>日本の中学・高校の英語の教科書は、アメリカ英語が中心です。これまでの学習とつながります。</li>
+     <li>基準を1つに決めると、発音記号と音声が食い違わず、迷わずに練習できます。</li>
+    </ul>
+    <p class="muted small" style="margin:6px 0 0">イギリス英語やオーストラリア英語が間違いというわけではありません。ワーホリなどで使う言い方の違いは、必要なところで短く紹介しています。</p></div>
+   <div class="panel"><h3>C2（最上級）は、あえて入れていません</h3>
+    <p class="small" style="margin:0 0 6px">学習のレベルは、入門（A1）から上級（C1）までです。C2は、レベルの目安の表に参考として載せるだけにしています。理由は3つです。</p>
+    <ul class="small" style="margin:0;padding-left:1.2em">
+     <li>C2は、教養のあるネイティブに近いレベルです。留学やワーホリで目指すのは、C1までで十分です。</li>
+     <li>英検とTOEICには、C2に当たる級や点数がありません。目安を示せないレベルは、目標にしにくくなります。</li>
+     <li>使う人の多いレベルに中身を集めた方が、一つひとつの内容を厚くできます。</li>
+    </ul></div>
+  </div>
+  <h2>カテゴリーの説明</h2>
+  <p class="muted small" style="margin:0 0 8px">「学ぶ」のカードの右上にある ⓘ を押しても、同じ説明が見られます。</p>
+  <div class="list">${Object.keys(CAT_INFO).map(k=>`<div class="panel" style="padding:12px 16px"><b>${esc(CATS[k])}</b><p class="small" style="margin:2px 0 0">${esc(CAT_INFO[k].one)}</p></div>`).join('')}<div class="panel" style="padding:12px 16px"><b>保存庫</b><p class="small" style="margin:2px 0 0">言えなかった表現をためて、復習して、次に使えるようにする自分だけの場所。</p></div></div>
+  <h2>句動詞とコロケーションの違い</h2>
+  <p class="muted">どちらも「2語以上のまとまり」ですが、覚える目的とテストのやり方が違うので、分けています。</p>
+  <div class="panel" style="padding:0;overflow-x:auto"><table class="lvtable cmp">
+    <thead><tr><th scope="col"></th><th scope="col">句動詞（熟語）</th><th scope="col">コロケーション</th></tr></thead>
+    <tbody>
+     <tr><th scope="row">どんなもの</th><td>組み合わせると<b>別の意味</b>になる</td><td>英語ならではの<b>語呂合わせ</b>（よく一緒に使う自然な組み合わせ）</td></tr>
+     <tr><th scope="row">例</th><td><span class="en">give up</span>（あきらめる）<br><span class="en">put off</span>（延期する）</td><td><span class="en">make a mistake</span>（間違える）<br><span class="en">heavy rain</span>（大雨）</td></tr>
+     <tr><th scope="row">つまずく所</th><td>単語を知っていても、意味が推測できない</td><td>意味は分かるのに、組み合わせを間違える（× <span class="en">do a mistake</span>、× <span class="en">strong rain</span>）</td></tr>
+     <tr><th scope="row">身につく力</th><td>聞いて分かる力</td><td>自然に話す・書く力</td></tr>
+     <tr><th scope="row">テスト</th><td>意味を選ぶ（日本語 ⇄ 英語）</td><td>穴埋め（<span class="en">___ a mistake</span> → make / do / take）</td></tr>
+    </tbody></table></div>
+  <div class="muted small stack" style="margin-top:8px">
+    <p>日本語の「熟語」は意味が広く、イディオムなども含みます。このアプリの「句動詞（熟語）」は、動詞と短い語の組み合わせだけを集めています。</p>
+    <p>イディオムは、<span class="en">a piece of cake</span>（とても簡単なこと。直訳は「ケーキ1切れ」）のように、直訳では意味が通らない決まった言い回しです。</p>
+    <p><span class="en">take a shower</span>（コロケーション）と <span class="en">take off</span>（句動詞・離陸する）のように、似ていても分類が違うものがあります。迷うものは監修者が決めています。</p>
+  </div>`;
+
+function lvGuideHTML(){ return `
+  <p class="muted">このアプリのレベルは、国際的な基準のCEFR（セファール）に合わせています。英検・TOEIC・IELTSでのおおよその目安も並べました。</p>
+  <div class="panel" style="padding:0;overflow-x:auto"><table class="lvtable">
+    <thead><tr><th scope="col">レベル</th><th scope="col">CEFR</th><th scope="col">英検</th><th scope="col">TOEIC</th><th scope="col">IELTS</th></tr></thead>
+    <tbody>${LV.map((l,i)=>`<tr><th scope="row">${l}<span class="lvsub">${LV_SUB[i]}</span></th><td class="en">${LV_CEFR[i]}</td><td>${LV_MAP[i][0]}</td><td>${LV_MAP[i][1]}</td><td>${LV_MAP[i][2]}</td></tr><tr class="def"><td colspan="5">${esc(LV_DEF[i])}</td></tr>`).join('')}<tr class="ref"><th scope="row">最上級<span class="lvsub">参考・対象外</span></th><td class="en">C2</td><td>対応する級なし</td><td>目安なし</td><td>8.5〜9.0</td></tr></tbody>
+  </table></div>
+  <div class="muted small stack" style="margin-top:8px">
+    <p>どれも大まかな目安です。試験ごとに測る技能や問題の形が違うので、点数どうしをぴったり換算することはできません。</p>
+    <p>英検: その級に合格した人の、おおよそのレベルです。たとえば2級の合格点はB1の範囲に入ります。合格点に届かなくても、成績表にB1と出ることがあります。</p>
+    <p>TOEIC: Listening &amp; Readingの合計点。ETSが示すCEFRごとの最低点をもとにした区切りです。ETSは、A1〜B1の人にはTOEIC Bridgeを勧めています。</p>
+    <p>IELTS: 公式の対応表はB1（4.0）からです。それより下は、資料によって区切りがばらつくので載せていません。</p>
+    <p>このアプリは上級（C1）までです。最上級のC2（教養のあるネイティブに近いレベル）は、参考として載せています。英検とTOEICには、C2に当たる級や点数がありません。TOEIC L&amp;Rは945点以上がC1の目安で、それより上の区切りはありません。</p>
+  </div>
+`; }
+function openLvGuide(){
+  let d=document.getElementById('lvdlg');
+  if(!d){ d=document.createElement('dialog'); d.id='lvdlg'; d.className='modal'; d.setAttribute('aria-labelledby','lvdlg-t'); document.body.appendChild(d);
+    d.addEventListener('click',e=>{ if(e.target===d) d.close(); }); }
+  d.innerHTML=`<div class="modal-head"><h2 id="lvdlg-t" style="margin:0">レベルの目安</h2><button class="btn sm" data-act="lvclose" autofocus>閉じる</button></div>${lvGuideHTML()}`;
+  d.showModal();
+}
+
+const PRON_PARTS = [
+ ['第1部 発音記号の読み方',[['pu:1','発音記号の見方'],['pu:2','短い母音'],['pu:3','あいまい母音 /ə/'],['pu:4','長い母音'],['pu:5','二重母音'],['pu:6','子音の基本']]],
+ ['第2部 日本人が苦手な音',[['pu:rl','/r/ と /l/'],['pu:th','/θ/ と /ð/（th）'],['pu:9','/f/ と /v/'],['pu:10','3つの「ア」（/æ/ /ʌ/ /ɑ/）'],['pu:11','/ɪ/ と /iː/'],['pu:12','/s/ と /ʃ/'],['pu:13','語末の子音'],['pu:14','r の付いた母音']]],
+ ['第3部 音のつながりのルール',[['pu:link','つながる音（リンキング）'],['pu:16','消える音'],['pu:17','変わる音'],['pu:18','ラ行に聞こえる t'],['pu:19','弱く読む言葉'],['pu:20','会話でよく縮まる形']]],
+ ['第4部 リズムとイントネーション',[['pu:21','単語の強く読む場所'],['pu:22','文の中の強弱'],['pu:23','上げ調子と下げ調子'],['pu:24','区切って話す']]],
+ ['第5部 実践',[['pu:25','留学で使うフレーズで練習'],['pu:26','シャドーイング'],['pu:27','自己紹介を録音して比べる']]]
+];
+const PRON_UNITS = {
+ 'pu:rl':{one:'r は舌をどこにも付けない。l は舌先を上の歯ぐきに付ける。',
+  sym:[{s:'/r/',how:'唇を少し丸め、舌先を口の中で浮かせたまま、少し奥に引く。舌はどこにも付けない。',ex:['right','rice','very']},
+       {s:'/l/',how:'舌先を、上の前歯の裏の歯ぐきにしっかり付けて声を出す。息は舌の両脇から出る。',ex:['light','lice','hello']}],
+  rule:'日本語の「ら行」は、舌先で歯ぐきを軽くはじく音で、r とも l とも違います。r は「付けない」、l は「付ける」と覚えると区別できます。school や feel のように最後に来る l は、舌を付けたまま「ウ」に近く聞こえます。',
+  pairs:[['right','light'],['rice','lice'],['read','lead'],['correct','collect'],['fry','fly']],
+  practice:['I really like rice.','Let me read the lesson.','The light is on the right.']},
+ 'pu:th':{one:'舌先を上の前歯に軽く当てて、息（/θ/）や声（/ð/）を出す。',
+  sym:[{s:'/θ/',how:'舌先を上の前歯の先に軽く当て（歯で軽くはさんでもよい）、すき間から息だけを出す。声は出さない。',ex:['think','three','bath']},
+       {s:'/ð/',how:'口の形は /θ/ と同じ。今度は声を出す。',ex:['this','they','mother']}],
+  rule:'th は日本語にない音です。「さ行」「ざ行」で代わりに言うと、think が sink（沈む）、thank が sank に聞こえてしまいます。舌を前歯に当てることが、いちばんのコツです。',
+  pairs:[['think','sink'],['thank','sank'],['three','tree'],['they','day'],['mouth','mouse']],
+  practice:['Thank you for this.','I think there are three.','My brother is over there.']},
+ 'pu:link':{one:'子音で終わる単語の次が母音で始まると、2つがつながって1語のように聞こえる。',
+  sym:[{s:'an apple',how:'n が次の a につながる。/ə ˈnæpəl/。目安は「アナポー」。',ex:['an apple']},
+       {s:'check it out',how:'k と t が次の母音につながる。t はラ行に近くなる。目安は「チェキラウ」。',ex:['check it out']},
+       {s:'pick it up',how:'k と t がつながる。最後の p はほとんど聞こえない。目安は「ピキラッ」。',ex:['pick it up']}],
+  rule:'英語は単語ごとに区切らず、つなげて話します。聞き取れない原因の多くは、このつながりです。前の単語の最後の子音を、次の単語の頭に移すつもりで読むと、自然に聞こえます。',
+  pairs:[],
+  practice:['Can I have a look at it?','Pick it up, please.','Not at all.']}
+};
+let PU = {id:null, i:0, t:0, pick:null, score:0};
+const PRON_FREE = 'pu:rl';
+const puOk = id=> tier()!=='general' || id===PRON_FREE;
+V.pron = ()=>{
+  if(PU.id) return puDetail(PU.id);
+  const done=S.pronDone||{}, nDone=Object.keys(done).length, nAll=PRON_PARTS.reduce((a,p)=>a+p[1].length,0);
+  return `<h1>発音講座</h1>
+  <p class="muted">発音記号の読み方、日本人が苦手な音、音のつながり、リズムを、ルール → 聞き分け → 言ってみる の順で練習します。発音はアメリカ英語が基準です。</p>
+  <div class="panel row" style="justify-content:space-between"><span>終えた単元 <b class="en">${nDone}</b> / ${nAll}</span><div class="lq-bar" aria-hidden="true" style="flex:1;max-width:220px">${'<i class="on" style="flex:1"></i>'.repeat(nDone)}${'<i style="flex:1"></i>'.repeat(nAll-nDone)}</div></div>
+  ${PRON_PARTS.map(([name,us])=>`<h2>${name}</h2><div class="list">${us.map(([id,title])=>{const has=!!PRON_UNITS[id];
+    return `<button class="li" data-act="puopen" data-id="${id}"><span><span class="t" style="font-family:var(--jp)">${esc(title)}</span><br><span class="s">${has?esc(PRON_UNITS[id].one):'準備中'}</span></span><span>${done[id]?'<span class="st known">終えた</span>':''}${puOk(id)?'':`<span class="lockmark" aria-label="鍵">${I.lock}</span>`}</span></button>`}).join('')}</div>`).join('')}`;
+};
+function puDetail(id){
+  const title=PRON_PARTS.flatMap(p=>p[1]).find(u=>u[0]===id)[1], u=PRON_UNITS[id];
+  const back=`<button class="btn sm back" data-act="puclose" style="display:inline-flex">← 単元の一覧に戻る</button>`;
+  if(!puOk(id)) return `${back}<h1>${esc(title)}</h1>${upsell('発音講座のこの単元は、無料カウンセリング（面談）を受けると使えます。')}`;
+  if(!u) return `${back}<h1>${esc(title)}</h1><div class="panel empty muted">この単元は準備中です。試作では「/r/ と /l/」「th」「つながる音」の3つに中身があります。</div>`;
+  const q=u.pairs[PU.i], quizDone=PU.i>=u.pairs.length;
+  return `${back}<h1>${esc(title)}</h1>
+  <div class="panel"><p class="filter-l" style="margin:0">ひとことで言うと</p><p style="font-size:18px;margin:2px 0 0;font-weight:700;color:var(--teal-ink)">${esc(u.one)}</p></div>
+  <h2>発音記号と口の形</h2>
+  <div class="stack">${u.sym.map(s=>`<div class="panel"><div class="row"><span class="word ipa-big">${esc(s.s)}</span></div><p style="margin:6px 0">${esc(s.how)}</p>
+    <div class="row">${s.ex.map(w=>`<button class="btn sm" data-act="say" data-t="${esc(w)}">${I.speaker} <span class="en">${esc(w)}</span></button>`).join('')}</div></div>`).join('')}</div>
+  <h2>ルール</h2><div class="panel"><p style="margin:0">${esc(u.rule)}</p></div>
+  ${u.pairs.length?`<h2>聞き分け</h2><div class="panel">
+    ${quizDone?`<p style="margin:0"><b>${PU.score} / ${u.pairs.length}問</b> 聞き分けられました。</p><button class="btn sm" style="margin-top:8px" data-act="puretry">もう一度</button>`
+    :`<p class="muted small" style="margin:0">${PU.i+1} / ${u.pairs.length}　音声を聞いて、聞こえた方を選んでください</p>
+      <button class="btn primary" style="margin:10px 0" data-act="puplay">${I.speaker} 音声を聞く</button>
+      <div class="row">${q.map((w,k)=>`<button class="opt en ${PU.pick!=null?(k===PU.t?'right':(k===PU.pick?'wrong':'')):''}" style="flex:1;min-width:120px" data-act="pupick" data-k="${k}" ${PU.pick!=null?'disabled':''}>${esc(w)}</button>`).join('')}</div>
+      ${PU.pick!=null?`<p class="small" style="margin:8px 0 0">${PU.pick===PU.t?'正解！':'おしい。'}流れたのは <b class="en">${esc(q[PU.t])}</b> です。<button class="btn sm" data-act="say" data-t="${esc(q[0])}">${esc(q[0])}</button> <button class="btn sm" data-act="say" data-t="${esc(q[1])}">${esc(q[1])}</button></p>
+      <button class="btn primary" style="margin-top:8px" data-act="punext">${PU.i+1<u.pairs.length?'次へ':'結果を見る'}</button>`:''}`}
+  </div>`:''}
+  <h2>言ってみる</h2>
+  <div class="stack">${u.practice.map(s=>`<div class="panel"><div class="row"><span class="en" style="font-size:18px">${esc(s)}</span>${sayBtn(s)}</div>
+    ${feature('pron')?`<button class="btn sm" style="margin-top:8px" data-act="pron" data-id="pp:${esc(s)}">${I.mic} 録音して比べる</button>${PRON.id==='pp:'+s?pronPanel(s):''}`:`<p class="muted small" style="margin:6px 0 0">お手本を聞いて、まねして言ってみましょう。録音して比べる機能は、面談を受けると使えます。</p>`}</div>`).join('')}</div>
+  <div class="row" style="margin-top:16px"><button class="btn ${S.pronDone&&S.pronDone[id]?'on':'primary'}" data-act="pudone" data-id="${id}">${S.pronDone&&S.pronDone[id]?'この単元を終えた ✓':'この単元を終えた'}</button>${back}</div>`;
+}
+
+V.me = ()=>{
+  const known=Object.values(S.prog).filter(p=>p.state==='known').length, fav=Object.values(S.prog).filter(p=>p.fav).length;
+  return `<h1>マイページ</h1>
+  <div class="panel"><div class="greet" style="margin:0">${mango(56)}<div><b style="font-size:18px">${esc(S.user)}</b><p class="muted small" style="margin:0">レベル: ${S.level==null?'未診断':LV[S.level]+'（'+LV_CEFR[S.level]+'）'}</p></div></div></div>
+  <div class="home-grid">
+    <div class="tile"><b>${known}</b><span>覚えた項目</span></div><div class="tile"><b>${S.vault.length}</b><span>保存庫の表現</span></div>
+    <div class="tile"><b>${fav}</b><span>お気に入り</span></div><div class="tile"><b>${S.tests}</b><span>テストの回数</span></div><div class="tile"><b>${S.talkLog}</b><span>AI英会話の回数</span></div>
+  </div>
+  <div class="panel" style="margin-top:14px"><h3>利用区分</h3>
+    <p>${TIER_NAME[tier()]}${expired()?'（お試しの期限切れ）':tier()==='counseled'?`（あと${trialLeft()}日）`:''}</p>
+    <p class="muted small">試作用: 区分を切り替えて、見え方を確かめられます。本番は、運営（代表）だけが切り替えます。</p>
+    <div class="row"><button class="btn sm ${S.tier==='general'?'on':''}" data-act="settier" data-t="general">一般（面談前）</button><button class="btn sm ${S.tier==='counseled'&&!expired()?'on':''}" data-act="settier" data-t="counseled">面談実施者</button><button class="btn sm ${S.tier==='customer'?'on':''}" data-act="settier" data-t="customer">成約者</button><button class="btn sm ${expired()?'on':''}" data-act="expire">お試しを期限切れにする</button></div></div>
+  <div class="row" style="margin-top:16px"><button class="btn" data-act="logout">ログアウト</button><button class="btn" data-act="wipe">この端末の学習データを消す</button></div>
+  <p class="muted small" style="margin-top:10px">本番では、ここにアカウントの削除、プライバシーポリシー、利用規約を置きます。</p>`;
+};
+
+document.addEventListener('click', e=>{
+  const b = e.target.closest('[data-act]'); if(!b) return;
+  const d = b.dataset;
+  switch(d.act){
+    case 'go': if(d.v==='level' && R.v!=='level' && LQS.done) LQS={cat:null,i:0,score:0,pick:null,qs:[],done:false}; if(d.v==='pron') PU={id:null,i:0,t:0,pick:null,score:0}; if(d.v==='learn'){ go('learn',{cat:null,sel:null}); break; } go(d.v); break;
+    case 'login': { const n=$('#w-name').value.trim(); if(!n){ $('#w-name').focus(); return; } S.user=n;
+      const code=$('#w-code').value.trim().toUpperCase(); S.tier=CODES[code]||'general'; S.trialStart = S.tier==='counseled'?today():''; S.talkTrialUsed=false;
+      if(code && !CODES[code]) toast('招待コードが見つからなかったので、一般（面談前）で始めます。');
+      save(); go('home'); break; }
+    case 'settier': S.tier=d.t; S.trialStart = d.t==='counseled'?today():''; S.talkTrialUsed=false; S.askCount={d:'',n:0}; save(); render(); toast(`区分を「${TIER_NAME[d.t]}」にしました。`); break;
+    case 'expire': S.tier='counseled'; S.trialStart=addDays(-(TRIAL_DAYS+1)); save(); render(); toast('お試しを期限切れにしました（一般と同じ範囲になります）。'); break;
+    case 'upsell': { const m=b.parentElement.querySelector('.upsell-msg'); if(COUNSEL_URL){ window.open(COUNSEL_URL,'_blank','noopener'); } else if(m){ m.textContent='試作のため、申し込み先はまだつながっていません。'; } break; }
+    case 'logout': S.user=''; save(); render(); break;
+    case 'wipe': if(confirm('この端末に保存した学習記録・保存庫・履歴書の入力を消します。元に戻せません。消しますか？')){ S=Object.assign(S0(),{user:S.user,tier:S.tier,trialStart:S.trialStart}); save(); render(); } break;
+    case 'say': say(d.t); break;
+    case 'learn': PRON.id=null; document.getElementById('catdlg')?.close(); document.getElementById('cidlg')?.close(); go('learn',{cat:d.cat,lv:'all',sel:null}); break;
+    case 'learnmenu': PRON.id=null; go('learn',{cat:null,sel:null}); break;
+    case 'catsheet': openCatSheet(); break;
+    case 'catinfo': openCatInfo(d.cat); break;
+    case 'ciclose': document.getElementById('cidlg')?.close(); break;
+    case 'catclose': document.getElementById('catdlg')?.close(); break;
+    case 'lv': R.lv=d.lv; R.sel=null; rerender(); break;
+    case 'scene': R.scene=d.s; R.sel=null; rerender(); break;
+    case 'whscene': R.whScene=d.s; R.sel=null; rerender(); break;
+    case 'simpick': { const x=WH_SIMS.find(s=>s.id===SIM.id); if(!x) break; SIM.picks.push(+d.k);
+      const o=x.steps[SIM.picks.length-1].opts[+d.k]; if(o[0]) say(o[0]);
+      if(SIM.picks.length>=x.steps.length){ const sc=SIM.picks.filter((p,i)=>x.steps[i].opts[p][2]===3).length; const p=(S.prog[x.id]=S.prog[x.id]||{}); p.simBest=Math.max(p.simBest??0,sc); save(); }
+      rerender(); { const n=document.querySelector('.sim-opts')||document.querySelector('.sim-end'); if(n){ const r=n.getBoundingClientRect(); if(r.bottom>window.innerHeight-20) window.scrollBy({top:r.bottom-window.innerHeight+40,behavior:'smooth'}); } } break; }
+    case 'simretry': SIM={id:SIM.id,i:0,picks:[]}; rerender(); break;
+    case 'lvguide': openLvGuide(); break;
+    case 'sayall': { const sd=SCENE_DL[d.id]; if(sd) say(sd.lines.map(l=>plain(l[1])).join(' ')); break; }
+    case 'lvclose': document.getElementById('lvdlg')?.close(); break;
+    case 'gch': R.gch=d.c; R.sel=null; rerender(); break;
+    case 'noteonly': R.noteOnly=!R.noteOnly; R.sel=null; rerender(); break;
+    case 'step': stepTo(+d.d); break;
+    case 'sel': R.sel=d.id; PRON={id:null,url:null,rec:null,result:''}; rerender(); if(window.innerWidth<960) window.scrollTo(0,0); break;
+    case 'unsel': R.sel=null; rerender(); break;
+    case 'fav': setProg(d.id,{fav:!P(d.id).fav}); rerender(); break;
+    case 'know': mark(d.id,d.ok==='1'); rerender(); break;
+    case 'tovault': { const x=ITEMS.find(i=>i.id===d.id); if(x){ addVault(x.en,x.ja,x.scene||CATS[x.cat],'item'); rerender(); } break; }
+    case 'exvault': addVault(d.en,d.ja,d.scene,'item'); rerender(); break;
+    case 'pron': PRON={id:d.id,url:null,rec:null,result:''}; rerender(); break;
+    case 'rec': toggleRec(); break;
+    case 'judge': judge(d.t); break;
+    case 'gq': { GQ[d.id]=GQ[d.id]||{}; GQ[d.id][+d.q]=+d.i; rerender(); break; }
+    case 'lvpick': if(LQS.pick===null){ LQS.pick=+d.i; const q=LQS.qs[LQS.i]; if(q.opts[+d.i]===q.o[0]) LQS.score++; rerender(); } break;
+    case 'lvstart': lvStart(d.cat); break;
+    case 'puopen': PU={id:d.id,i:0,t:Math.round(Math.random()),pick:null,score:0}; PRON={id:null,url:null,rec:null,result:''}; rerender(); window.scrollTo(0,0); break;
+    case 'puclose': PU={id:null,i:0,t:0,pick:null,score:0}; rerender(); window.scrollTo(0,0); break;
+    case 'puplay': { const q=PRON_UNITS[PU.id].pairs[PU.i]; say(q[PU.t]); break; }
+    case 'pupick': if(PU.pick==null){ PU.pick=+d.k; if(PU.pick===PU.t) PU.score++; rerender(); } break;
+    case 'punext': PU.i++; PU.pick=null; PU.t=Math.round(Math.random()); rerender(); break;
+    case 'puretry': PU.i=0; PU.pick=null; PU.score=0; PU.t=Math.round(Math.random()); rerender(); break;
+    case 'gaudio': grammarAudio(d.id); break;
+    case 'pudone': S.pronDone=S.pronDone||{}; if(S.pronDone[d.id]) delete S.pronDone[d.id]; else S.pronDone[d.id]=true; save(); rerender(); break;
+    case 'lqser': LQ_SERIES=d.k; rerender(); break;
+    case 'lvsample': lvSample(); rerender(); break;
+    case 'lvnext': LQS.i++; LQS.pick=null; if(LQS.i>=LQS.qs.length) lvFinish(); rerender(); break;
+    case 'lvreset': LQS={cat:null,i:0,score:0,pick:null,qs:[],done:false}; rerender(); break;
+    case 'counsel': { const m=$('#cmsg'); if(m) m.textContent='試作のため、申し込み先はまだつながっていません。'; break; }
+    case 'askdemo': if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[tier()].ask}回）を使い切りました。${tier()==='counseled'?'成約すると1日'+LIMIT.customer.ask+'回まで使えます。':''}`); break; } useAsk(); ASK={q:d.q,a:AI_DEMO[d.q],fb:null}; rerender(); break;
+    case 'askvault': if(ASK.a&&!ASK.a.none){ addVault(ASK.a.en,ASK.a.ja,'AIに聞いた','ai'); rerender(); } break;
+    case 'askmemo': if(addVault('',ASK.q,'メモ','ai')){ ASK={q:'',a:null,fb:null}; go('vault'); } break;
+    case 'askfb': ASK.fb=d.v; rerender(); break;
+    case 'vf': VF=d.f; rerender(); break;
+    case 'vused': { const v=S.vault.find(x=>String(x.id)===d.id); if(v){ v.used=(v.used||0)+1; save(); rerender(); } break; }
+    case 'vknow': { const v=S.vault.find(x=>String(x.id)===d.id); if(v){ Object.assign(v,review(v,d.ok==='1')); save(); rerender(); } break; }
+    case 'vdel': S.vault=S.vault.filter(x=>String(x.id)!==d.id); save(); rerender(); break;
+    case 'vask': { const v=S.vault.find(x=>String(x.id)===d.id); ASK={q:v?`「${v.ja}」の別の言い方は？`:'',a:null,fb:null}; go('ask'); break; }
+    case 'testfrom': T={setup:{src:d.src,lv:'all',dir:'ja2en'},qs:null,i:0,score:0,pick:null}; go('test'); break;
+    case 'tstart': { const s=$('#t-src'); if(s){ T.setup={src:s.value,lv:$('#t-lv').value,dir:$('#t-dir').value}; } startTest(); if(T.qs) rerender(); break; }
+    case 'tpick': tpick(+d.i); break;
+    case 'tnext': T.i++; T.pick=null; rerender(); break;
+    case 'treset': T.qs=null; rerender(); break;
+    case 'talkstart': talkStart(d.id); break;
+    case 'talkend': TALK={id:null,msgs:[],step:0,done:false}; go('talk'); break;
+    case 'talkmic': { try{ const r=new SR(); r.lang='en-US'; b.classList.add('rec'); r.onresult=ev=>{ $('#talk-in').value=ev.results[0][0].transcript; }; r.onend=()=>b.classList.remove('rec'); r.start(); }catch(err){} break; }
+    case 'rqstart': RQ={i:0,answers:[]}; rerender(); break;
+    case 'cvcolor': cvData().color=d.c; save(); rerender(); break;
+    case 'cvadd': { const r=cvData(), tpl={edu:{title:'',major:'',school:'',years:'',desc:''},exp:{role:'',length:'',company:'',place:'',years:'',desc:''},refs:{name:'',org:'',position:'',phone:'',email:''}}[d.l]; if(tpl) r[d.l].push(tpl); save(); rerender(); break; }
+    case 'cvdel': cvData()[d.l].splice(+d.i,1); save(); rerender(); break;
+    case 'cvphotodel': cvData().photo=''; save(); rerender(); break;
+    case 'rprint': window.print(); break;
+  }
+});
+document.addEventListener('submit', e=>{
+  const f=e.target.closest('[data-form]'); if(!f) return; e.preventDefault();
+  if(f.dataset.form==='ask'){ const q=$('#ask-q').value.trim(); if(!q) return; if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[tier()].ask}回）を使い切りました。`); return; } useAsk(); ASK={q,a:AI_DEMO[q]||{none:true},fb:null}; rerender(); }
+  if(f.dataset.form==='vadd'){ const en=$('#va-en').value.trim(), ja=$('#va-ja').value.trim(); if(!en||!ja){ alert('英語と意味を入れてください。'); return; } addVault(en,ja,$('#va-sc').value,'manual'); rerender(); }
+  if(f.dataset.form==='talk'){ talkSend($('#talk-in').value); }
+  if(f.dataset.form==='rq'){ const a=$('#rq-a').value.trim(); if(!a) return; RQ.answers.push(a); RQ.i++;
+    if(RQ.i>=RQS.length){ cvData(); S.resume.about = "Friendly and hardworking person with experience in customer service. Trusted to train new staff and handle busy shifts. Looking for a café or hospitality role to grow my skills and English."; save(); }
+    rerender(); }
+});
+document.addEventListener('change', e=>{
+  if(e.target.dataset.rb){ cvData()[e.target.dataset.rb]=e.target.checked; save(); rerender(); return; }
+  if(e.target.dataset.file){ const fl=e.target.files&&e.target.files[0]; if(!fl) return; const kind=e.target.dataset.file, r=cvData();
+    cvImage(fl, kind==='photo'?480:1100, url=>{ const bak=JSON.stringify(r);
+      if(kind==='photo') r.photo=url; else if(kind==='cert') r.certs[+e.target.dataset.i].img=url; else r.certs.push({img:url,cap:''});
+      if(!cvSave()){ S.resume=JSON.parse(bak); } rerender(); }); return; }
+  const c=e.target.dataset.change; if(!c) return; const v=e.target.value;
+  if(c==='gch') R.gch=v; else if(c==='whscene') R.whScene=v; else if(c==='scene') R.scene=v; else return;
+  R.sel=null; rerender(); });
+document.addEventListener('input', e=>{ const nk=e.target.dataset.note; if(nk){ S.notes=S.notes||{}; const v=e.target.value; if(v.trim()) S.notes[nk]=v; else delete S.notes[nk]; save(); return; } const k=e.target.dataset.r; if(k){ cvData()[k]=e.target.value; save(); cvRefresh(); return; }
+  const l=e.target.dataset.rl; if(l){ cvData()[l][+e.target.dataset.i][e.target.dataset.k]=e.target.value; save(); cvRefresh(); return; }
+  const c=e.target.dataset.rc; if(c){ cvData()[c]=e.target.value; save(); cvRefresh(); return; } });
+
+let SW=null;
+function swEls(){ const w=document.querySelector('.swipe-wrap'); return w?{w,el:w.querySelector('.detail'),prev:w.querySelector('.sw-hint.prev'),next:w.querySelector('.sw-hint.next')}:null; }
+function swPaint(){
+  if(!SW) return; SW.raf=0; const E=SW.E, dx=SW.dx, toNext=dx<0, has=SW.has, W=SW.W;
+  const d = has ? dx : Math.sign(dx)*W*0.18*(1-Math.exp(-Math.abs(dx)/(W*0.18)));
+  E.el.style.transform=`translate3d(${d}px,0,0)`;
+  const h=toNext?E.next:E.prev, o=toNext?E.prev:E.next;
+  if(h) h.style.opacity = has ? String(Math.min(1,Math.abs(dx)/(W*0.22))) : '0';
+  if(o) o.style.opacity='0';
+}
+function swReset(E){ if(!E||!E.el) return; const el=E.el;
+  el.style.transition='transform .38s cubic-bezier(.16,1,.3,1)'; el.style.transform='';
+  [E.prev,E.next].forEach(h=>{ if(h){ h.style.transition='opacity .2s'; h.style.opacity='0'; } });
+  setTimeout(()=>{ el.style.transition=''; },400); }
+document.addEventListener('touchstart', e=>{
+  SW=null; if(R.v!=='learn'||!R.sel||e.touches.length>1) return;
+  if(!e.target.closest('.swipe-wrap') || e.target.closest('textarea,input,.chips,audio')) return;
+  const E=swEls(); if(!E||!E.el) return;
+  E.w.classList.remove('nudge');
+  const x=e.touches[0].clientX, t0=performance.now();
+  SW={x,y:e.touches[0].clientY,dx:0,mode:null,E,W:E.w.offsetWidth||360,pts:[[x,t0]],raf:0};
+}, {passive:true});
+document.addEventListener('touchmove', e=>{
+  if(!SW) return; const c=e.touches[0], dx=c.clientX-SW.x, dy=c.clientY-SW.y;
+  if(!SW.mode){ if(Math.abs(dx)>6 && Math.abs(dx)>Math.abs(dy)) { SW.mode='h'; SW.x=c.clientX-Math.sign(dx)*1; SW.E.el.style.transition='none'; [SW.E.prev,SW.E.next].forEach(h=>{ if(h) h.style.transition='none'; }); } else if(Math.abs(dy)>8){ SW=null; return; } else return; }
+  e.preventDefault();
+  const E=SW.E; SW.dx=c.clientX-SW.x;
+  SW.has = SW.dx<0 ? !!(E.next && !E.next.classList.contains('off')) : !!(E.prev && !E.prev.classList.contains('off'));
+  const now=performance.now(); SW.pts.push([c.clientX,now]); while(SW.pts.length>2 && now-SW.pts[0][1]>100) SW.pts.shift();
+  if(!SW.raf) SW.raf=requestAnimationFrame(swPaint);
+}, {passive:false});
+document.addEventListener('touchend', ()=>{
+  if(!SW) return; const S2=SW; SW=null; if(S2.raf) cancelAnimationFrame(S2.raf); if(S2.mode!=='h') return;
+  const E=S2.E, p=S2.pts, a=p[0], b=p[p.length-1], v=(b[1]-a[1])>0 ? (b[0]-a[0])/(b[1]-a[1]) : 0;
+  const dir=S2.dx<0?1:-1, flick=Math.abs(v)>0.35 && Math.sign(v)===Math.sign(S2.dx);
+  const go=S2.has && (Math.abs(S2.dx)>S2.W*0.28 || flick);
+  if(!go){ swReset(E); return; }
+  const W=S2.W, rest=W-Math.abs(S2.dx), ms=Math.round(Math.max(120,Math.min(240, rest/Math.max(Math.abs(v),1.2))));
+  E.el.style.transition=`transform ${ms}ms cubic-bezier(.3,.6,.4,1), opacity ${ms}ms`;
+  E.el.style.transform=`translate3d(${dir>0?-W:W}px,0,0)`; E.el.style.opacity='.3';
+  setTimeout(()=>stepTo(dir), ms-10);
+}, {passive:true});
+document.addEventListener('touchcancel', ()=>{ if(SW){ if(SW.raf) cancelAnimationFrame(SW.raf); swReset(SW.E); SW=null; } }, {passive:true});
+document.addEventListener('keydown', e=>{
+  if(e.target.matches('input,textarea,select')) return;
+  if(R.v==='learn' && R.sel && (e.key==='ArrowRight'||e.key==='ArrowLeft') && !document.querySelector('dialog[open]')){ if(stepTo(e.key==='ArrowRight'?1:-1)) e.preventDefault(); return; }
+  const n=+e.key; if(!(n>=1&&n<=4)) return;
+  if(R.v==='test' && T.qs && T.i<T.qs.length && T.pick===null && T.qs[T.i].opts[n-1]){ tpick(n-1); }
+  else if(R.v==='level' && LQS.cat && !LQS.done && LQS.pick===null && LQS.qs[LQS.i] && LQS.qs[LQS.i].opts[n-1]){ document.querySelector(`[data-act=lvpick][data-i="${n-1}"]`).click(); }
+});
+
+render();
+</script>
+</body>
+</html>
