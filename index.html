@@ -267,6 +267,14 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .sim-end{border-top:1px solid var(--line);padding-top:12px;margin-top:6px}
 .li.sim{border-color:var(--mint2)}.sim-badge{font-size:12px;background:var(--mango-soft);border-radius:999px;padding:2px 10px;white-space:nowrap}
 .li .st{font-size:12px;white-space:nowrap}
+.li-wrap{position:relative}.li-wrap.has-kb .li{padding-right:128px}
+.li-kb{position:absolute;right:10px;top:50%;transform:translateY(-50%);display:flex;gap:4px}
+.kb{font:inherit;font-size:12px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:4px 9px;cursor:pointer;white-space:nowrap}
+.kb:hover{border-color:var(--teal)}.kb.on{background:var(--teal);border-color:var(--teal);color:#fff}.kb.ng.on{background:var(--mango);border-color:var(--mango);color:#3D2613}
+@media (hover:hover) and (min-width:960px){
+  .li .s.ja{opacity:0;transition:opacity .15s}
+  .li-wrap:hover .li .s.ja,.li:focus-visible .s.ja{opacity:1}
+}
 .st.known{color:var(--ok)} .st.unknown{color:var(--ng)}
 .detail .word{font-family:var(--en);font-size:28px;font-weight:600;line-height:1.25}
 .ex{border-left:3px solid var(--mint2);padding:2px 0 2px 12px;margin:10px 0}
@@ -278,7 +286,7 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
   .split{grid-template-columns:340px 1fr;align-items:start}
   .split.has-sel .list-col{display:block}
   .split.has-sel .back{display:none}
-  .detail{position:sticky;top:20px}
+  .detail-col{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto}
 }
 .dlg-line{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px}
 .dlg-line.right{flex-direction:row-reverse}
@@ -5290,7 +5298,9 @@ function liRow(x){
   const st = p.state==='known'?'<span class="st known">覚えた</span>':p.state==='unknown'?'<span class="st unknown">まだ</span>':'';
   const lk = allowed(x) ? '' : `<span class="lockmark" aria-label="鍵（今の区分では使えません）">${I.lock}</span>`;
   const nt = (S.notes||{})[x.id] ? '<span class="st note">ノート</span> ' : '';
-  return `<button class="li ${R.sel===x.id?'sel':''}" data-act="sel" data-id="${esc(x.id)}"><span><span class="t">${esc(title)}</span><br><span class="s">${esc(sub)}</span></span><span>${nt}${p.fav?'<span aria-label="お気に入り" style="color:var(--mango)">★</span> ':''}${st}${lk}</span></button>`;
+
+  const kb = (allowed(x) && !x.quiz && !x.steps) ? `<span class="li-kb"><button class="kb ${p.state==='known'?'on':''}" data-act="know" data-id="${esc(x.id)}" data-ok="1" aria-pressed="${p.state==='known'}">覚えた</button><button class="kb ng ${p.state==='unknown'?'on':''}" data-act="know" data-id="${esc(x.id)}" data-ok="0" aria-pressed="${p.state==='unknown'}">まだ</button></span>` : '';
+  return `<div class="li-wrap ${kb?'has-kb':''}"><button class="li ${R.sel===x.id?'sel':''}" data-act="sel" data-id="${esc(x.id)}"><span><span class="t">${esc(title)}</span><br><span class="s ${x.title?'':'ja'}">${esc(sub)}</span></span><span>${nt}${p.fav?'<span aria-label="お気に入り" style="color:var(--mango)">★</span> ':''}${kb?'':st}${lk}</span></button>${kb}</div>`;
 }
 
 const CAT_ICON = {
@@ -5423,7 +5433,7 @@ V.learn = ()=>{
   ${showLv?`<div class="filter"><p class="filter-l">レベル</p><div class="chips sub"><button class="chip ${R.lv==='all'?'on':''}" data-act="lv" data-lv="all">全レベル</button>${LV.map((l,i)=>`<button class="chip ${String(R.lv)===String(i)?'on':''}" data-act="lv" data-lv="${i}">${l} <span class="en">${LV_CEFR[i]}</span></button>`).join('')}<button class="linkbtn" data-act="lvguide" aria-haspopup="dialog">レベルの目安</button></div></div>`:''}
   <div class="split ${sel?'has-sel':''}" style="margin-top:14px">
     <div class="list-col">${(R.cat==='study'||R.cat==='dialog'||R.cat==='grammar'||R.cat==='wh')?groups:(list.length?`<div class="list">${list.map(liRow).join('')}</div>`:`<div class="panel empty">${coco(52)}<p style="margin-top:8px">${R.cat==='known'?'「覚えた」にした項目はありません。テストで正解するか「覚えた」を押すと、ここに集まります。':R.cat==='unknown'?'「まだ」にした項目はありません。テストや学習で「まだ」にすると、ここに集まります。':R.cat==='fav'?'★を付けた項目はありません。気に入った表現に★を付けると、ここから見返せます。':'このレベルの内容はまだありません。'}</p></div>`)}</div>
-    <div>${sel?`<div class="seltop"><button class="btn sm back" data-act="unsel">← 一覧に戻る</button>${miniNav(sel.id)}</div>`+swipeWrap(sel)+stepNav(sel.id):`<div class="panel empty muted">一覧から選ぶと、ここに詳しく出ます。</div>`}</div>
+    <div class="detail-col">${sel?`<div class="seltop"><button class="btn sm back" data-act="unsel">← 一覧に戻る</button>${miniNav(sel.id)}</div>`+swipeWrap(sel)+stepNav(sel.id):`<div class="panel empty muted">一覧から選ぶと、ここに詳しく出ます。</div>`}</div>
   </div>`;
 };
 
