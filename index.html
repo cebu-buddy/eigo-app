@@ -58,6 +58,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 }
 .icon-btn{border:0;background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;border:1px solid var(--line)}
 main{padding:4px 16px 24px;max-width:1080px;margin:0 auto}
+.app.is-welcome{display:block!important;padding-bottom:24px}
+.welcome-main{max-width:560px;width:100%}
+@media (min-width:960px){.welcome-main{padding-top:4vh}}
 .tabbar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:10}
 .tabbar button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;padding:4px 0;border-radius:12px;cursor:pointer;color:var(--muted)}
 .tabbar button svg{width:22px;height:22px}
@@ -945,7 +948,8 @@ function shell(){
   return side + `<div>${top}<main id="main"></main></div>` + tab;
 }
 function render(){
-  if(!S.user){ $('#app').innerHTML = `<main id="main" style="max-width:560px">${V.welcome()}</main>`; return; }
+  $('#app').classList.toggle('is-welcome', !S.user);
+  if(!S.user){ $('#app').innerHTML = `<main id="main" class="welcome-main">${V.welcome()}</main>`; return; }
   $('#app').innerHTML = shell();
   $('#main').innerHTML = (V[R.v]||V.home)();
   after();
