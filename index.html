@@ -40,6 +40,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 .app{min-height:100vh;padding-bottom:84px}
 .side{display:none}
+.produced{font-size:12px;color:var(--muted);margin:10px 0 0;letter-spacing:.02em}
+.produced a{color:var(--teal-ink);font-weight:700;text-decoration:none}.produced a:hover{text-decoration:underline}
+.produced.center{text-align:center;margin-top:18px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 16px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5}
 .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;color:var(--teal-ink);text-decoration:none;background:none;border:0;padding:0;cursor:pointer}
 .brand small{font-weight:500;color:var(--muted);font-size:11px;display:block;line-height:1.2}
@@ -81,6 +84,7 @@ main{padding:4px 16px 24px;max-width:1080px;margin:0 auto}
   .side .grp{font-size:12px;color:var(--muted);margin:14px 12px 4px}
   .side .ask-cta{margin-top:auto;background:var(--mango);border:0;border-radius:16px;padding:12px 14px;font-weight:700;font-size:14px;line-height:1.4;cursor:pointer;display:flex;align-items:center;gap:8px;text-align:left;color:#2B140B}
   .side .ask-cta svg{width:20px;height:20px;flex:none}
+  .side .side-pb{margin:12px 6px 0;font-size:11px}
   main{padding:28px 36px 48px}
 }
 
@@ -939,6 +943,7 @@ function shell(){
     ${NAV2.map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
     <div class="grp">利用区分: ${TIER_NAME[tier()]}</div>
     <button class="ask-cta" data-act="go" data-v="ask">${I.chat}<span>言えなかった表現を<br>AIに聞く</span></button>
+    ${producedBy('side-pb')}
   </nav>`;
   const top = `<header class="top"><button class="brand" data-act="go" data-v="home">${mango(30)}<span>ココマンゴー英語<small>試作2（名前は仮）</small></span></button>
     <div class="top-links"><button class="icon-btn" data-act="go" data-v="guide">手引書</button><button class="icon-btn" data-act="go" data-v="me">マイページ</button></div></header>`;
@@ -965,6 +970,9 @@ function rerender(){ const y=window.scrollY;
 }
 function after(){ const f=$('[data-autofocus]'); if(f) f.focus(); if(typeof fitCV==='function') requestAnimationFrame(fitCV); }
 
+const PRODUCER = {name:'セブ島留学バディー', url:'https://cebu-buddy.com/'};
+const producedBy = (cls='')=>`<p class="produced ${cls}">Produced by <a href="${PRODUCER.url}" target="_blank" rel="noopener">${PRODUCER.name}</a></p>`;
+
 const V = {};
 
 V.welcome = ()=>`<div style="padding-top:8vh">
@@ -977,7 +985,7 @@ V.welcome = ()=>`<div style="padding-top:8vh">
     <p class="muted small" style="margin:0">試作用のコード: 空欄＝一般（面談前）、MENDAN＝面談実施者（${TRIAL_DAYS}日のお試し）、SEIYAKU＝成約者。</p>
     <button class="btn primary" data-act="login">はじめる</button>
     <p class="muted small">試作では、ニックネームと学習記録をこの端末の中にだけ保存します。本番は、メールアドレスかGoogleでログインし、招待した人だけが使えるようにします。</p>
-  </div></div>`;
+  </div>${producedBy('center')}</div>`;
 
 V.home = ()=>{
   const due = dueCount(), known = Object.values(S.prog).filter(p=>p.state==='known').length;
@@ -1775,6 +1783,9 @@ V.me = ()=>{
     <p>${TIER_NAME[tier()]}${expired()?'（お試しの期限切れ）':tier()==='counseled'?`（あと${trialLeft()}日）`:''}</p>
     <p class="muted small">試作用: 区分を切り替えて、見え方を確かめられます。本番は、運営（代表）だけが切り替えます。</p>
     <div class="row"><button class="btn sm ${S.tier==='general'?'on':''}" data-act="settier" data-t="general">一般（面談前）</button><button class="btn sm ${S.tier==='counseled'&&!expired()?'on':''}" data-act="settier" data-t="counseled">面談実施者</button><button class="btn sm ${S.tier==='customer'?'on':''}" data-act="settier" data-t="customer">成約者</button><button class="btn sm ${expired()?'on':''}" data-act="expire">お試しを期限切れにする</button></div></div>
+  <div class="panel" style="margin-top:14px"><h3>このアプリについて</h3>
+    <p class="small" style="margin:0 0 6px">フィリピン留学・セブ島留学のエージェント「${PRODUCER.name}」が作っている、留学の前と留学中に使う英語アプリです（試作版）。</p>
+    ${producedBy()}</div>
   <div class="row" style="margin-top:16px"><button class="btn" data-act="logout">ログアウト</button><button class="btn" data-act="wipe">この端末の学習データを消す</button></div>
   <p class="muted small" style="margin-top:10px">本番では、ここにアカウントの削除、プライバシーポリシー、利用規約を置きます。</p>`;
 };
