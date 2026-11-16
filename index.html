@@ -488,7 +488,7 @@ const I = {
  mic:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>'
 };
 
-const CATS = {study:'留学で使う英語', word:'単語', phrasal:'句動詞（熟語）', colloc:'コロケーション', idiom:'イディオム', pattern:'構文', starter:'文頭フレーズ（付録）', dialog:'場面別フレーズ', grammar:'文法', wh:'ワーホリ対策'};
+const CATS = {study:'留学で使う英語', word:'単語', phrasal:'句動詞（熟語）', colloc:'コロケーション', idiom:'イディオム', pattern:'構文', starter:'文頭・つなぎ言葉', dialog:'場面別フレーズ', grammar:'文法', wh:'ワーホリ対策'};
 
 const ipaHTML = (en,ipa)=> (ipa && !/\s/.test(String(en||'').trim())) ? `<div class="ipa">${esc(ipa)}</div>` : '';
 const it = (cat,lv,en,ipa,ja,e1,j1,e2,j2,scene)=>({id:cat+':'+en,cat,lv,en,ipa,ja,ex:[[e1,j1],[e2,j2]],scene});
@@ -2091,6 +2091,9 @@ W(0,'very','/ˈveri/','とても',"It's very hot.",'とても暑い。',"Thank y
 W(0,'here','/hɪr/','ここに',"Come here.",'ここに来て。',"I live here.",'ここに住んでいる。');
 W(0,'there','/ðer/','そこに',"I'll be there at six.",'6時にそこに行く。',"Is there a bank near here?",'この近くに銀行はある？');
 
+const PT=(lv,en,ja,e1,j1,e2,j2)=>{ if(!ITEMS.some(x=>x.id==='pattern:'+en)) ITEMS.push(it('pattern',lv,en,'',ja,e1,j1,e2,j2)); };
+const ST=(lv,en,ja,e1,j1,e2,j2)=>{ if(!ITEMS.some(x=>x.id==='starter:'+en)) ITEMS.push(it('starter',lv,en,'',ja,e1,j1,e2,j2)); };
+const SC0=(scene,lv,en,ja,e1,j1,e2,j2)=>{ if(!ITEMS.some(x=>x.id==='scene:'+en)) ITEMS.push(it('scene',lv,en,'',ja,e1,j1,e2,j2,scene)); };
 const PV=(lv,en,ja,e1,j1,e2,j2)=>{ if(!ITEMS.some(x=>x.id==='phrasal:'+en)) ITEMS.push(it('phrasal',lv,en,'',ja,e1,j1,e2,j2)); };
 const ID=(lv,en,ja,e1,j1,e2,j2)=>{ if(!ITEMS.some(x=>x.id==='idiom:'+en)) ITEMS.push(it('idiom',lv,en,'',ja,e1,j1,e2,j2)); };
 PV(0,'stand up','立ち上がる',"Please stand up.",'立ってください。',"I stood up to say hello.",'あいさつするために立ち上がった。');
@@ -5129,6 +5132,144 @@ W(3,'steady','/ˈstedi/','安定した、着実な',"I'm making steady progress.
 W(3,'stimulate','/ˈstɪmjəleɪt/','刺激する、活発にする',"The class stimulates discussion.",'その授業は議論を活発にする。',"Exercise stimulates the brain.",'運動は脳を刺激する。');
 W(3,'tactful','/ˈtæktfəl/','如才ない、気配りのある',"Try to be tactful when you give feedback.",'意見を伝えるときは気配りを。',"That wasn't very tactful.",'それはあまり気が利かなかったね。');
 
+ST(1,"At the end of the day, ...",'結局のところ…',"At the end of the day, it's your choice.",'結局のところ、決めるのはあなただよ。',"At the end of the day, practice is everything.",'結局は練習がすべてだ。');
+ST(2,"If you think about it, ...",'考えてみると…',"If you think about it, two weeks isn't that long.",'考えてみると、2週間ってそんなに長くないよね。',"If you think about it, it's actually cheaper.",'考えてみると、実はそっちのほうが安い。');
+ST(1,"Simply put, ...",'簡単に言うと…',"Simply put, we need more time.",'簡単に言うと、もっと時間が必要です。',"Simply put, the class is too big.",'簡単に言えば、クラスの人数が多すぎる。');
+ST(1,"Let's say ...",'仮に…としよう、例えば…',"Let's say you have a free day. What would you do?",'仮に1日空いていたとしよう。何をする？',"Let's say we meet at six.",'じゃあ6時に会うことにしよう。');
+ST(2,"The reason being, ...",'その理由は…',"I moved to a new dorm, the reason being the noise.",'新しい寮に移ったんだ。理由は騒音。',"I'm staying home tonight, the reason being I have a test tomorrow.",'今夜は家にいるよ。明日テストがあるからね。');
+ST(3,"Whereas ...",'一方で…',"My roommate loves spicy food, whereas I can't eat it at all.",'ルームメートは辛い物が大好きだけど、私はまったく食べられない。',"Some students study at night, whereas others study early in the morning.",'夜に勉強する人もいれば、朝早く勉強する人もいる。');
+ST(2,"Going back to ...",'…の話に戻ると',"Going back to your question, yes, it's possible.",'さっきの質問に戻ると、はい、できますよ。',"Going back to what you said earlier, I agree.",'さっきの話に戻ると、私も賛成です。');
+ST(1,"In this case, ...",'この場合は…',"In this case, you should talk to the teacher.",'この場合は、先生に相談したほうがいいよ。',"In this case, we'll need a bigger room.",'この場合は、もっと広い部屋が必要だね。');
+ST(1,"Like you said, ...",'あなたが言ったように…',"Like you said, the beach was beautiful.",'あなたが言ったとおり、ビーチはきれいだった。',"Like you said, we should leave early.",'言ってたとおり、早めに出たほうがいいね。');
+ST(2,"This might be just me, but ...",'私だけかもしれないけど…',"This might be just me, but the room feels cold.",'私だけかもしれないけど、部屋が寒い気がする。',"This might be just me, but I liked the first movie better.",'私だけかもしれないけど、1作目のほうが好きだった。');
+ST(1,"I'd say ...",'私なら…と言うかな、たぶん…',"I'd say it takes about an hour.",'たぶん1時間くらいかかるかな。',"I'd say the second option is better.",'私なら2つ目の案のほうがいいと思う。');
+ST(2,"From that point of view, ...",'その観点から見ると…',"From that point of view, the plan makes sense.",'その観点から見ると、その計画は筋が通っている。',"From that point of view, I was wrong.",'そう考えると、私が間違っていた。');
+ST(2,"Just out of curiosity, ...",'ちょっと気になったんだけど…',"Just out of curiosity, how old are you?",'ちょっと気になったんだけど、何歳？',"Just out of curiosity, why did you choose Cebu?",'ちょっと気になったんだけど、どうしてセブを選んだの？');
+ST(2,"Off-topic, but ...",'話は変わるけど…',"Off-topic, but did you watch the game last night?",'話は変わるけど、昨日の試合見た？',"Off-topic, but I found a great café near school.",'話は変わるけど、学校の近くにいいカフェを見つけたよ。');
+ST(2,"But at the same time, ...",'でも同時に…',"I want to travel, but at the same time, I need to save money.",'旅行したいけど、同時にお金も貯めないと。',"The city is exciting, but at the same time, it's tiring.",'都会は刺激的だけど、同時に疲れる。');
+ST(3,"The flip side of it is ...",'その裏返しとして…、ただ逆に言うと…',"Living alone is free, but the flip side of it is you get lonely.",'一人暮らしは自由だけど、逆に言うと寂しくなる。',"The flip side of it is it costs more.",'その分、費用は高くなる。');
+ST(3,"From the perspective of ...",'…の観点から見ると',"From the perspective of a student, the rules are too strict.",'学生の立場から見ると、規則が厳しすぎる。',"From the perspective of cost, the dorm is better.",'費用の面から見ると、寮のほうがいい。');
+ST(3,"Given that ...",'…を考えると',"Given that it's raining, let's stay in.",'雨が降っていることを考えると、家にいよう。',"Given that you're a beginner, you did really well.",'初心者だということを考えると、すごくよくできたよ。');
+ST(2,"I might be wrong, but ...",'間違っているかもしれないけど…',"I might be wrong, but I think class starts at nine.",'間違っているかもしれないけど、授業は9時からだと思う。',"I might be wrong, but isn't this the wrong bus?",'違ったらごめんだけど、このバスじゃないんじゃない？');
+ST(2,"In terms of ...",'…の点では',"In terms of price, this school is the best.",'値段の点では、この学校がいちばんだ。',"In terms of food, I have no complaints.",'食べ物の面では、不満はまったくない。');
+ST(1,"In general, ...",'一般的に、全体的に',"In general, Filipino people are very friendly.",'一般的に、フィリピンの人はとてもフレンドリーだ。',"In general, I'm happy with the course.",'全体的には、講座に満足している。');
+ST(2,"In which case, ...",'その場合は…',"It might rain tomorrow, in which case we'll stay home.",'明日は雨かもしれない。その場合は家にいよう。',"You may be late, in which case just text me.",'遅れるかもしれないなら、その場合はメッセージして。');
+ST(1,"Even if ...",'たとえ…だとしても',"Even if it rains, we'll go.",'たとえ雨でも行くよ。',"Even if you make mistakes, keep speaking.",'たとえ間違えても、話し続けて。');
+ST(1,"Instead of ...",'…の代わりに、…ではなく',"Instead of taking a taxi, let's walk.",'タクシーの代わりに歩こう。',"I had tea instead of coffee.",'コーヒーではなく紅茶にした。');
+ST(2,"Rather than ...",'…よりむしろ',"Rather than complain, let's find a solution.",'文句を言うより、解決策を探そう。',"I'd rather walk than wait for the bus.",'バスを待つより歩きたい。');
+ST(2,"As to ...",'…については',"As to the schedule, I'll let you know tomorrow.",'予定については、明日お知らせします。',"As to your question, the answer is yes.",'ご質問については、答えは「はい」です。');
+ST(1,"..., if that makes sense.",'…って言えば伝わるかな、言ってること分かる？',"I want something light, if that makes sense.",'軽いものがいいんだ。伝わるかな？',"It's not bad, just different, if that makes sense.",'悪くはないんだ。ただ違うっていうか、分かる？');
+ST(1,"..., you know what I mean?",'…でしょ？、言いたいこと分かるでしょ？',"It's fun, but tiring, you know what I mean?",'楽しいけど疲れるんだよね。分かるでしょ？',"I need a break, you know what I mean?",'ちょっと休みたいんだよ。分かるでしょ？');
+ST(1,"... or so",'…くらい、…とかそのあたり',"I'll be there in ten minutes or so.",'10分くらいで着くよ。',"There were twenty people or so.",'20人くらいいた。');
+ST(1,"... and stuff",'…とか（いろいろ）',"We went shopping and stuff.",'買い物とかいろいろしたよ。',"I need to buy shampoo and stuff.",'シャンプーとかいろいろ買わないと。');
+ST(1,"... or something like that",'…とかなんとか、…みたいな',"His name is Ken or something like that.",'彼の名前はケンとかなんとかだった。',"Let's get pizza or something like that.",'ピザとか、そういうのにしよう。');
+ST(1,"Pretty much",'ほぼ、だいたいそう',"I'm pretty much done.",'ほぼ終わったよ。',"\"So you're leaving tomorrow?\" \"Pretty much.\"",'「じゃあ明日出発？」「まあ、そんな感じ」');
+ST(2,"... or not really?",'…って感じ？それともちょっと違う？',"You like it here, or not really?",'ここ気に入ってる？それともそうでもない？',"Is it spicy, or not really?",'それ辛い？それともそうでもない？');
+ST(1,"I have a feeling ...",'…な気がする',"I have a feeling it's going to rain.",'雨が降りそうな気がする。',"I have a feeling we've met before.",'前に会ったことがある気がする。');
+ST(0,"I know, right?",'だよね！、ほんとそれ',"\"This place is amazing!\" \"I know, right?\"",'「ここ最高！」「ほんとそれ！」',"\"The test was so hard.\" \"I know, right?\"",'「テスト難しすぎ」「だよね！」');
+ST(1,"... kind of thing",'…みたいなもの、…的なこと',"It's a welcome party kind of thing.",'歓迎会みたいなものだよ。',"I want to do volunteer work, a beach cleanup kind of thing.",'ボランティア、ビーチの清掃みたいなことがしたい。');
+ST(1,"What's it called?",'なんていうんだっけ？',"I need a, what's it called, a charger.",'あれが要るんだ、なんていうんだっけ、充電器。',"We went to that place, what's it called, near the mall.",'あそこに行ったんだ、なんだっけ、モールの近くの。');
+ST(0,"That's true.",'確かにそうだね',"\"It's cheaper to cook at home.\" \"That's true.\"",'「家で料理したほうが安いよ」「確かに」',"That's true, but it takes time.",'確かにそうだけど、時間がかかる。');
+ST(2,"That's a fair point.",'それはもっともだね',"That's a fair point. I didn't think of that.",'もっともだね。それは考えてなかった。',"That's a fair point, but I still disagree.",'もっともだけど、やっぱり賛成できない。');
+ST(1,"You know, ...",'ほら、あのね（話をつなぐ）',"You know, I've been thinking about it.",'あのね、ずっと考えてたんだけど。',"It was, you know, a bit strange.",'なんていうか、ちょっと変だった。');
+ST(2,"It's more like ...",'どちらかというと…という感じ',"It's not a party; it's more like a small dinner.",'パーティーじゃなくて、ちょっとした夕食会って感じ。',"I'm not angry. It's more like I'm disappointed.",'怒ってるんじゃなくて、どちらかというとがっかりしてる。');
+ID(2,"drop the ball",'へまをする、うっかり失敗する',"Sorry, I dropped the ball on that email.",'ごめん、あのメールのことうっかりしてた。',"Don't drop the ball this time.",'今回はしくじらないでね。');
+ID(3,"go down in flames",'派手に失敗する',"My plan went down in flames.",'私の計画は見事に失敗した。',"The project went down in flames after a month.",'その企画は1か月で大失敗に終わった。');
+ID(3,"get something out of one's system",'（気持ちなどを）すっきり吐き出す、やりたいことをやって満足する',"I just need to cry and get it out of my system.",'泣いてすっきりしたいだけなんだ。',"Go to the beach and get it out of your system.",'ビーチに行って気が済むまで遊んできなよ。');
+ID(3,"get a taste of one's own medicine",'自業自得の目にあう、同じ目にあう',"He's always late, so we made him wait. He got a taste of his own medicine.",'彼はいつも遅刻するから、待たせてやった。自業自得だ。',"Now she knows how it feels. It's a taste of her own medicine.",'これで彼女も気持ちが分かったでしょ。同じ目にあったんだから。');
+ID(3,"when it rains, it pours",'悪いこと（良いこと）は重なる',"I lost my wallet and then my phone broke. When it rains, it pours.",'財布をなくして、そのあとスマホも壊れた。悪いことは重なるね。',"Three job offers in one week? When it rains, it pours!",'1週間で3つも内定？いいことは重なるね！');
+ID(3,"fit as a fiddle",'とても元気な、ぴんぴんしている',"My grandfather is 85 and fit as a fiddle.",'祖父は85歳だけど、ぴんぴんしている。',"I was sick last week, but now I'm fit as a fiddle.",'先週は具合が悪かったけど、今はすっかり元気だ。');
+ID(2,"pick someone's brain",'（人の）知恵を借りる',"Can I pick your brain about studying abroad?",'留学のことで知恵を借りてもいい？',"I'd love to pick your brain over coffee.",'コーヒーでも飲みながら、いろいろ教えてほしい。');
+ID(4,"Elvis has left the building",'もう終わった、おしまい',"The party's over. Elvis has left the building.",'パーティーは終わり。もうおしまいだよ。',"Sorry, the sale ended yesterday. Elvis has left the building.",'ごめん、セールは昨日で終わったんだ。');
+ID(3,"get bent out of shape",'（ささいなことで）怒る、むっとする',"Don't get bent out of shape. It was a joke.",'そんなに怒らないで。冗談だよ。',"He got bent out of shape over nothing.",'彼は何でもないことでむっとした。');
+ID(3,"the whole nine yards",'何もかも全部、とことん',"They had music, food, fireworks, the whole nine yards.",'音楽に料理に花火、何から何までそろっていた。',"If we do it, let's go the whole nine yards.",'やるならとことんやろう。');
+ID(3,"out of the frying pan and into the fire",'一難去ってまた一難',"I left a bad job for a worse one. Out of the frying pan and into the fire.",'ひどい仕事を辞めたら、もっとひどい仕事だった。一難去ってまた一難だ。',"We escaped the rain, then got stuck in traffic. Out of the frying pan and into the fire.",'雨から逃げたら渋滞にはまった。一難去ってまた一難。');
+ID(3,"paint the town red",'（夜に）派手に遊ぶ',"It's Friday. Let's paint the town red!",'金曜日だ。今夜はパーッと遊ぼう！',"We painted the town red after the exam.",'試験のあと、思いきり遊んだ。');
+ID(3,"toe the line",'規則に従う、言われたとおりにする',"New staff need to toe the line.",'新人は規則を守る必要がある。',"He refused to toe the line.",'彼は言われたとおりにするのを拒んだ。');
+ID(3,"put the cart before the horse",'順序を逆にする、本末転倒なことをする',"Booking a hotel before getting a visa is putting the cart before the horse.",'ビザを取る前にホテルを予約するのは順番が逆だ。',"Let's not put the cart before the horse.",'順番を間違えないようにしよう。');
+ID(2,"catch someone red-handed",'（人の）現場を押さえる、現行犯で捕まえる',"The police caught him red-handed.",'警察は彼を現行犯で捕まえた。',"My mom caught me red-handed eating the cake.",'ケーキを食べているところを母に見つかった。');
+ID(2,"two sides of the same coin",'表裏一体、コインの裏表',"Freedom and responsibility are two sides of the same coin.",'自由と責任は表裏一体だ。',"Success and failure are two sides of the same coin.",'成功と失敗はコインの裏表だ。');
+ID(1,"It is what it is.",'仕方がない、そういうものだ',"The flight is delayed, but it is what it is.",'飛行機が遅れているけど、仕方がない。',"It's not perfect, but it is what it is.",'完璧じゃないけど、そういうものだよ。');
+ID(2,"Don't count your chickens before they hatch.",'【ことわざ】取らぬ狸の皮算用',"You haven't passed the interview yet. Don't count your chickens before they hatch.",'まだ面接に受かったわけじゃないよ。取らぬ狸の皮算用だ。',"I know you're excited, but don't count your chickens before they hatch.",'うれしいのは分かるけど、まだ早いよ。');
+ID(2,"Birds of a feather flock together.",'【ことわざ】類は友を呼ぶ',"They both love surfing. Birds of a feather flock together.",'2人ともサーフィンが大好き。類は友を呼ぶね。',"No wonder they're friends. Birds of a feather flock together.",'仲がいいのも当然だ。類は友を呼ぶ。');
+ID(2,"A watched pot never boils.",'【ことわざ】待つ身は長い',"Stop checking your phone. A watched pot never boils.",'スマホばかり見ないで。待っているときほど長く感じるよ。',"I keep waiting for the results. A watched pot never boils.",'結果をずっと待っている。待つ身は長い。');
+ID(2,"Don't bite the hand that feeds you.",'【ことわざ】恩をあだで返すな',"Your boss helped you a lot. Don't bite the hand that feeds you.",'上司にはたくさん助けてもらったでしょ。恩をあだで返さないで。',"Be careful what you say about your host family. Don't bite the hand that feeds you.",'ホストファミリーのことを悪く言わないように。お世話になっているんだから。');
+ID(1,"Don't judge a book by its cover.",'【ことわざ】見た目で判断するな',"The restaurant looks old, but don't judge a book by its cover.",'古そうな店だけど、見た目で判断しないで。',"He looks scary, but he's very kind. Don't judge a book by its cover.",'彼は怖そうに見えるけど、とても優しい。見た目で決めつけないで。');
+ID(2,"A picture is worth a thousand words.",'【ことわざ】百聞は一見にしかず',"Just show them the photo. A picture is worth a thousand words.",'写真を見せればいいよ。百聞は一見にしかず。',"I can't describe the view. A picture is worth a thousand words.",'景色はうまく説明できない。見てもらうのがいちばんだ。');
+ID(2,"Haste makes waste.",'【ことわざ】急いては事を仕損じる、急がば回れ',"Take your time with the form. Haste makes waste.",'書類はゆっくり書いて。急ぐと失敗するよ。',"I rushed and made mistakes. Haste makes waste.",'急いだらミスをした。急がば回れだ。');
+ID(3,"Once bitten, twice shy.",'【ことわざ】あつものに懲りてなますを吹く',"After that bad trip, I'm careful with cheap tours. Once bitten, twice shy.",'あのひどい旅行以来、安いツアーには慎重だ。一度痛い目にあうとね。',"She won't lend money again. Once bitten, twice shy.",'彼女はもうお金を貸さない。一度懲りたから。');
+ID(3,"Too many cooks spoil the broth.",'【ことわざ】船頭多くして船山に登る',"Let's keep the team small. Too many cooks spoil the broth.",'チームは少人数にしよう。人が多すぎるとまとまらない。',"Everyone had a different idea. Too many cooks spoil the broth.",'みんな意見がばらばらだった。船頭多くして船山に登る。');
+ID(1,"Rome wasn't built in a day.",'【ことわざ】ローマは一日にして成らず',"Your English will improve. Rome wasn't built in a day.",'英語は上達するよ。すぐにはできないものだから。',"Be patient. Rome wasn't built in a day.",'焦らないで。何事も時間がかかる。');
+ID(3,"Necessity is the mother of invention.",'【ことわざ】必要は発明の母',"We had no table, so we used a box. Necessity is the mother of invention.",'テーブルがなかったから箱を使った。必要は発明の母だね。',"Necessity is the mother of invention, as they say.",'必要は発明の母って言うからね。');
+ID(2,"When in Rome, do as the Romans do.",'【ことわざ】郷に入っては郷に従え',"Everyone eats with their hands here. When in Rome, do as the Romans do.",'ここではみんな手で食べる。郷に入っては郷に従えだ。',"I tried the local custom. When in Rome, do as the Romans do.",'現地の習慣を試してみた。郷に入っては郷に従え。');
+ID(3,"A journey of a thousand miles begins with a single step.",'【ことわざ】千里の道も一歩から',"Learn ten words today. A journey of a thousand miles begins with a single step.",'今日は10語覚えよう。千里の道も一歩からだ。',"Starting is the hardest part. A journey of a thousand miles begins with a single step.",'始めることがいちばん難しい。千里の道も一歩から。');
+ID(1,"The early bird catches the worm.",'【ことわざ】早起きは三文の徳',"Let's get to the market early. The early bird catches the worm.",'早めに市場に行こう。早起きは三文の徳だ。',"I applied on the first day. The early bird catches the worm.",'初日に申し込んだ。早い者勝ちだからね。');
+ID(3,"Beggars can't be choosers.",'【ことわざ】ぜいたくは言っていられない',"It's not my favorite, but beggars can't be choosers.",'好みじゃないけど、ぜいたくは言っていられない。',"It's the only room left, so beggars can't be choosers.",'残っている部屋はここだけ。選んでいる場合じゃない。');
+ID(2,"It takes two to tango.",'【ことわざ】片方だけの責任ではない、お互いさま',"Don't blame only him. It takes two to tango.",'彼だけを責めないで。どちらにも責任がある。',"A good relationship takes effort. It takes two to tango.",'いい関係には努力が必要。お互いさまだよ。');
+ID(3,"The pen is mightier than the sword.",'【ことわざ】ペンは剣よりも強し',"Her article changed the law. The pen is mightier than the sword.",'彼女の記事が法律を変えた。ペンは剣よりも強し。',"Words can change the world. The pen is mightier than the sword.",'言葉は世界を変えられる。ペンは剣よりも強し。');
+ID(1,"Don't cry over spilt milk.",'【ことわざ】覆水盆に返らず、済んだことを悔やんでも仕方ない',"You missed the bus, but don't cry over spilt milk.",'バスに乗り遅れたけど、くよくよしても仕方ない。',"It's done. Don't cry over spilt milk.",'もう終わったことだよ。気にしないで。');
+
+PT(1,"It's ... to ~",'～するのは…だ',"It's important to sleep well.",'よく眠ることは大切だ。',"It's fun to try new food.",'新しい食べ物を試すのは楽しい。');
+PT(2,"It's ... that ~",'～なのは…だ',"It's amazing that you finished so fast.",'そんなに早く終わったなんてすごいね。',"It's strange that nobody came.",'誰も来なかったなんて変だね。');
+PT(2,"... so ... that ~",'とても…なので～',"It was so hot that I couldn't sleep.",'暑すぎて眠れなかった。',"The food was so good that we ordered more.",'料理がおいしすぎて追加で注文した。');
+PT(2,"... enough to ~",'～するのに十分…',"I'm not old enough to drink here.",'ここではまだお酒を飲める年齢じゃない。',"The Wi-Fi is fast enough to watch videos.",'動画が見られるくらいWi-Fiは速い。');
+PT(2,"find it ... to ~",'～するのは…だと思う',"I find it hard to wake up early.",'早起きするのは難しいと感じる。',"I found it easy to make friends here.",'ここでは友達を作るのが簡単だった。');
+PT(2,"~ so that ...",'…するために～、…できるように～',"I saved money so that I could study abroad.",'留学できるようにお金を貯めた。',"Speak slowly so that everyone can understand.",'みんなが分かるようにゆっくり話して。');
+PT(1,"not ... at all",'まったく…ない',"I'm not tired at all.",'全然疲れていない。',"I didn't understand the movie at all.",'その映画はまったく分からなかった。');
+PT(1,"A is the same as B",'AはBと同じだ',"My phone is the same as yours.",'私のスマホはあなたのと同じだ。',"The price is the same as last year.",'値段は去年と同じだ。');
+PT(3,"Just because ~ doesn't mean ...",'～だからといって…とは限らない',"Just because it's cheap doesn't mean it's bad.",'安いからといって悪いとは限らない。',"Just because he's quiet doesn't mean he's unfriendly.",'静かだからといって無愛想とは限らない。');
+PT(3,"... is not necessarily ~",'…は必ずしも～ではない',"Expensive food is not necessarily delicious.",'高い料理が必ずしもおいしいわけではない。',"A big school is not necessarily better.",'大きな学校が必ずしも良いとは限らない。');
+PT(2,"... is not as ... as I expected",'…は思ったほど…ではない',"The test wasn't as difficult as I expected.",'テストは思ったほど難しくなかった。',"Cebu is not as hot as I thought.",'セブは思ったほど暑くない。');
+PT(2,"spend (time) ~ing",'～して（時間）を過ごす',"I spent the weekend studying.",'週末は勉強して過ごした。',"We spent two hours talking.",'2時間おしゃべりして過ごした。');
+PT(1,"feel like ~ing",'～したい気分だ',"I feel like eating ramen.",'ラーメンが食べたい気分だ。',"I don't feel like going out tonight.",'今夜は出かける気分じゃない。');
+PT(1,"~ as soon as ...",'…するとすぐに～',"Call me as soon as you arrive.",'着いたらすぐに電話して。',"I fell asleep as soon as I got home.",'家に帰ってすぐに寝てしまった。');
+PT(1,"I don't know if ~",'～かどうか分からない',"I don't know if I can come.",'行けるかどうか分からない。',"I don't know if this is right.",'これが正しいかどうか分からない。');
+PT(2,"I wonder if ~",'～かなと思う',"I wonder if it will rain tomorrow.",'明日は雨かな。',"I wonder if she got my message.",'彼女はメッセージを受け取ったかな。');
+PT(2,"It's been (time) since ~",'～してから（時間）がたつ',"It's been a month since I came here.",'ここに来て1か月になる。',"It's been ages since we last met.",'最後に会ってからずいぶんたつね。');
+PT(1,"How about ~?",'～はどう？',"How about we eat outside?",'外で食べるのはどう？',"How about Saturday?",'土曜日はどう？');
+PT(2,"have someone ~",'（人）に～してもらう',"I'll have the staff check the room.",'スタッフに部屋を確認してもらいます。',"I had my hair cut yesterday.",'昨日髪を切ってもらった。');
+PT(2,"get someone to ~",'（人）に（頼んで）～してもらう',"I got my friend to help me move.",'友達に引っ越しを手伝ってもらった。',"Can you get him to call me?",'彼に電話するよう伝えてくれる？');
+PT(2,"make someone ~",'（人）に（無理に）～させる',"The teacher made us speak only English.",'先生は私たちに英語だけを話させた。',"What made you choose this school?",'どうしてこの学校を選んだの？');
+PT(1,"let someone ~",'（人）に～させてあげる',"Let me help you.",'手伝わせて。',"I'll let you know later.",'あとで知らせるね。');
+PT(1,"make someone ... (形容詞)",'（人）を…にする',"Your message made me happy.",'メッセージをもらってうれしかった。',"This song makes me sleepy.",'この歌を聞くと眠くなる。');
+PT(2,"see someone ~ing",'（人）が～しているのを見る',"I saw him running on the beach.",'彼がビーチを走っているのを見た。',"I saw a man selling coconuts.",'男の人がココナッツを売っているのを見た。');
+PT(2,"hear someone ~ing",'（人）が～しているのが聞こえる',"I heard someone singing next door.",'隣で誰かが歌っているのが聞こえた。',"Can you hear the dog barking?",'犬が吠えているのが聞こえる？');
+PT(2,"What I ~ is ...",'私が～するのは…だ',"What I need is a long vacation.",'私に必要なのは長い休みだ。',"What I want to do is travel around Asia.",'私がやりたいのはアジアを旅することだ。');
+PT(2,"You know how ~?",'ほら、～でしょ？',"You know how I'm always late? Not today!",'ほら、私っていつも遅刻するでしょ？今日は違うよ！',"You know how hot it gets in April?",'ほら、4月ってすごく暑くなるでしょ？');
+PT(3,"If you could ~, that would be ...",'～してもらえると…なのですが',"If you could send it today, that would be great.",'今日送っていただけると助かります。',"If you could help me, that would be amazing.",'手伝ってもらえたら本当にうれしい。');
+PT(2,"for the first time in (time)",'（時間）ぶりに',"I went swimming for the first time in years.",'何年かぶりに泳ぎに行った。',"I called my parents for the first time in a month.",'1か月ぶりに両親に電話した。');
+PT(1,"What if ~?",'もし～だったらどうする？',"What if we miss the last bus?",'終バスに乗り遅れたらどうする？',"What if it rains?",'雨が降ったらどうする？');
+PT(1,"That's why ~",'だから～なんだ',"I was sick. That's why I didn't come.",'具合が悪かったんだ。だから来なかったの。',"That's why I love this place.",'だからこの場所が好きなんだ。');
+PT(2,"It feels like ~",'～な気がする、～みたいだ',"It feels like I've been here forever.",'ずっとここにいるような気がする。',"It feels like summer today.",'今日は夏みたいだ。');
+PT(2,"There's no way ~",'～なんてありえない',"There's no way I can finish this today.",'今日これを終わらせるなんて無理だ。',"There's no way he said that.",'彼がそんなことを言うはずがない。');
+PT(1,"I'm not sure if ~",'～かどうか分からない',"I'm not sure if the shop is open.",'お店が開いているか分からない。',"I'm not sure if I said it right.",'うまく言えたか自信がない。');
+PT(3,"What's the point of ~ing?",'～して何の意味があるの？',"What's the point of studying if you don't practice?",'練習しないなら勉強して何の意味があるの？',"What's the point of arguing?",'言い争って何になるの？');
+PT(3,"It's ... how ~",'～なのは…だ（how を使った驚き・感想）',"It's amazing how fast kids learn.",'子どもの覚える速さには驚く。',"It's funny how things work out.",'物事って不思議とうまくいくものだね。');
+PT(2,"be supposed to ~",'～することになっている、～するはずだ',"We're supposed to meet at seven.",'7時に会うことになっている。',"You're not supposed to smoke here.",'ここでたばこを吸ってはいけないことになっている。');
+PT(2,"The reason I ~ is (that) ...",'私が～する理由は…だ',"The reason I came to Cebu is the weather.",'セブに来た理由は気候だ。',"The reason I'm late is that the bus didn't come.",'遅れた理由はバスが来なかったからだ。');
+PT(2,"It's just that ~",'ただ～なだけ',"I like it. It's just that it's too expensive.",'気に入ってるよ。ただ高すぎるだけ。',"I'm not mad. It's just that I'm tired.",'怒ってないよ。ただ疲れてるだけ。');
+PT(1,"I'll probably ~",'たぶん～する',"I'll probably stay home tonight.",'今夜はたぶん家にいる。',"I'll probably be a little late.",'たぶん少し遅れる。');
+PT(2,"It's not that ~",'～というわけではない',"It's not that I don't like you.",'あなたが嫌いというわけじゃない。',"It's not that it's hard. I'm just busy.",'難しいわけじゃなくて、忙しいだけ。');
+PT(2,"without ~ing",'～しないで',"He left without saying goodbye.",'彼はさよならも言わずに帰った。',"Don't cross the road without looking.",'よく見ないで道を渡らないで。');
+PT(3,"It's said that ~",'～と言われている',"It's said that this island has the best sunsets.",'この島の夕日はいちばんきれいだと言われている。',"It's said that he was a famous singer.",'彼は有名な歌手だったと言われている。');
+PT(3,"If I were to ~, I would ...",'仮に～するとしたら…するだろう',"If I were to live abroad, I would choose Australia.",'仮に海外に住むとしたら、オーストラリアを選ぶ。',"If I were to quit, I would tell you first.",'仮に辞めるとしても、まずあなたに言うよ。');
+PT(3,"It was such a ... that ~",'とても…な～だったので',"It was such a nice day that we went to the beach.",'とてもいい天気だったので、ビーチに行った。',"It was such a long flight that I slept the whole time.",'すごく長いフライトだったので、ずっと寝ていた。');
+PT(3,"I'm at the stage where ~",'～という段階にいる',"I'm at the stage where I can understand most of the lesson.",'授業のほとんどが分かる段階まで来た。',"We're at the stage where we need to decide.",'決めなければいけない段階にいる。');
+PT(2,"What I like about ... is ~",'…について好きなところは～だ',"What I like about Cebu is the people.",'セブで好きなところは人だ。',"What I like about this café is the quiet music.",'このカフェの好きなところは静かな音楽だ。');
+PT(2,"I was like, \"~\"",'（その時）「～」って感じだった、「～」って思った',"When I saw the price, I was like, \"No way!\"",'値段を見たとき「うそでしょ！」って思った。',"He was like, \"Are you serious?\"",'彼は「本気？」って感じだった。');
+PT(2,"when it comes to ~",'～のことになると',"When it comes to food, I'm not picky.",'食べ物のことなら、好き嫌いはない。',"When it comes to grammar, she's the best.",'文法のことになると、彼女がいちばんだ。');
+PT(3,"with + 名詞 + 状態",'～を…した状態で',"Don't talk with your mouth full.",'口に物を入れたまま話さないで。',"She slept with the window open.",'彼女は窓を開けたまま寝た。');
+PT(2,"(動詞) how ... ~ is",'～がどれだけ…かを（動詞）する',"I can't believe how big this mall is.",'このモールがこんなに大きいなんて信じられない。',"You don't know how hard it is.",'それがどれだけ大変か分からないでしょ。');
+PT(2,"get to ~",'～する機会がある、～できる',"I got to meet people from many countries.",'いろいろな国の人と知り合えた。',"Do you get to speak English at work?",'仕事で英語を話す機会はある？');
+PT(3,"be going to have to ~",'～しなければならなくなる',"We're going to have to wait.",'待たなければならなそうだ。',"You're going to have to show your passport.",'パスポートを見せる必要がありますよ。');
+PT(2,"end up ~ing",'結局～することになる',"We ended up staying until midnight.",'結局夜中までいることになった。',"I ended up buying two.",'結局2つ買ってしまった。');
+PT(3,"in the process of ~ing",'～している最中だ',"I'm in the process of finding a new apartment.",'新しい部屋を探している最中だ。',"We're in the process of updating the system.",'今システムを更新しているところです。');
+PT(2,"for the sake of ~",'～のために',"I quit smoking for the sake of my health.",'健康のためにたばこをやめた。',"Let's agree, for the sake of time.",'時間のために、ここは合意しよう。');
+PT(2,"whether or not ~",'～かどうか',"I don't know whether or not he's coming.",'彼が来るかどうか分からない。',"Whether or not it rains, we'll go.",'雨が降っても降らなくても行く。');
+PT(2,"I'm more of a ...",'どちらかというと…なタイプだ',"I'm more of a morning person.",'どちらかというと朝型だ。',"I'm more of a listener than a talker.",'話すより聞くタイプだ。');
+PT(2,"It's all about ~",'大事なのは～だ、～がすべてだ',"Learning English is all about practice.",'英語の習得は練習がすべてだ。',"This trip is all about relaxing.",'この旅行の目的はのんびりすることだ。');
+PT(2,"This is something that ~",'これは～なことだ',"This is something that I've always wanted to do.",'これはずっとやりたかったことだ。',"This is something that only you can decide.",'これはあなたにしか決められないことだ。');
+
 const CT_ADJN=['heavy rain','strong coffee','bitter cold','fast food','heavy traffic'], CT_ADV=['highly recommend','deeply sorry'], CT_VP=['keep in touch'];
 ITEMS.forEach(x=>{ if(x.cat!=='colloc'||x.scene) return; x.scene = CT_ADJN.includes(x.en)?'形容詞＋名詞' : CT_ADV.includes(x.en)?'副詞との組み合わせ' : CT_VP.includes(x.en)?'動詞＋前置詞' : '動詞＋名詞'; });
 const COLLOC_TYPES=['動詞＋名詞','動詞＋前置詞','形容詞＋前置詞','名詞＋前置詞','形容詞＋名詞','副詞との組み合わせ'];
@@ -5974,7 +6115,7 @@ const CAT_INFO = {
  colloc:{one:'英語ならではの語呂合わせです。英語でよく一緒に使う、自然な単語の組み合わせを覚えます。',ex:[['make a mistake','間違える（× do a mistake）'],['heavy rain','大雨（× strong rain）']],point:'意味は分かるのに、日本語から直訳すると組み合わせを間違えやすい表現です。',gain:'自然な英語を話す・書く力'},
  idiom:{one:'直訳では意味が通らない、決まった言い回しです。全体でひとつの意味として覚えます。',ex:[['a piece of cake','とても簡単なこと（直訳は「ケーキ1切れ」）'],['break the ice','初対面の緊張をほぐす（直訳は「氷を割る」）']],point:'単語が全部分かっても、直訳すると意味を取り違えます。',gain:'ネイティブらしい表現を理解する力'},
  pattern:{one:'単語を入れ替えるだけで、たくさんの文が作れる「文の型」です。',ex:[["I'd like to ~",'〜したいのですが（I\'d like to book a table.）']],gain:'言いたいことを、すぐに文にする力'},
- starter:{one:'文の頭に置くだけで、話し始めやすくなり、気持ちやつなぎを伝えられる表現です。',ex:[['Actually, ...','実は…'],['To be honest, ...','正直に言うと…']],gain:'会話をなめらかに始める・つなぐ力'},
+ starter:{one:'文の頭に置くだけで話し始めやすくなる表現と、会話の間をつなぐ言葉です。気持ちや話の流れを自然に伝えられます。',ex:[['Actually, ...','実は…'],['To be honest, ...','正直に言うと…']],gain:'会話をなめらかに始める・つなぐ力'},
  dialog:{one:'あいさつ・食べる時・買い物など30の場面ごとに、ネイティブが実際に使う自然なフレーズを、2〜3往復の会話の中で覚えます。',ex:[["How's it going?",'調子はどう？']],gain:'教科書ではない、自然な言い方'},
  grammar:{one:'英語のルールを、内容ごと（時制・助動詞・受け身など17章）に、シンプルな日本語の解説・例文・確認問題で学びます。',ex:[['I have lived here for two years.','ここに2年住んでいます（現在完了）']],gain:'正しい文を組み立てる力'},
  wh:{one:'仕事探し・面接・職場・接客など、ワーホリで出会う場面ごとに、フレーズと、返事を選んで進めるシミュレーションで練習します。',ex:[['Are you hiring?','人を募集していますか？']],gain:'現地で仕事を見つけて、働く力'}
@@ -6281,7 +6422,7 @@ function addVault(en,ja,scene,src){
   if(vaultRoom()<=0){ toast(`お試しの保存庫は${LIMIT.counseled.vault}件までです。成約すると上限なしで使えます。`); return false; }
   S.vault.push({id:Date.now()+Math.floor(Math.random()*1000),en,ja,scene,src,created:today(),used:0,state:null,step:-1,next:addDays(1)}); save(); return true; }
 
-const TSRC = {study:'留学で使う英語',word:'単語',phrasal:'句動詞（熟語）',colloc:'コロケーション',idiom:'イディオム',pattern:'構文',starter:'文頭フレーズ',scene:'場面別フレーズ',wh:'ワーホリ対策',vault:'保存庫',known:'記憶',unknown:'未記憶',fav:'お気に入り'};
+const TSRC = {study:'留学で使う英語',word:'単語',phrasal:'句動詞（熟語）',colloc:'コロケーション',idiom:'イディオム',pattern:'構文',starter:'文頭・つなぎ言葉',scene:'場面別フレーズ',wh:'ワーホリ対策',vault:'保存庫',known:'記憶',unknown:'未記憶',fav:'お気に入り'};
 function pool(src,lv){
   if(src==='vault') return feature('vault') ? S.vault.filter(v=>v.en&&v.ja).map(v=>({id:'v:'+v.id,en:v.en,ja:v.ja})) : [];
   let xs;
