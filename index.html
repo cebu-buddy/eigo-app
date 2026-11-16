@@ -4,17 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>ココとマンゴー英語｜言えなかったを、その場で（ベータ版）</title>
+<title>ココとマンゴー英語｜言えなかったを、その場で</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#F2F8F7; --surface:#FFFFFF; --ink:#3D2613; --muted:#6E5A4B; --line:#D5E6E3;
   --teal:#49B0A8; --teal-ink:#2C7A73; --mint:#E7F4F3; --mint2:#CFE8E5;
   --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --mango-ink:#A9620C; --pink-soft:#FCE6E8; --pink-ink:#BE4552; --st-known:#E8F1FB; --st-unknown:#FDF5F5; --st-none:#EEF7F6; --lv0:#2C7A73; --lv1:#2B64A0; --lv2:#6E4BB0; --lv3:#A9620C; --lv4:#B23A4A; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
-  --jp:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
-  --en:"Lexend","Helvetica Neue",Arial,sans-serif;
+
+  --jp:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
+  --en:"M PLUS Rounded 1c","Helvetica Neue",Arial,sans-serif;
   --ipa:"Charis SIL","Doulos SIL","Lucida Grande","Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme: dark){
@@ -33,7 +34,7 @@
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--jp);font-size:16px;line-height:1.7}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--jp);font-weight:500;font-size:16px;line-height:1.7;letter-spacing:.02em}
 button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--mango);outline-offset:2px;border-radius:6px}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
@@ -46,7 +47,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 16px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5}
 .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;color:var(--teal-ink);text-decoration:none;background:none;border:0;padding:0;cursor:pointer}
 .brand small{font-weight:500;color:var(--muted);font-size:11px;display:block;line-height:1.2}
-.brand>span{text-align:left}.brand small.sub{color:var(--teal-ink);font-weight:700;opacity:.85}
+.brand>span{text-align:left}.brand-ic{display:flex;align-items:center;flex:none}.brand-ic svg+svg{margin-left:-8px}@media (max-width:420px){header.top .brand-ic svg+svg{margin-left:-10px}header.top .brand{gap:4px;font-size:14px;letter-spacing:0}header.top .brand small{letter-spacing:0}header.top .brand svg{width:24px;height:24px}}.brand small.sub{color:var(--teal-ink);font-weight:700;opacity:.85}
 .top-links{display:flex;gap:4px;flex:none}
 .top .brand{min-width:0}.top .brand>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .icon-btn{white-space:nowrap}
@@ -77,7 +78,7 @@ main{padding:4px 16px 24px;max-width:1080px;margin:0 auto}
   .app{display:grid;grid-template-columns:236px 1fr;padding-bottom:0}
   .tabbar,.top{display:none}
   .side{display:flex;flex-direction:column;gap:2px;position:sticky;top:0;height:100vh;padding:20px 14px;border-right:1px solid var(--line);background:var(--surface);overflow:auto}
-  .side .brand{margin:0 6px 18px}
+  .side .brand{margin:0 6px 18px;font-size:16px;gap:6px}.side .brand svg{width:27px;height:27px}.side .brand>span:last-child{white-space:nowrap}
   .side button.nav{display:flex;align-items:center;gap:10px;border:0;background:none;text-align:left;padding:9px 12px;border-radius:12px;cursor:pointer;color:var(--ink)}
   .side button.nav svg{width:20px;height:20px;flex:none}
   .side button.nav:hover{background:var(--mint)}
@@ -5538,7 +5539,7 @@ function shell(){
   const FEAT = {ask:'ask',vault:'vault',talk:'talk',resume:'resume'};
   const lk = v=> FEAT[v] && !feature(FEAT[v]) ? `<span class="lockmark" aria-label="鍵">${I.lock}</span>` : '';
   const side =`<nav class="side" aria-label="メニュー">
-    <button class="brand" data-act="go" data-v="home">${mango(34)}<span>ココとマンゴー英語<small class="sub">言えなかったを、その場で</small><small>ベータ版</small></span></button>
+    <button class="brand" data-act="go" data-v="home"><span class="brand-ic" aria-hidden="true">${coco(34)}${mango(34)}</span><span>ココとマンゴー英語<small class="sub">言えなかったを、その場で</small></span></button>
     ${NAV.filter(n=>n[0]!=='ask').map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
     <div class="grp">ほかの機能</div>
     ${NAV2.map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
@@ -5546,7 +5547,7 @@ function shell(){
     <button class="ask-cta" data-act="go" data-v="ask">${I.chat}<span>言えなかった表現を<br>AIに聞く</span></button>
     ${producedBy('side-pb')}
   </nav>`;
-  const top = `<header class="top"><button class="brand" data-act="go" data-v="home">${mango(30)}<span>ココとマンゴー英語<small class="sub">言えなかったを、その場で</small><small>ベータ版</small></span></button>
+  const top = `<header class="top"><button class="brand" data-act="go" data-v="home"><span class="brand-ic" aria-hidden="true">${coco(30)}${mango(30)}</span><span>ココとマンゴー英語<small class="sub">言えなかったを、その場で</small></span></button>
     <div class="top-links"><button class="icon-btn" data-act="go" data-v="guide">手引書</button><button class="icon-btn" data-act="go" data-v="me">マイページ</button></div></header>`;
   const tab = `<nav class="tabbar" aria-label="メインメニュー">${NAV.map(n=> n[0]==='ask'
      ? `<button class="ask ${R.v==='ask'?'on':''}" data-act="go" data-v="ask"><span class="bubble">${n[2]}</span>${n[1]}</button>`
@@ -5579,7 +5580,7 @@ const V = {};
 V.welcome = ()=>`<div style="padding-top:8vh">
   <div class="row" style="gap:4px">${coco(84)}${mango(84)}</div>
   <h1>留学で「言えなかった」を、次は言えるように。</h1>
-  <p class="muted">フィリピン留学の前と留学中に使う英語アプリのベータ版です。ココ（先生役）とマンゴー（一緒に学ぶ仲間）が案内します。キャラクターの名前と絵は仮です。</p>
+  <p class="muted">フィリピン留学の前と留学中に使う英語アプリです。ココ（先生役）とマンゴー（一緒に学ぶ仲間）が案内します。キャラクターの名前と絵は仮です。</p>
   <div class="panel stack" style="margin-top:16px">
     <div><label class="f" for="w-name">ニックネーム</label><input type="text" id="w-name" placeholder="例: ユキ" autocomplete="nickname"></div>
     <div><label class="f" for="w-code">招待コード（面談・成約のときにお渡しします）</label><input type="text" id="w-code" placeholder="お持ちでなければ空欄のまま"></div>
@@ -5948,7 +5949,7 @@ function grammarDetail(g){
     <h3 style="margin-top:12px">自分のノート</h3>
     <textarea class="note" data-note="${g.id}" aria-label="${esc(g.title)}のノート" placeholder="授業で習ったこと、先生に言われたこと、自分がした間違いなどをメモ">${esc((S.notes||{})[g.id]||'')}</textarea>
     <p class="muted small">書いた内容は、この端末に自動で保存されます。</p>
-    <p class="muted small">ベータ版のため、解説や例文に間違いがあるかもしれません。見つけたら教えてください。</p></div>`;
+    <p class="muted small">解説や例文に間違いを見つけたら、教えてください。</p></div>`;
 }
 function interviewDetail(v){
   return `<div class="panel detail">
