@@ -244,7 +244,9 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .tile{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:14px 16px;text-align:left;cursor:pointer}
 .tile b{display:block;font-size:15px}
 .tile span{font-size:13px;color:var(--muted)}
-.tile .cat-hd{font-size:inherit;color:inherit;margin-bottom:4px}.tile .cat-hd b{display:inline}
+.tile{position:relative;overflow:hidden}.tile>b,.tile>span:not(.tile-mk){position:relative;z-index:1}
+.tile .tile-mk{position:absolute;right:-8px;bottom:-10px;opacity:.22;pointer-events:none;z-index:0;line-height:0}.tile-mk svg{width:64px;height:64px}
+.tile .tile-mk.g0{color:var(--teal)}.tile .tile-mk.g1{color:var(--mango)}.tile .tile-mk.g2{color:var(--pink)}
 .today{display:flex;gap:16px;align-items:center}
 .today .num{font-family:var(--en);font-size:34px;font-weight:600;color:var(--teal-ink);line-height:1}
 
@@ -4220,12 +4222,12 @@ V.home = ()=>{
   <button class="hero-study" data-act="learn" data-cat="study"><div><h2>留学で使う英語</h2><p>授業中・学校生活・寮と生活で、そのまま使える表現と会話</p></div><div class="pair">${coco(52)}${mango(52)}</div></button>
   <div class="home-grid">
     <div class="tile today"><div class="num">${due}</div><div><b>今日の復習</b><span>覚えた ${known}件・保存庫 ${S.vault.length}件</span></div></div>
-    <button class="tile" data-act="go" data-v="level"><span class="cat-hd">${catIcon('level',0)}<b>レベル診断</b></span><span>${S.level==null?'カテゴリーごとに5問':'記録とグラフを見る'}</span></button>
-    <button class="tile" data-act="go" data-v="pron"><span class="cat-hd">${catIcon('pron',1)}<b>発音講座</b></span><span>発音記号・ルール・聞き分け・言ってみる</span></button>
-    <button class="tile" data-act="go" data-v="talk"><span class="cat-hd">${catIcon('talk',1)}<b>AI英会話</b></span><span>面接・授業・ルームメイトと練習</span></button>
-    <button class="tile" data-act="learn" data-cat="wh"><span class="cat-hd">${catIcon('wh',2)}<b>ワーホリ対策</b></span><span>場面ごとのフレーズとシミュレーション</span></button>
-    <button class="tile" data-act="go" data-v="resume"><span class="cat-hd">${catIcon('resume',2)}<b>履歴書をつくる</b></span><span>AIと一問一答で強みを見つける</span></button>
-    <button class="tile" data-act="learn" data-cat="grammar"><span class="cat-hd">${catIcon('grammar',2)}<b>文法</b></span><span>レベル別の単元と確認問題</span></button>
+    <button class="tile" data-act="go" data-v="level"><b>レベル診断</b>${tileMark('level',0)}<span>${S.level==null?'カテゴリーごとに5問':'記録とグラフを見る'}</span></button>
+    <button class="tile" data-act="go" data-v="pron"><b>発音講座</b>${tileMark('pron',1)}<span>発音記号・ルール・聞き分け・言ってみる</span></button>
+    <button class="tile" data-act="go" data-v="talk"><b>AI英会話</b>${tileMark('talk',1)}<span>面接・授業・ルームメイトと練習</span></button>
+    <button class="tile" data-act="learn" data-cat="wh"><b>ワーホリ対策</b>${tileMark('wh',2)}<span>場面ごとのフレーズとシミュレーション</span></button>
+    <button class="tile" data-act="go" data-v="resume"><b>履歴書をつくる</b>${tileMark('resume',2)}<span>AIと一問一答で強みを見つける</span></button>
+    <button class="tile" data-act="learn" data-cat="grammar"><b>文法</b>${tileMark('grammar',2)}<span>レベル別の単元と確認問題</span></button>
   </div>
   <h2>保存庫の新着</h2>
   ${latest.length ? `<div class="list">${latest.map(v=>`<button class="li" data-act="go" data-v="vault"><span><span class="t">${esc(v.en||'（メモ）')}</span><br><span class="s">${esc(v.ja)}</span></span><span class="tag">${esc(v.scene||'未分類')}</span></button>`).join('')}</div>`
@@ -4341,6 +4343,8 @@ const CAT_ICON = {
   talk:'<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 15h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zM20 15h-2a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1z"/>',
   resume:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>'
 };
+
+const tileMark=(k,gi)=>CAT_ICON[k]?`<span class="tile-mk g${gi}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${CAT_ICON[k]}</svg></span>`:'';
 const catIcon=(k,gi)=>CAT_ICON[k]?`<span class="cat-ic g${gi}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${CAT_ICON[k]}</svg></span>`:'';
 const CAT_GROUPS = [['語彙',['word','phrasal','colloc','idiom']],['表現',['study','dialog','pattern','starter']],['文法・ワーホリ',['grammar','wh']]];
 function catStats(k){
