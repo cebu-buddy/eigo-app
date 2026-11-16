@@ -201,6 +201,7 @@ dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
   .tl-dot{left:50%;top:-46px;transform:translateX(-50%)}
   .tl-card:not(:last-child)::after{content:'';position:absolute;right:-18px;top:50%;width:10px;height:10px;border-top:3px solid var(--muted);border-right:3px solid var(--muted);opacity:.45;transform:translateY(-50%) rotate(45deg)}
 }
+.cinfo{padding:12px 16px}.cinfo .cat-hd b{font-size:16px}
 .fg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:10px 0 8px}
 .fg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column}
 .fg-h{display:flex;align-items:center;gap:10px}.fg-h h3{margin:0;font-size:16px;display:flex;align-items:center;gap:6px}
@@ -6551,7 +6552,7 @@ V.guide = ()=>`<h1>手引書</h1>
   </div>
   <h2>カテゴリーの説明</h2>
   <p class="muted small" style="margin:0 0 8px">「学ぶ」のカードの右上にある ⓘ を押しても、同じ説明が見られます。</p>
-  <div class="list">${Object.keys(CAT_INFO).map(k=>`<div class="panel" style="padding:12px 16px"><b>${esc(CATS[k])}</b><p class="small" style="margin:2px 0 0">${esc(CAT_INFO[k].one)}</p></div>`).join('')}<div class="panel" style="padding:12px 16px"><b>保存庫</b><p class="small" style="margin:2px 0 0">言えなかった表現をためて、復習して、次に使えるようにする自分だけの場所。</p></div></div>
+  <div class="list">${Object.keys(CAT_INFO).map(k=>`<div class="panel cinfo"><div class="cat-hd">${catIcon(k,Math.max(0,CAT_GROUPS.findIndex(g=>g[1].includes(k))))}<b>${esc(CATS[k])}</b></div><p class="small" style="margin:4px 0 0">${esc(CAT_INFO[k].one)}</p></div>`).join('')}<div class="panel cinfo"><div class="cat-hd"><span class="cat-ic g1" aria-hidden="true">${I.vault}</span><b>保存庫</b></div><p class="small" style="margin:4px 0 0">言えなかった表現をためて、復習して、次に使えるようにする自分だけの場所。</p></div></div>
   <h2>句動詞（熟語）とコロケーションの違い</h2>
   <p class="muted">どちらも「2語以上のまとまり」ですが、性質とつまずく所が違うので、分けています。</p>
   <div class="panel" style="padding:0;overflow-x:auto"><table class="lvtable cmp">
