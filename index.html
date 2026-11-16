@@ -1676,6 +1676,17 @@ C(AP,0,'interested in','～に興味がある',"I'm interested in working abroad
 C(AP,3,'skilled in','～に熟練している',"He's skilled in making coffee.",'彼はコーヒーをいれる腕がいい。',"We need staff skilled in communication.",'コミュニケーションに長けたスタッフが必要だ。');
 C(AP,2,'successful in','～で成功している',"She was successful in her application.",'彼女の応募は通った。',"I hope you're successful in your job search.",'仕事探しがうまくいきますように。');
 
+[
+ it('phrasal',1,'ask someone out','','～をデートに誘う',"He finally asked her out.",'彼はついに彼女をデートに誘った。',"Are you going to ask him out?",'彼をデートに誘うの？'),
+ it('phrasal',3,'ask after','','～の様子を尋ねる、～のことを気にかけて聞く',"My teacher asked after you.",'先生があなたは元気かと聞いていたよ。',"She always asks after my family.",'彼女はいつも私の家族の様子を聞いてくれる。'),
+ it('phrasal',0,'come back','','戻ってくる',"I'll come back in five minutes.",'5分で戻ってくるね。',"When are you coming back to Japan?",'いつ日本に戻ってくるの？'),
+ it('phrasal',1,'get together','','集まる、会う',"Let's get together this weekend.",'今週末集まろうよ。',"We get together every Friday night.",'毎週金曜の夜に集まっている。'),
+ it('phrasal',2,'get rid of','','～を処分する、取り除く',"I need to get rid of some clothes before I leave.",'出発前に服を少し処分しないと。',"How can I get rid of this cold?",'この風邪、どうしたら治る？'),
+ it('phrasal',3,'see to','','～を引き受ける、手配する',"Don't worry, I'll see to it.",'心配しないで、私がやっておくよ。',"Can someone see to the broken air conditioner?",'壊れたエアコンを誰か見てくれませんか？'),
+ it('phrasal',3,'allow for','','～を考慮に入れる',"Allow for traffic when you go to the airport.",'空港へ行くときは渋滞を考えに入れておいて。',"The price allows for tax.",'その値段は税金込みで考えてある。'),
+ it('phrasal',4,'answer to','','～の指示を受ける、～に報告する立場にある',"At work, I answer to the store manager.",'職場では店長の指示を受けています。',"Who do you answer to?",'あなたの上司は誰ですか？'),
+].forEach(x=>{ if(!ITEMS.some(y=>y.id===x.id)) ITEMS.push(x); });
+
 const CT_ADJN=['heavy rain','strong coffee','bitter cold','fast food','heavy traffic'], CT_ADV=['highly recommend','deeply sorry'], CT_VP=['keep in touch'];
 ITEMS.forEach(x=>{ if(x.cat!=='colloc'||x.scene) return; x.scene = CT_ADJN.includes(x.en)?'形容詞＋名詞' : CT_ADV.includes(x.en)?'副詞との組み合わせ' : CT_VP.includes(x.en)?'動詞＋前置詞' : '動詞＋名詞'; });
 const COLLOC_TYPES=['動詞＋名詞','動詞＋前置詞','形容詞＋前置詞','名詞＋前置詞','形容詞＋名詞','副詞との組み合わせ'];
