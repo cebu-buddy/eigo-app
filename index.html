@@ -12,7 +12,7 @@
 :root{
   --bg:#F2F8F7; --surface:#FFFFFF; --ink:#3D2613; --muted:#6E5A4B; --line:#D5E6E3;
   --teal:#49B0A8; --teal-ink:#2C7A73; --mint:#E7F4F3; --mint2:#CFE8E5;
-  --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --mango-ink:#A9620C; --pink-soft:#FCE6E8; --pink-ink:#BE4552; --st-known:#E8F1FB; --st-unknown:#FDF5F5; --st-none:#EEF7F6; --sub-ink:#4A4A4A; --lv0:#2C7A73; --lv1:#2B64A0; --lv2:#6E4BB0; --lv3:#A9620C; --lv4:#B23A4A; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
+  --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --mango-ink:#A9620C; --pink-soft:#FCE6E8; --pink-ink:#BE4552; --st-known:#E8F1FB; --st-unknown:#FDF5F5; --st-none:#EEF7F6; --head-brown:#6B4220; --sub-ink:#4A4A4A; --lv0:#2C7A73; --lv1:#2B64A0; --lv2:#6E4BB0; --lv3:#A9620C; --lv4:#B23A4A; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
 
   --jp:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
   --en:"M PLUS Rounded 1c","Helvetica Neue",Arial,sans-serif;
@@ -22,14 +22,14 @@
   :root:not([data-theme="light"]){
     --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
     --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
-    --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --sub-ink:#D0D0D0; --lv0:#7FD6CD; --lv1:#8DBDF0; --lv2:#C3A8F2; --lv3:#F7B548; --lv4:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+    --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --head-brown:#D9B48C; --sub-ink:#D0D0D0; --lv0:#7FD6CD; --lv1:#8DBDF0; --lv2:#C3A8F2; --lv3:#F7B548; --lv4:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
   --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
-  --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --sub-ink:#D0D0D0; --lv0:#7FD6CD; --lv1:#8DBDF0; --lv2:#C3A8F2; --lv3:#F7B548; --lv4:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+  --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --head-brown:#D9B48C; --sub-ink:#D0D0D0; --lv0:#7FD6CD; --lv1:#8DBDF0; --lv2:#C3A8F2; --lv3:#F7B548; --lv4:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -205,6 +205,8 @@ dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
 .gnotes{margin:8px 0 0;padding-left:1.2em;color:var(--muted);font-size:13px;line-height:1.65}.gnotes li{margin:3px 0}.gnotes li::marker{color:var(--teal)}.gnotes b{color:var(--ink)}
 
 .opt.opt-dk{color:var(--muted);border-style:dashed}.opt.opt-dk.picked{background:var(--mint);color:var(--ink);border-style:solid}
+
+.guide-pg h2{color:var(--head-brown)}
 .fg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:10px 0 8px}
 .fg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column}
 .fg-h{display:flex;align-items:center;gap:10px}.fg-h h3{margin:0;font-size:16px;display:flex;align-items:center;gap:6px}
@@ -447,7 +449,7 @@ const LV_CEFR = ['A1','A2','B1','B2','C1'];
 
 let _g = 0;
 function coco(s=56){
-  return `<svg class="chara" width="${s}" height="${s}" viewBox="0 0 64 64" aria-hidden="true">
+  return `<svg class="chara" width="${s}" height="${s}" viewBox="2 3 60 60" aria-hidden="true">
   <path d="M33 11c3-6 11-8 16-5-5 1-9 3-11 8z" fill="#3E9B5B"/><path d="M31 12c-3-6-10-8-15-5 5 1 8 3 10 8z" fill="#58B36E"/>
   <circle cx="32" cy="37" r="23" fill="#8A5A3B"/>
   <path d="M15 31c4-3 8-4 12-3M39 27c4 0 8 2 11 5M19 50c3 2 6 3 9 3" stroke="#6E452C" stroke-width="2" fill="none" stroke-linecap="round"/>
@@ -6501,7 +6503,7 @@ const GUIDE_FEATS = [
  ['resume','doc','g0','履歴書','ワーホリの仕事探しに使う、英文の履歴書をつくります。','質問に日本語で答えると、AIがアピールポイントを英文にまとめます。できた履歴書はPDFで保存（印刷）できます。入力した内容は、この端末にだけ保存されます。'],
 ];
 const FEAT_LOCK = v=>{ const F={ask:'ask',vault:'vault',talk:'talk',resume:'resume'}; return F[v] && !feature(F[v]) ? `<span class="lockmark" aria-label="鍵（今の区分では使えません）">${I.lock}</span>` : ''; };
-V.guide = ()=>`<h1>手引書</h1>
+V.guide = ()=>`<div class="guide-pg"><h1>手引書</h1>
   <div class="greet" style="margin-top:0">${coco(56)}<div class="speech"><b>ココ</b>時期ごと・機能ごとの使い方です。帰国後も続けて使えます。</div></div>
   <section class="ask-hero" aria-labelledby="ask-hero-h">
     <p class="ask-hero-k">このアプリでいちばん大事にしている機能</p>
@@ -6571,7 +6573,7 @@ V.guide = ()=>`<h1>手引書</h1>
     <li>日本語の「熟語」は意味が広く、イディオムなども含みます。このアプリの「句動詞（熟語）」は、動詞と短い語の組み合わせだけを集めています。</li>
     <li>イディオムは、<span class="en">a piece of cake</span>（とても簡単なこと。直訳は「ケーキ1切れ」）のように、直訳では意味が通らない決まった言い回しです。</li>
     <li><span class="en">take a shower</span>（コロケーション）と <span class="en">take off</span>（句動詞・離陸する）のように、似ていても分類が違うものがあります。迷うものは監修者が決めています。</li>
-  </ul>`;
+  </ul></div>`;
 
 function lvGuideHTML(){ return `
   <p class="muted">このアプリのレベルは、国際的な基準のCEFR（セファール）に合わせています。英検・TOEIC・IELTSでのおおよその目安も並べました。</p>
