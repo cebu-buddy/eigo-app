@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F2F8F7; --surface:#FFFFFF; --ink:#3D2613; --muted:#6E5A4B; --line:#D5E6E3;
+  --bg:#F2F8F7; --surface:#FFFFFF; --accent-bg:#2C7A73; --cta-bg:#E76874; --tl1:#49B0A8; --tl2:#2B64A0; --tl3:#F5A524; --tl4:#E76874; --ink:#3D2613; --muted:#6E5A4B; --line:#D5E6E3;
   --teal:#49B0A8; --teal-ink:#2C7A73; --mint:#E7F4F3; --mint2:#CFE8E5;
   --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --mango-ink:#A9620C; --pink-soft:#FCE6E8; --pink-ink:#BE4552; --st-known:#E8F1FB; --st-unknown:#FDF5F5; --st-none:#EEF7F6; --head-brown:#6B4220; --sub-ink:#4A4A4A; --lv0:#2C7A73; --lv1:#2B64A0; --lv2:#6E4BB0; --lv3:#A9620C; --lv4:#B23A4A; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
 
@@ -20,19 +20,40 @@
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
+    --bg:#12201E; --surface:#1A2C29; --accent-bg:#2A7D75; --cta-bg:#C94F5E; --tl1:#2A7D75; --tl2:#2F5F94; --tl3:#B06F12; --tl4:#C94F5E; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
     --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
     --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --head-brown:#D9B48C; --sub-ink:#D0D0D0; --lv0:#7FD6CD; --lv1:#8DBDF0; --lv2:#C3A8F2; --lv3:#F7B548; --lv4:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
+  --bg:#12201E; --surface:#1A2C29; --accent-bg:#2A7D75; --cta-bg:#C94F5E; --tl1:#2A7D75; --tl2:#2F5F94; --tl3:#B06F12; --tl4:#C94F5E; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
   --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
   --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1D3340; --st-unknown:#352A2E; --st-none:#1F3632; --head-brown:#D9B48C; --sub-ink:#D0D0D0; --lv0:#7FD6CD; --lv1:#8DBDF0; --lv2:#C3A8F2; --lv3:#F7B548; --lv4:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+.srch{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--bg);border-radius:999px;padding:7px 12px;color:var(--muted)}
+.srch:focus-within{border-color:var(--teal);box-shadow:0 0 0 3px var(--mint2)}
+.srch svg{width:18px;height:18px;flex:none}.srch input{border:0;outline:0;background:none;font-size:14px;width:100%;min-width:0;color:var(--ink)}
+.srch input::-webkit-search-cancel-button{cursor:pointer}
+.side .srch{margin:0 4px 14px}
+.top-srch{display:none}
+@media (max-width:959px){.top-srch{display:block;padding:8px 16px 10px;background:var(--surface);border-bottom:1px solid var(--line)}.top-srch input{font-size:16px}}
+.sr-h{display:flex;align-items:baseline;gap:8px;margin:20px 0 8px}.sr-h h2{margin:0;font-size:17px}.sr-h .n{font-size:13px;color:var(--muted)}
+.sr-li{display:flex;justify-content:space-between;gap:10px;align-items:center;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:10px 14px;margin-bottom:6px;cursor:pointer}
+.sr-li:hover{border-color:var(--teal)}
+.sr-li b{font-family:var(--en)}.sr-li .s{font-size:13px;color:var(--muted)}.sr-li mark{background:var(--mango-soft);color:inherit;border-radius:4px;padding:0 2px}
+.sr-tag{font-size:11px;white-space:nowrap;border-radius:999px;padding:2px 8px;background:var(--mint);color:var(--teal-ink)}
+.sr-more{font-size:13px;color:var(--teal-ink);background:none;border:0;cursor:pointer;padding:4px 0;font-weight:700}
+.sr-none{text-align:center;padding:22px 16px;margin-top:22px}
+.theme-sw{display:flex;gap:2px;padding:3px;border-radius:999px;background:var(--mint);border:1px solid var(--line)}
+.theme-sw button{flex:1;display:flex;align-items:center;justify-content:center;gap:4px;border:0;background:none;border-radius:999px;padding:6px 8px;font-size:12.5px;cursor:pointer;color:var(--muted);white-space:nowrap}
+.theme-sw button svg{width:15px;height:15px;flex:none}
+.theme-sw button.on{background:var(--surface);color:var(--teal-ink);font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.side .side-theme{margin:12px 4px 0}
+.side .side-theme button{padding:5px 4px;font-size:12px}
+@media (min-width:960px) and (max-height:900px){html .side button.nav{padding:6px 12px}html .side .grp{margin:8px 12px 2px}html .side .brand{margin-bottom:12px}html .side .srch{margin-bottom:8px}html .side .ask-cta{padding:9px 12px}html .side .side-theme{margin-top:8px}html .side .side-pb{margin-top:8px}html .side{padding-top:14px;padding-bottom:12px}}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--jp);font-weight:500;font-size:16px;line-height:1.7;letter-spacing:.02em}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -72,7 +93,7 @@ main{padding:4px 16px 24px;max-width:1080px;margin:0 auto}
 .tabbar button.on{color:var(--teal-ink);font-weight:700}
 .tabbar button.ask{color:var(--ink)}
 .tabbar button.ask .bubble{background:var(--mango);border-radius:14px;padding:4px 12px;margin-top:-14px;box-shadow:0 2px 0 rgba(61,38,19,.18)}
-.tabbar button.ask.on .bubble{background:var(--teal);color:#fff}
+.tabbar button.ask.on .bubble{background:var(--accent-bg);color:#fff}
 
 @media (min-width: 960px){
   .app{display:grid;grid-template-columns:236px 1fr;padding-bottom:0}
@@ -100,15 +121,15 @@ p{margin:0 0 8px}
 .stack>*+*{margin-top:12px}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .btn{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 16px;cursor:pointer}
-.btn.primary{background:var(--teal-ink);border-color:var(--teal-ink);color:#fff;font-weight:700}
-.btn.cta{background:var(--pink);border-color:var(--pink);color:#fff;font-weight:700}
+.btn.primary{background:var(--accent-bg);border-color:var(--accent-bg);color:#fff;font-weight:700}
+.btn.cta{background:var(--cta-bg);border-color:var(--cta-bg);color:#fff;font-weight:700}
 .btn.mango{background:var(--mango);border-color:var(--mango);color:#2B140B;font-weight:700}
 .btn.sm{padding:5px 11px;font-size:13px;border-radius:10px}
 .btn.on{background:var(--mint2);border-color:var(--teal);color:var(--teal-ink);font-weight:700}
 .btn:disabled{opacity:.5;cursor:default}
 .chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;position:relative}
 .chip{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:14px;white-space:nowrap}
-.chip.on{background:var(--teal-ink);border-color:var(--teal-ink);color:#fff;font-weight:700}
+.chip.on{background:var(--accent-bg);border-color:var(--accent-bg);color:#fff;font-weight:700}
 
 .ja-audio{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:4px 0 10px}
 .stepnav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}
@@ -193,7 +214,7 @@ dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
 .tl::before{content:'';position:absolute;left:13px;top:18px;bottom:18px;width:3px;border-radius:3px;background:linear-gradient(180deg,var(--teal),var(--lv1),var(--mango),var(--pink))}
 .tl-card{position:relative;margin:0;border-top:4px solid var(--tlc)}
 .tl-dot{position:absolute;left:-38px;top:14px;width:30px;height:30px;border-radius:50%;background:var(--tlc);color:#fff;font-family:var(--en);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--bg)}
-.tl-when{margin:0 0 2px;font-size:12px;font-weight:700;color:var(--tlc)}
+.tl-when{margin:0 0 2px;font-size:12px;font-weight:700;color:color-mix(in srgb,var(--tlc) 55%,var(--ink))}
 .tl-card h3{margin-top:0}
 @media (min-width:1100px){
   .tl{grid-template-columns:repeat(4,1fr);gap:26px;padding-left:0;padding-top:46px}
@@ -278,7 +299,7 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .greet{display:flex;align-items:flex-end;gap:10px;margin:6px 0 18px}
 .speech{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:18px 18px 18px 6px;padding:12px 16px;max-width:520px}
 .speech b{display:block;font-size:13px;color:var(--teal-ink)}
-.hero-study{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--teal-ink);color:#fff;border-radius:22px;padding:20px;border:0;width:100%;text-align:left;cursor:pointer}
+.hero-study{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--accent-bg);color:#fff;border-radius:22px;padding:20px;border:0;width:100%;text-align:left;cursor:pointer}
 .hero-study h2{margin:0 0 4px;font-size:20px;color:#fff}
 .hero-study p{margin:0;color:#DDF1EE;font-size:14px}
 .hero-study .pair{display:flex;gap:2px}
@@ -314,7 +335,7 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .li-wrap{position:relative}.li.st-known{background:var(--st-known)}.li.st-unknown{background:var(--st-unknown)}.li.st-none{background:var(--st-none)}.li-wrap.has-kb .li{padding-right:128px}
 .li-kb{position:absolute;right:10px;top:50%;transform:translateY(-50%);display:flex;gap:4px}
 .kb{font:inherit;font-size:12px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:4px 9px;cursor:pointer;white-space:nowrap}
-.kb:hover{border-color:var(--teal)}.kb.on{background:var(--teal);border-color:var(--teal);color:#fff}.kb.ng.on{background:var(--pink);border-color:var(--pink);color:#fff}
+.kb:hover{border-color:var(--teal)}.kb.on{background:var(--accent-bg);border-color:var(--accent-bg);color:#fff}.kb.ng.on{background:var(--cta-bg);border-color:var(--cta-bg);color:#fff}
 .ja-tg{display:none;margin:10px 0 0}
 .tg{font:inherit;font-size:12.5px;color:var(--muted);background:none;border:0;padding:4px 0;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
 .tg-sw{width:30px;height:18px;border-radius:999px;background:var(--line);position:relative;flex:none;transition:background .15s}
@@ -357,7 +378,7 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .chat{display:flex;flex-direction:column;gap:10px}
 .msg{max-width:88%;padding:10px 14px;border-radius:16px}
 .msg.ai{background:var(--surface);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:6px}
-.msg.me{background:var(--teal-ink);color:#fff;align-self:flex-end;border-bottom-right-radius:6px}
+.msg.me{background:var(--accent-bg);color:#fff;align-self:flex-end;border-bottom-right-radius:6px}
 .msg.me .en{color:#fff}
 .answer h3{font-size:14px;color:var(--teal-ink);margin:12px 0 4px}
 .ask-box{display:flex;gap:8px}
@@ -5955,6 +5976,11 @@ let S = S0();
 try{ const raw = localStorage.getItem(KEY); if(raw) S = Object.assign(S, JSON.parse(raw)); }catch(e){}
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
+function applyTheme(){ const r=document.documentElement; if(!r||!r.dataset) return; if(S.theme==='light'||S.theme==='dark') r.dataset.theme=S.theme; else delete r.dataset.theme; }
+applyTheme();
+const THEME_IC={auto:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',light:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',dark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>'};
+const themeSw = cls=>{ const cur=S.theme||'auto'; return `<div class="theme-sw ${cls||''}" role="radiogroup" aria-label="画面の明るさ">${[['auto','自動'],['light','ライト'],['dark','ダーク']].map(([k,n])=>`<button role="radio" aria-checked="${cur===k}" class="${cur===k?'on':''}" data-act="theme" data-t="${k}" title="${k==='auto'?'端末の設定に合わせる':n}">${THEME_IC[k]}<span>${n}</span></button>`).join('')}</div>`; };
+
 const $ = s=>document.querySelector(s);
 const esc = s=>String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const shuffle = a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
@@ -6405,15 +6431,17 @@ function shell(){
   const lk = v=> FEAT[v] && !feature(FEAT[v]) ? `<span class="lockmark" aria-label="鍵">${I.lock}</span>` : '';
   const side =`<nav class="side" aria-label="メニュー">
     <button class="brand" data-act="go" data-v="home"><span class="brand-ic" aria-hidden="true">${coco(34)}${mango(34)}</span><span>ココとマンゴー英語<small class="sub">言えなかったを、その場で</small></span></button>
+    <label class="srch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="srch-side" class="srch-in" type="search" placeholder="英語・日本語で検索（例: 楽しみ）" value="${esc(R.q||'')}" autocomplete="off" enterkeyhint="search" aria-label="表現を検索"></label>
     ${NAV.filter(n=>n[0]!=='ask').map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
     <div class="grp">ほかの機能</div>
     ${NAV2.map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
     <div class="grp">利用区分: ${TIER_NAME[tier()]}</div>
     <button class="ask-cta" data-act="go" data-v="ask">${I.chat}<span>今、言えなかった<br>表現をAIに聞く</span></button>
+    ${themeSw('side-theme')}
     ${producedBy('side-pb')}
   </nav>`;
   const top = `<header class="top"><button class="brand" data-act="go" data-v="home"><span class="brand-ic" aria-hidden="true">${coco(30)}${mango(30)}</span><span>ココとマンゴー英語<small class="sub">言えなかったを、その場で</small></span></button>
-    <div class="top-links"><button class="icon-btn" data-act="go" data-v="guide">手引書</button><button class="icon-btn" data-act="go" data-v="me">マイページ</button></div></header>`;
+    <div class="top-links"><button class="icon-btn" data-act="go" data-v="guide">手引書</button><button class="icon-btn" data-act="go" data-v="me">マイページ</button></div></header><div class="top-srch"><label class="srch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="srch-top" class="srch-in" type="search" placeholder="英語・日本語で検索（例: 楽しみ）" value="${esc(R.q||'')}" autocomplete="off" enterkeyhint="search" aria-label="表現を検索"></label></div>`;
   const tab = `<nav class="tabbar" aria-label="メインメニュー">${NAV.map(n=> n[0]==='ask'
      ? `<button class="ask ${R.v==='ask'?'on':''}" data-act="go" data-v="ask"><span class="bubble">${n[2]}</span>${n[1]}</button>`
      : `<button class="${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}</button>`).join('')}</nav>`;
@@ -6886,6 +6914,38 @@ V.ask = ()=>{
 };
 
 let VF = 'all';
+
+const SR_GROUPS=[['vault','保存庫'],['word','単語'],['phrasal','句動詞（熟語）'],['idiom','イディオム'],['colloc','コロケーション'],['scene','場面別フレーズ'],['study','留学で使う英語'],['pattern','構文'],['starter','文頭・つなぎ言葉'],['wh','ワーホリ対策']];
+const srNorm = s=>String(s||'').toLowerCase().replace(/[’‘]/g,"'").replace(/\s+/g,' ').trim();
+function srFind(q){
+  const n=srNorm(q); if(!n) return {};
+  const score=x=>{ const en=srNorm(x.en), ja=srNorm(x.ja); if(en===n) return 0; if(en.startsWith(n)) return 1; if(new RegExp('\\b'+n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).test(en)) return 2; if(en.includes(n)) return 3; if(ja.includes(n)) return 4; return -1; };
+  const g={};
+  const add=(k,x)=>{ const s=score(x); if(s>=0) (g[k]=g[k]||[]).push([s,x]); };
+  (S.vault||[]).forEach(v=>add('vault',{...v,vid:v.id}));
+  ITEMS.forEach(x=>{ const k=x.cat==='interview'?'wh':x.cat; if(SR_GROUPS.some(s=>s[0]===k)) add(k,x); });
+  Object.keys(g).forEach(k=>g[k]=g[k].sort((a,b)=>a[0]-b[0]||a[1].en.length-b[1].en.length).map(a=>a[1]));
+  return g;
+}
+const srHl=(s,q)=>{ const n=srNorm(q); s=String(s||''); if(!n) return esc(s); const i=s.toLowerCase().indexOf(n); return i<0?esc(s):esc(s.slice(0,i))+'<mark>'+esc(s.slice(i,i+n.length))+'</mark>'+esc(s.slice(i+n.length)); };
+V.search = ()=>{
+  const q=(R.q||'').trim();
+  if(!q) return `<h1>検索</h1><div class="panel empty">${coco(52)}<p style="margin-top:8px">英語でも日本語でも探せます。保存庫の表現も一緒に探します。<br>例: stoked、楽しみ、疲れ、check in</p></div>`;
+  const g=srFind(q), keys=SR_GROUPS.filter(s=>g[s[0]]), total=keys.reduce((a,s)=>a+g[s[0]].length,0), open=R.sxp||{};
+  const row=(k,x)=>`<button class="sr-li" data-act="sopen" data-k="${k}" data-id="${esc(k==='vault'?String(x.vid):x.id)}"><span><b>${srHl(x.en,q)}</b><br><span class="s">${srHl(x.ja,q)}${k==='scene'&&x.scene?`（${esc(x.scene)}）`:''}</span></span><span class="sr-tag">${k==='vault'?'保存庫':typeof x.lv==='number'?LV[x.lv]:''}</span></button>`;
+  const none=`<div class="panel sr-none"><p style="margin:0 0 10px">${total?'探している表現が見つからないときは':'アプリの中には見つかりませんでした。'}</p><button class="btn primary" data-act="sask">「${esc(q)}」をAIに聞く</button></div>`;
+  if(!total) return `<h1>「${esc(q)}」の検索結果</h1>${none}`;
+  return `<h1>「${esc(q)}」の検索結果</h1><p class="muted">${total}件見つかりました。押すと、その表現の画面に移ります。</p>
+  ${keys.map(([k,name])=>{ const xs=g[k], all=open[k]||xs.length<=4; return `<div class="sr-h"><h2>${name}</h2><span class="n">${xs.length}件</span></div>${(all?xs.slice(0,200):xs.slice(0,3)).map(x=>row(k,x)).join('')}${all?'':`<button class="sr-more" data-act="smore" data-k="${k}">${name}の結果をすべて見る（${xs.length}件）</button>`}`; }).join('')}
+  ${none}`;
+};
+function srInput(el){
+  R.q=el.value; R.sxp={};
+  document.querySelectorAll('.srch-in').forEach(i=>{ if(i!==el) i.value=el.value; });
+
+  if(R.v!=='search'){ R=Object.assign({},R,{v:'search'}); document.querySelectorAll('.side .nav.on,.tabbar .on').forEach(b=>b.classList.remove('on')); window.scrollTo(0,0); }
+  $('#main').innerHTML=V.search(); after();
+}
 V.vault = ()=>{
   if(!feature('vault')) return `<h1>保存庫</h1><p class="muted">言えなかった表現をためて、次に使えるようにする、あなただけの場所です。</p>${upsell(expired()&&S.vault.length?`お試しの期限が切れました。保存した${S.vault.length}件は残っています。成約すると、続きから使えます。`:'保存庫は、無料カウンセリング（面談）を受けると使えます。')}`;
   const t = today();
@@ -7165,10 +7225,10 @@ V.guide = ()=>`<div class="guide-pg"><h1>手引書</h1>
   </section>
   <h2>時期ごとの使い方</h2>
   <div class="tl" aria-label="時期の流れ">
-    <div class="panel tl-card" style="--tlc:var(--teal)"><span class="tl-dot" aria-hidden="true">1</span><p class="tl-when">出発の1〜3か月前</p><h3>留学前</h3><p class="small gs-lead">出発前に基礎を固めておくと、現地の授業に早くなじめます。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>レベル診断で、今の自分のレベルを知る</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>「留学で使う英語」で、授業中・学校生活の表現を覚える</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>自分のレベルの単語と構文を、「覚えた・まだ」で仕分けながら進める</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>AI英会話の「授業の始まりの雑談」で、話す練習をする</span></li></ol></div>
-    <div class="panel tl-card" style="--tlc:var(--lv1)"><span class="tl-dot" aria-hidden="true">2</span><p class="tl-when">現地で</p><h3>留学中</h3><p class="small gs-lead">毎日の授業と生活が、いちばんの練習の場になります。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>授業で言えなかったことは、その日のうちにAIに聞く</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>聞いた表現を保存庫に入れて、次の授業で使ってみる</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>使えたら「実際に使えた！」を押して、使える表現を増やす</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>寮・生活の表現や場面別フレーズで、授業の外の英語も広げる</span></li></ol></div>
-    <div class="panel tl-card" style="--tlc:var(--mango)"><span class="tl-dot" aria-hidden="true">3</span><p class="tl-when">仕事探しの前に</p><h3>ワーホリの前</h3><p class="small gs-lead">仕事探しでは、英語の面接と履歴書が最初の関門です。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>「ワーホリ対策」で、現地で出会う場面の表現を覚える</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>面接対策で、よく聞かれる質問と答え方を準備する</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>AI英会話で、面接の受け答えを練習する</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>「履歴書」で、英文の履歴書をつくる</span></li></ol></div>
-    <div class="panel tl-card" style="--tlc:var(--pink)"><span class="tl-dot" aria-hidden="true">4</span><p class="tl-when">帰国してから</p><h3>留学のあと（帰国後）</h3><p class="small gs-lead">留学で伸びた英語は、使わないと少しずつ落ちていきます。帰国後も続けて使えます。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>保存庫の復習で、留学中に覚えた表現を忘れないようにする</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>単語・句動詞・イディオムを、一つ上のレベルへ進める</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>AI英会話で、話す機会を毎日少しずつ持つ</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>仕事や旅行の英語、次の留学やワーホリの準備にも使う</span></li></ol></div>
+    <div class="panel tl-card" style="--tlc:var(--tl1)"><span class="tl-dot" aria-hidden="true">1</span><p class="tl-when">出発の1〜3か月前</p><h3>留学前</h3><p class="small gs-lead">出発前に基礎を固めておくと、現地の授業に早くなじめます。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>レベル診断で、今の自分のレベルを知る</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>「留学で使う英語」で、授業中・学校生活の表現を覚える</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>自分のレベルの単語と構文を、「覚えた・まだ」で仕分けながら進める</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>AI英会話の「授業の始まりの雑談」で、話す練習をする</span></li></ol></div>
+    <div class="panel tl-card" style="--tlc:var(--tl2)"><span class="tl-dot" aria-hidden="true">2</span><p class="tl-when">現地で</p><h3>留学中</h3><p class="small gs-lead">毎日の授業と生活が、いちばんの練習の場になります。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>授業で言えなかったことは、その日のうちにAIに聞く</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>聞いた表現を保存庫に入れて、次の授業で使ってみる</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>使えたら「実際に使えた！」を押して、使える表現を増やす</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>寮・生活の表現や場面別フレーズで、授業の外の英語も広げる</span></li></ol></div>
+    <div class="panel tl-card" style="--tlc:var(--tl3)"><span class="tl-dot" aria-hidden="true">3</span><p class="tl-when">仕事探しの前に</p><h3>ワーホリの前</h3><p class="small gs-lead">仕事探しでは、英語の面接と履歴書が最初の関門です。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>「ワーホリ対策」で、現地で出会う場面の表現を覚える</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>面接対策で、よく聞かれる質問と答え方を準備する</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>AI英会話で、面接の受け答えを練習する</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>「履歴書」で、英文の履歴書をつくる</span></li></ol></div>
+    <div class="panel tl-card" style="--tlc:var(--tl4)"><span class="tl-dot" aria-hidden="true">4</span><p class="tl-when">帰国してから</p><h3>留学のあと（帰国後）</h3><p class="small gs-lead">留学で伸びた英語は、使わないと少しずつ落ちていきます。帰国後も続けて使えます。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>保存庫の復習で、留学中に覚えた表現を忘れないようにする</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>単語・句動詞・イディオムを、一つ上のレベルへ進める</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>AI英会話で、話す機会を毎日少しずつ持つ</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>仕事や旅行の英語、次の留学やワーホリの準備にも使う</span></li></ol></div>
   </div>
   <h2>それぞれの機能の使い方</h2>
   <p class="muted small" style="margin-top:-4px">左のメニュー（スマホは下のメニュー）にある機能の、役割と使い方です。</p>
@@ -7345,13 +7405,14 @@ V.me = ()=>{
     <div class="tile"><b>${known}</b><span>覚えた項目</span></div><div class="tile"><b>${S.vault.length}</b><span>保存庫の表現</span></div>
     <div class="tile"><b>${fav}</b><span>お気に入り</span></div><div class="tile"><b>${S.tests}</b><span>テストの回数</span></div><div class="tile"><b>${S.talkLog}</b><span>AI英会話の回数</span></div>
   </div>
+  <div class="panel" style="margin-top:14px"><h3>画面の明るさ</h3><p class="muted small" style="margin:0 0 8px">「自動」は、端末（スマホ・パソコン）の設定に合わせます。</p>${themeSw()}</div>
   <div class="panel" style="margin-top:14px"><h3>利用区分</h3>
     <p>${TIER_NAME[tier()]}${expired()?'（お試しの期限切れ）':tier()==='counseled'?`（あと${trialLeft()}日）`:''}</p>
 ${tier()!=='customer'?`<div class="filter" style="margin-top:8px"><label class="filter-l" for="me-code">招待コードをお持ちの方</label><div class="ask-box"><input type="text" id="me-code" placeholder="面談・成約のときにお渡しするコード" autocomplete="off"><button class="btn" data-act="code">使う</button></div></div>`:''}
 ${DEBUG?`    <p class="muted small">確認用: 区分を切り替えて、見え方を確かめられます（URLに ?debug を付けたときだけ表示）。</p>
     <div class="row"><button class="btn sm ${S.tier==='general'?'on':''}" data-act="settier" data-t="general">一般（面談前）</button><button class="btn sm ${S.tier==='counseled'&&!expired()?'on':''}" data-act="settier" data-t="counseled">面談実施者</button><button class="btn sm ${S.tier==='customer'?'on':''}" data-act="settier" data-t="customer">成約者</button><button class="btn sm ${expired()?'on':''}" data-act="expire">お試しを期限切れにする</button></div>`:''}</div>
   <div class="panel" style="margin-top:14px"><h3>このアプリについて</h3>
-    <p class="small" style="margin:0 0 6px">フィリピン留学・セブ島留学のエージェント「${PRODUCER.name}」が作っている、留学の前と留学中に使う英語アプリです（ベータ版）。</p>
+    <p class="small" style="margin:0 0 6px">フィリピン留学・セブ島留学のエージェント「${PRODUCER.name}」が作っている、留学の前と留学中に使う英語アプリです。</p>
     ${producedBy()}</div>
   <div class="row" style="margin-top:16px"><button class="btn" data-act="logout">ログアウト</button><button class="btn" data-act="wipe">この端末の学習データを消す</button></div>
   <p class="muted small" style="margin-top:10px">今後、ここにアカウントの削除、プライバシーポリシー、利用規約を置きます。</p>`;
@@ -7375,6 +7436,15 @@ document.addEventListener('click', e=>{
     case 'logout': S.user=''; save(); render(); break;
     case 'wipe': if(confirm('この端末に保存した学習記録・保存庫・履歴書の入力を消します。元に戻せません。消しますか？')){ S=Object.assign(S0(),{user:S.user,tier:S.tier,trialStart:S.trialStart}); save(); render(); } break;
     case 'say': say(d.t); break;
+    case 'smore': R.sxp=Object.assign({},R.sxp,{[d.k]:1}); rerender(); break;
+    case 'sask': { const q=R.q||''; go('ask'); const a=document.getElementById('ask-q'); if(a){ a.value=q; a.focus(); } break; }
+    case 'sopen': {
+      if(d.k==='vault'){ go('vault'); break; }
+      const x=ITEMS.find(i=>i.id===d.id); if(!x) break;
+      const cat=x.cat==='scene'?'dialog':x.cat==='interview'?'wh':x.cat, ex={cat,lv:'all',sel:x.id};
+      if(x.cat==='scene') ex.scene=x.scene; if(cat==='wh'&&x.scene) ex.whScene=x.scene;
+      PRON={id:null,url:null,rec:null,result:''}; go('learn',ex); break; }
+    case 'theme': S.theme=d.t; save(); applyTheme(); document.querySelectorAll('.theme-sw button').forEach(b=>{const on=b.dataset.t===d.t; b.classList.toggle('on',on); b.setAttribute('aria-checked',on);}); break;
     case 'ipaplay': { const u=ipaUrl(d.k); if(u){ try{speechSynthesis.cancel();}catch(e){} try{ new Audio(u).play(); }catch(e){} } break; }
     case 'learn': PRON.id=null; document.getElementById('catdlg')?.close(); document.getElementById('cidlg')?.close(); go('learn',{cat:d.cat,lv:'all',sel:null}); break;
     case 'learnmenu': PRON.id=null; go('learn',{cat:null,sel:null}); break;
@@ -7465,7 +7535,7 @@ document.addEventListener('change', e=>{
   const c=e.target.dataset.change; if(!c) return; const v=e.target.value;
   if(c==='gch') R.gch=v; else if(c==='ctype') R.ctype=v; else if(c==='whscene') R.whScene=v; else if(c==='scene') R.scene=v; else return;
   R.sel=null; rerender(); });
-document.addEventListener('input', e=>{ const nk=e.target.dataset.note; if(nk){ S.notes=S.notes||{}; const v=e.target.value; if(v.trim()) S.notes[nk]=v; else delete S.notes[nk]; save(); return; } const k=e.target.dataset.r; if(k){ cvData()[k]=e.target.value; save(); cvRefresh(); return; }
+document.addEventListener('input', e=>{ if(e.target.classList&&e.target.classList.contains('srch-in')){ srInput(e.target); return; } const nk=e.target.dataset.note; if(nk){ S.notes=S.notes||{}; const v=e.target.value; if(v.trim()) S.notes[nk]=v; else delete S.notes[nk]; save(); return; } const k=e.target.dataset.r; if(k){ cvData()[k]=e.target.value; save(); cvRefresh(); return; }
   const l=e.target.dataset.rl; if(l){ cvData()[l][+e.target.dataset.i][e.target.dataset.k]=e.target.value; save(); cvRefresh(); return; }
   const c=e.target.dataset.rc; if(c){ cvData()[c]=e.target.value; save(); cvRefresh(); return; } });
 
