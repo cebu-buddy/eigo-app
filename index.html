@@ -203,6 +203,8 @@ dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
 }
 .cinfo{padding:12px 16px}.cinfo .cat-hd b{font-size:16px}
 .gnotes{margin:8px 0 0;padding-left:1.2em;color:var(--muted);font-size:13px;line-height:1.65}.gnotes li{margin:3px 0}.gnotes li::marker{color:var(--teal)}.gnotes b{color:var(--ink)}
+
+.opt.opt-dk{color:var(--muted);border-style:dashed}.opt.opt-dk.picked{background:var(--mint);color:var(--ink);border-style:solid}
 .fg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:10px 0 8px}
 .fg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column}
 .fg-h{display:flex;align-items:center;gap:10px}.fg-h h3{margin:0;font-size:16px;display:flex;align-items:center;gap:6px}
@@ -5840,8 +5842,9 @@ V.level = ()=>{
   if(LQS.cat && !LQS.done){
     const c=lqCat(LQS.cat), q=LQS.qs[LQS.i], ans=LQS.pick!==null, isEn=!/[ぁ-んァ-ン一-龥]/.test(q.o[0]);
     return `<h1>レベル診断：${c.name}</h1><div class="bar" aria-hidden="true"><i style="width:${LQS.i/LQS.qs.length*100}%"></i></div>
-    <div class="panel" style="margin-top:12px"><p class="muted small">${LQS.i+1} / ${LQS.qs.length}　${c.how}</p><p class="q-big en">${esc(q.q)}</p>
+    <div class="panel" style="margin-top:12px"><p class="muted small">${LQS.i+1} / ${LQS.qs.length}　${c.how}</p><p class="muted small" style="margin:-4px 0 0">分からないときは、無理に選ばず「分からない」を選んでください。</p><p class="q-big en">${esc(q.q)}</p>
     ${q.opts.map((o,i)=>`<button class="opt ${isEn?'en':''} ${ans?(o===q.o[0]?'right':(i===LQS.pick?'wrong':'')):''}" data-act="lvpick" data-i="${i}" ${ans?'disabled':''}><kbd>${i+1}</kbd>${esc(o)}</button>`).join('')}
+    <button class="opt opt-dk ${ans&&LQS.pick===q.opts.length?'picked':''}" data-act="lvpick" data-i="${q.opts.length}" ${ans?'disabled':''}><kbd>${q.opts.length+1}</kbd>分からない</button>
     ${ans?`<button class="btn primary" data-act="lvnext" data-autofocus>${LQS.i+1<LQS.qs.length?'次へ':'結果を見る'}</button>`:''}</div>
     <button class="btn sm" style="margin-top:10px" data-act="lvreset">やめて一覧に戻る</button>`;
   }
@@ -5850,7 +5853,7 @@ V.level = ()=>{
   if(LQS.done){ const c=lqCat(LQS.cat), lv=lqLevel(LQS.byLv);
     head=`<div class="panel" style="margin-bottom:12px"><p class="muted small" style="margin:0">${c.name}の結果（${LQS.score} / ${LQS.qs.length}問正解）</p>
       <div style="font-size:26px;font-weight:700;color:var(--teal-ink)">${LV[lv]} <span class="en" style="font-size:16px">${LV_CEFR[lv]}</span></div>
-      <p class="small" style="margin:0">${esc(LV_SUB[lv])}</p></div>`; }
+      <p class="small" style="margin:0">${esc(LV_SUB[lv])}</p><p class="muted small" style="margin:6px 0 0">「分からない」は不正解として数えています。勘で当たる分がないので、そのぶん今の力に近い結果が出ます。</p></div>`; }
   const olv = ov==null?null:Math.round(ov);
   return `<h1>レベル診断</h1>${head}
   <div class="panel"><div class="greet" style="margin:0">${olv!=null&&olv>=2?mango(64):coco(64)}<div>
@@ -6862,7 +6865,7 @@ document.addEventListener('keydown', e=>{
   if(R.v==='learn' && R.sel && (e.key==='ArrowRight'||e.key==='ArrowLeft') && !document.querySelector('dialog[open]')){ if(stepTo(e.key==='ArrowRight'?1:-1)) e.preventDefault(); return; }
   const n=+e.key; if(!(n>=1&&n<=4)) return;
   if(R.v==='test' && T.qs && T.i<T.qs.length && T.pick===null && T.qs[T.i].opts[n-1]){ tpick(n-1); }
-  else if(R.v==='level' && LQS.cat && !LQS.done && LQS.pick===null && LQS.qs[LQS.i] && LQS.qs[LQS.i].opts[n-1]){ document.querySelector(`[data-act=lvpick][data-i="${n-1}"]`).click(); }
+  else if(R.v==='level' && LQS.cat && !LQS.done && LQS.pick===null && LQS.qs[LQS.i] && (n-1)<=LQS.qs[LQS.i].opts.length){ document.querySelector(`[data-act=lvpick][data-i="${n-1}"]`).click(); }
 });
 
 render();
