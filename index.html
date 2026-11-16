@@ -12,7 +12,7 @@
 :root{
   --bg:#F2F8F7; --surface:#FFFFFF; --ink:#3D2613; --muted:#6E5A4B; --line:#D5E6E3;
   --teal:#49B0A8; --teal-ink:#2C7A73; --mint:#E7F4F3; --mint2:#CFE8E5;
-  --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --mango-ink:#A9620C; --pink-soft:#FCE6E8; --pink-ink:#BE4552; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
+  --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --mango-ink:#A9620C; --pink-soft:#FCE6E8; --pink-ink:#BE4552; --st-known:#E6F1FB; --st-unknown:#FCEBEB; --st-none:#FFF8E1; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
   --jp:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
   --en:"Lexend","Helvetica Neue",Arial,sans-serif;
   --ipa:"Charis SIL","Doulos SIL","Lucida Grande","Segoe UI",sans-serif;
@@ -21,14 +21,14 @@
   :root:not([data-theme="light"]){
     --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
     --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
-    --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+    --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1B3550; --st-unknown:#45252B; --st-none:#3A3420; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
   --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
-  --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+  --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --st-known:#1B3550; --st-unknown:#45252B; --st-none:#3A3420; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -267,10 +267,10 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .sim-end{border-top:1px solid var(--line);padding-top:12px;margin-top:6px}
 .li.sim{border-color:var(--mint2)}.sim-badge{font-size:12px;background:var(--mango-soft);border-radius:999px;padding:2px 10px;white-space:nowrap}
 .li .st{font-size:12px;white-space:nowrap}
-.li-wrap{position:relative}.li-wrap.has-kb .li{padding-right:128px}
+.li-wrap{position:relative}.li.st-known{background:var(--st-known)}.li.st-unknown{background:var(--st-unknown)}.li.st-none{background:var(--st-none)}.li-wrap.has-kb .li{padding-right:128px}
 .li-kb{position:absolute;right:10px;top:50%;transform:translateY(-50%);display:flex;gap:4px}
 .kb{font:inherit;font-size:12px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:4px 9px;cursor:pointer;white-space:nowrap}
-.kb:hover{border-color:var(--teal)}.kb.on{background:var(--teal);border-color:var(--teal);color:#fff}.kb.ng.on{background:var(--mango);border-color:var(--mango);color:#3D2613}
+.kb:hover{border-color:var(--teal)}.kb.on{background:var(--teal);border-color:var(--teal);color:#fff}.kb.ng.on{background:var(--pink);border-color:var(--pink);color:#fff}
 .ja-tg{display:none;margin:0 0 8px}
 .tg{font:inherit;font-size:12.5px;color:var(--muted);background:none;border:0;padding:4px 0;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
 .tg-sw{width:30px;height:18px;border-radius:999px;background:var(--line);position:relative;flex:none;transition:background .15s}
@@ -5444,7 +5444,9 @@ function liRow(x){
   const nt = (S.notes||{})[x.id] ? '<span class="st note">ノート</span> ' : '';
 
   const kb = (allowed(x) && !x.quiz && !x.steps) ? `<span class="li-kb"><button class="kb ${p.state==='known'?'on':''}" data-act="know" data-id="${esc(x.id)}" data-ok="1" aria-pressed="${p.state==='known'}">覚えた</button><button class="kb ng ${p.state==='unknown'?'on':''}" data-act="know" data-id="${esc(x.id)}" data-ok="0" aria-pressed="${p.state==='unknown'}">まだ</button></span>` : '';
-  return `<div class="li-wrap ${kb?'has-kb':''}"><button class="li ${R.sel===x.id?'sel':''}" data-act="sel" data-id="${esc(x.id)}"><span><span class="t">${esc(title)}</span><br><span class="s ${x.title?'':'ja'}">${esc(sub)}</span></span><span>${nt}${p.fav?'<span aria-label="お気に入り" style="color:var(--mango)">★</span> ':''}${kb?'':st}${lk}</span></button>${kb}</div>`;
+
+  const stc = kb ? (p.state==='known'?'st-known':p.state==='unknown'?'st-unknown':'st-none') : '';
+  return `<div class="li-wrap ${kb?'has-kb':''}"><button class="li ${stc} ${R.sel===x.id?'sel':''}" data-act="sel" data-id="${esc(x.id)}"><span><span class="t">${esc(title)}</span><br><span class="s ${x.title?'':'ja'}">${esc(sub)}</span></span><span>${nt}${p.fav?'<span aria-label="お気に入り" style="color:var(--mango)">★</span> ':''}${kb?'':st}${lk}</span></button>${kb}</div>`;
 }
 
 const CAT_ICON = {
