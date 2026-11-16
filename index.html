@@ -1079,6 +1079,47 @@ const DIALOGS = [
   ['coco',"Hi! I'm Coco. [[Is this your first week here?|ここに来て最初の週？]]",'こんにちは！ココです。ここに来て最初の週？'],
   ['mango',"Yes, I just arrived on Sunday. [[Where are you from?|どこの出身？]]",'うん、日曜日に着いたばかり。どこの出身？'],
   ['coco',"I'm from Korea. [[Let me know if you need anything.|何かあったら言ってね。]]",'韓国だよ。何かあったら言ってね。']]},
+
+ {id:'dl:prep-docs',scene:'出発前の手続き',title:'学校に必要な書類を聞く',lv:1,roles:{coco:'学校の担当者',mango:'あなた'},lines:[
+  ['mango',"Hi, I'm starting in June. [[What documents do I need?|どんな書類が必要ですか？]]",'こんにちは、6月から通います。どんな書類が必要ですか？'],
+  ['coco',"Just a copy of your passport and the application form.",'パスポートのコピーと申込書だけで大丈夫です。'],
+  ['mango',"Great. [[When is the deadline?|締め切りはいつですか？]]",'分かりました。締め切りはいつですか？'],
+  ['coco',"Please send them by May 15th.",'5月15日までに送ってください。']]},
+ {id:'dl:prep-pay',scene:'出発前の手続き',title:'入金と空港送迎を確かめる',lv:1,roles:{coco:'学校の担当者',mango:'あなた'},lines:[
+  ['mango',"I sent the tuition yesterday. [[Has my payment been received?|支払いは届いていますか？]]",'昨日授業料を送りました。入金は確認できていますか？'],
+  ['coco',"Yes, we got it this morning. Thank you!",'はい、今朝確認できました。ありがとうございます！'],
+  ['mango',"Thanks. Also, [[is airport pickup included?|空港送迎は含まれていますか？]]",'よかった。それと、空港送迎は含まれていますか？'],
+  ['coco',"Yes, our staff will meet you at arrivals.",'はい、到着口でスタッフがお迎えします。']]},
+ {id:'dl:air-checkin',scene:'空港',title:'チェックインで荷物を預ける',lv:1,roles:{coco:'空港の係員',mango:'あなた'},lines:[
+  ['coco',"Good morning. Passport, please. Any bags to check?",'おはようございます。パスポートをお願いします。お預けの荷物は？'],
+  ['mango',"Just one. [[I'd like a window seat, please.|窓側の席をお願いします。]]",'1つです。窓側の席をお願いします。'],
+  ['coco',"Sure. Hmm, [[your bag is overweight|荷物が重量オーバーです]] by two kilos.",'かしこまりました。うーん、荷物が2キロ重量オーバーですね。'],
+  ['mango',"Oh no. Can I move some things to my carry-on?",'しまった。手荷物に少し移してもいいですか？']]},
+ {id:'dl:air-immig',scene:'空港',title:'入国審査で答える',lv:0,roles:{coco:'入国審査官',mango:'あなた'},lines:[
+  ['coco',"What's the purpose of your visit?",'渡航の目的は何ですか？'],
+  ['mango',"[[I'm here to study English.|英語を勉強しに来ました。]]",'英語を勉強しに来ました。'],
+  ['coco',"How long will you stay?",'どのくらい滞在しますか？'],
+  ['mango',"[[I'll stay for four weeks.|4週間滞在します。]] [[I'm staying at the school dormitory.|学校の寮に泊まります。]]",'4週間です。学校の寮に泊まります。']]},
+ {id:'dl:hosp-fever',scene:'病院・薬局',title:'クリニックで症状を伝える',lv:1,roles:{coco:'医師',mango:'あなた'},lines:[
+  ['coco',"So, what seems to be the problem?",'どうされましたか？'],
+  ['mango',"[[I've had a fever since yesterday.|昨日から熱があります。]] And [[I have a sore throat.|のどが痛いです。]]",'昨日から熱があります。それと、のどが痛いです。'],
+  ['coco',"I see. Are you allergic to any medicine?",'なるほど。薬のアレルギーはありますか？'],
+  ['mango',"Yes, [[I'm allergic to penicillin.|ペニシリンにアレルギーがあります。]]",'はい、ペニシリンにアレルギーがあります。']]},
+ {id:'dl:hosp-pharm',scene:'病院・薬局',title:'薬局で飲み方を聞く',lv:1,roles:{coco:'薬剤師',mango:'あなた'},lines:[
+  ['mango',"Hi. [[Do you have something for a stomachache?|腹痛に効くものはありますか？]]",'こんにちは。腹痛に効く薬はありますか？'],
+  ['coco',"Yes, this one works well. No prescription needed.",'はい、これがよく効きます。処方箋はいりません。'],
+  ['mango',"[[How often should I take this?|これはどのくらいの頻度で飲めばいいですか？]]",'どのくらいの頻度で飲めばいいですか？'],
+  ['coco',"Twice a day, after meals.",'1日2回、食後に飲んでください。']]},
+ {id:'dl:bank-exch',scene:'銀行・お金',title:'両替所でお金を替える',lv:1,roles:{coco:'両替所の係員',mango:'あなた'},lines:[
+  ['mango',"Hi. [[I'd like to exchange yen into pesos.|円をペソに両替したいです。]]",'こんにちは。円をペソに両替したいです。'],
+  ['coco',"Sure. How much would you like to change?",'かしこまりました。いくら両替しますか？'],
+  ['mango',"Thirty thousand yen. [[What's the exchange rate today?|今日の為替レートはいくらですか？]]",'3万円です。今日のレートはいくらですか？'],
+  ['coco',"It's 0.38. [[Do you need smaller bills?|細かいお札も必要ですか？]]",'0.38です。細かいお札も必要ですか？']]},
+ {id:'dl:bank-atm',scene:'銀行・お金',title:'ATMでカードが出てこない',lv:1,roles:{coco:'銀行の係員',mango:'あなた'},lines:[
+  ['mango',"Excuse me. [[The ATM ate my card.|ATMにカードが吸い込まれました。]]",'すみません。ATMにカードが吸い込まれました。'],
+  ['coco',"I'm sorry. Which machine was it?",'申し訳ありません。どの機械でしたか？'],
+  ['mango',"The one by the door. [[My card was declined|カードが使えなくて]], and then it didn't come out.",'ドアの横のです。カードが通らなくて、そのまま出てきませんでした。'],
+  ['coco',"Please show me your ID. We'll get it back for you.",'身分証を見せてください。お取り出しします。']]},
 ];
 
 const SCENE_DL = {
