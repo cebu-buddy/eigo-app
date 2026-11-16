@@ -5544,7 +5544,7 @@ function shell(){
     <div class="grp">ほかの機能</div>
     ${NAV2.map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
     <div class="grp">利用区分: ${TIER_NAME[tier()]}</div>
-    <button class="ask-cta" data-act="go" data-v="ask">${I.chat}<span>言えなかった表現を<br>AIに聞く</span></button>
+    <button class="ask-cta" data-act="go" data-v="ask">${I.chat}<span>今、言えなかった<br>表現をAIに聞く</span></button>
     ${producedBy('side-pb')}
   </nav>`;
   const top = `<header class="top"><button class="brand" data-act="go" data-v="home"><span class="brand-ic" aria-hidden="true">${coco(30)}${mango(30)}</span><span>ココとマンゴー英語<small class="sub">言えなかったを、その場で</small></span></button>
