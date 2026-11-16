@@ -467,7 +467,7 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 <div class="app" id="app"></div>
 <script>
 
-const COUNSEL_URL = '';
+const COUNSEL_URL = 'https://lin.ee/TyLuCWw';
 const LV = ['入門','初級','中級','中上級','上級'];
 const LV_SUB = ['はじめの一歩','日常会話','留学で困らない','意見が言える','仕事で使える'];
 const LV_CEFR = ['A1','A2','B1','B2','C1'];
@@ -7860,6 +7860,117 @@ Object.assign(SCENE_DL, {
  "scene:Let's bounce.":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","The bar is closing soon.","バー、もうすぐ閉まるよ。"],["mango","OK, [[let's bounce.|もう行こう。]]","じゃあ、行こうか。"]]},
 });
 
+SC0("あいづち・返事",0,"Sorry?","え？（聞き返し）","Sorry? I didn't hear you.","え？聞こえなかった。","\"It's on the third floor.\" \"Sorry?\"","「3階だよ」「え？」");
+SC0("あいづち・返事",0,"Could you say that again?","もう一度言ってもらえますか？","Could you say that again, please?","もう一度言ってもらえますか？","Sorry, could you say that again more slowly?","すみません、もう一度ゆっくり言ってもらえますか？");
+SC0("あいづち・返事",0,"I don't understand.","分かりません。","Sorry, I don't understand.","すみません、分かりません。","I don't understand this word.","この単語が分かりません。");
+SC0("あいづち・返事",1,"What does ~ mean?","～はどういう意味ですか？","What does \"awkward\" mean?","「awkward」はどういう意味ですか？","What does this sign mean?","この標識はどういう意味ですか？");
+SC0("あいづち・返事",1,"How do you say ~ in English?","～は英語で何と言いますか？","How do you say \"itadakimasu\" in English?","「いただきます」は英語で何と言いますか？","How do you say this in English?","これは英語で何と言いますか？");
+SC0("あいづち・返事",1,"Could you speak a little slower?","もう少しゆっくり話してもらえますか？","Sorry, could you speak a little slower?","すみません、もう少しゆっくり話してもらえますか？","My English is not so good. Could you speak a little slower?","英語があまり得意じゃないので、もう少しゆっくり話してもらえますか？");
+SC0("あいづち・返事",1,"How do you spell that?","それはどうつづりますか？","Sorry, how do you spell that?","すみません、それはどうつづりますか？","How do you spell your last name?","名字はどうつづりますか？");
+SC0("あいづち・返事",1,"What do you mean?","どういう意味？","What do you mean? I don't get it.","どういう意味？よく分からない。","What do you mean by \"later\"?","「あとで」ってどういう意味？");
+SC0("あいづち・返事",1,"I didn't catch that.","聞き取れませんでした。","Sorry, I didn't catch that.","すみません、聞き取れませんでした。","I didn't catch your name.","お名前が聞き取れませんでした。");
+SC0("あいづち・返事",1,"Can you give me an example?","例を挙げてもらえますか？","Can you give me an example of this grammar?","この文法の例を挙げてもらえますか？","I don't get it. Can you give me an example?","よく分からない。例を挙げてもらえる？");
+SC0("あいづち・返事",1,"Is this correct?","これで合っていますか？","\"I have been to Cebu.\" Is this correct?","「I have been to Cebu.」これで合っていますか？","Is this correct, or should I say \"in\"?","これで合ってますか？それとも「in」ですか？");
+SC0("あいづち・返事",2,"I'm not sure I follow.","話についていけてないかも。","Sorry, I'm not sure I follow.","ごめんなさい、話についていけてないかも。","I'm not sure I follow. Can you explain again?","ちょっと分からなかった。もう一度説明してくれる？");
+SC0("あいづち・返事",2,"Come again?","もう一回言って？","Come again? I didn't hear you.","もう一回言って？聞こえなかった。","\"It's 3,000 pesos.\" \"Come again?\"","「3,000ペソです」「えっ、もう一回？」");
+SC0("あいづち・返事",2,"What's the word for ~?","～って何て言うんだっけ？","What's the word for this in English?","これって英語で何て言うんだっけ？","What's the word for a person who doesn't eat meat?","肉を食べない人のことを何て言うんだっけ？");
+SC0("あいづち・返事",2,"Does that make sense?","（私の言ったこと）伝わってる？","I mean the other bag. Does that make sense?","もう一つのかばんのこと。伝わってる？","Does that make sense, or should I explain again?","伝わった？もう一回説明しようか？");
+SC0("カジュアル",0,"Do you want to come?","一緒に来る？","We're going to the beach. Do you want to come?","ビーチに行くんだ。一緒に来る？","Do you want to come with us tonight?","今夜一緒に来る？");
+SC0("カジュアル",0,"Let's go together.","一緒に行こう。","Let's go together after class.","授業のあと一緒に行こう。","I'm going to the mall too. Let's go together.","私もモールに行くよ。一緒に行こう。");
+SC0("カジュアル",1,"Why don't we ~?","～しない？","Why don't we go to the beach this weekend?","今週末ビーチに行かない？","Why don't we eat out tonight?","今夜は外食しない？");
+SC0("カジュアル",1,"Are you in?","参加する？","We're playing volleyball at five. Are you in?","5時にバレーやるよ。参加する？","Pizza party tonight. Are you in?","今夜ピザパーティー。来る？");
+SC0("カジュアル",1,"Count me in!","私も入れて！","Karaoke tonight? Count me in!","今夜カラオケ？私も入れて！","If you're going to Bohol, count me in.","ボホールに行くなら、私も入れて。");
+SC0("カジュアル",1,"Maybe next time.","また今度ね。","Sorry, I'm busy. Maybe next time.","ごめん、忙しいんだ。また今度ね。","Maybe next time. I have homework.","また今度ね。宿題があるんだ。");
+SC0("カジュアル",1,"I'd love to, but ~.","ぜひ行きたいけど、～。","I'd love to, but I have a test tomorrow.","ぜひ行きたいけど、明日テストなんだ。","I'd love to, but I'm out of money.","行きたいんだけど、お金がなくて。");
+SC0("カジュアル",1,"I already have plans.","もう予定があるんだ。","Sorry, I already have plans on Friday.","ごめん、金曜はもう予定があるんだ。","I already have plans, but thanks for asking.","もう予定があるんだ。でも誘ってくれてありがとう。");
+SC0("カジュアル",1,"Thanks for asking.","誘ってくれてありがとう。","I can't go, but thanks for asking.","行けないけど、誘ってくれてありがとう。","Thanks for asking. I'll come next time.","誘ってくれてありがとう。次は行くね。");
+SC0("カジュアル",2,"Can I take a rain check?","また今度にしてもいい？","Can I take a rain check on dinner?","夕飯、また今度にしてもいい？","I'm so tired. Can I take a rain check?","すごく疲れてて。また今度でもいい？");
+SC0("カジュアル",2,"I'll pass this time.","今回はやめておく。","Thanks, but I'll pass this time.","ありがとう、でも今回はやめておく。","Clubbing? I'll pass this time.","クラブ？今回はパス。");
+SC0("カジュアル",2,"Let me check my schedule.","予定を確認させて。","Let me check my schedule and get back to you.","予定を確認して、また連絡するね。","Saturday? Let me check my schedule.","土曜？予定を確認させて。");
+SC0("カジュアル",2,"Do you feel like ~?","～する気分？","Do you feel like going for a walk?","散歩する気分？","Do you feel like pizza tonight?","今夜はピザの気分？");
+SC0("カジュアル",0,"Can you help me?","手伝ってくれる？","Can you help me with my homework?","宿題手伝ってくれる？","Can you help me? This box is heavy.","手伝ってくれる？この箱重いんだ。");
+SC0("カジュアル",1,"Can I borrow ~?","～を借りてもいい？","Can I borrow your pen?","ペン借りてもいい？","Can I borrow your umbrella?","傘借りてもいい？");
+SC0("カジュアル",1,"Could you pass me ~?","～を取ってくれる？","Could you pass me the salt?","塩を取ってくれる？","Could you pass me that bag?","そのかばんを取ってくれる？");
+SC0("カジュアル",1,"Would you mind ~?","～してもらってもいい？","Would you mind closing the door?","ドア閉めてもらってもいい？","Would you mind taking a photo of us?","写真撮ってもらってもいいですか？");
+SC0("カジュアル",1,"Can you lend me ~?","～を貸してくれる？","Can you lend me 100 pesos?","100ペソ貸してくれる？","Can you lend me your charger?","充電器貸してくれる？");
+SC0("カジュアル",1,"Can you keep an eye on my bag?","かばんを見ててくれる？","Can you keep an eye on my bag? I'll be right back.","かばん見ててくれる？すぐ戻るから。","Can you keep an eye on my stuff while I swim?","泳いでる間、荷物を見ててくれる？");
+SC0("カジュアル",2,"Do me a favor and ~.","悪いけど～してくれる？","Do me a favor and turn off the light.","悪いけど電気消してくれる？","Do me a favor and text me when you get home.","悪いけど、家に着いたらメッセージして。");
+SC0("カジュアル",2,"Could you give me a hand?","ちょっと手を貸してくれる？","Could you give me a hand with these bags?","この荷物運ぶの手を貸してくれる？","Could you give me a hand? I can't open this.","手伝ってくれる？これ開かないの。");
+SC0("フォーマル",1,"Could you help me, please?","手伝っていただけますか？","Excuse me, could you help me, please?","すみません、手伝っていただけますか？","Could you help me, please? I'm looking for the office.","手伝っていただけますか？事務所を探しています。");
+SC0("フォーマル",2,"Could you possibly ~?","～していただくことは可能でしょうか？","Could you possibly send it by tomorrow?","明日までに送っていただくことは可能でしょうか？","Could you possibly change my room?","部屋を替えていただくことは可能でしょうか？");
+SC0("フォーマル",2,"Would it be OK if ~?","～してもよろしいでしょうか？","Would it be OK if I left early today?","今日は早めに帰ってもよろしいでしょうか？","Would it be OK if I recorded the class?","授業を録音してもよろしいでしょうか？");
+SC0("フォーマル",2,"I was wondering if you could ~.","～していただけないかと思いまして。","I was wondering if you could check my essay.","作文を見ていただけないかと思いまして。","I was wondering if you could write a reference letter.","推薦状を書いていただけないかと思いまして。");
+SC0("フォーマル",2,"May I ask a favor?","お願いがあるのですが。","May I ask a favor? It's about my schedule.","お願いがあるのですが。予定のことで。","Excuse me, may I ask a favor?","すみません、お願いしてもよろしいですか？");
+SC0("フォーマル",2,"Would you be able to ~?","～していただけますか？","Would you be able to meet on Monday?","月曜にお会いできますか？","Would you be able to send me the details?","詳細を送っていただけますか？");
+SC0("フォーマル",3,"I'd be very grateful if you could ~.","～していただけると大変ありがたいです。","I'd be very grateful if you could reply soon.","早めにご返信いただけると大変ありがたいです。","I'd be very grateful if you could help me.","お力添えいただけると大変ありがたいです。");
+SC0("感情",0,"Wow!","わあ！","Wow! This view is amazing.","わあ！この景色すごい。","Wow, you cooked all this?","わあ、これ全部作ったの？");
+SC0("感情",0,"Oh my gosh!","うそ！／なんてこと！","Oh my gosh! You're here!","うそ！来てたの！","Oh my gosh, I forgot my passport!","なんてこと、パスポート忘れた！");
+SC0("感情",1,"I can't believe it!","信じられない！","I can't believe it! I passed!","信じられない！受かった！","I can't believe it's already December.","もう12月なんて信じられない。");
+SC0("感情",1,"Seriously?","マジで？","Seriously? The class is canceled?","マジで？授業休講？","\"I'm quitting my job.\" \"Seriously?\"","「仕事辞めるんだ」「マジで？」");
+SC0("感情",1,"What a surprise!","びっくりした！","What a surprise! I didn't know you were coming.","びっくりした！来るなんて知らなかった。","What a surprise to see you here!","ここで会うなんてびっくり！");
+SC0("感情",1,"You scared me!","びっくりさせないでよ！","Oh, you scared me!","わっ、びっくりさせないでよ！","You scared me! I didn't hear you come in.","びっくりした！入ってきたの気づかなかった。");
+SC0("感情",2,"That's unbelievable.","信じられないね。","He ran 100 kilometers? That's unbelievable.","100キロ走ったの？信じられないね。","That's unbelievable. How did you do it?","信じられない。どうやったの？");
+SC0("感情",2,"I'm speechless.","言葉が出ない。","I'm speechless. This is beautiful.","言葉が出ない。きれいすぎる。","Thank you for the surprise. I'm speechless.","サプライズありがとう。言葉が出ないよ。");
+SC0("感情",2,"You've got to be kidding!","冗談でしょ！","You've got to be kidding! Another test?","冗談でしょ！またテスト？","You've got to be kidding me. It's closed?","冗談でしょ。閉まってるの？");
+SC0("感情",2,"That came out of nowhere.","突然すぎてびっくり。","Her question came out of nowhere.","彼女の質問は突然すぎた。","The rain came out of nowhere.","雨が急に降ってきた。");
+SC0("感情",2,"I didn't see that coming.","それは予想してなかった。","He's moving abroad? I didn't see that coming.","彼が海外に引っ越す？それは予想してなかった。","What an ending! I didn't see that coming.","なんて結末！予想してなかった。");
+Object.assign(SCENE_DL, {
+ "scene:Sorry?":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","Let's meet at the gate at five.","5時に門で会おう。"],["mango","[[Sorry?|え？]] At what time?","え？何時？"]]},
+ "scene:Could you say that again?":{roles:{coco:"先生",mango:"あなた"},lines:[["coco","Please open your book to page forty-three.","43ページを開いてください。"],["mango","[[Could you say that again?|もう一度言ってもらえますか？]]","もう一度言ってもらえますか？"]]},
+ "scene:I don't understand.":{roles:{coco:"先生",mango:"あなた"},lines:[["coco","Use the present perfect here.","ここは現在完了を使ってね。"],["mango","Sorry, [[I don't understand.|分かりません。]]","すみません、分かりません。"]]},
+ "scene:What does ~ mean?":{roles:{coco:"先生",mango:"あなた"},lines:[["mango","[[What does \"awkward\" mean?|「awkward」はどういう意味ですか？]]","「awkward」ってどういう意味ですか？"],["coco","It means uncomfortable or strange.","気まずい、変な感じ、という意味だよ。"]]},
+ "scene:How do you say ~ in English?":{roles:{coco:"先生",mango:"あなた"},lines:[["mango","[[How do you say|～は英語で何と言いますか]] \"natsukashii\" in English?","「懐かしい」は英語で何と言いますか？"],["coco","Maybe \"It brings back memories.\"","「It brings back memories.」かな。"]]},
+ "scene:Could you speak a little slower?":{roles:{coco:"お店の人",mango:"あなた"},lines:[["coco","So-you-need-to-fill-this-out-and-sign-here.","じゃあこれに記入して、ここにサインしてね。"],["mango","Sorry, [[could you speak a little slower?|もう少しゆっくり話してもらえますか？]]","すみません、もう少しゆっくり話してもらえますか？"]]},
+ "scene:How do you spell that?":{roles:{coco:"クラスメート",mango:"あなた"},lines:[["coco","My name is Siobhan.","私の名前はシボーン。"],["mango","Nice name! [[How do you spell that?|どうつづるの？]]","すてきな名前！どうつづるの？"]]},
+ "scene:What do you mean?":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","The party is kind of a secret.","パーティーはちょっと秘密なんだ。"],["mango","[[What do you mean?|どういうこと？]]","どういうこと？"]]},
+ "scene:I didn't catch that.":{roles:{coco:"お店の人",mango:"あなた"},lines:[["coco","It's two-fifty, please.","250になります。"],["mango","Sorry, [[I didn't catch that.|聞き取れませんでした。]]","すみません、聞き取れませんでした。"]]},
+ "scene:Can you give me an example?":{roles:{coco:"先生",mango:"あなた"},lines:[["coco","\"Used to\" shows a past habit.","「used to」は過去の習慣を表します。"],["mango","[[Can you give me an example?|例を挙げてもらえますか？]]","例を挙げてもらえますか？"]]},
+ "scene:Is this correct?":{roles:{coco:"先生",mango:"あなた"},lines:[["mango","\"I went to shopping.\" [[Is this correct?|これで合っていますか？]]","「I went to shopping.」これで合っていますか？"],["coco","Almost. Just say \"I went shopping.\"","おしい。「I went shopping.」でいいよ。"]]},
+ "scene:I'm not sure I follow.":{roles:{coco:"同僚",mango:"あなた"},lines:[["coco","So we move the deadline, but keep the budget flexible.","だから締め切りは動かして、予算は柔軟に。"],["mango","Sorry, [[I'm not sure I follow.|話についていけてないかも。]]","すみません、ちょっとついていけていません。"]]},
+ "scene:Come again?":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","I'm moving to Iceland.","アイスランドに引っ越すんだ。"],["mango","[[Come again?|もう一回言って？]]","えっ、もう一回言って？"]]},
+ "scene:What's the word for ~?":{roles:{coco:"クラスメート",mango:"あなた"},lines:[["mango","[[What's the word for|～って何て言うんだっけ]] the thing you use to open a bottle?","瓶を開ける道具って何て言うんだっけ？"],["coco","A bottle opener.","ボトルオープナーだよ。"]]},
+ "scene:Does that make sense?":{roles:{coco:"クラスメート",mango:"あなた"},lines:[["mango","I want a smaller room, but with a window. [[Does that make sense?|伝わってる？]]","もっと小さい部屋がいいけど、窓付きで。伝わってる？"],["coco","Yes, totally.","うん、ばっちり。"]]},
+ "scene:Do you want to come?":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","We're going to the night market. [[Do you want to come?|一緒に来る？]]","ナイトマーケットに行くんだ。一緒に来る？"],["mango","Sure! What time?","うん！何時？"]]},
+ "scene:Let's go together.":{roles:{coco:"クラスメート",mango:"あなた"},lines:[["coco","I'm going to the library.","図書館に行くんだ。"],["mango","Me too. [[Let's go together.|一緒に行こう。]]","私も。一緒に行こう。"]]},
+ "scene:Why don't we ~?":{roles:{coco:"友達",mango:"あなた"},lines:[["mango","[[Why don't we|～しない？]] try that new cafe?","あの新しいカフェに行ってみない？"],["coco","Great idea!","いいね！"]]},
+ "scene:Are you in?":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","We're going island hopping on Saturday. [[Are you in?|参加する？]]","土曜にアイランドホッピングに行くよ。来る？"],["mango","Count me in!","入れて！"]]},
+ "scene:Count me in!":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","We're going hiking tomorrow.","明日ハイキングに行くんだ。"],["mango","[[Count me in!|私も入れて！]]","私も入れて！"]]},
+ "scene:Maybe next time.":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","Want to go out tonight?","今夜出かける？"],["mango","Sorry, I'm tired. [[Maybe next time.|また今度ね。]]","ごめん、疲れてて。また今度ね。"]]},
+ "scene:I'd love to, but ~.":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","Do you want to come to the party?","パーティー来る？"],["mango","[[I'd love to, but|ぜひ行きたいけど、]] I have a test tomorrow.","行きたいけど、明日テストなんだ。"]]},
+ "scene:I already have plans.":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","Are you free on Saturday?","土曜空いてる？"],["mango","Sorry, [[I already have plans.|もう予定があるんだ。]]","ごめん、もう予定があるんだ。"]]},
+ "scene:Thanks for asking.":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","Want to join us for dinner?","夕飯一緒にどう？"],["mango","I can't tonight, but [[thanks for asking.|誘ってくれてありがとう。]]","今夜は無理だけど、誘ってくれてありがとう。"]]},
+ "scene:Can I take a rain check?":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","Coffee after class?","授業のあとコーヒーどう？"],["mango","I have a headache. [[Can I take a rain check?|また今度にしてもいい？]]","頭が痛いんだ。また今度でもいい？"]]},
+ "scene:I'll pass this time.":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","Do you want to go clubbing?","クラブ行かない？"],["mango","Thanks, but [[I'll pass this time.|今回はやめておく。]]","ありがとう、でも今回はやめとく。"]]},
+ "scene:Let me check my schedule.":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","Are you free next Sunday?","来週の日曜空いてる？"],["mango","[[Let me check my schedule.|予定を確認させて。]]","予定を確認させて。"]]},
+ "scene:Do you feel like ~?":{roles:{coco:"友達",mango:"あなた"},lines:[["mango","[[Do you feel like|～する気分？]] going to the beach?","ビーチに行く気分？"],["coco","Yes! Let's go.","うん！行こう。"]]},
+ "scene:Can you help me?":{roles:{coco:"ルームメイト",mango:"あなた"},lines:[["mango","[[Can you help me?|手伝ってくれる？]] This box is heavy.","手伝ってくれる？この箱重いんだ。"],["coco","Sure!","いいよ！"]]},
+ "scene:Can I borrow ~?":{roles:{coco:"クラスメート",mango:"あなた"},lines:[["mango","[[Can I borrow|～を借りてもいい？]] your pen?","ペン借りてもいい？"],["coco","Sure, here you go.","いいよ、はい。"]]},
+ "scene:Could you pass me ~?":{roles:{coco:"ホストファミリー",mango:"あなた"},lines:[["mango","[[Could you pass me|～を取ってくれる？]] the soy sauce?","しょうゆを取ってもらえる？"],["coco","Here you go.","はい、どうぞ。"]]},
+ "scene:Would you mind ~?":{roles:{coco:"旅行者",mango:"あなた"},lines:[["mango","Excuse me. [[Would you mind|～してもらってもいいですか]] taking a photo of us?","すみません。写真を撮ってもらってもいいですか？"],["coco","Not at all. Say cheese!","いいですよ。はい、チーズ！"]]},
+ "scene:Can you lend me ~?":{roles:{coco:"友達",mango:"あなた"},lines:[["mango","I forgot my wallet. [[Can you lend me|～を貸してくれる？]] 100 pesos?","財布忘れた。100ペソ貸してくれる？"],["coco","Sure, no problem.","いいよ。"]]},
+ "scene:Can you keep an eye on my bag?":{roles:{coco:"クラスメート",mango:"あなた"},lines:[["mango","[[Can you keep an eye on my bag?|かばんを見ててくれる？]] I'll be right back.","かばん見ててくれる？すぐ戻る。"],["coco","OK.","いいよ。"]]},
+ "scene:Do me a favor and ~.":{roles:{coco:"ルームメイト",mango:"あなた"},lines:[["mango","[[Do me a favor and|悪いけど～してくれる？]] close the window.","悪いけど窓閉めてくれる？"],["coco","Sure thing.","了解。"]]},
+ "scene:Could you give me a hand?":{roles:{coco:"ルームメイト",mango:"あなた"},lines:[["mango","[[Could you give me a hand?|ちょっと手を貸してくれる？]] I can't open this jar.","ちょっと手を貸して。この瓶が開かないの。"],["coco","Let me try.","やってみる。"]]},
+ "scene:Could you help me, please?":{roles:{coco:"学校のスタッフ",mango:"あなた"},lines:[["mango","Excuse me, [[could you help me, please?|手伝っていただけますか？]]","すみません、手伝っていただけますか？"],["coco","Of course. What do you need?","もちろん。どうしましたか？"]]},
+ "scene:Could you possibly ~?":{roles:{coco:"ホテルのスタッフ",mango:"あなた"},lines:[["mango","[[Could you possibly|～していただくことは可能でしょうか]] give me a room with a view?","眺めのいい部屋にしていただくことは可能でしょうか？"],["coco","Let me check. Yes, we have one.","確認します。はい、ございます。"]]},
+ "scene:Would it be OK if ~?":{roles:{coco:"先生",mango:"あなた"},lines:[["mango","[[Would it be OK if|～してもよろしいでしょうか]] I recorded the class?","授業を録音してもよろしいでしょうか？"],["coco","Sure, that's fine.","ええ、かまいませんよ。"]]},
+ "scene:I was wondering if you could ~.":{roles:{coco:"先生",mango:"あなた"},lines:[["mango","[[I was wondering if you could|～していただけないかと思いまして]] check my essay.","作文を見ていただけないかと思いまして。"],["coco","Of course. Send it to me.","もちろん。送ってください。"]]},
+ "scene:May I ask a favor?":{roles:{coco:"学校のスタッフ",mango:"あなた"},lines:[["mango","[[May I ask a favor?|お願いがあるのですが。]]","お願いがあるのですが。"],["coco","Of course. What is it?","もちろん。何でしょう？"]]},
+ "scene:Would you be able to ~?":{roles:{coco:"取引先",mango:"あなた"},lines:[["mango","[[Would you be able to|～していただけますか]] meet on Monday?","月曜にお会いできますか？"],["coco","Yes, Monday afternoon works.","はい、月曜の午後なら大丈夫です。"]]},
+ "scene:I'd be very grateful if you could ~.":{roles:{coco:"学校の担当者",mango:"あなた"},lines:[["mango","[[I'd be very grateful if you could|～していただけると大変ありがたいです]] extend my deadline.","締め切りを延ばしていただけると大変ありがたいです。"],["coco","I'll ask the manager.","責任者に確認します。"]]},
+ "scene:Wow!":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","Look, a whale shark!","見て、ジンベエザメ！"],["mango","[[Wow!|わあ！]] It's so big!","わあ！すごく大きい！"]]},
+ "scene:Oh my gosh!":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","Surprise! Happy birthday!","サプライズ！誕生日おめでとう！"],["mango","[[Oh my gosh!|うそ！]] Thank you!","うそ！ありがとう！"]]},
+ "scene:I can't believe it!":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","You got a perfect score!","満点だったよ！"],["mango","[[I can't believe it!|信じられない！]]","信じられない！"]]},
+ "scene:Seriously?":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","The ferry is canceled again.","フェリーがまた欠航だって。"],["mango","[[Seriously?|マジで？]]","マジで？"]]},
+ "scene:What a surprise!":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","Hi! I came to visit you.","やあ！会いに来たよ。"],["mango","[[What a surprise!|びっくりした！]]","びっくりした！"]]},
+ "scene:You scared me!":{roles:{coco:"ルームメイト",mango:"あなた"},lines:[["coco","Boo!","わっ！"],["mango","Ah! [[You scared me!|びっくりさせないでよ！]]","わっ！びっくりさせないでよ！"]]},
+ "scene:That's unbelievable.":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","I learned 500 words in one week.","1週間で500単語覚えたよ。"],["mango","[[That's unbelievable.|信じられないね。]]","信じられない。"]]},
+ "scene:I'm speechless.":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","We made you a photo album.","あなたにフォトアルバムを作ったよ。"],["mango","[[I'm speechless.|言葉が出ない。]] Thank you.","言葉が出ないよ。ありがとう。"]]},
+ "scene:You've got to be kidding!":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","The restaurant is closed today.","レストラン、今日は休みだって。"],["mango","[[You've got to be kidding!|冗談でしょ！]]","冗談でしょ！"]]},
+ "scene:That came out of nowhere.":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","Ken just asked me to marry him!","ケンにプロポーズされた！"],["mango","Wow, [[that came out of nowhere!|突然すぎてびっくり！]]","わあ、急すぎてびっくり！"]]},
+ "scene:I didn't see that coming.":{roles:{coco:"友達",mango:"あなた"},lines:[["coco","Lisa and Ken broke up.","リサとケン、別れたって。"],["mango","Really? [[I didn't see that coming.|それは予想してなかった。]]","本当？それは予想外だった。"]]},
+});
+
 const CT_ADJN=['heavy rain','strong coffee','bitter cold','fast food','heavy traffic'], CT_ADV=['highly recommend','deeply sorry'], CT_VP=['keep in touch'];
 ITEMS.forEach(x=>{ if(x.cat!=='colloc'||x.scene) return; x.scene = CT_ADJN.includes(x.en)?'形容詞＋名詞' : CT_ADV.includes(x.en)?'副詞との組み合わせ' : CT_VP.includes(x.en)?'動詞＋前置詞' : '動詞＋名詞'; });
 const COLLOC_TYPES=['動詞＋名詞','動詞＋前置詞','形容詞＋前置詞','名詞＋前置詞','形容詞＋名詞','副詞との組み合わせ'];
@@ -9118,12 +9229,16 @@ function allowed(x){
   if(x.cat==='wh') return false;
   return x.lv<=1;
 }
+
+const FEATURE_OFF = true;
+const limTier = ()=> FEATURE_OFF ? 'customer' : tier();
 function feature(f){
+  if(FEATURE_OFF) return true;
   const t=tier(); if(t==='customer') return true; if(t==='general') return false; return f!=='resume';
 }
-function askLeft(){ const max=LIMIT[tier()].ask; return S.askCount.d!==today() ? max : Math.max(0,max-S.askCount.n); }
+function askLeft(){ const max=LIMIT[limTier()].ask; return S.askCount.d!==today() ? max : Math.max(0,max-S.askCount.n); }
 function useAsk(){ if(S.askCount.d!==today()) S.askCount={d:today(),n:0}; S.askCount.n++; save(); }
-const vaultRoom = ()=>LIMIT[tier()].vault - S.vault.length;
+const vaultRoom = ()=>LIMIT[limTier()].vault - S.vault.length;
 function lockMsg(){ return tier()==='general' ? 'この機能・内容は、無料カウンセリング（面談）を受けると使えます。' : 'この機能・内容は、成約すると使えます。'; }
 function upsell(title){ return `<div class="panel lock">${coco(56)}<div><h3>${esc(title||lockMsg())}</h3><p class="muted small">${tier()==='general'?`面談を受けた方は、${TRIAL_DAYS}日間のお試しで多くの機能を使えます。`:'成約すると、すべての機能を、留学が終わったあとも使えます。'}</p><button class="btn cta" data-act="upsell">無料カウンセリングで相談する</button><p class="muted small upsell-msg" role="status"></p></div></div>`; }
 function toast(m){ let el=document.getElementById('toast'); if(!el){ el=document.createElement('div'); el.id='toast'; el.setAttribute('role','status'); document.body.appendChild(el);} el.textContent=m; el.classList.add('show'); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('show'),3500); }
@@ -9634,7 +9749,7 @@ V.ask = ()=>{
 
 let VF = 'all';
 
-const SR_GROUPS=[['vault','保存庫'],['word','単語'],['phrasal','句動詞（熟語）'],['idiom','イディオム'],['colloc','コロケーション'],['scene','場面別フレーズ'],['study','留学で使う英語'],['pattern','構文'],['starter','文頭・つなぎ言葉'],['wh','ワーホリ対策']];
+const SR_GROUPS=[['vault','保存庫'],['word','単語'],['phrasal','句動詞（熟語）'],['idiom','イディオム'],['colloc','コロケーション'],['scene','場面別フレーズ'],['study','留学で使う英語'],['pattern','構文'],['starter','文頭・つなぎ言葉'],['grammar','文法'],['wh','ワーホリ対策']];
 const srNorm = s=>String(s||'').toLowerCase().replace(/[’‘]/g,"'").replace(/\s+/g,' ').trim();
 function srFind(q){
   const n=srNorm(q); if(!n) return {};
@@ -9643,13 +9758,15 @@ function srFind(q){
   const add=(k,x)=>{ const s=score(x); if(s>=0) (g[k]=g[k]||[]).push([s,x]); };
   (S.vault||[]).forEach(v=>add('vault',{...v,vid:v.id}));
   ITEMS.forEach(x=>{ const k=x.cat==='interview'?'wh':x.cat; if(SR_GROUPS.some(s=>s[0]===k)) add(k,x); });
+
+  GRAMMAR.forEach(gr=>{ const ch=(GR_CH.find(c=>c.u.some(u=>GR_LINK[u[0]]===gr.id))||{}).n||''; const y={id:gr.id,lv:gr.lv,en:gr.title,ja:ch}; let s=score(y); if(s<0 && srNorm(gr.body.join(' ')+' '+gr.ex.map(e=>e.join(' ')).join(' ')).includes(n)) s=5; if(s>=0) (g.grammar=g.grammar||[]).push([s,y]); });
   Object.keys(g).forEach(k=>g[k]=g[k].sort((a,b)=>a[0]-b[0]||a[1].en.length-b[1].en.length).map(a=>a[1]));
   return g;
 }
 const srHl=(s,q)=>{ const n=srNorm(q); s=String(s||''); if(!n) return esc(s); const i=s.toLowerCase().indexOf(n); return i<0?esc(s):esc(s.slice(0,i))+'<mark>'+esc(s.slice(i,i+n.length))+'</mark>'+esc(s.slice(i+n.length)); };
 V.search = ()=>{
   const q=(R.q||'').trim();
-  if(!q) return `<h1>検索</h1><div class="panel empty">${coco(52)}<p style="margin-top:8px">英語でも日本語でも探せます。保存庫の表現も一緒に探します。<br>例: stoked、楽しみ、疲れ、check in</p></div>`;
+  if(!q) return `<h1>検索</h1><div class="panel empty">${coco(52)}<p style="margin-top:8px">英語でも日本語でも探せます。保存庫の表現も一緒に探します。<br>文法の単元も探せます。<br>例: stoked、楽しみ、疲れ、check in、現在完了</p></div>`;
   const g=srFind(q), keys=SR_GROUPS.filter(s=>g[s[0]]), total=keys.reduce((a,s)=>a+g[s[0]].length,0), open=R.sxp||{};
   const row=(k,x)=>`<button class="sr-li" data-act="sopen" data-k="${k}" data-id="${esc(k==='vault'?String(x.vid):x.id)}"><span><b>${srHl(x.en,q)}</b><br><span class="s">${srHl(x.ja,q)}${k==='scene'&&x.scene?`（${esc(x.scene)}）`:''}</span></span><span class="sr-tag">${k==='vault'?'保存庫':typeof x.lv==='number'?LV[x.lv]:''}</span></button>`;
   const none=`<div class="panel sr-none"><p style="margin:0 0 10px">${total?'探している表現が見つからないときは':'アプリの中には見つかりませんでした。'}</p><button class="btn primary" data-act="sask">「${esc(q)}」をAIに聞く</button></div>`;
@@ -9675,7 +9792,7 @@ V.vault = ()=>{
   else if(VF!=='all') list = list.filter(v=>v.scene===VF);
   return `<h1>保存庫</h1>
   <p class="muted">言えなかった表現をためて、次に使えるようにする、あなただけの場所です。</p>
-  ${tier()!=='customer'?`<p class="tier note">お試し中: 保存庫は${LIMIT.counseled.vault}件まで（あと${Math.max(0,vaultRoom())}件）。成約すると上限なしで使えます。</p>`:''}
+  ${limTier()!=='customer'?`<p class="tier note">お試し中: 保存庫は${LIMIT.counseled.vault}件まで（あと${Math.max(0,vaultRoom())}件）。成約すると上限なしで使えます。</p>`:''}
   <div class="chips"><button class="chip ${VF==='all'?'on':''}" data-act="vf" data-f="all">すべて（${S.vault.length}）</button><button class="chip ${VF==='due'?'on':''}" data-act="vf" data-f="due">今日の復習</button><button class="chip ${VF==='unknown'?'on':''}" data-act="vf" data-f="unknown">まだ覚えていない</button>${scenes.map(s=>`<button class="chip ${VF===s?'on':''}" data-act="vf" data-f="${esc(s)}">${esc(s)}</button>`).join('')}</div>
   <details class="panel" style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">自分で追加する（授業で出た単語など）</summary>
     <form data-form="vadd" class="stack" style="margin-top:8px">
@@ -10159,6 +10276,7 @@ document.addEventListener('click', e=>{
     case 'sask': { const q=R.q||''; go('ask'); const a=document.getElementById('ask-q'); if(a){ a.value=q; a.focus(); } break; }
     case 'sopen': {
       if(d.k==='vault'){ go('vault'); break; }
+      if(d.k==='grammar'){ go('learn',{cat:'grammar',gch:'all',lv:'all',sel:d.id}); break; }
       const x=ITEMS.find(i=>i.id===d.id); if(!x) break;
       const cat=x.cat==='scene'?'dialog':x.cat==='interview'?'wh':x.cat, ex={cat,lv:'all',sel:x.id};
       if(x.cat==='scene') ex.scene=x.scene; if(cat==='wh'&&x.scene) ex.whScene=x.scene;
@@ -10211,7 +10329,7 @@ document.addEventListener('click', e=>{
     case 'lvnext': LQS.i++; LQS.pick=null; if(LQS.i>=LQS.qs.length) lvFinish(); rerender(); break;
     case 'lvreset': LQS={cat:null,i:0,score:0,pick:null,qs:[],done:false}; rerender(); break;
     case 'counsel': { const m=$('#cmsg'); if(m) m.textContent='申し込み先を準備中です。セブ島留学バディーのサイトからご相談ください。'; break; }
-    case 'askdemo': if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[tier()].ask}回）を使い切りました。${tier()==='counseled'?'成約すると1日'+LIMIT.customer.ask+'回まで使えます。':''}`); break; } useAsk(); ASK={q:d.q,a:AI_DEMO[d.q],fb:null}; rerender(); break;
+    case 'askdemo': if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[limTier()].ask}回）を使い切りました。${tier()==='counseled'?'成約すると1日'+LIMIT.customer.ask+'回まで使えます。':''}`); break; } useAsk(); ASK={q:d.q,a:AI_DEMO[d.q],fb:null}; rerender(); break;
     case 'askvault': if(ASK.a&&!ASK.a.none){ addVault(ASK.a.en,ASK.a.ja,'AIに聞いた','ai'); rerender(); } break;
     case 'askmemo': if(addVault('',ASK.q,'メモ','ai')){ ASK={q:'',a:null,fb:null}; go('vault'); } break;
     case 'askfb': ASK.fb=d.v; rerender(); break;
@@ -10238,7 +10356,7 @@ document.addEventListener('click', e=>{
 });
 document.addEventListener('submit', e=>{
   const f=e.target.closest('[data-form]'); if(!f) return; e.preventDefault();
-  if(f.dataset.form==='ask'){ const q=$('#ask-q').value.trim(); if(!q) return; if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[tier()].ask}回）を使い切りました。`); return; } useAsk(); ASK={q,a:AI_DEMO[q]||{none:true},fb:null}; rerender(); }
+  if(f.dataset.form==='ask'){ const q=$('#ask-q').value.trim(); if(!q) return; if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[limTier()].ask}回）を使い切りました。`); return; } useAsk(); ASK={q,a:AI_DEMO[q]||{none:true},fb:null}; rerender(); }
   if(f.dataset.form==='vadd'){ const en=$('#va-en').value.trim(), ja=$('#va-ja').value.trim(); if(!en||!ja){ alert('英語と意味を入れてください。'); return; } addVault(en,ja,$('#va-sc').value,'manual'); rerender(); }
   if(f.dataset.form==='talk'){ talkSend($('#talk-in').value); }
   if(f.dataset.form==='rq'){ const a=$('#rq-a').value.trim(); if(!a) return; RQ.answers.push(a); RQ.i++;
