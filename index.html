@@ -5866,7 +5866,7 @@ V.level = ()=>{
   </div></div>
   ${olv!=null?`<p class="small" style="margin-top:10px">${esc(LV_TEXT[olv])}　<button class="linkbtn" data-act="lvguide">レベルの目安</button></p>`:''}
   <div class="lq-grid">${LQ_CATS.map(c=>{const h=latest[c.cat];return `<div class="lq-cell"><div class="lq-name">${c.name}</div>
-    ${h?`<div class="lq-lv">${LV[h.lv]} <span class="en">${LV_CEFR[h.lv]}</span></div><div class="lq-bar" aria-hidden="true">${LV.map((_,i)=>`<i class="${i<=h.lv?'on':''}"></i>`).join('')}</div><div class="muted small">${fmtD(h.d)}</div>`:`<div class="muted small" style="margin:6px 0">未診断</div>`}
+    ${h?`<div class="lq-lv">${LV[h.lv]} <span class="en">${LV_CEFR[h.lv]}</span></div><div class="lq-bar" aria-hidden="true">${LV.map((_,i)=>`<i class="${i<=h.lv?'on':''}"></i>`).join('')}</div><div class="small"><b class="en">${h.sc}</b> / ${h.n||5}問正解</div><div class="muted small">受けた日 ${fmtD(h.d)}</div>`:`<div class="muted small" style="margin:6px 0">未診断</div>`}
     <button class="btn sm ${h?'':'primary'}" data-act="lvstart" data-cat="${c.cat}">${h?'もう一度':'20問で診断'}</button></div>`}).join('')}</div>
   <p class="muted small">各カテゴリー20問（各レベル4問）の簡易判定です。レベルごとに4問中3問以上正解で、そのレベルに届いているとみなします。正式なCEFRの判定ではありません。</p>
   </div>
