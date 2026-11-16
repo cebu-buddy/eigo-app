@@ -12,7 +12,7 @@
 :root{
   --bg:#F2F8F7; --surface:#FFFFFF; --ink:#3D2613; --muted:#6E5A4B; --line:#D5E6E3;
   --teal:#49B0A8; --teal-ink:#2C7A73; --mint:#E7F4F3; --mint2:#CFE8E5;
-  --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
+  --mango:#F5A524; --mango-soft:#FDF0D5; --pink:#E76874; --mango-ink:#A9620C; --pink-soft:#FCE6E8; --pink-ink:#BE4552; --ok:#2E8B57; --ng:#C8455A; --hl:#FCE7B2;
   --jp:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
   --en:"Lexend","Helvetica Neue",Arial,sans-serif;
   --ipa:"Charis SIL","Doulos SIL","Lucida Grande","Segoe UI",sans-serif;
@@ -21,14 +21,14 @@
   :root:not([data-theme="light"]){
     --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
     --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
-    --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+    --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#12201E; --surface:#1A2C29; --ink:#F1EBE4; --muted:#B9AA9C; --line:#2E4642;
   --teal:#5CC2B9; --teal-ink:#7FD6CD; --mint:#1F3632; --mint2:#2A4743;
-  --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
+  --mango:#F7B548; --mango-soft:#3A3020; --pink:#F08791; --mango-ink:#F7B548; --pink-soft:#3A2428; --pink-ink:#F08791; --ok:#5CC48A; --ng:#F08A9B; --hl:#5A4718;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -161,6 +161,8 @@ svg.growth{width:100%;max-width:640px;height:auto;margin-top:6px;display:block}
 .catcard{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 12px 10px;min-height:78px;cursor:pointer;color:var(--ink)}
 .catcard:hover{border-color:var(--teal)}
 .catcard b{font-size:15px}.catcard .n{font-size:11.5px;color:var(--muted)}
+.cat-hd{display:flex;align-items:center;gap:8px;margin-bottom:2px}.cat-ic{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none}.cat-ic svg{width:18px;height:18px}
+.cat-ic.g0{background:var(--mint);color:var(--teal-ink)}.cat-ic.g1{background:var(--mango-soft);color:var(--mango-ink)}.cat-ic.g2{background:var(--pink-soft);color:var(--pink-ink)}
 .cbar{display:block;width:100%;height:5px;background:var(--mint);border-radius:9px;margin-top:auto;overflow:hidden}.cbar i{display:block;height:100%;background:var(--teal)}
 .crumbrow{margin:4px 0 2px}
 .cat-title{font-size:24px}
@@ -4036,6 +4038,19 @@ function liRow(x){
   return `<button class="li ${R.sel===x.id?'sel':''}" data-act="sel" data-id="${esc(x.id)}"><span><span class="t">${esc(title)}</span><br><span class="s">${esc(sub)}</span></span><span>${nt}${p.fav?'<span aria-label="お気に入り" style="color:var(--mango)">★</span> ':''}${st}${lk}</span></button>`;
 }
 
+const CAT_ICON = {
+  word:'<path d="M4 18L8 6l4 12M5.5 14h5"/><path d="M19 18v-5.5a2.5 2.5 0 0 0-5 0M14 15.5a2.5 2.5 0 1 0 5 0"/>',
+  phrasal:'<path d="M4 7h3a1 1 0 0 0 1-1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-1a2 2 0 0 0-4 0v1a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a2 2 0 0 0 0-4h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1"/>',
+  colloc:'<path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/>',
+  idiom:'<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/>',
+  study:'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5M22 9v6"/>',
+  dialog:'<path d="M4 4h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H9l-4 3v-3H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M19 9h1a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1v3l-4-3h-3a1 1 0 0 1-1-1v-1"/>',
+  pattern:'<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/>',
+  starter:'<path d="M5 19v-5h4v5H5zM5 14c0-4 1.5-6.5 4-8"/><path d="M14 19v-5h4v5h-4zM14 14c0-4 1.5-6.5 4-8"/>',
+  grammar:'<path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"/><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>',
+  wh:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 13h18"/>'
+};
+const catIcon=(k,gi)=>CAT_ICON[k]?`<span class="cat-ic g${gi}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${CAT_ICON[k]}</svg></span>`:'';
 const CAT_GROUPS = [['語彙',['word','phrasal','colloc','idiom']],['表現',['study','dialog','pattern','starter']],['文法・ワーホリ',['grammar','wh']]];
 function catStats(k){
   const kn=xs=>xs.filter(x=>P(x.id).state==='known').length;
@@ -4083,7 +4098,7 @@ function openCatInfo(k){
 const INFO_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="7.5" r="1.4" fill="currentColor"/><path d="M12 11v6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
 const infoBtn = k=>`<button class="catinfo" data-act="catinfo" data-cat="${k}" aria-label="${esc(CATS[k].replace('（付録）',''))}とは（説明を開く）">${INFO_ICON}</button>`;
 function catCard(k){ const s=catStats(k), pct=s.total?Math.round(s.known/s.total*100):0;
-  return `<div class="catwrap"><button class="catcard" data-act="learn" data-cat="${k}"><b>${esc(CATS[k].replace('（付録）',''))}</b><span class="n">${esc(s.label)}</span><span class="cbar" aria-hidden="true"><i style="width:${pct}%"></i></span></button>${infoBtn(k)}</div>`; }
+  return `<div class="catwrap"><button class="catcard" data-act="learn" data-cat="${k}"><span class="cat-hd">${catIcon(k,CAT_GROUPS.findIndex(g=>g[1].includes(k)))}<b>${esc(CATS[k].replace('（付録）',''))}</b></span><span class="n">${esc(s.label)}</span><span class="cbar" aria-hidden="true"><i style="width:${pct}%"></i></span></button>${infoBtn(k)}</div>`; }
 function myListBtns(){
   const nKnown = allItems().filter(x=>P(x.id).state==='known').length, nUnknown = allItems().filter(x=>P(x.id).state==='unknown').length, nFav = Object.values(S.prog).filter(v=>v.fav).length;
   return `<div class="mylist" aria-label="自分のリスト"><button class="mybtn ${R.cat==='known'?'on':''}" data-act="learn" data-cat="known" aria-pressed="${R.cat==='known'}">記憶 <b>${nKnown}</b></button><button class="mybtn ${R.cat==='unknown'?'on':''}" data-act="learn" data-cat="unknown" aria-pressed="${R.cat==='unknown'}">未記憶 <b>${nUnknown}</b></button><button class="mybtn ${R.cat==='fav'?'on':''}" data-act="learn" data-cat="fav" aria-pressed="${R.cat==='fav'}">★ お気に入り <b>${nFav}</b></button></div>`;
