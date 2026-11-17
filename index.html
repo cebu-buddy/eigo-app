@@ -402,18 +402,21 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .msg.me .en{color:#fff}
 .answer h3{font-size:14px;color:var(--teal-ink);margin:12px 0 4px}
 .ask-box{display:flex;gap:8px}
-.ask-box input{flex:1}
+.ask-box input{flex:1;min-width:0}
+.ask-box .btn{flex:none}
 
-.ask-box .vbtn{flex:none;width:44px;padding:0;display:inline-grid;place-items:center;border-radius:12px}
-.ask-box .vbtn svg{width:20px;height:20px}
-.ask-box .vbtn.on{background:var(--pink);border-color:var(--pink);color:#fff;animation:vpulse 1.2s ease-in-out infinite}
+.voice-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+.voice-row .vbtn{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 14px 6px 10px;font-size:13px}
+.voice-row .vbtn svg{width:18px;height:18px;flex:none}
+.voice-row .vbtn.on{background:var(--pink);border-color:var(--pink);color:#fff;animation:vpulse 1.2s ease-in-out infinite}
 @keyframes vpulse{50%{box-shadow:0 0 0 6px var(--pink-soft)}}
-@media (prefers-reduced-motion:reduce){.ask-box .vbtn.on{animation:none}}
+@media (prefers-reduced-motion:reduce){.voice-row .vbtn.on{animation:none}}
 .vlang{display:inline-flex;gap:2px;padding:2px;border-radius:999px;background:var(--mint);border:1px solid var(--line);font-size:12px}
-.vlang button{border:0;background:transparent;border-radius:999px;padding:3px 10px;cursor:pointer;color:var(--muted);font-size:12px}
+.vlang button{border:0;background:transparent;border-radius:999px;padding:4px 10px;cursor:pointer;color:var(--muted);font-size:12px}
 .vlang button.on{background:var(--surface);color:var(--teal-ink);font-weight:700}
-.ask-box .vlang{align-self:center;flex:none}
-@media (max-width:600px){ .ask-box[data-form="ask"]{flex-wrap:wrap} .ask-box[data-form="ask"] input{flex:1 1 100%} .ask-box .vlang{margin-left:auto} }
+.voice-row #vstat{flex:1 1 100%}
+.chips.ask-ex{flex-wrap:wrap;overflow:visible}
+.chips.ask-ex .chip{white-space:normal;text-align:left}
 .mic.rec{background:var(--pink);border-color:var(--pink)}
 
 .designs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
@@ -9798,7 +9801,7 @@ const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
 const VOICE_OK = !!SpeechRec;
 const VOICE = {on:false, lang:'ja-JP', rec:null};
 function voiceUI(){
-  const b=document.querySelector('.ask-box .vbtn'); if(b){ b.classList.toggle('on',VOICE.on); b.setAttribute('aria-pressed',VOICE.on); b.setAttribute('aria-label',VOICE.on?'音声入力を止める':'声で入力する'); }
+  const b=document.querySelector('.voice-row .vbtn'); if(b){ b.classList.toggle('on',VOICE.on); const t=b.querySelector('.vtxt'); if(t) t.textContent=VOICE.on?'止める':'声で入力'; b.setAttribute('aria-pressed',VOICE.on); b.setAttribute('aria-label',VOICE.on?'音声入力を止める':'声で入力する'); }
   const s=document.getElementById('vstat'); if(s) s.textContent = VOICE.on ? '聞いています…話し終わると止まります' : '';
 }
 function voiceToggle(){
@@ -9834,9 +9837,9 @@ V.ask = ()=>{
   ${limTier()!=='customer'?`<p class="tier note">お試し中: 今日あと${askLeft()}回聞けます（1日${LIMIT.counseled.ask}回まで）。成約すると1日${LIMIT.customer.ask}回まで使えます。</p>`:''}
   <div class="greet" style="margin-top:0">${mango(52)}<div class="speech"><b>マンゴー</b>言いたいのに言えなかった表現、分からなかった単語を聞いてね。答えは保存庫に入れて、次に使えるようにしよう。</div></div>
   <div class="panel stack">
-    <form class="ask-box" data-form="ask"><input type="text" id="ask-q" value="${esc(ASK.q)}" placeholder="${VOICE_OK?'例: 「割り勘にしよう」は英語で？（マイクで話してもOK）':'例: 「割り勘にしよう」は英語で？'}" aria-label="AIへの質問" data-autofocus>${VOICE_OK?`<span class="vlang" role="group" aria-label="音声入力の言葉"><button type="button" class="${VOICE.lang==='ja-JP'?'on':''}" data-act="vlang" data-l="ja-JP" aria-pressed="${VOICE.lang==='ja-JP'}">日本語</button><button type="button" class="${VOICE.lang==='en-US'?'on':''}" data-act="vlang" data-l="en-US" aria-pressed="${VOICE.lang==='en-US'}">English</button></span>`:''}${VOICE_OK?`<button type="button" class="btn vbtn ${VOICE.on?'on':''}" data-act="askvoice" aria-pressed="${VOICE.on}" aria-label="${VOICE.on?'音声入力を止める':'声で入力する'}" title="声で入力">${I.mic}</button>`:''}<button class="btn primary" type="submit">聞く</button></form>
-    ${VOICE_OK?`<p class="muted small" id="vstat" aria-live="polite" style="margin:0">${VOICE.on?'聞いています…話し終わると止まります':''}</p>`:''}
-    <div class="chips">${Object.keys(AI_DEMO).map(k=>`<button class="chip" data-act="askdemo" data-q="${esc(k)}">${esc(k)}</button>`).join('')}</div>
+    <form class="ask-box" data-form="ask"><input type="text" id="ask-q" value="${esc(ASK.q)}" placeholder="例: 割り勘って英語で？" aria-label="AIへの質問" data-autofocus><button class="btn primary" type="submit">聞く</button></form>
+    ${VOICE_OK?`<div class="voice-row"><button type="button" class="btn vbtn ${VOICE.on?'on':''}" data-act="askvoice" aria-pressed="${VOICE.on}" aria-label="${VOICE.on?'音声入力を止める':'声で入力する'}">${I.mic}<span class="vtxt">${VOICE.on?'止める':'声で入力'}</span></button><span class="vlang" role="group" aria-label="話す言葉"><button type="button" class="${VOICE.lang==='ja-JP'?'on':''}" data-act="vlang" data-l="ja-JP" aria-pressed="${VOICE.lang==='ja-JP'}">日本語</button><button type="button" class="${VOICE.lang==='en-US'?'on':''}" data-act="vlang" data-l="en-US" aria-pressed="${VOICE.lang==='en-US'}">English</button></span><p class="muted small" id="vstat" aria-live="polite" style="margin:0">${VOICE.on?'聞いています…話し終わると止まります':''}</p></div>`:''}
+    <div class="chips ask-ex">${Object.keys(AI_DEMO).map(k=>`<button class="chip" data-act="askdemo" data-q="${esc(k)}">${esc(k)}</button>`).join('')}</div>
     <p class="muted small">${AI_URL?`AI（Claude）が答えます（1人1日50回まで${AI_LEFT!=null?`。今日はあと${AI_LEFT}回`:''}）。答えに間違いがあることもあります。`:'AI即答は準備中です。今は、上の4つの例だけ見本の答えが出ます（単語1語のときは発音記号つき）。'}名前や連絡先は書かないでください。</p>
   </div>
   ${a&&a.loading?`<div class="panel" style="margin-top:12px" role="status"><p style="margin:0">${mango(36)} 考えています…（数秒かかります）</p></div>`:''}
