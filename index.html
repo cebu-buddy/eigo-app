@@ -434,7 +434,7 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .chip.pc-ok{background:var(--teal);border-color:var(--teal);color:#fff;opacity:1}.chip.pc-ng{background:var(--pink-soft);border-color:var(--pink);color:var(--pink-ink);opacity:1}.pc-okt{color:var(--teal-ink)}.pc-ngt{color:var(--pink-ink)}
 .pp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
 .pp-card{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 14px 14px;cursor:pointer;color:var(--ink)}
-.pp-card:hover{border-color:var(--teal)}.pp-card.seen{background:var(--mint)}
+.pp-card:hover{border-color:var(--teal)}
 .pp-card .pi{width:100%;height:auto;margin-bottom:4px}.pp-card b{font-size:20px;font-weight:600}.pp-card span{font-size:13px;color:var(--muted);line-height:1.5}
 .pp-hero{display:grid;gap:16px;align-items:center}@media (min-width:640px){.pp-hero{grid-template-columns:minmax(0,240px) 1fr}}
 .pp-hero .pi{width:100%;max-width:220px;height:auto;background:var(--bg);border-radius:16px;padding:8px}
@@ -10165,7 +10165,7 @@ function prepView(){
     <h3 class="st-h" style="margin-top:16px">迷いやすい使い分け</h3>
     <div class="pc-list">${PREP_CMP.map(c=>`<button class="pc-card" data-act="prepcmp" data-c="${c.id}"><b class="en">${esc(c.title)}</b><span>${esc(c.sub)}</span></button>`).join('')}</div>
     ${PREP_GROUPS.map((g,gi)=>`<h3 class="st-h pp-gh"><span class="cat-ic g${gi%3}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${g[2]}</svg></span>${esc(g[0])} <small>${esc(g[1])}</small></h3>
-    <div class="pp-grid">${g[3].map(k=>PREPS.find(p=>p.k===k)).map(p=>`<button class="pp-card ${(S.prepSeen||{})[p.k]?'seen':''}" data-act="prep" data-k="${p.k}">${prepSvg(p.k)}<b class="en">${p.k}</b><span>${esc(p.core)}</span></button>`).join('')}</div>`).join('')}`;
+    <div class="pp-grid">${g[3].map(k=>PREPS.find(p=>p.k===k)).map(p=>`<button class="pp-card" data-act="prep" data-k="${p.k}">${prepSvg(p.k)}<b class="en">${p.k}</b><span>${esc(p.core)}</span></button>`).join('')}</div>`).join('')}`;
   const p=PREPS.find(x=>x.k===k), i=PREP_K.indexOf(k), ph=prepRel(k,'phrasal'), co=prepRel(k,'colloc'), more=R.prepMore===k;
   const rel=(xs,n)=>xs.slice(0,more?xs.length:n).map(x=>`<button class="pp-rel" data-act="sopen" data-id="${esc(x.id)}"><span class="en">${esc(x.en)}</span><span class="s">${esc(x.ja)}</span></button>`).join('');
   const gch=GR_CH.findIndex(c=>c.n==='前置詞');
