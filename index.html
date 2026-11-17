@@ -447,8 +447,8 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .hm-h{font-size:17px;margin:22px 0 10px}
 .hm-hrow{display:flex;justify-content:space-between;align-items:baseline}.hm-hrow .linkbtn{font-size:13px}
 .hm-groups{display:grid;gap:12px}
-@media (min-width:1120px){.hm-groups{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (min-width:600px) and (max-width:1119px){.hm-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:4px}.hm-group h3{grid-column:1/-1}}
+@media (min-width:860px){.hm-groups{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:600px) and (max-width:859px){.hm-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:4px}.hm-group h3{grid-column:1/-1}}
 .hm-group{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 8px 8px}
 .hm-group h3{margin:0 10px 6px;font-size:13px;color:var(--muted);font-weight:700}
 .hm-row{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;text-align:left;padding:9px 10px;border-radius:12px;cursor:pointer;color:var(--ink)}
@@ -9625,7 +9625,8 @@ V.home = ()=>{
   <button class="hero-study" data-act="learn" data-cat="study"><div><h2>留学で使う英語</h2><p>出発前の手続きから空港・授業・寮・病院・銀行まで、そのまま使える表現と会話</p></div><div class="pair">${coco(52)}${mango(52)}</div></button>
   <h2 class="hm-h">目的から選ぶ</h2>
   <div class="hm-groups">
-    ${grp('基礎をかためる',[row('go','data-v="level"','level','g0','レベル診断',S.level==null?'カテゴリーごとに20問':'記録とグラフを見る'),row('learn','data-cat="grammar"','grammar','g0','文法','レベル別の単元と確認問題'),row('go','data-v="pron"','pron','g0','発音講座','発音記号・聞き分け・言ってみる')])}
+    ${grp('基礎をかためる',[row('go','data-v="level"','level','g0','レベル診断',S.level==null?'カテゴリーごとに20問':'記録とグラフを見る'),row('learn','data-cat="word"','word','g0','単語',`レベル別 ${ITEMS.filter(x=>x.cat==='word').length.toLocaleString()}語`),row('learn','data-cat="grammar"','grammar','g0','文法','レベル別の単元と確認問題'),row('go','data-v="pron"','pron','g0','発音講座','発音記号・聞き分け・言ってみる')])}
+    ${grp('発展',[row('learn','data-cat="phrasal"','phrasal','g0','句動詞（熟語）','get up・look for など'),row('learn','data-cat="colloc"','colloc','g0','コロケーション','よく一緒に使う語の組み合わせ'),row('learn','data-cat="pattern"','pattern','g0','構文','文の型で、言える文を増やす')])}
     ${grp('話す練習',[row('go','data-v="talk"','talk','g1','AI英会話','留学生活・場面別・ワーホリ'),row('learn','data-cat="dialog"','dialog','g1','場面別フレーズ','買い物・レストラン・交通など')])}
     ${grp('ワーホリの準備',[row('learn','data-cat="wh"','wh','g2','ワーホリ対策','仕事探し・面接・職場の表現'),row('go','data-v="resume"','resume','g2','履歴書をつくる','AIと一問一答で強みを見つける')])}
   </div>
