@@ -318,6 +318,13 @@ dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
 .gd-steps{margin:0;padding-left:1.4em;display:grid;gap:8px;font-size:14px;line-height:1.7}
 .gd-list .gd-row{gap:12px;padding-left:12px}
 .gd-acc{display:grid;gap:8px}
+.gd-item.open .gd-row{border-color:var(--teal);background:var(--mint);border-bottom-left-radius:0;border-bottom-right-radius:0}
+.gd-chev{transition:transform .2s}.gd-item.open .gd-chev{transform:rotate(180deg)}
+.gd-more{border:1px solid var(--teal);border-top:0;border-radius:0 0 14px 14px;background:var(--surface);padding:10px 16px 14px}
+.gd-more p{margin:0 0 10px;font-size:14px;line-height:1.7}
+.gd-list{align-items:start}
+.backbar{display:inline-flex;align-items:center;gap:4px;margin:4px 0 8px;padding:6px 12px 6px 8px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--teal-ink);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.backbar svg{width:16px;height:16px}.backbar:hover{background:var(--mint)}
 .gd-acc details>summary{cursor:pointer;font-weight:700;font-size:15px;list-style-position:inside}
 .gd-acc details[open]>summary{margin-bottom:6px}
 .hs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;margin:10px 0 8px}.hs-card h3{margin:0 0 8px;font-size:16px}
@@ -9491,13 +9498,21 @@ function render(){
   $('#app').classList.toggle('is-welcome', !S.user);
   if(!S.user){ $('#app').innerHTML = `<main id="main" class="welcome-main">${V.welcome()}</main>`; after(); return; }
   $('#app').innerHTML = shell();
-  $('#main').innerHTML = (V[R.v]||V.home)();
+  $('#main').innerHTML = backBar() + (V[R.v]||V.home)();
   after();
 }
-function go(v,extra){ R = Object.assign({}, R, {v}, extra||{}); render(); window.scrollTo(0,0); saveRoute(); }
+
+const histD = ()=> (history.state && +history.state.d) || 0;
+function go(v,extra){ const d0=histD(); try{ history.replaceState({R, y:window.scrollY, d:d0}, ''); }catch(e){}
+  R = Object.assign({}, R, {v, from:null}, extra||{}); render(); window.scrollTo(0,0);
+  try{ history.pushState({R, y:0, d:d0+1}, ''); }catch(e){} saveRoute(); }
+function goBack(){ if(histD()>0) history.back(); else go(R.from||'home'); }
+addEventListener('popstate', e=>{ const st=e.state; if(!st || !st.R) return; R=Object.assign({}, st.R); render(); setTimeout(()=>window.scrollTo(0, st.y||0), 0); saveRoute(); });
+const BACK_NAME = {guide:'手引書'};
+function backBar(){ return R.from && BACK_NAME[R.from] && R.v!==R.from ? `<button class="backbar" data-act="goback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>${BACK_NAME[R.from]}に戻る</button>` : ''; }
 function rerender(){ const y=window.scrollY;
   const xs=[...document.querySelectorAll('#main .chips')].map(c=>c.scrollLeft);
-  $('#main').innerHTML=!S.user?V.welcome():(V[R.v]||V.home)(); after(); window.scrollTo(0,y);
+  $('#main').innerHTML=!S.user?V.welcome():backBar()+(V[R.v]||V.home)(); after(); window.scrollTo(0,y);
   document.querySelectorAll('#main .chips').forEach((c,i)=>{ if(xs[i]!=null) c.scrollLeft=xs[i];
     const on=c.querySelector('.chip.on'); if(!on) return;
     const l=on.offsetLeft-c.offsetLeft, r=l+on.offsetWidth;
@@ -10326,7 +10341,7 @@ V.resume = ()=>{
 };
 
 const GUIDE_FEATS = [
- ['ask','chat','g1','AIに聞く','言えなかった表現を、その場で聞く','日本語のまま質問すると、自然な表現・解説・例文が出ます。そのまま保存庫に入れて、あなただけの辞書にしていけます（詳しくはこのページの上）。'],
+ ['ask','chat','g1','AIに聞く','言えなかった表現を、その場で聞く','日本語のまま質問すると、自然な表現・解説・例文が出ます。そのまま保存庫に入れて、あなただけの辞書にしていけます（くわしくは「はじめに」タブ）。'],
  ['learn','book','g0','学ぶ','単語やフレーズを覚える','単語・句動詞・イディオム・場面別フレーズ・文法などから選びます。レベルで絞り込み、「覚えた」「まだ」で仕分けると、復習する日が自動で決まります。'],
  ['vault','vault','g1','保存庫','聞いた表現をためて復習する','授業や会話で言えなかったことをAIに聞いて、ここに入れます。復習して、実際に使えたら「実際に使えた！」を押します。'],
  ['test','test','g2','テスト','覚えたかを4択で確かめる','範囲を選んで、4択で答えます。正解は「覚えた」、不正解は「まだ」に入り、復習する日が自動で決まります。'],
@@ -10346,7 +10361,10 @@ const GUIDE_POINTS = [
  ['home','g0','見やすいデザイン','毎日開きたくなる、また戻ってきたくなる作りです。'],
  ['level','g1','本当に使える英語がそろう','単語・文法・熟語・イディオム・表現集・構文・発音まで、これ1つで学べます。'],
  ['doc','g2','ワーホリの準備もできる','面接対策と、デザインを選べる英文の履歴書づくりで、仕事探しも困りません。']];
-function guideRow(v,ic,g,name,role,extra){ return `<li><button class="tk-row gd-row" data-act="${extra?'learn':'go'}" ${extra||`data-v="${v}"`}><span class="cat-ic ${g}" aria-hidden="true">${I[ic]}</span><span class="tk-txt"><b>${name}${extra?'':FEAT_LOCK(v)}</b><span>${role}</span></span><svg class="tk-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button></li>`; }
+
+function guideRow(v,ic,g,name,role,how,extra){ const key=v||'interview', open=R.guideOpen===key;
+  return `<li class="gd-item${open?' open':''}"><button class="tk-row gd-row" data-act="guideopen" data-k="${key}" aria-expanded="${open}"><span class="cat-ic ${g}" aria-hidden="true">${I[ic]}</span><span class="tk-txt"><b>${name}${extra?'':FEAT_LOCK(v)}</b><span>${role}</span></span><svg class="tk-chev gd-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+  ${open?`<div class="gd-more"><p>${how}</p><button class="btn primary sm" data-act="${extra?'learn':'go'}" ${extra||`data-v="${v}"`} data-from="guide">${name}を開く</button></div>`:''}</li>`; }
 V.guide = ()=>{ const t=Math.min(R.guideT||0,GUIDE_TABS.length-1), pi=Math.min(R.guideP||0,GUIDE_PER.length-1), P=GUIDE_PER[pi];
  const tabs=`<div class="tk-tabs gd-tabs" role="tablist" aria-label="手引書の内容">${GUIDE_TABS.map((x,i)=>`<button role="tab" aria-selected="${i===t}" class="${i===t?'on':''}" data-act="guidetab" data-t="${i}">${x}</button>`).join('')}</div>`;
  let body='';
@@ -10372,7 +10390,7 @@ V.guide = ()=>{ const t=Math.min(R.guideT||0,GUIDE_TABS.length-1), pi=Math.min(R
   <div class="panel gd-pcard" style="--tlc:var(--tl${pi+1})"><p class="tl-when">${P[0]}</p><p class="gd-plead">${P[2]}</p>
    <ol class="gd-steps">${P[3].map(x=>`<li>${x}</li>`).join('')}</ol></div>
   <h2 class="gd-h">機能の一覧</h2>
-  <ul class="tk-list gd-list">${GUIDE_FEATS.map(([v,ic,g,name,role])=>guideRow(v,ic,g,name,role)).join('')}${guideRow('','chat','g2','面接対策','よく聞かれる質問と答え方','data-cat="wh" data-sc="面接"')}</ul>`;
+  <ul class="tk-list gd-list">${GUIDE_FEATS.map(([v,ic,g,name,role,how])=>guideRow(v,ic,g,name,role,how)).join('')}${guideRow('','chat','g2','面接対策','よく聞かれる質問と答え方','「ワーホリ対策」の「面接」で、よく聞かれる質問と答え方の例を見て、返事を選んで進めるシミュレーションで練習します。仕上げに「AI英会話」の「面接」で、本番のように受け答えを練習できます。','data-cat="wh" data-sc="面接"')}</ul>`;
  if(t===2) body=`
   <p class="gd-lead">ホーム画面にアイコンを置くと、アプリのように1回で開けます。インストールや料金はいりません。</p>
   <div class="hs-grid">
@@ -10579,7 +10597,7 @@ document.addEventListener('click', e=>{
   const b = e.target.closest('[data-act]'); if(!b) return;
   const d = b.dataset;
   switch(d.act){
-    case 'go': if(d.v==='level' && R.v!=='level' && LQS.done) LQS={cat:null,i:0,score:0,pick:null,qs:[],done:false}; if(d.v==='pron') PU={id:null,i:0,t:0,pick:null,score:0}; if(d.v==='learn'){ go('learn',{cat:null,sel:null}); break; } go(d.v); break;
+    case 'go': if(d.v==='level' && R.v!=='level' && LQS.done) LQS={cat:null,i:0,score:0,pick:null,qs:[],done:false}; if(d.v==='pron') PU={id:null,i:0,t:0,pick:null,score:0}; if(d.v==='learn'){ go('learn',{cat:null,sel:null}); break; } go(d.v, d.from?{from:d.from}:null); break;
     case 'login': { const n=$('#w-name').value.trim(); if(!n){ $('#w-name').focus(); return; } S.user=n; if(!AUTH.user){ S.tier=S.tier||'general'; } save(); go('home'); break; }
     case 'settier': S.tier=d.t; S.trialStart = d.t==='counseled'?today():''; S.talkTrialUsed=false; S.askCount={d:'',n:0}; save(); render(); toast(`区分を「${TIER_NAME[d.t]}」にしました。`); break;
     case 'expire': S.tier='counseled'; S.trialStart=addDays(-(TRIAL_DAYS+1)); save(); render(); toast('お試しを期限切れにしました（一般と同じ範囲になります）。'); break;
@@ -10588,6 +10606,8 @@ document.addEventListener('click', e=>{
     case 'talkgrp': R.talkG=+d.g; rerender(); break;
     case 'guidetab': R.guideT=+d.t; render(); window.scrollTo(0,0); break;
     case 'guideper': R.guideP=+d.p; rerender(); break;
+    case 'guideopen': R.guideOpen = R.guideOpen===d.k ? null : d.k; rerender(); break;
+    case 'goback': goBack(); break;
     case 'talkcode': redeemCode(($('#talk-code')?.value||'').trim()); break;
     case 'logout': if(AUTH.user){ signOut(); } else { S.user=''; save(); render(); } break;
     case 'acdel': deleteAccount(); break;
@@ -10608,7 +10628,7 @@ document.addEventListener('click', e=>{
       PRON={id:null,url:null,rec:null,result:''}; go('learn',ex); break; }
     case 'theme': S.theme=d.t; save(); applyTheme(); document.querySelectorAll('.theme-sw button').forEach(b=>{const on=b.dataset.t===d.t; b.classList.toggle('on',on); b.setAttribute('aria-checked',on);}); break;
     case 'ipaplay': { const u=ipaUrl(d.k); if(u){ try{speechSynthesis.cancel();}catch(e){} try{ new Audio(u).play(); }catch(e){} } break; }
-    case 'learn': PRON.id=null; document.getElementById('catdlg')?.close(); document.getElementById('cidlg')?.close(); go('learn',Object.assign({cat:d.cat,lv:'all',sel:null},d.sc?{whScene:d.sc}:{})); break;
+    case 'learn': PRON.id=null; document.getElementById('catdlg')?.close(); document.getElementById('cidlg')?.close(); go('learn',Object.assign({cat:d.cat,lv:'all',sel:null},d.sc?{whScene:d.sc}:{},d.from?{from:d.from}:{})); break;
     case 'learnmenu': PRON.id=null; go('learn',{cat:null,sel:null}); break;
     case 'catsheet': openCatSheet(); break;
     case 'catinfo': openCatInfo(d.cat); break;
@@ -10950,6 +10970,7 @@ async function redeemCode(c){
   if(data.talk_until) S.talkUntil=data.talk_until;
   S.tier=data.tier; S.trialStart=data.trial_start||''; S.talkTrialUsed=false; save(); render(); toast(`「${TIER_NAME[data.tier]}」になりました。`);
 }
+try{ history.replaceState({R, y:ROUTE_Y, d:histD()}, ''); }catch(e){}
 render();
 if(ROUTE_Y && S.user) setTimeout(()=>window.scrollTo(0,ROUTE_Y),0);
 acctInit();
