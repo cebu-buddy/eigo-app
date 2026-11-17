@@ -295,6 +295,31 @@ dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
 .talk-ph summary{cursor:pointer}.talk-ph .ex{margin-top:10px}
 .tile[disabled]{opacity:.55;cursor:default}
 
+.gd-tabs{margin:12px 0 18px}
+.gd-h{font-size:18px;margin:26px 0 10px}
+.gd-lead{margin:0 0 4px;font-size:15px}
+.gd-hero{margin-top:0}
+.gd-flow{list-style:none;margin:14px 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.gd-flow li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center}
+.gd-flow .ask-n{grid-row:span 2}
+.gd-flow b{font-size:14px}.gd-flow span:not(.ask-n){font-size:12px;color:var(--muted)}
+.gd-points{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:600px){.gd-points,.gd-flow{grid-template-columns:1fr}.gd-per button{font-size:12px;padding:8px 2px;white-space:nowrap}}
+.gd-points li{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.gd-points li>div{display:flex;flex-direction:column;gap:2px;min-width:0}.gd-points b{font-size:15px}.gd-points span:not(.cat-ic){font-size:13px;color:var(--muted)}
+.gd-per{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.gd-per button{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 6px;font:inherit;font-weight:700;font-size:14px;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.gd-per button.on{border-color:var(--tlc);color:var(--ink);box-shadow:inset 0 -3px 0 var(--tlc)}
+.gd-per button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.gd-pn{width:22px;height:22px;border-radius:50%;background:var(--tlc);color:#fff;font-size:12px;display:grid;place-items:center}
+.gd-pcard{margin-top:8px;border-top:4px solid var(--tlc)}
+.gd-pcard .tl-when{margin:0;font-size:12px;font-weight:700;color:var(--muted)}
+.gd-plead{margin:4px 0 10px;font-size:15px}
+.gd-steps{margin:0;padding-left:1.4em;display:grid;gap:8px;font-size:14px;line-height:1.7}
+.gd-list .gd-row{gap:12px;padding-left:12px}
+.gd-acc{display:grid;gap:8px}
+.gd-acc details>summary{cursor:pointer;font-weight:700;font-size:15px;list-style-position:inside}
+.gd-acc details[open]>summary{margin-bottom:6px}
 .hs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;margin:10px 0 8px}.hs-card h3{margin:0 0 8px;font-size:16px}
 .hs-steps{margin:0;padding-left:1.4em;display:grid;gap:6px;font-size:14px;line-height:1.7}.hs-ic{width:18px;height:18px;vertical-align:-3px;color:var(--teal-ink)}
 .fg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:10px 0 8px}
@@ -10301,66 +10326,53 @@ V.resume = ()=>{
 };
 
 const GUIDE_FEATS = [
- ['ask','chat','g1','AIに聞く','言えなかった表現・分からなかった表現を、その場で解決します。','日本語のまま質問すると、自然な表現・解説・例文が出ます。そのまま保存庫に入れて、あなただけの辞書にしていけます（詳しくはこのページの上）。'],
- ['learn','book','g0','学ぶ','英語の中身を覚える場所です。','単語・句動詞・イディオム・場面別フレーズ・文法などから選びます。レベルで絞り込み、「覚えた」「まだ」で仕分けると、復習する日が自動で決まります。'],
- ['vault','vault','g1','保存庫','言えなかった表現をためる、自分だけの単語帳です。','授業や会話で言えなかったことをAIに聞いて、ここに入れます。復習して、実際に使えたら「実際に使えた！」を押します。'],
- ['test','test','g2','テスト','覚えたかどうかを確かめます。','範囲を選んで、4択で答えます。正解は「覚えた」、不正解は「まだ」に入り、復習する日が自動で決まります。'],
- ['level','level','g0','レベル診断','今の自分のレベルを知ります。','カテゴリーごとに20問の簡単な判定です。結果を見て、「学ぶ」で自分のレベルから始めましょう（正式なCEFRの判定ではありません）。'],
- ['pron','mic','g1','発音講座','通じる発音の基本を身につけます。','発音記号の読み方、日本人が苦手な音、音のつながり、リズムを、ルール → 聞き分け → 言ってみる の順で練習します。'],
- ['talk','chat','g2','AI英会話','AIを相手に、英語で話す練習をします。','場面を選んで話します。終わると直しの一覧が出て、そのまま保存庫に入れられます。'],
- ['resume','doc','g0','履歴書','ワーホリの仕事探しに使う、英文の履歴書（レジュメ）をつくります。','質問に日本語で答えると、AIがアピールポイントを英文にまとめます。できた履歴書はPDFで保存（印刷）できます。入力した内容は、この端末にだけ保存されます。'],
+ ['ask','chat','g1','AIに聞く','言えなかった表現を、その場で聞く','日本語のまま質問すると、自然な表現・解説・例文が出ます。そのまま保存庫に入れて、あなただけの辞書にしていけます（詳しくはこのページの上）。'],
+ ['learn','book','g0','学ぶ','単語やフレーズを覚える','単語・句動詞・イディオム・場面別フレーズ・文法などから選びます。レベルで絞り込み、「覚えた」「まだ」で仕分けると、復習する日が自動で決まります。'],
+ ['vault','vault','g1','保存庫','聞いた表現をためて復習する','授業や会話で言えなかったことをAIに聞いて、ここに入れます。復習して、実際に使えたら「実際に使えた！」を押します。'],
+ ['test','test','g2','テスト','覚えたかを4択で確かめる','範囲を選んで、4択で答えます。正解は「覚えた」、不正解は「まだ」に入り、復習する日が自動で決まります。'],
+ ['level','level','g0','レベル診断','今の自分のレベルを知る','カテゴリーごとに20問の簡単な判定です。結果を見て、「学ぶ」で自分のレベルから始めましょう（正式なCEFRの判定ではありません）。'],
+ ['pron','mic','g1','発音講座','通じる発音の基本を練習する','発音記号の読み方、日本人が苦手な音、音のつながり、リズムを、ルール → 聞き分け → 言ってみる の順で練習します。'],
+ ['talk','chat','g2','AI英会話','場面を選んで、英語で話す','場面を選んで話します。終わると直しの一覧が出て、そのまま保存庫に入れられます。'],
+ ['resume','doc','g0','履歴書','ワーホリ用の英文の履歴書をつくる','質問に日本語で答えると、AIがアピールポイントを英文にまとめます。できた履歴書はPDFで保存（印刷）できます。入力した内容は、この端末にだけ保存されます。'],
 ];
 const FEAT_LOCK = v=>{ const F={ask:'ask',vault:'vault',talk:'talk',resume:'resume'}; return F[v] && !feature(F[v]) ? `<span class="lockmark" aria-label="鍵（今の区分では使えません）">${I.lock}</span>` : ''; };
-V.guide = ()=>`<div class="guide-pg"><h1>手引書</h1>
-  <div class="greet" style="margin-top:0">${coco(56)}<div class="speech"><b>Coco先生</b>時期ごと・機能ごとの使い方です。帰国後も続けて使えます。</div></div>
-  <section class="ask-hero" aria-labelledby="ask-hero-h">
-    <p class="ask-hero-k">このアプリでいちばん大事にしている機能</p>
+
+const GUIDE_TABS = ['はじめに','使い方','ホーム画面','くわしく'];
+const GUIDE_PER = [["出発の1〜3か月前", "留学前", "出発前に基礎を固めておくと、現地の授業に早くなじめます。", ["レベル診断で、今の自分のレベルを知る", "「留学で使う英語」で、授業中・学校生活の表現を覚える", "自分のレベルの単語と構文を、「覚えた・まだ」で仕分けながら進める", "AI英会話の「授業の始まりの雑談」で、話す練習をする"]], ["現地で", "留学中", "毎日の授業と生活が、いちばんの練習の場になります。", ["授業で言えなかったことは、その日のうちにAIに聞く", "聞いた表現を保存庫に入れて、次の授業で使ってみる", "使えたら「実際に使えた！」を押して、使える表現を増やす", "寮・生活の表現や場面別フレーズで、授業の外の英語も広げる"]], ["仕事探しの前に", "ワーホリの前", "仕事探しでは、英語の面接と履歴書が最初の関門です。", ["「ワーホリ対策」で、現地で出会う場面の表現を覚える", "面接対策で、よく聞かれる質問と答え方を準備する", "AI英会話で、面接の受け答えを練習する", "「履歴書」で、英文の履歴書をつくる"]], ["帰国してから", "留学のあと（帰国後）", "留学で伸びた英語は、使わないと少しずつ落ちていきます。帰国後も続けて使えます。", ["保存庫の復習で、留学中に覚えた表現を忘れないようにする", "単語・句動詞・イディオムを、一つ上のレベルへ進める", "AI英会話で、話す機会を毎日少しずつ持つ", "仕事や旅行の英語、次の留学やワーホリの準備にも使う"]]];
+const GUIDE_POINTS = [
+ ['speaker','g1','音声つき','耳で聞いて、正しい発音で覚えられます。'],
+ ['book','g0','言いかえも紹介','似た言い回し（パラフレーズ）も一緒に覚えられます。'],
+ ['chat','g2','例文は2つずつ','違う場面の例で、使い方がイメージできます。'],
+ ['home','g0','見やすいデザイン','毎日開きたくなる、また戻ってきたくなる作りです。']];
+function guideRow(v,ic,g,name,role,extra){ return `<li><button class="tk-row gd-row" data-act="${extra?'learn':'go'}" ${extra||`data-v="${v}"`}><span class="cat-ic ${g}" aria-hidden="true">${I[ic]}</span><span class="tk-txt"><b>${name}${extra?'':FEAT_LOCK(v)}</b><span>${role}</span></span><svg class="tk-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button></li>`; }
+V.guide = ()=>{ const t=Math.min(R.guideT||0,GUIDE_TABS.length-1), pi=Math.min(R.guideP||0,GUIDE_PER.length-1), P=GUIDE_PER[pi];
+ const tabs=`<div class="tk-tabs gd-tabs" role="tablist" aria-label="手引書の内容">${GUIDE_TABS.map((x,i)=>`<button role="tab" aria-selected="${i===t}" class="${i===t?'on':''}" data-act="guidetab" data-t="${i}">${x}</button>`).join('')}</div>`;
+ let body='';
+ if(t===0) body=`
+  <section class="ask-hero gd-hero" aria-labelledby="ask-hero-h">
+    <p class="ask-hero-k">いちばん大事にしている機能</p>
     <h2 id="ask-hero-h">言えなかった表現を、その場でAIに聞く</h2>
-    <p class="ask-hero-lead">言いたかったのに言えなかったこと。見たり聞いたりしたけれど、意味が分からなかったこと。そのもやもやを、その場ですぐ解決してほしい。そんな思いで作った機能です。</p>
-    <div class="ask-when">
-      <div><b>言いたかったのに、言えなかった</b><span>授業や会話で、英語が出てこなかった一言。</span></div>
-      <div><b>見たけど、意味が分からなかった</b><span>看板・メニュー・メール・先生の言葉で出会った知らない表現。</span></div>
-      <div><b>知っているけど、自信がない</b><span>この言い方で失礼じゃないか、自然かどうか。</span></div>
-    </div>
-    <ol class="ask-flow">
-      <li><span class="ask-n">1</span><div><b>日本語のまま聞く</b><span>例:「割り勘にしよう」は英語で？　英語の単語や文をそのまま入れても大丈夫です。</span></div></li>
-      <li><span class="ask-n">2</span><div><b>AIがすぐ答える</b><span>自然な英語の表現、使い方の解説、例文2つが出ます。単語なら発音記号つきで、音声も聞けます。</span></div></li>
-      <li><span class="ask-n">3</span><div><b>保存庫に入れる</b><span>ボタン1つで、あなたの保存庫に残ります。</span></div></li>
-      <li><span class="ask-n">4</span><div><b>復習して、使ってみる</b><span>復習の日が自動で決まります。実際に使えたら「実際に使えた！」を押して、自分の言葉にしていきます。</span></div></li>
+    <p class="ask-hero-lead">授業や生活で言えなかった一言、意味が分からなかった表現を、その場で解決します。</p>
+    <ol class="gd-flow">
+      <li><span class="ask-n">1</span><b>日本語で聞く</b><span>「割り勘って英語で？」</span></li>
+      <li><span class="ask-n">2</span><b>AIが答える</b><span>表現・解説・例文2つ</span></li>
+      <li><span class="ask-n">3</span><b>保存庫に入れる</b><span>ボタン1つで残る</span></li>
+      <li><span class="ask-n">4</span><b>復習して使う</b><span>使えたら「使えた！」</span></li>
     </ol>
-    <p class="ask-hero-end">毎日の生活や仕事で出会った表現が、少しずつたまっていきます。<b>あなたが本当に出会った言葉だけでできた、あなただけのとっておきの辞書</b>になります。</p>
-    <div class="row" style="justify-content:space-between;align-items:center;gap:10px"><p class="muted small" style="margin:0">コツ: 忘れないうちに、その日のうちに聞きましょう。名前や連絡先は書かないでください。</p><button class="btn primary sm" data-act="go" data-v="ask">${I.chat} AIに聞いてみる</button></div>
+    <p class="ask-hero-end">出会った言葉だけでできた、<b>あなただけの辞書</b>になります。</p>
+    <button class="btn primary" data-act="go" data-v="ask">${I.chat} AIに聞いてみる</button>
   </section>
-  <h2>その他のこだわりポイント</h2>
-  <p class="muted small" style="margin-top:-4px">単語やフレーズを、覚えるだけでなく、実際に使えるようにするための工夫です。</p>
-  <div class="fg-grid">
-   <div class="fg"><div class="fg-h"><span class="cat-ic g1" aria-hidden="true">${I.speaker}</span><h3>音声で、正しい発音を意識できる</h3></div>
-    <p class="fg-how">単語やフレーズには音声がついています。目で覚えるだけでなく、耳で聞いて、正しい発音を意識しながら覚えられます。</p></div>
-   <div class="fg"><div class="fg-h"><span class="cat-ic g0" aria-hidden="true">${I.book}</span><h3>言いかえの表現も、解説の中に</h3></div>
-    <p class="fg-how">同じ意味のほかの単語や、似た言い回し（パラフレーズ）も、解説の中で紹介しています。1つの言い方が出てこなくても、別の言い方で伝えられるようになります。</p></div>
-   <div class="fg"><div class="fg-h"><span class="cat-ic g2" aria-hidden="true">${I.chat}</span><h3>例文を2つずつ</h3></div>
-    <p class="fg-how">どの表現にも、例文を2つ入れています。違う場面の例を見比べることで、どんなときに使えるのかをイメージしやすくなります。</p></div>
-   <div class="fg"><div class="fg-h"><span class="cat-ic g0" aria-hidden="true">${I.home}</span><h3>見やすく、使いやすいデザイン</h3></div>
-    <p class="fg-how">文字の大きさや色、ボタンの置き場所まで、見やすさと使いやすさ（UI・UX）を大切にして作りました。毎日開くのが楽しくなり、また戻ってきたくなる学習ツールを目指しています。</p></div>
-  </div>
-  <h2>英語の勉強のほかに、できること</h2>
-  <p class="muted small" style="margin-top:-4px">単語やフレーズを覚えるだけでなく、通じる発音と、ワーホリの仕事探し（レジュメ・面接）の準備もできます。</p>
-  <div class="fg-grid">
-   <div class="fg"><div class="fg-h"><span class="cat-ic g1" aria-hidden="true">${I.mic}</span><h3>発音の練習</h3></div>
-    <p class="fg-role">通じる発音の基本を、ひとりで練習できます。</p>
-    <p class="fg-how">「発音講座」で、発音記号の読み方、日本人が苦手な音、音のつながり、リズムを、ルール → 聞き分け → 言ってみる の順で練習します。単語やフレーズの画面では、自分の発音をチェックすることもできます。</p>
-    <button class="linkbtn" data-act="go" data-v="pron">発音講座を開く</button></div>
-   <div class="fg"><div class="fg-h"><span class="cat-ic g0" aria-hidden="true">${I.doc}</span><h3>レジュメ（英文の履歴書）づくり</h3></div>
-    <p class="fg-role">ワーホリの仕事探しで出す、英文のレジュメをつくれます。</p>
-    <p class="fg-how">「履歴書」で、質問に日本語で答えると、AIがあなたの経験とアピールポイントを英文にまとめます。できたレジュメはPDFで保存（印刷）して、お店に持っていけます。「ワーホリ対策」では、レジュメを渡すときのひとことも練習できます。</p>
-    <button class="linkbtn" data-act="go" data-v="resume">履歴書を開く</button></div>
-   <div class="fg"><div class="fg-h"><span class="cat-ic g2" aria-hidden="true">${I.chat}</span><h3>面接対策</h3></div>
-    <p class="fg-role">仕事の面接でよく聞かれる質問と、答え方を準備できます。</p>
-    <p class="fg-how">「ワーホリ対策」の「面接」で、よく聞かれる質問と答え方の例、返事を選んで進めるシミュレーションで練習します。仕上げに「AI英会話」の「ワーホリの面接練習」で、本番のように受け答えを練習できます。</p>
-    <button class="linkbtn" data-act="learn" data-cat="wh" data-sc="面接">面接対策を開く</button></div>
-  </div>
-  <h2>ホーム画面に置いて、アプリのように使う</h2>
-  <p class="muted small" style="margin-top:-4px">スマホのホーム画面にアイコンを置くと、ふつうのアプリと同じように、1回押すだけで開けます。インストールや料金はいりません。</p>
+  <h2 class="gd-h">その他のこだわりポイント</h2>
+  <ul class="gd-points">${GUIDE_POINTS.map(([ic,g,h,d])=>`<li><span class="cat-ic ${g}" aria-hidden="true">${I[ic]}</span><div><b>${h}</b><span>${d}</span></div></li>`).join('')}</ul>`;
+ if(t===1) body=`
+  <h2 class="gd-h">時期ごとの使い方</h2>
+  <div class="gd-per" role="tablist" aria-label="時期">${GUIDE_PER.map((x,i)=>`<button role="tab" aria-selected="${i===pi}" class="${i===pi?'on':''}" style="--tlc:var(--tl${i+1})" data-act="guideper" data-p="${i}"><span class="gd-pn">${i+1}</span>${['留学前','留学中','ワーホリ前','帰国後'][i]}</button>`).join('')}</div>
+  <div class="panel gd-pcard" style="--tlc:var(--tl${pi+1})"><p class="tl-when">${P[0]}</p><p class="gd-plead">${P[2]}</p>
+   <ol class="gd-steps">${P[3].map(x=>`<li>${x}</li>`).join('')}</ol></div>
+  <h2 class="gd-h">機能の一覧</h2>
+  <ul class="tk-list gd-list">${GUIDE_FEATS.map(([v,ic,g,name,role])=>guideRow(v,ic,g,name,role)).join('')}${guideRow('','chat','g2','面接対策','よく聞かれる質問と答え方','data-cat="wh" data-sc="面接"')}</ul>`;
+ if(t===2) body=`
+  <p class="gd-lead">ホーム画面にアイコンを置くと、アプリのように1回で開けます。インストールや料金はいりません。</p>
   <div class="hs-grid">
    <div class="panel hs-card"><h3>iPhone（Safari）</h3><ol class="hs-steps">
     <li>Safariで、このアプリのページを開きます。</li>
@@ -10376,23 +10388,11 @@ V.guide = ()=>`<div class="guide-pg"><h1>手引書</h1>
     <p class="muted small" style="margin:8px 0 0">機種によって、ボタンの名前や場所が少し違うことがあります。</p></div>
   </div>
   <p class="muted small">ホーム画面から開いても、記録はそのまま使えます。ログインしていれば、スマホとパソコンで同じ記録を続けられます。</p>
-  <h2>時期ごとの使い方</h2>
-  <div class="tl" aria-label="時期の流れ">
-    <div class="panel tl-card" style="--tlc:var(--tl1)"><span class="tl-dot" aria-hidden="true">1</span><p class="tl-when">出発の1〜3か月前</p><h3>留学前</h3><p class="small gs-lead">出発前に基礎を固めておくと、現地の授業に早くなじめます。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>レベル診断で、今の自分のレベルを知る</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>「留学で使う英語」で、授業中・学校生活の表現を覚える</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>自分のレベルの単語と構文を、「覚えた・まだ」で仕分けながら進める</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>AI英会話の「授業の始まりの雑談」で、話す練習をする</span></li></ol></div>
-    <div class="panel tl-card" style="--tlc:var(--tl2)"><span class="tl-dot" aria-hidden="true">2</span><p class="tl-when">現地で</p><h3>留学中</h3><p class="small gs-lead">毎日の授業と生活が、いちばんの練習の場になります。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>授業で言えなかったことは、その日のうちにAIに聞く</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>聞いた表現を保存庫に入れて、次の授業で使ってみる</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>使えたら「実際に使えた！」を押して、使える表現を増やす</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>寮・生活の表現や場面別フレーズで、授業の外の英語も広げる</span></li></ol></div>
-    <div class="panel tl-card" style="--tlc:var(--tl3)"><span class="tl-dot" aria-hidden="true">3</span><p class="tl-when">仕事探しの前に</p><h3>ワーホリの前</h3><p class="small gs-lead">仕事探しでは、英語の面接と履歴書が最初の関門です。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>「ワーホリ対策」で、現地で出会う場面の表現を覚える</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>面接対策で、よく聞かれる質問と答え方を準備する</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>AI英会話で、面接の受け答えを練習する</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>「履歴書」で、英文の履歴書をつくる</span></li></ol></div>
-    <div class="panel tl-card" style="--tlc:var(--tl4)"><span class="tl-dot" aria-hidden="true">4</span><p class="tl-when">帰国してから</p><h3>留学のあと（帰国後）</h3><p class="small gs-lead">留学で伸びた英語は、使わないと少しずつ落ちていきます。帰国後も続けて使えます。</p><ol class="gsteps"><li><span class="gs-n" aria-hidden="true">①</span><span>保存庫の復習で、留学中に覚えた表現を忘れないようにする</span></li><li><span class="gs-n" aria-hidden="true">②</span><span>単語・句動詞・イディオムを、一つ上のレベルへ進める</span></li><li><span class="gs-n" aria-hidden="true">③</span><span>AI英会話で、話す機会を毎日少しずつ持つ</span></li><li><span class="gs-n" aria-hidden="true">④</span><span>仕事や旅行の英語、次の留学やワーホリの準備にも使う</span></li></ol></div>
-  </div>
-  <h2>それぞれの機能の使い方</h2>
-  <p class="muted small" style="margin-top:-4px">左のメニュー（スマホは下のメニュー）にある機能の、役割と使い方です。</p>
-  <div class="fg-grid">${GUIDE_FEATS.map(([v,ic,g,name,role,how])=>`<div class="fg">
-    <div class="fg-h"><span class="cat-ic ${g}" aria-hidden="true">${I[ic]}</span><h3>${name}${FEAT_LOCK(v)}</h3></div>
-    <p class="fg-role">${role}</p><p class="fg-how">${how}</p>
-    <button class="linkbtn" data-act="go" data-v="${v}">${name}を開く</button></div>`).join('')}</div>
-  <h2>レベルの目安</h2>
-  ${lvGuideHTML()}
-  <h2>このアプリの方針</h2>
-  <div class="stack">
+  <p class="muted small">ログインしていれば、ホーム画面から開いても同じ記録を続けられます。</p>`;
+ if(t===3) body=`
+  <div class="gd-acc">
+   <details class="panel"><summary>レベルの目安（CEFR・英検・TOEIC・IELTS）</summary>${lvGuideHTML()}</details>
+   <details class="panel"><summary>このアプリの方針（発音・レベルの範囲）</summary><div class="stack" style="margin-top:10px">
    <div class="panel"><h3>発音はアメリカ英語を基準にしています</h3>
     <p class="small" style="margin:0 0 6px">発音記号・音声・発音講座は、アメリカ英語に合わせています。理由は3つです。</p>
     <ul class="small" style="margin:0;padding-left:1.2em">
@@ -10408,11 +10408,11 @@ V.guide = ()=>`<div class="guide-pg"><h1>手引書</h1>
      <li>英検とTOEICには、C2に当たる級や点数がありません。目安を示せないレベルは、目標にしにくくなります。</li>
      <li>使う人の多いレベルに中身を集めた方が、一つひとつの内容を厚くできます。</li>
     </ul></div>
-  </div>
-  <h2>カテゴリーの説明</h2>
-  <p class="muted small" style="margin:0 0 8px">「学ぶ」のカードの右上にある ⓘ を押しても、同じ説明が見られます。</p>
+     </div></details>
+   <details class="panel"><summary>カテゴリーの説明</summary><p class="muted small" style="margin:8px 0">「学ぶ」のカードの右上の ⓘ でも見られます。</p>
   <div class="list">${Object.keys(CAT_INFO).map(k=>`<div class="panel cinfo"><div class="cat-hd">${catIcon(k,Math.max(0,CAT_GROUPS.findIndex(g=>g[1].includes(k))))}<b>${esc(CATS[k])}</b></div><p class="small" style="margin:4px 0 0">${esc(CAT_INFO[k].one)}</p></div>`).join('')}<div class="panel cinfo"><div class="cat-hd"><span class="cat-ic g1" aria-hidden="true">${I.vault}</span><b>保存庫</b></div><p class="small" style="margin:4px 0 0">言えなかった表現をためて、復習して、次に使えるようにする自分だけの場所。</p></div></div>
-  <h2>句動詞（熟語）とコロケーションの違い</h2>
+   </details>
+   <details class="panel"><summary>句動詞（熟語）とコロケーションの違い</summary>
   <p class="muted">どちらも「2語以上のまとまり」ですが、性質とつまずく所が違うので、分けています。</p>
   <div class="panel" style="padding:0;overflow-x:auto"><table class="lvtable cmp">
     <thead><tr><th scope="col"></th><th scope="col">句動詞（熟語）</th><th scope="col">コロケーション</th></tr></thead>
@@ -10426,7 +10426,9 @@ V.guide = ()=>`<div class="guide-pg"><h1>手引書</h1>
     <li>日本語の「熟語」は意味が広く、イディオムなども含みます。このアプリの「句動詞（熟語）」は、動詞と短い語の組み合わせだけを集めています。</li>
     <li>イディオムは、<span class="en">a piece of cake</span>（とても簡単なこと。直訳は「ケーキ1切れ」）のように、直訳では意味が通らない決まった言い回しです。</li>
     <li><span class="en">take a shower</span>（コロケーション）と <span class="en">take off</span>（句動詞・離陸する）のように、似ていても分類が違うものがあります。迷うものは監修者が決めています。</li>
-  </ul></div>`;
+  </ul>   </details>
+  </div>`;
+ return `<div class="guide-pg"><h1>手引書</h1>${tabs}${body}</div>`; };
 
 function lvGuideHTML(){ return `
   <p class="muted">このアプリのレベルは、国際的な基準のCEFR（セファール）に合わせています。英検・TOEIC・IELTSでのおおよその目安も並べました。</p>
@@ -10582,6 +10584,8 @@ document.addEventListener('click', e=>{
     case 'upsell': { const m=b.parentElement.querySelector('.upsell-msg'); if(COUNSEL_URL){ window.open(COUNSEL_URL,'_blank','noopener'); } else if(m){ m.textContent='申し込み先を準備中です。セブ島留学バディーのサイトからご相談ください。'; } break; }
     case 'code': redeemCode(($('#me-code')?.value||'').trim()); break;
     case 'talkgrp': R.talkG=+d.g; rerender(); break;
+    case 'guidetab': R.guideT=+d.t; render(); window.scrollTo(0,0); break;
+    case 'guideper': R.guideP=+d.p; rerender(); break;
     case 'talkcode': redeemCode(($('#talk-code')?.value||'').trim()); break;
     case 'logout': if(AUTH.user){ signOut(); } else { S.user=''; save(); render(); } break;
     case 'acdel': deleteAccount(); break;
