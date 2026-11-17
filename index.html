@@ -316,6 +316,8 @@ dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
 .gd-pcard{margin-top:8px;border-top:4px solid var(--tlc)}
 .gd-pcard .tl-when{margin:0;font-size:12px;font-weight:700;color:var(--muted)}
 .gd-plead{margin:4px 0 10px;font-size:15px}
+.my-sel{max-width:320px}
+.st-h.my-h:first-child{margin-top:4px}
 .gd-sort-l{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 .gd-sort-l li{display:flex;gap:12px;align-items:flex-start}
 .gd-sort-l li>div{display:grid;gap:3px}
@@ -9982,10 +9984,17 @@ function lvSample(){ const plan={'2026-08-20':[0,1,0,0,1,0],'2026-09-25':[1,1,1,
   S.lvHist=[]; Object.entries(plan).forEach(([d,a])=>LQ_CATS.forEach((c,i)=>S.lvHist.push({d,cat:c.cat,lv:a[i],sc:(a[i]+1)*4,n:20})));
   S.level=Math.round(lqOverall()); S.levelDate='2026-11-15'; save(); }
 
+const MY_CATS=[['study','留学で使う英語'],['word','単語'],['phrasal','句動詞（熟語）'],['colloc','コロケーション'],['idiom','イディオム'],['pattern','構文'],['starter','文頭・つなぎ言葉'],['scene','場面別フレーズ'],['dl','会話'],['wh','ワーホリ対策'],['interview','面接の質問']];
+const myKey=x=>x.cat||(String(x.id).startsWith('dl:')?'dl':'');
+function myAll(){
+  const xs = R.cat==='unknown' ? allItems().filter(x=>P(x.id).state==='unknown')
+    : R.cat==='known' ? allItems().filter(x=>P(x.id).state==='known')
+    : [...ITEMS,...DIALOGS,...INTERVIEW.map(v=>({...v,cat:'interview',en:v.q}))].filter(x=>P(x.id).fav);
+  const o=k=>{ const i=MY_CATS.findIndex(c=>c[0]===k); return i<0?99:i; };
+  return xs.map((x,i)=>[x,i]).sort((a,b)=>o(myKey(a[0]))-o(myKey(b[0]))||a[1]-b[1]).map(a=>a[0]);
+}
 function listFor(){
-  if(R.cat==='unknown') return allItems().filter(x=>P(x.id).state==='unknown');
-  if(R.cat==='known') return allItems().filter(x=>P(x.id).state==='known');
-  if(R.cat==='fav') return [...ITEMS,...DIALOGS,...INTERVIEW.map(v=>({...v,cat:'interview',en:v.q}))].filter(x=>P(x.id).fav);
+  if(R.cat==='unknown'||R.cat==='known'||R.cat==='fav'){ const xs=myAll(); return (!R.mycat||R.mycat==='all')?xs:xs.filter(x=>myKey(x)===R.mycat); }
   if(R.cat==='dialog') return ITEMS.filter(x=>x.cat==='scene'&&x.scene===R.scene);
   if(R.cat==='grammar') return GR_CH.flatMap((c,ci)=>(R.gch==null||R.gch==='all'||+R.gch===ci)?c.u.map(u=>GRAMMAR.find(g=>g.id===GR_LINK[u[0]])).filter(Boolean):[]).filter(g=>!R.noteOnly || (S.notes||{})[g.id]);
   if(R.cat==='wh'){ const sc=R.whScene||WH_SCENES[0]; return WH_SIMS.filter(s=>s.scene===sc).concat(ITEMS.filter(x=>x.cat==='wh'&&x.scene===sc), sc==='面接'?INTERVIEW.map(v=>({...v,cat:'interview',en:v.q})):[]); }
@@ -10528,9 +10537,14 @@ V.learn = ()=>{
       || `<div class="panel empty">${coco(52)}<p style="margin-top:8px">ノートを書いた単元はまだありません。</p></div>`;
   }
   const isMy = R.cat==='known'||R.cat==='unknown'||R.cat==='fav';
+  let myFilter='';
+  if(isMy){ const all=myAll(), cnt=k=>all.filter(x=>myKey(x)===k).length, mc=R.mycat||'all';
+    myFilter=`<div class="filter"><label class="filter-l" for="my-sel">カテゴリー</label><div class="gsel my-sel"><select id="my-sel" data-change="mycat"><option value="all" ${mc==='all'?'selected':''}>すべてのカテゴリー（${all.length}）</option>${MY_CATS.filter(([k])=>cnt(k)||k===mc).map(([k,n])=>`<option value="${k}" ${mc===k?'selected':''}>${esc(n)}（${cnt(k)}）</option>`).join('')}</select></div></div>`;
+    if(list.length && mc==='all') groups = MY_CATS.map(([k,n])=>{ const xs=list.filter(x=>myKey(x)===k); return xs.length?`<h3 class="st-h my-h">${esc(n)} <small>${xs.length}</small></h3><div class="list">${xs.map(liRow).join('')}</div>`:''; }).join(''); }
   return `<div class="lv-sticky"><div class="crumbrow"><button class="btn sm" data-act="learnmenu">← カテゴリー</button></div>
   <div class="learn-head"><h1 class="cat-title">${isMy?titles[R.cat]:`<button class="catswitch" data-act="catsheet" aria-haspopup="dialog">${esc(CATS[R.cat]||'学ぶ')}<span class="sw">カテゴリ切替え ▾</span></button>${infoBtn(R.cat)}`}</h1>
     ${myListBtns()}</div>
+  ${myFilter}
   ${R.cat==='grammar'?`<div class="filter"><label class="filter-l" for="gch-sel">学習したい内容</label><div class="gsel"><select id="gch-sel" data-change="gch"><option value="all" ${(R.gch==null||R.gch==='all')?'selected':''}>すべての内容（${GR_CH.reduce((n,c)=>n+c.u.length,0)}単元）</option>${GR_CH.map((c,ci)=>`<option value="${ci}" ${String(R.gch)===String(ci)?'selected':''}>${esc(c.n)}（${c.u.length}単元）</option>`).join('')}</select><button class="chip ${R.noteOnly?'on':''}" data-act="noteonly" aria-pressed="${!!R.noteOnly}">ノートを書いた単元</button></div></div><p class="muted small" style="margin:8px 0 0">文法は、レベルではなく内容ごとに並べています。各単元の「目安 A1」などは、難しさの参考です。</p>`:''}
   ${R.cat==='wh'?`<p class="muted small" style="margin:10px 0 0">ワーホリで実際に出会う場面ごとに、フレーズと、返事を選んで進めるシミュレーションで練習します。</p><div class="filter"><label class="filter-l" for="wh-sel">場面</label><div class="gsel"><select id="wh-sel" data-change="whscene">${WH_SCENES.map((s,i)=>{ const n=WH_SIMS.filter(x=>x.scene===s).length+ITEMS.filter(x=>x.cat==='wh'&&x.scene===s).length; return `<option value="${esc(s)}" ${(R.whScene||WH_SCENES[0])===s?'selected':''}>${i+1}. ${esc(s)}${n?'':'（準備中）'}</option>`; }).join('')}</select></div></div>`:''}
   ${R.cat==='study'?`<p class="muted small" style="margin:10px 0 0">出発前から帰国まで、時間の流れの順に並んでいます。学びたい場面を選んでください。</p><div class="st-pick" role="tablist" aria-label="場面">${STUDY_SCENES.map((s,i)=>{ const ids=DIALOGS.filter(d=>d.scene===s).map(d=>d.id).concat(ITEMS.filter(x=>x.cat==='study'&&x.scene===s).map(x=>x.id)); const k=ids.filter(id=>P(id).state==='known').length, on=stSc()===s; return `<button class="st-card ${on?'on':''}" role="tab" aria-selected="${on}" data-act="stsc" data-s="${esc(s)}"><span class="st-n">${i+1}</span><b>${esc(s)}</b><span class="st-bar" aria-hidden="true"><i style="width:${ids.length?Math.round(k/ids.length*100):0}%"></i></span></button>`; }).join('')}</div>`:''}
@@ -10538,7 +10552,7 @@ V.learn = ()=>{
   ${R.cat==='dialog'?`<p class="muted small" style="margin:10px 0 0">教科書の英語ではなく、ネイティブが実際に使う自然な言い方を、場面ごとに覚えます。</p><div class="filter"><label class="filter-l" for="sc-sel">場面</label><div class="gsel"><select id="sc-sel" data-change="scene">${GEN_SCENES.map(s=>{ const n=ITEMS.filter(x=>x.cat==='scene'&&x.scene===s).length; return `<option value="${esc(s)}" ${R.scene===s?'selected':''}>${esc(s)}${n?`（${n}フレーズ）`:'（準備中）'}</option>`; }).join('')}</select></div></div>`:''}
   ${showLv?`${R.cat==='word'?'<div class="filter-row">':''}<div class="filter"><div class="filter-hd"><p class="filter-l">レベル</p><button class="linkbtn" data-act="lvguide" aria-haspopup="dialog">レベルの目安</button></div><div class="chips sub"><button class="chip ${R.lv==='all'?'on':''}" data-act="lv" data-lv="all">全レベル <span class="lv-n">${lvCnt('all')}</span></button>${LV.map((l,i)=>`<button class="chip ${String(R.lv)===String(i)?'on':''}" data-act="lv" data-lv="${i}">${l} <span class="en">${LV_CEFR[i]}</span> <span class="lv-n">${lvCnt(i)}</span></button>`).join('')}</div></div>${R.cat==='word'?`<div class="filter pos-f"><label class="filter-l" for="wp-sel">品詞の絞り込み</label><div class="gsel"><select id="wp-sel" data-change="wpos">${WPOS_F.map(([k,n])=>`<option value="${k}" ${(R.wpos||'all')===k?'selected':''}>${k==='all'?'すべての品詞':n}（${ITEMS.filter(x=>x.cat==='word'&&(R.lv==='all'||x.lv===+R.lv)&&wposMatch(x,k)).length.toLocaleString()}）</option>`).join('')}</select></div></div></div>`:''}`:''}${(R.cat==='study'||R.cat==='dialog'||R.cat==='grammar'||R.cat==='wh')?'':`<div class="ja-tg"><button class="tg ${S.hideJa===true?'on':''}" data-act="hideja" aria-pressed="${S.hideJa===true}"><span class="tg-sw" aria-hidden="true"></span>日本語を隠す（カーソルを当てると表示）</button></div>`}</div>
   <div class="split ${sel?'has-sel':''}" style="margin-top:14px">
-    <div class="list-col ${S.hideJa===true?'hide-ja':''}">${(R.cat==='study'||R.cat==='dialog'||R.cat==='grammar'||R.cat==='wh')?groups:(list.length?`<div class="list">${list.map(liRow).join('')}</div>`:`<div class="panel empty">${coco(52)}<p style="margin-top:8px">${R.cat==='known'?'「覚えた」にした項目はありません。テストで正解するか「覚えた」を押すと、ここに集まります。':R.cat==='unknown'?'「まだ」にした項目はありません。テストや学習で「まだ」にすると、ここに集まります。':R.cat==='fav'?'★を付けた項目はありません。気に入った表現に★を付けると、ここから見返せます。':'このレベルの内容はまだありません。'}</p></div>`)}</div>
+    <div class="list-col ${S.hideJa===true?'hide-ja':''}">${(R.cat==='study'||R.cat==='dialog'||R.cat==='grammar'||R.cat==='wh'||(isMy&&groups))?groups:(list.length?`<div class="list">${list.map(liRow).join('')}</div>`:`<div class="panel empty">${coco(52)}<p style="margin-top:8px">${(isMy&&R.mycat&&R.mycat!=='all')?'このカテゴリーには、まだありません。上の「カテゴリー」で、ほかを選んでください。':R.cat==='known'?'「覚えた」にした項目はありません。テストで正解するか「覚えた」を押すと、ここに集まります。':R.cat==='unknown'?'「まだ」にした項目はありません。テストや学習で「まだ」にすると、ここに集まります。':R.cat==='fav'?'★を付けた項目はありません。気に入った表現に★を付けると、ここから見返せます。':'このレベルの内容はまだありません。'}</p></div>`)}</div>
     <div class="detail-col">${sel?`<div class="seltop"><button class="btn sm back" data-act="unsel">← 一覧に戻る</button>${miniNav(sel.id)}</div>`+swipeWrap(sel)+stepNav(sel.id):`<div class="panel empty muted">一覧から選ぶと、ここに詳しく出ます。</div>${bdTall()}`}</div>
   </div>`;
 };
@@ -11506,7 +11520,7 @@ document.addEventListener('change', e=>{
       if(kind==='photo') r.photo=url; else if(kind==='cert') r.certs[+e.target.dataset.i].img=url; else r.certs.push({img:url,cap:''});
       if(!cvSave()){ S.resume=JSON.parse(bak); } rerender(); }); return; }
   const c=e.target.dataset.change; if(!c) return; const v=e.target.value;
-  if(c==='gch') R.gch=v; else if(c==='wpos') R.wpos=v; else if(c==='ctype') R.ctype=v; else if(c==='whscene') R.whScene=v; else if(c==='scene') R.scene=v; else return;
+  if(c==='gch') R.gch=v; else if(c==='wpos') R.wpos=v; else if(c==='mycat') R.mycat=v; else if(c==='ctype') R.ctype=v; else if(c==='whscene') R.whScene=v; else if(c==='scene') R.scene=v; else return;
   R.sel=null; rerender(); });
 document.addEventListener('input', e=>{ if(e.target.classList&&e.target.classList.contains('srch-in')){ srInput(e.target); return; } const nk=e.target.dataset.note; if(nk){ S.notes=S.notes||{}; const v=e.target.value; if(v.trim()) S.notes[nk]=v; else delete S.notes[nk]; save(); return; } const k=e.target.dataset.r; if(k){ cvData()[k]=e.target.value; save(); cvRefresh(); return; }
   const l=e.target.dataset.rl; if(l){ cvData()[l][+e.target.dataset.i][e.target.dataset.k]=e.target.value; save(); cvRefresh(); return; }
