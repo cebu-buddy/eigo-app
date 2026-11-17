@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>ココとマンゴー英語｜言えなかったを、その場で</title>
+<title>CocoMan英語｜言えなかったを、その場で</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -9328,7 +9328,7 @@ function shell(){
   const FEAT = {ask:'ask',vault:'vault',talk:'talk',resume:'resume'};
   const lk = v=> FEAT[v] && !feature(FEAT[v]) ? `<span class="lockmark" aria-label="鍵">${I.lock}</span>` : '';
   const side =`<nav class="side" aria-label="メニュー">
-    <button class="brand" data-act="go" data-v="home"><span class="brand-ic" aria-hidden="true">${coco(34)}${mango(34)}</span><span>ココとマンゴー英語<small class="sub">言えなかったを、その場で</small></span></button>
+    <button class="brand" data-act="go" data-v="home"><span class="brand-ic" aria-hidden="true">${coco(34)}${mango(34)}</span><span>CocoMan英語<small class="sub">言えなかったを、その場で</small></span></button>
     <label class="srch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="srch-side" class="srch-in" type="search" placeholder="英語・日本語で検索（例: 楽しみ）" value="${esc(R.q||'')}" autocomplete="off" enterkeyhint="search" aria-label="表現を検索"></label>
     ${NAV.filter(n=>n[0]!=='ask').map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
     <div class="grp">ほかの機能</div>
@@ -9338,7 +9338,7 @@ function shell(){
     ${themeSw('side-theme')}
     ${producedBy('side-pb')}
   </nav>`;
-  const top = `<header class="top"><button class="brand" data-act="go" data-v="home"><span class="brand-ic" aria-hidden="true">${coco(30)}${mango(30)}</span><span>ココとマンゴー英語<small class="sub">言えなかったを、その場で</small></span></button>
+  const top = `<header class="top"><button class="brand" data-act="go" data-v="home"><span class="brand-ic" aria-hidden="true">${coco(30)}${mango(30)}</span><span>CocoMan英語<small class="sub">言えなかったを、その場で</small></span></button>
     <div class="top-links"><button class="icon-btn" data-act="go" data-v="guide">手引書</button><button class="icon-btn" data-act="go" data-v="me">マイページ</button></div></header><div class="top-srch"><label class="srch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="srch-top" class="srch-in" type="search" placeholder="英語・日本語で検索（例: 楽しみ）" value="${esc(R.q||'')}" autocomplete="off" enterkeyhint="search" aria-label="表現を検索"></label></div>`;
   const tab = `<nav class="tabbar" aria-label="メインメニュー">${NAV.map(n=> n[0]==='ask'
      ? `<button class="ask ${R.v==='ask'?'on':''}" data-act="go" data-v="ask"><span class="bubble">${n[2]}</span>${n[1]}</button>`
