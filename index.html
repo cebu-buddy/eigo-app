@@ -10143,15 +10143,37 @@ const PREPS = [
   uses:[["続いて","The shop is open until 9 p.m.","その店は夜9時まで開いている。"],["〜しない（〜まで）","I didn't know until yesterday.","昨日まで知らなかった。"],["〜するまで（接続詞）","Wait here until I come back.","戻ってくるまでここで待っていて。"]]},
  {k:"during",core:"〜の間に（期間の中で）",svg:'<rect class="pi-o" x="34" y="34" width="92" height="40" rx="8"/><circle class="pi-b" cx="72" cy="54" r="10"/><line class="pi-g" x1="18" y1="86" x2="142" y2="86"/>',
   note:"休み・授業・旅行のような「出来事の期間」の中で何かが起こるイメージです。「3日間」のように長さを言うときは for を使います。",
-  uses:[["期間の中","I worked part-time during the summer.","夏の間、アルバイトをした。"],["ある時点で","My phone rang during the class.","授業中に電話が鳴った。"],["ずっと","It rained during the whole trip.","旅行の間ずっと雨だった。"]]}
+  uses:[["期間の中","I worked part-time during the summer.","夏の間、アルバイトをした。"],["ある時点で","My phone rang during the class.","授業中に電話が鳴った。"],["ずっと","It rained during the whole trip.","旅行の間ずっと雨だった。"]]},
+
+ {k:"near",core:"近くに",svg:'<circle class="pi-gh" cx="56" cy="52" r="44"/><rect class="pi-of" x="40" y="36" width="32" height="32" rx="4"/><circle class="pi-b" cx="88" cy="76" r="10"/>',
+  note:"基準のものから近い範囲（点線の円）にいるイメージです。くっついてはいません。距離の「近さ」を言うので、時間や数にも使えます。",
+  uses:[["場所","Is there a pharmacy near here?","この近くに薬局はありますか？"],["時間","Prices go up near Christmas.","クリスマスが近づくと値段が上がる。"],["もう少しで","Our project is near completion.","プロジェクトはもう少しで完成だ。"]]},
+ {k:"beside",core:"すぐ横に",svg:'<line class="pi-g" x1="16" y1="80" x2="144" y2="80"/><rect class="pi-of" x="46" y="36" width="36" height="44" rx="4"/><circle class="pi-b" cx="96" cy="69" r="11"/>',
+  note:"基準のものの真横にぴったり並んでいるイメージです。near より近く、next to とほぼ同じです。besides（〜に加えて）と形が似ているので注意します。",
+  uses:[["真横","Can I sit beside you?","隣に座ってもいい？"],["そばに","There's a small cafe beside the school.","学校のすぐ横に小さなカフェがある。"],["比べて","My bag looks tiny beside yours.","あなたのに比べると私のかばんは小さく見える。"]]},
+ {k:"beyond",core:"〜の向こうに・〜を超えて",svg:'<line class="pi-g" x1="12" y1="80" x2="148" y2="80"/><rect class="pi-of" x="70" y="30" width="10" height="50" rx="2"/><circle class="pi-gh" cx="36" cy="68" r="9"/><path class="pi-a" d="M46 60 Q75 6 108 52" marker-end="MK"/><circle class="pi-b" cx="128" cy="68" r="11"/>',
+  note:"区切りの線を越えて、その先の遠いところにあるイメージです。場所だけでなく、能力・予想・時間の「範囲を超えて」にも使います。",
+  uses:[["向こう側","There's a beach beyond those hills.","あの丘の向こうにビーチがある。"],["範囲を超えて","This math problem is beyond me.","この数学の問題は私には分からない。"],["予想以上","The trip was beyond my expectations.","旅行は期待以上だった。"]]},
+ {k:"onto",core:"〜の上へ（乗って）",svg:'<rect class="pi-of" x="80" y="58" width="64" height="14" rx="4"/><circle class="pi-gh" cx="30" cy="80" r="9"/><path class="pi-a" d="M40 72 Q70 18 102 38" marker-end="MK"/><circle class="pi-b" cx="112" cy="46" r="11"/>',
+  note:"外から動いてきて、面の上に乗るイメージです（on＋to）。動きがあるのが on との違いです。in と into の関係と同じです。",
+  uses:[["上へ乗る","The cat jumped onto the table.","猫がテーブルの上に飛び乗った。"],["乗り物","We got onto the ferry at 7 a.m.","朝7時にフェリーに乗り込んだ。"],["面へ動く","Don't drop your phone onto the floor.","スマホを床に落とさないで。"]]},
+ {k:"within",core:"〜以内に・〜の範囲の中で",svg:'<rect class="pi-o" x="26" y="28" width="108" height="46" rx="8"/><circle class="pi-b" cx="106" cy="51" r="10"/><line class="pi-a" x1="34" y1="88" x2="126" y2="88" marker-start="MK" marker-end="MK"/>',
+  note:"決められた範囲（期限・距離・ルール）の内側におさまるイメージです。時間なら「〜以内に」で、in（〜後に）とよく迷います。",
+  uses:[["時間の範囲","Please reply within 24 hours.","24時間以内に返信してください。"],["距離の範囲","The school is within walking distance.","学校は歩いて行ける距離にある。"],["決まりの範囲","Keep your spending within your budget.","出費は予算内におさめよう。"]]},
+ {k:"as",core:"〜として（＝その立場で）",svg:'<circle class="pi-b" cx="44" cy="54" r="13"/><line class="pi-a" x1="68" y1="48" x2="92" y2="48"/><line class="pi-a" x1="68" y1="60" x2="92" y2="60"/><rect class="pi-o" x="106" y="34" width="40" height="40" rx="6"/>',
+  note:"前のもの＝後ろの立場・役割、とイコールで結ぶイメージです。「〜として働く」「〜として使う」のように使います。「〜のように（似ている）」は like です。",
+  uses:[["立場・仕事","I worked as a waiter in Sydney.","シドニーでウェイターとして働いた。"],["役割","You can use this room as an office.","この部屋は事務所として使える。"],["〜のころ","As a child, I lived in Osaka.","子どものころ、大阪に住んでいた。"]]},
+ {k:"except",core:"〜を除いて",svg:'<circle class="pi-o" cx="64" cy="54" r="34"/><circle class="pi-b" cx="52" cy="44" r="8"/><circle class="pi-b" cx="74" cy="42" r="8"/><circle class="pi-b" cx="62" cy="66" r="8"/><line class="pi-a pi-d" x1="100" y1="54" x2="114" y2="54" marker-end="MK"/><circle class="pi-gh" cx="130" cy="54" r="10"/>',
+  note:"全体の中から1つだけを外に出すイメージです。all・every・nothing のような「全部」を表す語と一緒によく使います。",
+  uses:[["全部〜ただし","The shop is open every day except Sunday.","その店は日曜以外毎日開いている。"],["〜以外","Everyone came except Ken.","ケン以外はみんな来た。"],["〜を除けば","I like all vegetables except carrots.","にんじん以外の野菜はみんな好き。"]]}
 ];
 const PREP_K = PREPS.map(p=>p.k);
 
 const PREP_GROUPS = [
- ['位置','どこにある？','<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',['in','on','at','by','over','under','above','below','between','among','behind']],
- ['動き・方向','どこへ動く？','<path d="M4 12h14"/><path d="M13 6l6 6-6 6"/>',['up','down','into','out','off','away','back','to','toward','from','through','across','along','around','forward','ahead','aside']],
- ['時間・順番','いつ？','<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',['before','after','since','until','during']],
- ['つながり・関係','何とどうつながる？','<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',['with','without','for','of','about','against','together','apart']]
+ ['位置','どこにある？','<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',['in','on','at','by','near','beside','over','under','above','below','between','among','behind','beyond']],
+ ['動き・方向','どこへ動く？','<path d="M4 12h14"/><path d="M13 6l6 6-6 6"/>',['up','down','into','onto','out','off','away','back','to','toward','from','through','across','along','around','forward','ahead','aside']],
+ ['時間・順番','いつ？','<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',['before','after','since','until','during','within']],
+ ['つながり・関係','何とどうつながる？','<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',['with','without','for','of','about','as','except','against','together','apart']]
 ];
 const prepSvg = (k,w)=>{ const p=PREPS.find(x=>x.k===k), body=p?p.svg:PREP_X[k]; if(!body) return ''; const id='pa-'+k+'-'+(w||0);
   return `<svg class="pi" viewBox="0 0 160 100" ${w?`width="${w}" height="${Math.round(w*100/160)}"`:''} aria-hidden="true"><defs><marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path class="pi-mk" d="M2 1L8 5L2 9"/></marker></defs>${body.replace(/MK/g,`url(#${id})`)}</svg>`; };
@@ -10194,6 +10216,7 @@ const PREP_X = {
  byd:'<line class="pi-g" x1="18" y1="70" x2="124" y2="70"/><rect class="pi-of" x="124" y="26" width="8" height="56" rx="2"/><circle class="pi-b" cx="84" cy="56" r="11"/><path class="pi-a pi-d" d="M98 56 H114" marker-end="MK"/>',
  until:'<circle class="pi-gh" cx="24" cy="56" r="9"/><line class="pi-a" x1="36" y1="56" x2="114" y2="56" style="stroke-width:6" marker-end="MK"/><rect class="pi-of" x="124" y="26" width="8" height="56" rx="2"/>',
  forlen:'<line class="pi-a" x1="34" y1="56" x2="126" y2="56" marker-start="MK" marker-end="MK"/><line class="pi-g" x1="30" y1="40" x2="30" y2="72"/><line class="pi-g" x1="130" y1="40" x2="130" y2="72"/><circle class="pi-b" cx="80" cy="30" r="9"/>',
+ like:'<circle class="pi-b" cx="40" cy="54" r="14"/><path class="pi-a" d="M64 49 q6 -6 12 0 t12 0"/><path class="pi-a" d="M64 61 q6 -6 12 0 t12 0"/><circle class="pi-o" cx="120" cy="54" r="14"/>',
  during:'<rect class="pi-o" x="34" y="34" width="92" height="40" rx="8"/><circle class="pi-b" cx="72" cy="54" r="10"/><line class="pi-g" x1="18" y1="86" x2="142" y2="86"/>'
 };
 const PREP_CMP = [
@@ -10288,7 +10311,49 @@ const PREP_CMP = [
   q:[['I go ___ school by bus.',['to','toward'],0,'学校に「着く」のが前提なので to。'],
      ['A dog was running ___ me!',['to','toward'],1,'自分の方へ向かって走ってくる途中なので toward。'],
      ['She turned ___ the window.',['to','toward'],1,'窓の方を「向いた」だけなので toward。'],
-     ['Please send this letter ___ my office.',['to','toward'],0,'事務所に「届く」ので to。']]}
+     ['Please send this letter ___ my office.',['to','toward'],0,'事務所に「届く」ので to。']]},
+
+ {id:'ononto',title:'on / onto',sub:'上にある・上へ乗る',
+  lead:'on は面にくっついている「状態」。onto は外から動いてきて面の上に乗る「動き」です。',
+  ws:[['on','on','面の上にある（状態）','The cup is on the table.／sit on the sofa'],
+      ['onto','onto','面の上へ乗る（動き）','jump onto the bed／climb onto the roof']],
+  cols:['例'],
+  tip:'in / into と同じ考え方です。「どこにあるか」なら on、「どこへ動くか」なら onto。ただし put・sit などは on だけで動きを表せるので、put it on the table がふつうです。',
+  q:[['My keys are ___ the desk.',['on','onto'],0,'机の上に「ある」状態なので on。'],
+     ['The dog jumped ___ the sofa.',['on','onto'],1,'床からソファーの上へ「乗る」動きなので onto。'],
+     ['There is a poster ___ the wall.',['on','onto'],0,'壁にくっついている状態なので on。'],
+     ['He climbed ___ the roof to fix it.',['on','onto'],1,'下から屋根の上へ「乗る」動きなので onto。']]},
+ {id:'nearbeside',title:'near / beside / by',sub:'そばに・近くに',
+  lead:'近さの順に、near（近くの範囲）→ by（すぐそば）→ beside（ぴったり真横）です。',
+  ws:[['near','near','近くの範囲','near the station／live near the beach'],
+      ['by','by','すぐそば','a house by the sea／stand by the door'],
+      ['beside','beside','ぴったり真横','sit beside me／a lamp beside the bed']],
+  cols:['例'],
+  tip:'歩いて行けるくらいの「近所」なら near、手が届くくらいの「すぐそば」なら by、人や物が「横に並ぶ」なら beside（＝ next to）です。',
+  q:[['Is there an ATM ___ here?',['near','by','beside'],0,'「この近くに」は near here。'],
+     ['Come and sit ___ me.',['near','by','beside'],2,'自分の真横に並んで座るので beside。'],
+     ['We stayed at a hotel ___ the sea.',['near','by','beside'],1,'海のすぐそばのホテルは by the sea がよく使われます。'],
+     ['I live ___ the university, about 10 minutes on foot.',['near','by','beside'],0,'歩いて10分ほどの「近く」なので near。']]},
+ {id:'inwithin',title:'in / within',sub:'〜後に・〜以内に',
+  lead:'時間に使うとき、in は「その時間がたったあとに」。within は「その時間が終わる前のどこかで（以内に）」です。',
+  ws:[['in','in','〜たったあとに','in 10 minutes（10分後に）／in a week'],
+      ['within','within','〜以内に','within 10 minutes（10分以内に）／within a week']],
+  cols:['例'],
+  tip:'I\'ll be back in an hour. は「1時間後に戻る」。Please reply within an hour. は「1時間以内に」。期限を守ってほしいときは within を使います。',
+  q:[['The bus will leave ___ five minutes.',['in','within'],0,'今から5分「たったら」出発するので in。'],
+     ['You must apply ___ 30 days of arrival.',['in','within'],1,'到着から30日の「以内に」申請するので within。'],
+     ['I\'ll call you back ___ an hour.',['in','within'],0,'1時間「後に」かけ直すので in。'],
+     ['The package will arrive ___ three business days.',['in','within'],1,'3営業日「以内に」届くので within。']]},
+ {id:'aslike',title:'as / like',sub:'〜として・〜のように',
+  lead:'as は「〜として（本当にその立場）」。like は「〜のように・〜みたいに（似ているだけ）」です。',
+  ws:[['as','as','〜として（本当にその立場）','work as a nurse／use it as a bag'],
+      ['like','like','〜のように（似ている）','talk like a teacher／look like rain']],
+  cols:['例'],
+  tip:'He works as a teacher. は本当に先生。He talks like a teacher. は先生ではないけれど先生みたいな話し方。「本物かどうか」で選びます。',
+  q:[['She works ___ a nurse in Manila.',['as','like'],0,'本当に看護師として働いているので as。'],
+     ['You look ___ your mother.',['as','like'],1,'お母さんに「似ている」ので like。'],
+     ['I used my jacket ___ a pillow.',['as','like'],0,'上着を枕「として」使ったので as。'],
+     ['It sounds ___ a great plan.',['as','like'],1,'「〜のように聞こえる」は sound like。']]}
 ];
 let PCQ = {};
 function prepCmpView(c){
