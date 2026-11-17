@@ -452,7 +452,7 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .st-card.on .st-n{background:var(--teal);color:#fff}
 .st-card b{font-size:14.5px}
 .st-bar{position:absolute;left:0;right:0;bottom:0;height:3px}.st-bar i{display:block;height:100%;background:var(--teal)}
-.st-h{margin:14px 0 6px;font-size:15px}.st-h.pp-gh{margin:26px 0 10px;font-size:20px;font-weight:700}.st-h.pp-gh small{font-size:14px;margin-left:8px}.st-h:first-child{margin-top:0}.st-h small{font-size:12px;color:var(--muted);font-weight:500;margin-left:4px}
+.st-h{margin:14px 0 6px;font-size:15px}.st-h.pp-gh{margin:26px 0 10px;font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}.st-h.pp-gh .cat-ic{width:36px;height:36px;border-radius:10px}.st-h.pp-gh .cat-ic svg{width:20px;height:20px}.st-h.pp-gh small{font-size:14px;margin-left:8px}.st-h:first-child{margin-top:0}.st-h small{font-size:12px;color:var(--muted);font-weight:500;margin-left:4px}
 .hm-today{display:grid;gap:12px;margin-bottom:12px}
 @media (min-width:720px){.hm-today{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}}
 .hm-card{border-radius:22px;padding:18px 20px;text-align:left;display:flex;flex-direction:column;gap:6px}
@@ -10141,10 +10141,10 @@ const PREPS = [
 const PREP_K = PREPS.map(p=>p.k);
 
 const PREP_GROUPS = [
- ['位置','どこにある？',['in','on','at','by','over','under','above','below','between','among','behind']],
- ['動き・方向','どこへ動く？',['up','down','into','out','off','away','back','to','toward','from','through','across','along','around','forward','ahead','aside']],
- ['時間・順番','いつ？',['before','after','since']],
- ['つながり・関係','何とどうつながる？',['with','without','for','of','about','against','together','apart']]
+ ['位置','どこにある？','<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',['in','on','at','by','over','under','above','below','between','among','behind']],
+ ['動き・方向','どこへ動く？','<path d="M4 12h14"/><path d="M13 6l6 6-6 6"/>',['up','down','into','out','off','away','back','to','toward','from','through','across','along','around','forward','ahead','aside']],
+ ['時間・順番','いつ？','<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',['before','after','since']],
+ ['つながり・関係','何とどうつながる？','<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',['with','without','for','of','about','against','together','apart']]
 ];
 const prepSvg = (k,w)=>{ const p=PREPS.find(x=>x.k===k), body=p?p.svg:PREP_X[k]; if(!body) return ''; const id='pa-'+k+'-'+(w||0);
   return `<svg class="pi" viewBox="0 0 160 100" ${w?`width="${w}" height="${Math.round(w*100/160)}"`:''} aria-hidden="true"><defs><marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path class="pi-mk" d="M2 1L8 5L2 9"/></marker></defs>${body.replace(/MK/g,`url(#${id})`)}</svg>`; };
@@ -10164,8 +10164,8 @@ function prepView(){
     <p class="muted small" style="margin:10px 0 0">黄色い玉が動くもの、緑の形が基準の場所です。訳を覚えるより、イメージを1つつかむと、たくさんの句動詞やコロケーションが分かるようになります。</p>
     <h3 class="st-h" style="margin-top:16px">迷いやすい使い分け</h3>
     <div class="pc-list">${PREP_CMP.map(c=>`<button class="pc-card" data-act="prepcmp" data-c="${c.id}"><b class="en">${esc(c.title)}</b><span>${esc(c.sub)}</span></button>`).join('')}</div>
-    ${PREP_GROUPS.map(g=>`<h3 class="st-h pp-gh">${esc(g[0])} <small>${esc(g[1])}</small></h3>
-    <div class="pp-grid">${g[2].map(k=>PREPS.find(p=>p.k===k)).map(p=>`<button class="pp-card ${(S.prepSeen||{})[p.k]?'seen':''}" data-act="prep" data-k="${p.k}">${prepSvg(p.k)}<b class="en">${p.k}</b><span>${esc(p.core)}</span></button>`).join('')}</div>`).join('')}`;
+    ${PREP_GROUPS.map((g,gi)=>`<h3 class="st-h pp-gh"><span class="cat-ic g${gi%3}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${g[2]}</svg></span>${esc(g[0])} <small>${esc(g[1])}</small></h3>
+    <div class="pp-grid">${g[3].map(k=>PREPS.find(p=>p.k===k)).map(p=>`<button class="pp-card ${(S.prepSeen||{})[p.k]?'seen':''}" data-act="prep" data-k="${p.k}">${prepSvg(p.k)}<b class="en">${p.k}</b><span>${esc(p.core)}</span></button>`).join('')}</div>`).join('')}`;
   const p=PREPS.find(x=>x.k===k), i=PREP_K.indexOf(k), ph=prepRel(k,'phrasal'), co=prepRel(k,'colloc'), more=R.prepMore===k;
   const rel=(xs,n)=>xs.slice(0,more?xs.length:n).map(x=>`<button class="pp-rel" data-act="sopen" data-id="${esc(x.id)}"><span class="en">${esc(x.en)}</span><span class="s">${esc(x.ja)}</span></button>`).join('');
   const gch=GR_CH.findIndex(c=>c.n==='前置詞');
