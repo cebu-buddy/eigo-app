@@ -415,6 +415,18 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .tile .tile-mk.g0{color:var(--teal)}.tile .tile-mk.g1{color:var(--mango)}.tile .tile-mk.g2{color:var(--pink)}
 .today{display:flex;gap:16px;align-items:center}
 .today .num{font-family:var(--en);font-size:34px;font-weight:600;color:var(--teal-ink);line-height:1}
+.pi .pi-g{stroke:var(--line);stroke-width:1.5}.pi .pi-o{fill:var(--teal);fill-opacity:.15;stroke:var(--teal);stroke-width:2}.pi .pi-of{fill:var(--teal)}.pi .pi-b{fill:var(--mango)}.pi .pi-gh{fill:none;stroke:var(--mango);stroke-width:1.5;stroke-dasharray:3 3}.pi .pi-a{fill:none;stroke:var(--teal-ink);stroke-width:2.5;stroke-linecap:round}.pi .pi-d{stroke-dasharray:5 4}.pi .pi-mk{fill:none;stroke:var(--teal-ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
+.pp-card{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 14px 14px;cursor:pointer;color:var(--ink)}
+.pp-card:hover{border-color:var(--teal)}.pp-card.seen{background:var(--mint)}
+.pp-card .pi{width:100%;height:auto;margin-bottom:4px}.pp-card b{font-size:20px;font-weight:600}.pp-card span{font-size:13px;color:var(--muted);line-height:1.5}
+.pp-hero{display:grid;gap:16px;align-items:center}@media (min-width:640px){.pp-hero{grid-template-columns:minmax(0,240px) 1fr}}
+.pp-hero .pi{width:100%;max-width:220px;height:auto;background:var(--bg);border-radius:16px;padding:8px}
+.pp-detail .word{font-family:var(--en);font-size:40px;font-weight:600;line-height:1.1}
+.pp-core{font-size:19px;font-weight:700;color:var(--teal-ink);margin:4px 0 6px}
+.pp-rels{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px}
+.pp-rel{display:flex;flex-direction:column;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:8px 12px;cursor:pointer;color:var(--ink)}.pp-rel:hover{border-color:var(--teal)}.pp-rel .en{font-family:var(--en);font-weight:600}.pp-rel .s{font-size:12.5px;color:var(--muted)}
+.pp-links{margin:10px 0 4px;display:flex;flex-wrap:wrap;gap:6px}.pp-links>p{flex-basis:100%}.pp-chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:4px 12px 4px 4px;cursor:pointer;color:var(--ink);text-align:left}.pp-chip:hover{border-color:var(--teal)}.pp-chip>span{display:flex;flex-direction:column}.pp-chip b{font-size:15px}.pp-chip small{font-size:12px;color:var(--muted)}
 .st-pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:8px;margin-top:10px}
 @media (max-width:719px){.st-pick{display:flex;overflow-x:auto;scroll-snap-type:x proximity;margin:10px -16px 0;padding:2px 16px 6px;scroll-padding-inline:16px;scrollbar-width:none}.st-pick::-webkit-scrollbar{display:none}.st-card{flex:0 0 auto;scroll-snap-align:start}}
 .st-card{position:relative;overflow:hidden;display:flex;align-items:center;gap:10px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;color:var(--ink);white-space:nowrap}
@@ -709,7 +721,7 @@ const I = {
  mic:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>'
 };
 
-const CATS = {study:'留学で使う英語', word:'単語', phrasal:'句動詞（熟語）', colloc:'コロケーション', idiom:'イディオム', pattern:'構文', starter:'文頭・つなぎ言葉', dialog:'場面別フレーズ', grammar:'文法', wh:'ワーホリ対策'};
+const CATS = {study:'留学で使う英語', word:'単語', phrasal:'句動詞（熟語）', colloc:'コロケーション', idiom:'イディオム', pattern:'構文', starter:'文頭・つなぎ言葉', dialog:'場面別フレーズ', grammar:'文法', wh:'ワーホリ対策', prep:'前置詞（イメージ）'};
 
 const ipaHTML = (en,ipa)=> (ipa && !/\s/.test(String(en||'').trim())) ? `<div class="ipa">${esc(ipa)}</div>` : '';
 const it = (cat,lv,en,ipa,ja,e1,j1,e2,j2,scene)=>({id:cat+':'+en,cat,lv,en,ipa,ja,ex:[[e1,j1],[e2,j2]],scene});
@@ -9620,7 +9632,7 @@ V.home = ()=>{
   <button class="hero-study" data-act="learn" data-cat="study"><div><h2>留学で使う英語</h2><p>出発前の手続きから空港・授業・寮・病院・銀行まで、そのまま使える表現と会話</p></div><div class="pair">${coco(52)}${mango(52)}</div></button>
   <h2 class="hm-h">目的から選ぶ</h2>
   <div class="hm-groups">
-    ${grp('基礎をかためる',[row('go','data-v="level"','level','g0','レベル診断',S.level==null?'カテゴリーごとに20問':'記録とグラフを見る'),row('learn','data-cat="word"','word','g0','単語',`レベル別 ${ITEMS.filter(x=>x.cat==='word').length.toLocaleString()}語`),row('learn','data-cat="grammar"','grammar','g0','文法','レベル別の単元と確認問題'),row('go','data-v="pron"','pron','g0','発音講座','発音記号・聞き分け・言ってみる')])}
+    ${grp('基礎をかためる',[row('go','data-v="level"','level','g0','レベル診断',S.level==null?'カテゴリーごとに20問':'記録とグラフを見る'),row('learn','data-cat="word"','word','g0','単語',`レベル別 ${ITEMS.filter(x=>x.cat==='word').length.toLocaleString()}語`),row('learn','data-cat="grammar"','grammar','g0','文法','レベル別の単元と確認問題'),row('learn','data-cat="prep"','prep','g0','前置詞（イメージ）','up・in・on を図でつかむ'),row('go','data-v="pron"','pron','g0','発音講座','発音記号・聞き分け・言ってみる')])}
     ${grp('表現を広げる',[row('learn','data-cat="phrasal"','phrasal','g0','句動詞（熟語）','get up・look for など'),row('learn','data-cat="colloc"','colloc','g0','コロケーション','よく一緒に使う語の組み合わせ'),row('learn','data-cat="pattern"','pattern','g0','構文','文の型で、言える文を増やす'),row('learn','data-cat="idiom"','idiom','g0','イディオム','決まった言い回しと、その意味'),row('learn','data-cat="starter"','starter','g0','文頭・つなぎ言葉','話し始めと、話をつなぐ言葉')])}
     ${grp('話す練習',[row('go','data-v="talk"','talk','g1','AI英会話','留学生活・場面別・ワーホリ'),row('learn','data-cat="dialog"','dialog','g1','場面別フレーズ','買い物・レストラン・交通など')])}
     ${grp('ワーホリの準備',[row('learn','data-cat="wh"','wh','g2','ワーホリ対策','仕事探し・面接・職場の表現'),row('go','data-v="resume"','resume','g2','履歴書をつくる','AIと一問一答で強みを見つける')])}
@@ -9744,14 +9756,113 @@ const CAT_ICON = {
   level:'<path d="M4 20V13M10 20V8M16 20V4M2 20h20"/>',
   pron:'<path d="M9 5a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0z"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4M8 21h8"/>',
   talk:'<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 15h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zM20 15h-2a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1z"/>',
+  prep:'<rect x="11" y="6" width="10" height="12" rx="2"/><path d="M3 12h10M10 9l3 3-3 3"/>',
   resume:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>'
 };
 
 const tileMark=(k,gi)=>CAT_ICON[k]?`<span class="tile-mk g${gi}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${CAT_ICON[k]}</svg></span>`:'';
 const catIcon=(k,gi)=>CAT_ICON[k]?`<span class="cat-ic g${gi}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${CAT_ICON[k]}</svg></span>`:'';
-const CAT_GROUPS = [['語彙',['word','phrasal','colloc','idiom']],['表現',['study','dialog','pattern','starter']],['文法・ワーホリ',['grammar','wh']]];
+
+const PREPS = [
+ {k:"up",core:"上へ・最後まで",svg:'<line class="pi-g" x1="20" y1="88" x2="140" y2="88"/><circle class="pi-gh" cx="80" cy="76" r="9"/><line class="pi-a" x1="80" y1="64" x2="80" y2="36" marker-end="MK"/><circle class="pi-b" cx="80" cy="20" r="11"/>',
+  note:"下から上へ動くのが基本です。上まで行くと「いっぱい・最後まで」になり、「すっかり〜する」の意味が生まれます。",
+  uses:[["動き","Stand up, please.","立ってください。"],["最後まで","I ate up all the rice.","ご飯を全部たいらげた。"],["現れる","He finally showed up at ten.","彼は10時にやっと来た。"]]},
+ {k:"down",core:"下へ・減って・しっかり",svg:'<line class="pi-g" x1="20" y1="88" x2="140" y2="88"/><circle class="pi-gh" cx="80" cy="18" r="9"/><line class="pi-a" x1="80" y1="30" x2="80" y2="58" marker-end="MK"/><circle class="pi-b" cx="80" cy="75" r="11"/>',
+  note:"上から下へ動くのが基本です。量や勢いが「下がる」、紙の上に「書き下ろして固定する」にも広がります。",
+  uses:[["動き","Please sit down.","座ってください。"],["減る","Can you turn the volume down?","音量を下げてくれる？"],["固定する","Let me write it down.","書き留めておくね。"]]},
+ {k:"in",core:"中に",svg:'<rect class="pi-o" x="62" y="28" width="60" height="50" rx="6"/><line class="pi-a" x1="18" y1="53" x2="52" y2="53" marker-end="MK"/><circle class="pi-b" cx="92" cy="53" r="11"/>',
+  note:"囲まれた空間の中にあるイメージです。時間なら「月・年・季節」のような幅のある時間の中です。",
+  uses:[["場所","My phone is in my bag.","スマホはかばんの中にある。"],["時間","I came to Cebu in March.","3月にセブに来た。"],["中に入れる","Please fill in this form.","この用紙に記入してください。"]]},
+ {k:"out",core:"外へ・すっかり",svg:'<rect class="pi-o" x="20" y="28" width="60" height="50" rx="6"/><circle class="pi-gh" cx="50" cy="53" r="9"/><line class="pi-a" x1="62" y1="53" x2="112" y2="53" marker-end="MK"/><circle class="pi-b" cx="130" cy="53" r="11"/>',
+  note:"中から外へ出るイメージです。外へ出し切ると「すっかり・なくなるまで」、隠れていたものが「出てくる」にもなります。",
+  uses:[["外へ","Let's eat out tonight.","今夜は外食しよう。"],["なくなる","We ran out of milk.","牛乳を切らした。"],["出てくる","I found out the answer.","答えが分かった。"]]},
+ {k:"on",core:"くっついて・続けて",svg:'<rect class="pi-of" x="25" y="62" width="110" height="14" rx="4"/><circle class="pi-b" cx="80" cy="50" r="11"/><path class="pi-a pi-d" d="M60 40 Q80 30 100 40"/>',
+  note:"表面にくっついているイメージです。上だけでなく、壁や天井でも on です。くっついた状態が続くと「続けて」になります。",
+  uses:[["接している","There is a poster on the wall.","壁にポスターが貼ってある。"],["日・曜日","I have a test on Monday.","月曜日にテストがある。"],["続けて","Keep on trying!","あきらめずに続けて！"]]},
+ {k:"off",core:"離れて",svg:'<rect class="pi-of" x="25" y="62" width="110" height="14" rx="4"/><circle class="pi-gh" cx="62" cy="50" r="9"/><line class="pi-a" x1="72" y1="42" x2="100" y2="26" marker-end="MK"/><circle class="pi-b" cx="118" cy="20" r="11"/>',
+  note:"くっついていたものが離れるイメージで、on の反対です。電気が離れると「消える」、仕事から離れると「休み」です。",
+  uses:[["離れる","Take off your shoes here.","ここで靴を脱いでください。"],["止める","Turn off the light, please.","電気を消してください。"],["休み","I'm off tomorrow.","明日は休みです。"]]},
+ {k:"away",core:"遠ざかって",svg:'<circle class="pi-gh" cx="28" cy="55" r="9"/><line class="pi-a" x1="40" y1="55" x2="112" y2="55" marker-end="MK"/><circle class="pi-b" cx="128" cy="55" r="7" opacity=".7"/><circle class="pi-b" cx="144" cy="55" r="4" opacity=".4"/>',
+  note:"今いる場所から遠ざかっていくイメージです。手元から離れて「なくなる」にも使います。",
+  uses:[["距離","The beach is 10 minutes away.","ビーチは10分の距離です。"],["手放す","Don't throw it away.","捨てないで。"],["去る","The cat ran away.","猫が逃げた。"]]},
+ {k:"back",core:"元の場所へ",svg:'<path class="pi-a" d="M40 72 H108 A19 19 0 0 0 108 34 H56" marker-end="MK"/><circle class="pi-b" cx="34" cy="34" r="11"/><circle class="pi-gh" cx="30" cy="72" r="9"/>',
+  note:"元の場所・元の状態に戻るイメージです。お金や電話を「返す」ときにも使います。",
+  uses:[["戻る","I'll be back in five minutes.","5分で戻ります。"],["返す","Can I pay you back tomorrow?","明日お金を返してもいい？"],["折り返す","I'll call you back later.","あとで折り返し電話するね。"]]},
+ {k:"over",core:"越えて・覆って・終わって",svg:'<rect class="pi-o" x="58" y="56" width="44" height="32" rx="5"/><path class="pi-a" d="M28 86 Q80 0 132 86" marker-end="MK"/><circle class="pi-b" cx="80" cy="36" r="11"/>',
+  note:"上を弧を描いて越えるイメージです。越え終わると「終わって」、上から全体を覆うと「じっくり・全体に」になります。",
+  uses:[["越える","We walked over the bridge.","橋を歩いて渡った。"],["終わって","The class is over.","授業が終わった。"],["じっくり","Let me think it over.","よく考えさせて。"]]},
+ {k:"through",core:"通り抜けて・最後まで",svg:'<rect class="pi-of" x="58" y="22" width="44" height="18" rx="4"/><rect class="pi-of" x="58" y="68" width="44" height="18" rx="4"/><line class="pi-a" x1="18" y1="54" x2="140" y2="54" marker-end="MK"/><circle class="pi-b" cx="80" cy="54" r="10"/>',
+  note:"トンネルの入口から出口まで通り抜けるイメージです。最後まで通り抜けると「やり遂げて・経験して」になります。",
+  uses:[["通り抜ける","The bus goes through the city.","バスは街の中を通る。"],["経験する","She went through a hard time.","彼女はつらい時期を経験した。"],["最後まで","I read through the contract.","契約書を最後まで読んだ。"]]},
+ {k:"around",core:"周りを・あちこち",svg:'<circle class="pi-of" cx="80" cy="52" r="13"/><path class="pi-a" d="M80 18 A34 34 0 1 1 46 52" marker-end="MK"/><circle class="pi-b" cx="114" cy="52" r="9"/>',
+  note:"ぐるっと周りを回るイメージです。あちこち動き回る、数字の「周辺＝だいたい」にも使います。",
+  uses:[["周り","Let's look around the school.","学校を見て回ろう。"],["だいたい","It costs around 500 pesos.","500ペソくらいかかる。"],["向きを変える","Turn around, please.","後ろを向いてください。"]]},
+ {k:"into",core:"中へ入り込んで・変わって",svg:'<rect class="pi-o" x="74" y="34" width="58" height="50" rx="6"/><path class="pi-a" d="M18 26 Q60 18 88 52" marker-end="MK"/><circle class="pi-b" cx="106" cy="64" r="11"/>',
+  note:"外から中へ入り込む「動き」です（in は中にある「状態」）。中に入って別のものになると「変わる」です。",
+  uses:[["入る","She walked into the classroom.","彼女は教室に入ってきた。"],["ばったり","I ran into my teacher at the mall.","モールで先生にばったり会った。"],["変わる","Water turns into ice.","水は氷に変わる。"]]},
+ {k:"at",core:"一点に",svg:'<circle class="pi-o" cx="96" cy="54" r="30" fill-opacity="0"/><circle class="pi-o" cx="96" cy="54" r="18" fill-opacity="0"/><circle class="pi-b" cx="96" cy="54" r="7"/><line class="pi-a" x1="20" y1="20" x2="84" y2="46" marker-end="MK"/>',
+  note:"地図の上の「点」のイメージです。時刻のようなピンポイントの時間や、視線を向ける先にも使います。",
+  uses:[["地点","Let's meet at the station.","駅で会おう。"],["時刻","Class starts at 8.","授業は8時に始まる。"],["向ける先","Look at this picture.","この写真を見て。"]]},
+ {k:"to",core:"到着点まで",svg:'<line class="pi-a" x1="124" y1="22" x2="124" y2="86" style="stroke:var(--teal);stroke-width:3"/><path class="pi-of" d="M124 22 L146 30 L124 38 Z"/><circle class="pi-b" cx="28" cy="62" r="11"/><line class="pi-a" x1="42" y1="62" x2="116" y2="62" marker-end="MK"/>',
+  note:"到着点に向かって進み、届くイメージです。物や言葉が相手に「届く」ときにも使います。",
+  uses:[["行き先","I go to school by jeepney.","ジプニーで学校へ行く。"],["相手","I sent an email to my agent.","エージェントにメールを送った。"],["範囲の終わり","The shop is open from 9 to 6.","店は9時から6時まで開いている。"]]},
+ {k:"for",core:"〜に向かって・〜のために",svg:'<line class="pi-a" x1="124" y1="22" x2="124" y2="86" style="stroke:var(--teal);stroke-width:3"/><path class="pi-of" d="M124 22 L146 30 L124 38 Z"/><circle class="pi-b" cx="28" cy="62" r="11"/><line class="pi-a pi-d" x1="42" y1="62" x2="96" y2="62" marker-end="MK"/>',
+  note:"目的地の方向を指すイメージです。to と違い、届いたかどうかは問いません。そこから「〜のために・〜を求めて」になります。",
+  uses:[["行き先","This bus is for Ayala.","このバスはアヤラ行きです。"],["求めて","I'm looking for my key.","鍵を探している。"],["期間","I studied English for three months.","3か月英語を勉強した。"]]},
+ {k:"from",core:"〜から（出発点）",svg:'<rect class="pi-of" x="18" y="36" width="34" height="34" rx="5"/><line class="pi-a" x1="58" y1="53" x2="108" y2="53" marker-end="MK"/><circle class="pi-b" cx="126" cy="53" r="11"/>',
+  note:"出発点・起点のイメージです。場所・時間・送り主など、何かが始まる点を表します。",
+  uses:[["出身","I'm from Japan.","日本から来ました。"],["始まり","The class runs from 1 to 3.","授業は1時から3時まで。"],["送り主","I got a message from my host family.","ホストファミリーから連絡が来た。"]]},
+ {k:"with",core:"一緒に・〜を使って",svg:'<ellipse class="pi-a pi-d" cx="80" cy="54" rx="44" ry="26" style="stroke-width:1.5"/><circle class="pi-b" cx="67" cy="54" r="12"/><circle class="pi-of" cx="93" cy="54" r="12"/>',
+  note:"2つのものが一緒にいるイメージです。手に持っている道具と一緒に＝「〜を使って」にもなります。",
+  uses:[["一緒に","I live with two roommates.","ルームメイト2人と住んでいる。"],["持っている","I want a room with a window.","窓のある部屋がいい。"],["使って","Eat it with a spoon.","スプーンで食べて。"]]},
+ {k:"by",core:"そばに・〜によって",svg:'<rect class="pi-o" x="46" y="32" width="44" height="46" rx="6"/><circle class="pi-b" cx="106" cy="55" r="11"/><path class="pi-a pi-d" d="M92 82 H120" style="stroke-width:1.5"/>',
+  note:"すぐそばにあるイメージです。そばを通る手段＝「〜によって」、期限のそば＝「〜までに」に広がります。",
+  uses:[["そば","I sat by the window.","窓のそばに座った。"],["手段","I paid by card.","カードで払った。"],["期限","Please finish it by Friday.","金曜日までに終わらせてください。"]]},
+ {k:"about",core:"〜のあたり・〜について",svg:'<circle class="pi-o" cx="80" cy="52" r="32" fill-opacity="0" style="stroke-dasharray:4 4"/><circle class="pi-b" cx="80" cy="52" r="10"/><circle class="pi-of" cx="80" cy="20" r="4"/><circle class="pi-of" cx="112" cy="52" r="4"/><circle class="pi-of" cx="80" cy="84" r="4"/><circle class="pi-of" cx="48" cy="52" r="4"/>',
+  note:"あるものの周りのあたりをぼんやり指すイメージです。話の周り＝「〜について」、数の周り＝「だいたい」です。",
+  uses:[["話題","What are you talking about?","何の話をしているの？"],["だいたい","It takes about an hour.","1時間くらいかかる。"],["気持ちの向け先","Don't worry about it.","気にしないで。"]]},
+ {k:"of",core:"〜の一部・〜とつながって",svg:'<circle class="pi-o" cx="80" cy="52" r="34"/><circle class="pi-b" cx="100" cy="38" r="11"/>',
+  note:"全体の中の一部、または何かとつながっているイメージです。「〜の」と訳せることが多い語です。",
+  uses:[["一部","One of my friends lives in Cebu.","友達の1人がセブに住んでいる。"],["つながり","What's the name of your school?","学校の名前は何？"],["中身","Can I have a cup of coffee?","コーヒーを1杯もらえますか？"]]}
+];
+const PREP_K = PREPS.map(p=>p.k);
+const prepSvg = (k,w)=>{ const p=PREPS.find(x=>x.k===k); if(!p) return ''; const id='pa-'+k+'-'+(w||0);
+  return `<svg class="pi" viewBox="0 0 160 100" ${w?`width="${w}" height="${Math.round(w*100/160)}"`:''} aria-hidden="true"><defs><marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path class="pi-mk" d="M2 1L8 5L2 9"/></marker></defs>${p.svg.replace(/MK/g,`url(#${id})`)}</svg>`; };
+
+const prepRel = (k,cat)=>{ const re=new RegExp('(^|[^a-z])'+k+'($|[^a-z])','i'); return ITEMS.filter(x=>x.cat===cat && re.test(x.en)); };
+
+function prepChips(x){
+  if(x.cat!=='phrasal' && x.cat!=='colloc') return '';
+  const ks=PREP_K.filter(k=>new RegExp('(^|[^a-z])'+k+'($|[^a-z])','i').test(x.en)); if(!ks.length) return '';
+  return `<div class="pp-links"><p class="filter-l" style="margin:0 0 6px">前置詞のイメージ</p>${ks.map(k=>{const p=PREPS.find(q=>q.k===k); return `<button class="pp-chip" data-act="prep" data-k="${k}">${prepSvg(k,56)}<span><b class="en">${k}</b><small>${esc(p.core)}</small></span></button>`;}).join('')}</div>`;
+}
+function prepView(){
+  const head=`<div class="crumbrow"><button class="btn sm" data-act="learnmenu">← カテゴリー</button></div>`;
+  const k=PREP_K.includes(R.prepK)?R.prepK:null;
+  if(!k) return `${head}<div class="learn-head"><h1 class="cat-title"><button class="catswitch" data-act="catsheet" aria-haspopup="dialog">${esc(CATS.prep)}<span class="sw">カテゴリ切替え ▾</span></button>${infoBtn('prep')}</h1></div>
+    <p class="muted small" style="margin:10px 0 0">黄色い玉が動くもの、緑の形が基準の場所です。訳を覚えるより、イメージを1つつかむと、たくさんの句動詞やコロケーションが分かるようになります。</p>
+    <div class="pp-grid">${PREPS.map(p=>`<button class="pp-card ${(S.prepSeen||{})[p.k]?'seen':''}" data-act="prep" data-k="${p.k}">${prepSvg(p.k)}<b class="en">${p.k}</b><span>${esc(p.core)}</span></button>`).join('')}</div>`;
+  const p=PREPS.find(x=>x.k===k), i=PREP_K.indexOf(k), ph=prepRel(k,'phrasal'), co=prepRel(k,'colloc'), more=R.prepMore===k;
+  const rel=(xs,n)=>xs.slice(0,more?xs.length:n).map(x=>`<button class="pp-rel" data-act="sopen" data-id="${esc(x.id)}"><span class="en">${esc(x.en)}</span><span class="s">${esc(x.ja)}</span></button>`).join('');
+  const gch=GR_CH.findIndex(c=>c.n==='前置詞');
+  return `<div class="crumbrow"><button class="btn sm" data-act="prep" data-k="">← 前置詞の一覧</button></div>
+  <div class="panel pp-detail">
+    <div class="pp-hero">${prepSvg(k)}<div><div class="row"><span class="word">${k}</span>${sayBtn(k)}</div><p class="pp-core">${esc(p.core)}</p><p style="margin:0">${esc(p.note)}</p></div></div>
+    <h3 class="st-h" style="margin-top:18px">イメージから広がる使い方</h3>
+    ${p.uses.map(u=>`<div class="ex"><span class="tag">${esc(u[0])}</span><div class="row" style="margin-top:4px"><span class="e">${hlWord(u[1],k)}</span>${sayBtn(u[1])}</div><div class="muted">${esc(u[2])}</div></div>`).join('')}
+    ${ph.length?`<h3 class="st-h" style="margin-top:18px">${k} を使う句動詞 <small>${ph.length}</small></h3><div class="pp-rels">${rel(ph,12)}</div>`:''}
+    ${co.length?`<h3 class="st-h" style="margin-top:18px">${k} を使うコロケーション <small>${co.length}</small></h3><div class="pp-rels">${rel(co,8)}</div>`:''}
+    ${(ph.length>12||co.length>8)&&!more?`<button class="btn sm" style="margin-top:10px" data-act="prepmore" data-k="${k}">すべて表示する</button>`:''}
+    ${gch>=0?`<p class="small" style="margin:16px 0 0">場所・時間の at / on / in の使い分けは、<button class="linkbtn" data-act="prepgr" data-i="${gch}">文法の「前置詞」の章</button>でも学べます。</p>`:''}
+    <div class="row" style="justify-content:space-between;margin-top:16px">${i>0?`<button class="btn sm" data-act="prep" data-k="${PREP_K[i-1]}">← ${PREP_K[i-1]}</button>`:'<span></span>'}${i<PREP_K.length-1?`<button class="btn sm" data-act="prep" data-k="${PREP_K[i+1]}">${PREP_K[i+1]} →</button>`:''}</div>
+  </div>`;
+}
+const hlWord=(s,k)=>esc(s).replace(new RegExp('(^|[^A-Za-z])('+k+')(?=$|[^A-Za-z])','i'),'$1<mark>$2</mark>');
+
+const CAT_GROUPS = [['語彙',['word','phrasal','colloc','idiom','prep']],['表現',['study','dialog','pattern','starter']],['文法・ワーホリ',['grammar','wh']]];
 function catStats(k){
   const kn=xs=>xs.filter(x=>P(x.id).state==='known').length;
+  if(k==='prep'){ const n=Object.keys(S.prepSeen||{}).filter(x=>PREP_K.includes(x)).length; return {label:`${PREPS.length}語・見た ${n}`,total:PREPS.length,known:n}; }
   if(k==='grammar'){ const n=GR_CH.reduce((a,c)=>a+c.u.length,0); return {label:`${GR_CH.length}章・${n}単元`,total:n,known:kn(GRAMMAR)}; }
   if(k==='wh'){ const xs=ITEMS.filter(x=>x.cat==='wh'); return {label:`${WH_SCENES.length}場面`,total:xs.length+WH_SIMS.length,known:kn(xs)+WH_SIMS.filter(s=>P(s.id).simBest>=s.steps.length).length}; }
   if(k==='dialog'){ const xs=ITEMS.filter(x=>x.cat==='scene'); return {label:`${GEN_SCENES.length}場面`,total:xs.length,known:kn(xs)}; }
@@ -9762,6 +9873,7 @@ function catStats(k){
 
 const CAT_INFO = {
  study:{one:'出発前の手続き、空港、フィリピンの語学学校の授業中・学校生活・寮、病院や薬局、銀行やお金の場面で、そのまま使える表現と会話。',ex:[["Could you say that again, please?",'もう一度言っていただけますか？']],gain:'留学の初日から困らずに話せる力'},
+ prep:{one:'up・in・on などの小さな語を、動きと位置のイメージ図でつかみます。句動詞やコロケーションの意味が分かりやすくなります。',ex:[['give up','up＝最後まで → あきらめる'],['on Monday','on＝くっついて → 月曜日に']],gain:'句動詞・コロケーションを、丸暗記せずに理解する力',point:'日本人がいちばん迷いやすいのが前置詞です。訳を1つずつ覚えるより、イメージを1つつかむ方が、たくさんの表現に使えます。'},
  word:{one:'1語の基本の単語。レベル別に、発音記号・音声・例文2つ付きで覚えます。',ex:[['borrow','借りる'],['schedule','予定']],gain:'英語を聞く・読む・話す、すべての土台'},
  phrasal:{one:'動詞と、up・off・out などの短い語を組み合わせると、もとの単語からは想像しにくい「別の意味」になる表現です。',ex:[['give up','あきらめる（give＝与える ＋ up からは想像しにくい）'],['pick up','拾う／車で迎えに行く']],point:'単語を知っていても意味が分からない、ネイティブが会話でいちばんよく使う表現です。up・on などを外すと意味が変わる、または通じなくなるものを、句動詞にしています。',gain:'ネイティブの会話を聞いて分かる力'},
  colloc:{one:'英語でよく一緒に使う、決まった単語の組み合わせです。自然な組み合わせを覚えます。',ex:[['make a mistake','間違える（× do a mistake）'],['heavy rain','大雨（× strong rain）']],point:'意味は分かるのに、日本語から直訳すると組み合わせを間違えやすい表現です。前置詞などを外しても動詞の意味のままで、どの語と組み合わせるかを覚えるものを、コロケーションにしています。',gain:'自然な英語を話す・書く力'},
@@ -9816,6 +9928,7 @@ function openCatSheet(){
 }
 V.learn = ()=>{
   if(!R.cat) return learnMenu();
+  if(R.cat==='prep') return prepView();
   const list = listFor();
   const showLv = ['word','phrasal','colloc','idiom','pattern','starter'].includes(R.cat);
   const sel = R.sel ? (list.find(x=>x.id===R.sel) || findAny(R.sel)) : null;
@@ -9915,6 +10028,7 @@ function detail(x){
     <div class="row" style="margin-top:8px"><span class="word">${esc(x.en)}</span>${sayBtn(x.en)}</div>
     ${ipaHTML(x.en,x.ipa)}
     <p style="font-size:18px;margin-top:6px">${esc(x.ja)}</p>
+    ${prepChips(x)}
     ${PT_NOTE[x.id]?`<div class="pt-note"><p class="filter-l" style="margin:0 0 2px">ポイント</p><p style="margin:0">${esc(PT_NOTE[x.id])}</p></div>`:''}
     ${SYN[x.id]?`<p class="syn"><span class="syn-l">似た意味</span>${SYN[x.id].map(s=>`<span class="en">${esc(s[0])}</span>${s[1]?`<span class="muted">（${esc(s[1])}）</span>`:''}`).join('<span class="muted">、</span>')}</p>`:''}
     ${x.ex.map(e=>`<div class="ex"><div class="row"><span class="e">${esc(e[0])}</span>${sayBtn(e[0])}</div><div class="muted">${esc(e[1])}</div></div>`).join('')}
@@ -10690,7 +10804,10 @@ document.addEventListener('click', e=>{
       PRON={id:null,url:null,rec:null,result:''}; go('learn',ex); break; }
     case 'theme': S.theme=d.t; save(); applyTheme(); document.querySelectorAll('.theme-sw button').forEach(b=>{const on=b.dataset.t===d.t; b.classList.toggle('on',on); b.setAttribute('aria-checked',on);}); break;
     case 'ipaplay': { const u=ipaUrl(d.k); if(u){ try{speechSynthesis.cancel();}catch(e){} try{ new Audio(u).play(); }catch(e){} } break; }
-    case 'learn': PRON.id=null; document.getElementById('catdlg')?.close(); document.getElementById('cidlg')?.close(); go('learn',Object.assign({cat:d.cat,lv:'all',sel:null},d.sc?{whScene:d.sc}:{},d.from?{from:d.from}:{})); break;
+    case 'learn': PRON.id=null; document.getElementById('catdlg')?.close(); document.getElementById('cidlg')?.close(); go('learn',Object.assign({cat:d.cat,lv:'all',sel:null,prepK:null},d.sc?{whScene:d.sc}:{},d.from?{from:d.from}:{})); break;
+    case 'prep': if(d.k){ S.prepSeen=S.prepSeen||{}; S.prepSeen[d.k]=1; save(); } go('learn',{cat:'prep',prepK:d.k||null,prepMore:null,sel:null}); break;
+    case 'prepmore': R.prepMore=d.k; rerender(); break;
+    case 'prepgr': go('learn',{cat:'grammar',gch:String(d.i),lv:'all',sel:null}); break;
     case 'learnmenu': PRON.id=null; go('learn',{cat:null,sel:null}); break;
     case 'catsheet': openCatSheet(); break;
     case 'catinfo': openCatInfo(d.cat); break;
