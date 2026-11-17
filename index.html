@@ -9817,7 +9817,7 @@ function voiceToggle(){
 
 let AI_LEFT=null;
 async function askAI(q){
-  if(AI_DEMO[q] || !AI_URL){ ASK={q,a:AI_DEMO[q]||{none:true},fb:null}; rerender(); return; }
+  if(AI_DEMO[q] || !AI_URL){ ASK={q,a:AI_DEMO[q]||{none:true},fb:null}; rerender(); askScroll(); return; }
   const id=Date.now(); ASK={q,a:{loading:true,id},fb:null}; rerender();
   let a;
   try{
@@ -9827,7 +9827,17 @@ async function askAI(q){
     a = j.error ? {err:j.error} : j;
     if(typeof j.left==='number') AI_LEFT=j.left;
   }catch(e){ a={err:'AIの中継サーバーにつながりませんでした。パソコンで中継サーバーが動いているか確かめてください。'}; }
-  if(ASK.a && ASK.a.id===id){ ASK={q,a,fb:null}; if(R.v==='ask') rerender(); }
+  if(ASK.a && ASK.a.id===id){ ASK={q,a,fb:null}; if(R.v==='ask'){ rerender(); askScroll(); } }
+}
+
+function askScroll(){
+  if(!matchMedia('(max-width:959px)').matches) return;
+  setTimeout(()=>{
+    const el=document.querySelector('.panel.answer, .panel[role=alert]'); if(!el) return;
+    let top=0; document.querySelectorAll('header, .topbar, .search-bar, [class*=sticky]').forEach(h=>{ const cs=getComputedStyle(h); if(cs.position==='sticky'||cs.position==='fixed'){ const r=h.getBoundingClientRect(); if(r.top<=1&&r.bottom<innerHeight/2) top=Math.max(top,r.bottom); } });
+    const y=el.getBoundingClientRect().top+scrollY-top-8;
+    window.scrollTo({top:y, behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+  },60);
 }
 
 V.ask = ()=>{
@@ -10453,7 +10463,7 @@ document.addEventListener('click', e=>{
     case 'lvnext': LQS.i++; LQS.pick=null; if(LQS.i>=LQS.qs.length) lvFinish(); rerender(); break;
     case 'lvreset': LQS={cat:null,i:0,score:0,pick:null,qs:[],done:false}; rerender(); break;
     case 'counsel': { const m=$('#cmsg'); if(m) m.textContent='申し込み先を準備中です。セブ島留学バディーのサイトからご相談ください。'; break; }
-    case 'askdemo': if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[limTier()].ask}回）を使い切りました。${tier()==='counseled'?'成約すると1日'+LIMIT.customer.ask+'回まで使えます。':''}`); break; } useAsk(); ASK={q:d.q,a:AI_DEMO[d.q],fb:null}; rerender(); break;
+    case 'askdemo': if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[limTier()].ask}回）を使い切りました。${tier()==='counseled'?'成約すると1日'+LIMIT.customer.ask+'回まで使えます。':''}`); break; } useAsk(); ASK={q:d.q,a:AI_DEMO[d.q],fb:null}; rerender(); askScroll(); break;
     case 'askvault': if(ASK.a&&!ASK.a.none){ addVault(ASK.a.en,ASK.a.ja,'AIに聞いた','ai'); rerender(); } break;
     case 'askmemo': if(addVault('',ASK.q,'メモ','ai')){ ASK={q:'',a:null,fb:null}; go('vault'); } break;
     case 'askfb': ASK.fb=d.v; rerender(); break;
