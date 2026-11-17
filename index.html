@@ -8207,7 +8207,6 @@ const LV_MAP = [
 const LV_TEXT = ['英語の基礎から。まずは「留学で使う英語」のあいさつと授業中の表現を固めましょう。','簡単な会話ができる段階。留学で話す量を増やすと、大きく伸びるレベルです。','日常会話の土台があります。言えなかった表現を保存庫にためて、使える表現を増やしましょう。','幅広い話題で話せる段階。ワーホリの面接練習や、より自然な言い回しに挑戦できます。','高度な英語が使える段階。ディスカッションやプレゼン、仕事の英語で、より正確で自然な表現を磨きましょう。'];
 
 const AI_DEMO = {
- '「reluctant」ってどういう意味？':{en:'reluctant',ipa:'/rɪˈlʌktənt/',ja:'気が進まない、乗り気でない',ex:'やりたくない気持ちがあって、ためらっている様子を表します。be reluctant to ~ で「〜するのに気が進まない」。unwilling よりも、迷いやためらいの気持ちが強く出ます。',ex2:[['She was reluctant to leave.','彼女は帰るのに気が進まなかった。'],["I'm a little reluctant to ask him.",'彼に頼むのは少し気が引ける。']]},
  '「割り勘にしよう」は英語で？':{en:"Let's split the bill.",ipa:'/lets splɪt ðə bɪl/',ja:'割り勘にしよう。',ex:'split は「分ける」、the bill は「お会計」。友達同士の食事でよく使う、自然でカジュアルな言い方です。',ex2:[["Let's split the bill this time.",'今回は割り勘にしよう。'],["Do you want to split the bill?",'割り勘にする？']]},
  '友達が言った "I\'m down" ってどういう意味？':{en:"I'm down.",ipa:'/aɪm daʊn/',ja:'いいね、乗った！',ex:'誘いに「いいね、行く！」と乗るときのカジュアルな表現です。友達同士で使います。先生や目上の人には I\'d love to. の方が無難です。',ex2:[["A: Wanna get pizza? B: I'm down!",'A: ピザ食べに行かない？ B: いいね、行く！'],["I'm down for a movie tonight.",'今夜の映画、いいね。']]},
  'タクシーで「ここで降ります」は？':{en:"You can drop me off here.",ipa:'/ju kən drɑːp mi ɔːf hɪr/',ja:'ここで降ろしてください。',ex:'drop off は「（車から）降ろす」。運転手に伝える自然な言い方で、Grabでも使えます。Here is fine. だけでも通じます。',ex2:[["You can drop me off here, thanks.",'ここで降ろしてください、ありがとう。'],["Could you drop me off at the next corner?",'次の角で降ろしてもらえますか？']]}
@@ -9849,7 +9848,7 @@ V.ask = ()=>{
     <form class="ask-box" data-form="ask"><input type="text" id="ask-q" value="${esc(ASK.q)}" placeholder="例: 割り勘って英語で？" aria-label="AIへの質問" data-autofocus><button class="btn primary" type="submit">聞く</button></form>
     ${VOICE_OK?`<div class="voice-row"><button type="button" class="btn vbtn ${VOICE.on?'on':''}" data-act="askvoice" aria-pressed="${VOICE.on}" aria-label="${VOICE.on?'音声入力を止める':'声で入力する'}">${I.mic}<span class="vtxt">${VOICE.on?'止める':'声で入力'}</span></button><span class="vlang" role="group" aria-label="話す言葉"><button type="button" class="${VOICE.lang==='ja-JP'?'on':''}" data-act="vlang" data-l="ja-JP" aria-pressed="${VOICE.lang==='ja-JP'}">日本語</button><button type="button" class="${VOICE.lang==='en-US'?'on':''}" data-act="vlang" data-l="en-US" aria-pressed="${VOICE.lang==='en-US'}">English</button></span><p class="muted small" id="vstat" aria-live="polite" style="margin:0">${VOICE.on?'聞いています…話し終わると止まります':''}</p></div>`:''}
     <div class="chips ask-ex">${Object.keys(AI_DEMO).map(k=>`<button class="chip" data-act="askdemo" data-q="${esc(k)}">${esc(k)}</button>`).join('')}</div>
-    <p class="muted small">${AI_URL?`AIが考えて回答します（1人1日50回まで${AI_LEFT!=null?`。今日はあと${AI_LEFT}回`:''}）`:'AI即答は準備中です。今は、上の4つの例だけ見本の答えが出ます（単語1語のときは発音記号つき）。名前や連絡先は書かないでください。'}</p>
+    <p class="muted small">${AI_URL?`AIが考えて回答します（1人1日50回まで${AI_LEFT!=null?`。今日はあと${AI_LEFT}回`:''}）`:'AI即答は準備中です。今は、上の3つの例だけ見本の答えが出ます（単語1語のときは発音記号つき）。名前や連絡先は書かないでください。'}</p>
   </div>
   ${a&&a.loading?`<div class="panel" style="margin-top:12px" role="status"><p style="margin:0">${mango(36)} 考えています…（数秒かかります）</p></div>`:''}
   ${a&&a.err?`<div class="panel" style="margin-top:12px" role="alert"><p style="margin:0 0 8px">${esc(a.err)}</p><button class="btn sm" data-act="askmemo">質問をメモとして保存庫に入れる</button></div>`:''}
