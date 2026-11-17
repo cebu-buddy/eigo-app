@@ -9769,7 +9769,7 @@ const CAT_INFO = {
  study:{one:'出発前の手続き、空港、フィリピンの語学学校の授業中・学校生活・寮、病院や薬局、銀行やお金の場面で、そのまま使える表現と会話。',ex:[["Could you say that again, please?",'もう一度言っていただけますか？']],gain:'留学の初日から困らずに話せる力'},
  word:{one:'1語の基本の単語。レベル別に、発音記号・音声・例文2つ付きで覚えます。',ex:[['borrow','借りる'],['schedule','予定']],gain:'英語を聞く・読む・話す、すべての土台'},
  phrasal:{one:'動詞と、up・off・out などの短い語を組み合わせると、もとの単語からは想像しにくい「別の意味」になる表現です。',ex:[['give up','あきらめる（give＝与える ＋ up からは想像しにくい）'],['pick up','拾う／車で迎えに行く']],point:'単語を知っていても意味が分からない、ネイティブが会話でいちばんよく使う表現です。',gain:'ネイティブの会話を聞いて分かる力'},
- colloc:{one:'英語ならではの語呂合わせです。英語でよく一緒に使う、自然な単語の組み合わせを覚えます。',ex:[['make a mistake','間違える（× do a mistake）'],['heavy rain','大雨（× strong rain）']],point:'意味は分かるのに、日本語から直訳すると組み合わせを間違えやすい表現です。',gain:'自然な英語を話す・書く力'},
+ colloc:{one:'英語でよく一緒に使う、決まった単語の組み合わせです。自然な組み合わせを覚えます。',ex:[['make a mistake','間違える（× do a mistake）'],['heavy rain','大雨（× strong rain）']],point:'意味は分かるのに、日本語から直訳すると組み合わせを間違えやすい表現です。',gain:'自然な英語を話す・書く力'},
  idiom:{one:'直訳では意味が通らない、決まった言い回しです。全体でひとつの意味として覚えます。',ex:[['a piece of cake','とても簡単なこと（直訳は「ケーキ1切れ」）'],['break the ice','初対面の緊張をほぐす（直訳は「氷を割る」）']],point:'単語が全部分かっても、直訳すると意味を取り違えます。',gain:'ネイティブらしい表現を理解する力'},
  pattern:{one:'単語を入れ替えるだけで、たくさんの文が作れる「文の型」です。',ex:[["I'd like to ~",'〜したいのですが（I\'d like to book a table.）']],gain:'言いたいことを、すぐに文にする力'},
  starter:{one:'文の頭に置くだけで話し始めやすくなる表現と、会話の間をつなぐ言葉です。気持ちや話の流れを自然に伝えられます。',ex:[['Actually, ...','実は…'],['To be honest, ...','正直に言うと…']],gain:'会話をなめらかに始める・つなぐ力'},
@@ -9781,7 +9781,7 @@ function catInfoHTML(k){ const c=CAT_INFO[k]; if(!c) return '';
   const cmp = ['phrasal','colloc','idiom'].includes(k) ? `<h3 style="margin:16px 0 6px;font-size:15px">似ているものとの違い</h3>
     <div style="overflow-x:auto"><table class="lvtable cmp ci-cmp"><thead><tr><th scope="col"></th><th scope="col">どんなもの</th><th scope="col">例</th></tr></thead><tbody>
      <tr class="${k==='phrasal'?'here':''}"><th scope="row">句動詞（熟語）</th><td>動詞＋短い語で<b>別の意味</b>になる</td><td class="en">give up</td></tr>
-     <tr class="${k==='colloc'?'here':''}"><th scope="row">コロケーション</th><td>英語ならではの<b>語呂合わせ</b>（よく一緒に使う自然な組み合わせ）</td><td class="en">make a mistake</td></tr>
+     <tr class="${k==='colloc'?'here':''}"><th scope="row">コロケーション</th><td>英語でよく一緒に使う、<b>決まった単語の組み合わせ</b></td><td class="en">make a mistake</td></tr>
      <tr class="${k==='idiom'?'here':''}"><th scope="row">イディオム</th><td>直訳では意味が通らない<b>決まった言い回し</b></td><td class="en">a piece of cake</td></tr>
     </tbody></table></div>` : '';
   return `<p style="font-size:16px;line-height:1.7;margin:4px 0 10px">${esc(c.one)}</p>
@@ -10504,7 +10504,7 @@ V.guide = ()=>{ const t=Math.min(R.guideT||0,GUIDE_TABS.length-1), pi=Math.min(R
   <div class="panel" style="padding:0;overflow-x:auto"><table class="lvtable cmp">
     <thead><tr><th scope="col"></th><th scope="col">句動詞（熟語）</th><th scope="col">コロケーション</th></tr></thead>
     <tbody>
-     <tr><th scope="row">どんなもの</th><td>組み合わせると<b>別の意味</b>になる</td><td>英語ならではの<b>語呂合わせ</b>（よく一緒に使う自然な組み合わせ）</td></tr>
+     <tr><th scope="row">どんなもの</th><td>組み合わせると<b>別の意味</b>になる</td><td>英語でよく一緒に使う、<b>決まった単語の組み合わせ</b></td></tr>
      <tr><th scope="row">例</th><td><span class="en">give up</span>（あきらめる）<br><span class="en">put off</span>（延期する）</td><td><span class="en">make a mistake</span>（間違える）<br><span class="en">heavy rain</span>（大雨）</td></tr>
      <tr><th scope="row">つまずく所</th><td>単語を知っていても、意味が推測できない</td><td>意味は分かるのに、組み合わせを間違える（× <span class="en">do a mistake</span>、× <span class="en">strong rain</span>）</td></tr>
 
