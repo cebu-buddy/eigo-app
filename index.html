@@ -114,6 +114,12 @@ main{padding:4px 16px 24px;max-width:1080px;margin:0 auto}
   .side .grp{font-size:12px;color:var(--muted);margin:14px 12px 4px}
   .side .ask-cta{margin-top:auto;background:var(--mango);border:0;border-radius:16px;padding:12px 14px;font-weight:700;font-size:14px;line-height:1.4;cursor:pointer;display:flex;align-items:center;gap:8px;text-align:left;color:#2B140B}
   .side .ask-cta svg{width:20px;height:20px;flex:none}
+
+  .side .cta-pals{margin-top:auto;display:flex;justify-content:center;align-items:flex-end;gap:14px;margin-bottom:-8px;position:relative;z-index:1;pointer-events:none}
+  .side .cta-pals + .ask-cta{margin-top:0}
+  .side .pal{display:block;line-height:0;animation:palfloat 4.4s ease-in-out infinite}
+  .side .pal.p2{animation-duration:5.2s;animation-delay:-2.1s}
+  @keyframes palfloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
   .side .side-pb{margin:12px 6px 0;font-size:11px}
   main{padding:28px 36px 48px}
 }
@@ -9342,6 +9348,7 @@ function shell(){
     <div class="grp">ほかの機能</div>
     ${NAV2.map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
     <div class="grp">利用区分: ${TIER_NAME[tier()]}</div>
+    <div class="cta-pals" aria-hidden="true"><span class="pal p1">${coco(46)}</span><span class="pal p2">${mango(42)}</span></div>
     <button class="ask-cta" data-act="go" data-v="ask">${I.chat}<span>今、言えなかった<br>表現をAIに聞く</span></button>
     ${themeSw('side-theme')}
     ${producedBy('side-pb')}
