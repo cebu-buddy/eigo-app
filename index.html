@@ -9421,6 +9421,14 @@ function upsell(title){ return `<div class="panel lock">${coco(56)}<div><h3>${es
 function toast(m){ let el=document.getElementById('toast'); if(!el){ el=document.createElement('div'); el.id='toast'; el.setAttribute('role','status'); document.body.appendChild(el);} el.textContent=m; el.classList.add('show'); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('show'),3500); }
 
 let R = {v:'home', cat:null, lv:'all', sel:null, scene:'あいさつ'};
+
+const ROUTE_KEY='eigo.route';
+let ROUTE_Y=0;
+try{ const r=JSON.parse(sessionStorage.getItem(ROUTE_KEY)||'null'); if(r && r.R && typeof r.R.v==='string'){ R=Object.assign(R,r.R); ROUTE_Y=+r.y||0; } }catch(e){}
+function saveRoute(){ try{ sessionStorage.setItem(ROUTE_KEY, JSON.stringify({R, y:window.scrollY})); }catch(e){} }
+addEventListener('pagehide', saveRoute);
+document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='hidden') saveRoute(); });
+if('scrollRestoration' in history) history.scrollRestoration='manual';
 let LQS = {cat:null,i:0,score:0,pick:null,qs:[],done:false};
 let LQ_SERIES = 'all';
 let T = {setup:{src:'study',lv:'all',dir:'ja2en'}, qs:null, i:0, score:0, pick:null};
@@ -9461,7 +9469,7 @@ function render(){
   $('#main').innerHTML = (V[R.v]||V.home)();
   after();
 }
-function go(v,extra){ R = Object.assign({}, R, {v}, extra||{}); render(); window.scrollTo(0,0); }
+function go(v,extra){ R = Object.assign({}, R, {v}, extra||{}); render(); window.scrollTo(0,0); saveRoute(); }
 function rerender(){ const y=window.scrollY;
   const xs=[...document.querySelectorAll('#main .chips')].map(c=>c.scrollLeft);
   $('#main').innerHTML=!S.user?V.welcome():(V[R.v]||V.home)(); after(); window.scrollTo(0,y);
@@ -10937,6 +10945,7 @@ async function redeemCode(c){
   S.tier=data.tier; S.trialStart=data.trial_start||''; S.talkTrialUsed=false; save(); render(); toast(`「${TIER_NAME[data.tier]}」になりました。`);
 }
 render();
+if(ROUTE_Y && S.user) setTimeout(()=>window.scrollTo(0,ROUTE_Y),0);
 acctInit();
 </script>
 </body>
