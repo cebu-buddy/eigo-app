@@ -10343,7 +10343,9 @@ const GUIDE_POINTS = [
  ['speaker','g1','音声つき','耳で聞いて、正しい発音で覚えられます。'],
  ['book','g0','言いかえも紹介','似た言い回し（パラフレーズ）も一緒に覚えられます。'],
  ['chat','g2','例文は2つずつ','違う場面の例で、使い方がイメージできます。'],
- ['home','g0','見やすいデザイン','毎日開きたくなる、また戻ってきたくなる作りです。']];
+ ['home','g0','見やすいデザイン','毎日開きたくなる、また戻ってきたくなる作りです。'],
+ ['level','g1','本当に使える英語がそろう','単語・文法・熟語・イディオム・表現集・構文・発音まで、これ1つで学べます。'],
+ ['doc','g2','ワーホリの準備もできる','面接対策と、デザインを選べる英文の履歴書づくりで、仕事探しも困りません。']];
 function guideRow(v,ic,g,name,role,extra){ return `<li><button class="tk-row gd-row" data-act="${extra?'learn':'go'}" ${extra||`data-v="${v}"`}><span class="cat-ic ${g}" aria-hidden="true">${I[ic]}</span><span class="tk-txt"><b>${name}${extra?'':FEAT_LOCK(v)}</b><span>${role}</span></span><svg class="tk-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button></li>`; }
 V.guide = ()=>{ const t=Math.min(R.guideT||0,GUIDE_TABS.length-1), pi=Math.min(R.guideP||0,GUIDE_PER.length-1), P=GUIDE_PER[pi];
  const tabs=`<div class="tk-tabs gd-tabs" role="tablist" aria-label="手引書の内容">${GUIDE_TABS.map((x,i)=>`<button role="tab" aria-selected="${i===t}" class="${i===t?'on':''}" data-act="guidetab" data-t="${i}">${x}</button>`).join('')}</div>`;
