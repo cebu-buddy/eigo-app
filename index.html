@@ -10472,7 +10472,7 @@ function catCard(k){ const s=catStats(k), pct=s.total?Math.round(s.known/s.total
   return `<div class="catwrap"><button class="catcard" data-act="learn" data-cat="${k}"><span class="cat-hd">${catIcon(k,CAT_GROUPS.findIndex(g=>g[1].includes(k)))}<b>${esc(CATS[k].replace('（付録）',''))}</b></span>${CAT_INFO[k]?`<span class="cat-desc">${esc(CAT_INFO[k].one)}</span>`:''}<span class="n">${esc(s.label)}</span>${s.nobar?'':`<span class="cbar" aria-hidden="true"><i style="width:${pct}%"></i></span>`}</button>${infoBtn(k)}</div>`; }
 function myListBtns(){
   const nKnown = allItems().filter(x=>P(x.id).state==='known').length, nUnknown = allItems().filter(x=>P(x.id).state==='unknown').length, nFav = Object.values(S.prog).filter(v=>v.fav).length;
-  return `<div class="mylist" aria-label="自分のリスト"><button class="mybtn ${R.cat==='known'?'on':''}" data-act="learn" data-cat="known" aria-pressed="${R.cat==='known'}">記憶 <b>${nKnown}</b></button><button class="mybtn ${R.cat==='unknown'?'on':''}" data-act="learn" data-cat="unknown" aria-pressed="${R.cat==='unknown'}">未記憶 <b>${nUnknown}</b></button><button class="mybtn ${R.cat==='fav'?'on':''}" data-act="learn" data-cat="fav" aria-pressed="${R.cat==='fav'}">★ お気に入り <b>${nFav}</b></button></div>`;
+  return `<div class="mylist" aria-label="自分のリスト"><button class="mybtn ${R.cat==='known'?'on':''}" data-act="learn" data-cat="known" aria-pressed="${R.cat==='known'}">覚えた <b>${nKnown}</b></button><button class="mybtn ${R.cat==='unknown'?'on':''}" data-act="learn" data-cat="unknown" aria-pressed="${R.cat==='unknown'}">まだ <b>${nUnknown}</b></button><button class="mybtn ${R.cat==='fav'?'on':''}" data-act="learn" data-cat="fav" aria-pressed="${R.cat==='fav'}">★ お気に入り <b>${nFav}</b></button></div>`;
 }
 function learnMenu(){
   return `<div class="learn-head"><h1>学ぶ</h1>${myListBtns()}</div>
@@ -10494,7 +10494,7 @@ V.learn = ()=>{
   const list = listFor();
   const showLv = ['word','phrasal','colloc','idiom','pattern','starter'].includes(R.cat);
   const sel = R.sel ? (list.find(x=>x.id===R.sel) || findAny(R.sel)) : null;
-  const titles = {known:'記憶の一覧',unknown:'未記憶の一覧',fav:'お気に入り'};
+  const titles = {known:'「覚えた」の一覧',unknown:'「まだ」の一覧',fav:'お気に入り'};
   let groups = '';
   if(R.cat==='study'){
 
@@ -10837,7 +10837,7 @@ function addVault(en,ja,scene,src){
   if(vaultRoom()<=0){ toast(`お試しの保存庫は${LIMIT.counseled.vault}件までです。成約すると上限なしで使えます。`); return false; }
   S.vault.push({id:Date.now()+Math.floor(Math.random()*1000),en,ja,scene,src,created:today(),used:0,state:null,step:-1,next:addDays(1)}); save(); return true; }
 
-const TSRC = {due:'今日の復習',study:'留学で使う英語',word:'単語',phrasal:'句動詞（熟語）',colloc:'コロケーション',idiom:'イディオム',pattern:'構文',starter:'文頭・つなぎ言葉',scene:'場面別フレーズ',wh:'ワーホリ対策',vault:'保存庫',known:'記憶',unknown:'未記憶',fav:'お気に入り'};
+const TSRC = {due:'今日の復習',study:'留学で使う英語',word:'単語',phrasal:'句動詞（熟語）',colloc:'コロケーション',idiom:'イディオム',pattern:'構文',starter:'文頭・つなぎ言葉',scene:'場面別フレーズ',wh:'ワーホリ対策',vault:'保存庫',known:'覚えた',unknown:'まだ',fav:'お気に入り'};
 function pool(src,lv){
   if(src==='due'){ const t=today(); return allItems().filter(x=>{const q=P(x.id); return q.next && q.next<=t;}).filter(allowed).concat(feature('vault')?S.vault.filter(v=>v.en&&v.ja&&v.next&&v.next<=t).map(v=>({id:'v:'+v.id,en:v.en,ja:v.ja})):[]); }
   if(src==='vault') return feature('vault') ? S.vault.filter(v=>v.en&&v.ja).map(v=>({id:'v:'+v.id,en:v.en,ja:v.ja})) : [];
@@ -10860,8 +10860,8 @@ V.test = ()=>{
   }
   if(T.i>=T.qs.length){
     const good = T.score>=Math.ceil(T.qs.length*.7);
-    return `<h1>テストの結果</h1><div class="panel"><div class="greet" style="margin:0">${good?mango(72):coco(72)}<div class="speech"><b>${good?'マンゴー':'Coco先生'}</b>${T.score} / ${T.qs.length}問正解！${good?'この調子！':'「まだ」の表現は、未記憶の一覧から復習できます。'}</div></div></div>
-    <div class="row" style="margin-top:12px"><button class="btn primary" data-act="tstart">同じ範囲でもう一度</button><button class="btn" data-act="treset">範囲を選び直す</button><button class="btn" data-act="learn" data-cat="unknown">未記憶の一覧へ</button></div>`;
+    return `<h1>テストの結果</h1><div class="panel"><div class="greet" style="margin:0">${good?mango(72):coco(72)}<div class="speech"><b>${good?'マンゴー':'Coco先生'}</b>${T.score} / ${T.qs.length}問正解！${good?'この調子！':'「まだ」の表現は、「まだ」の一覧から復習できます。'}</div></div></div>
+    <div class="row" style="margin-top:12px"><button class="btn primary" data-act="tstart">同じ範囲でもう一度</button><button class="btn" data-act="treset">範囲を選び直す</button><button class="btn" data-act="learn" data-cat="unknown">「まだ」の一覧へ</button></div>`;
   }
   const q=T.qs[T.i], ans=T.pick!==null, ja2en=T.setup.dir!=='en2ja';
   return `<h1>テスト</h1><div class="bar" aria-hidden="true"><i style="width:${T.i/T.qs.length*100}%"></i></div>
@@ -11075,7 +11075,7 @@ V.resume = ()=>{
 
 const GUIDE_FEATS = [
  ['ask','chat','g1','AIに聞く','言えなかった表現を、その場で聞く','日本語のまま質問すると、自然な表現・解説・例文が出ます。そのまま保存庫に入れて、あなただけの辞書にしていけます（くわしくは「はじめに」タブ）。'],
- ['learn','pencil','g0','学ぶ','単語やフレーズを覚える','単語・句動詞・イディオム・場面別フレーズ・文法などから選びます。レベルで絞り込み、「覚えた」「まだ」で仕分けると、復習する日が自動で決まります。まず分かる・分からないで仕分けてから、「未記憶」を覚えていくのがおすすめです。前置詞は、イメージ図で学べます（くわしくは「くわしく」タブ）。'],
+ ['learn','pencil','g0','学ぶ','単語やフレーズを覚える','単語・句動詞・イディオム・場面別フレーズ・文法などから選びます。レベルで絞り込み、「覚えた」「まだ」で仕分けると、復習する日が自動で決まります。まず分かる・分からないで仕分けてから、「まだ」を覚えていくのがおすすめです。前置詞は、イメージ図で学べます（くわしくは「くわしく」タブ）。'],
  ['vault','vault','g1','保存庫','聞いた表現をためて復習する','授業や会話で言えなかったことをAIに聞いて、ここに入れます。復習して、実際に使えたら「実際に使えた！」を押します。'],
  ['test','test','g2','テスト','覚えたかを4択で確かめる','範囲を選んで、4択で答えます。正解は「覚えた」、不正解は「まだ」に入り、復習する日が自動で決まります。'],
  ['level','level','g0','レベル診断','今の自分のレベルを知る','カテゴリーごとに20問の簡単な判定です。結果を見て、「学ぶ」で自分のレベルから始めましょう（正式なCEFRの判定ではありません）。'],
@@ -11131,7 +11131,7 @@ V.guide = ()=>{ const t=Math.min(R.guideT||0,GUIDE_TABS.length-1), pi=Math.min(R
   <div class="panel gd-sort">
    <ol class="gd-sort-l">
     <li><span class="ask-n">1</span><div><b>まず「分かる・分からない」で仕分ける</b><span>一覧をざっと見て、もう分かるものは「覚えた」、分からないものは「まだ」を押します。1つに時間をかけず、テンポよく進めるのがコツです。</span></div></li>
-    <li><span class="ask-n">2</span><div><b>次に「覚えた・まだ」を振り分けていく</b><span>「未記憶」に入ったものだけを学びます。覚えたら「覚えた」に切り替えます。分かるものを何度も見なくてよいので、覚えるべきものに時間を使えます。</span></div></li>
+    <li><span class="ask-n">2</span><div><b>次に「覚えた・まだ」を振り分けていく</b><span>「まだ」に入ったものだけを学びます。覚えたら「覚えた」に切り替えます。分かるものを何度も見なくてよいので、覚えるべきものに時間を使えます。</span></div></li>
    </ol>
    <p class="muted small" style="margin:10px 0 0">「覚えた」にしたものも、復習する日が来たら見直します。テストで確かめるのもおすすめです。</p>
   </div>
