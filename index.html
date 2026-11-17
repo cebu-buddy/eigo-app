@@ -9995,7 +9995,7 @@ function liRow(x){
   const kb = (allowed(x) && !x.quiz && !x.steps) ? `<span class="li-kb"><button class="kb ${p.state==='known'?'on':''}" data-act="know" data-id="${esc(x.id)}" data-ok="1" aria-pressed="${p.state==='known'}">覚えた</button><button class="kb ng ${p.state==='unknown'?'on':''}" data-act="know" data-id="${esc(x.id)}" data-ok="0" aria-pressed="${p.state==='unknown'}">まだ</button></span>` : '';
 
   const stc = kb ? (p.state==='known'?'st-known':p.state==='unknown'?'st-unknown':'st-none') : '';
-  return `<div class="li-wrap ${kb?'has-kb':''}"><button class="li ${stc} ${R.sel===x.id?'sel':''}" data-act="sel" data-id="${esc(x.id)}"><span><span class="t">${esc(title)}</span>${posTag(x)}<br><span class="s ${x.title?'':'ja'}">${esc(sub)}</span></span><span>${nt}${p.fav?'<span aria-label="お気に入り" style="color:var(--mango)">★</span> ':''}${kb?'':st}${lk}</span></button>${kb}</div>`;
+  return `<div class="li-wrap ${kb?'has-kb':''}"><button class="li ${stc} ${R.sel===x.id?'sel':''}" data-act="sel" data-id="${esc(x.id)}"><span><span class="t">${esc(title)}</span><br><span class="s ${x.title?'':'ja'}">${esc(sub)}</span></span><span>${nt}${p.fav?'<span aria-label="お気に入り" style="color:var(--mango)">★</span> ':''}${kb?'':st}${lk}</span></button>${kb}</div>`;
 }
 
 const CAT_ICON = {
