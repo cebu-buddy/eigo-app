@@ -415,6 +415,39 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .tile .tile-mk.g0{color:var(--teal)}.tile .tile-mk.g1{color:var(--mango)}.tile .tile-mk.g2{color:var(--pink)}
 .today{display:flex;gap:16px;align-items:center}
 .today .num{font-family:var(--en);font-size:34px;font-weight:600;color:var(--teal-ink);line-height:1}
+.hm-today{display:grid;gap:12px;margin-bottom:12px}
+@media (min-width:720px){.hm-today{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}}
+.hm-card{border-radius:22px;padding:18px 20px;text-align:left;display:flex;flex-direction:column;gap:6px}
+.hm-k{font-size:13px;font-weight:700;color:var(--teal-ink)}
+.hm-review{background:var(--surface);border:1px solid var(--line)}
+.hm-review p{margin:0;font-size:13px;color:var(--muted)}
+.hm-review .btn{margin-top:auto;align-self:flex-start}
+.hm-review p.hm-done{color:var(--ink);font-size:14px;font-weight:700}
+.hm-rv{display:flex;align-items:center;gap:16px;margin:2px 0 8px}
+.hm-num{display:flex;align-items:baseline;gap:4px;color:var(--teal-ink)}.hm-num b{font-family:var(--en);font-size:44px;line-height:1}.hm-num span{font-weight:700}
+.hm-ask{background:var(--mango-soft);border:1px solid color-mix(in srgb,var(--mango) 35%,transparent);cursor:pointer;flex-direction:row;align-items:center;gap:12px;width:100%;color:var(--ink)}
+.hm-ask .hm-k{color:var(--mango-ink)}
+.hm-ask-tx{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+.hm-ask-tx b{font-size:19px;line-height:1.45}.hm-ask-tx b .nb{display:inline-block}
+@media (max-width:719px){.hm-ask-tx b{font-size:17px}.hm-ask .pair svg{width:40px;height:40px}.hm-card{padding:16px 18px}}
+.hm-ask-tx>span:not(.hm-k):not(.hm-ask-go){font-size:13px;color:var(--muted)}
+.hm-ask-go{align-self:flex-start;margin-top:4px;background:var(--mango);color:#3D2613;font-weight:700;font-size:14px;border-radius:999px;padding:8px 18px}
+.hm-ask:hover .hm-ask-go{filter:brightness(1.05)}
+.hm-ask .pair{display:flex;align-items:flex-end;gap:2px;flex:none}
+.hm-h{font-size:17px;margin:22px 0 10px}
+.hm-hrow{display:flex;justify-content:space-between;align-items:baseline}.hm-hrow .linkbtn{font-size:13px}
+.hm-groups{display:grid;gap:12px}
+@media (min-width:1120px){.hm-groups{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:600px) and (max-width:1119px){.hm-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:4px}.hm-group h3{grid-column:1/-1}}
+.hm-group{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 8px 8px}
+.hm-group h3{margin:0 10px 6px;font-size:13px;color:var(--muted);font-weight:700}
+.hm-row{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;text-align:left;padding:9px 10px;border-radius:12px;cursor:pointer;color:var(--ink)}
+.hm-row:hover{background:var(--bg)}
+.hm-row .cat-ic{width:38px;height:38px;border-radius:11px}.hm-row .cat-ic svg{width:20px;height:20px}
+.hm-tx{display:flex;flex-direction:column;flex:1;min-width:0}.hm-tx b{font-size:15px}.hm-tx span{font-size:12.5px;color:var(--muted)}
+.hm-chev{color:var(--muted);font-size:20px;line-height:1}
+.hm-ad{margin-top:22px}
+.hm-ad .bd-tile{flex-direction:row;align-items:center;padding:16px 18px;min-height:96px}.hm-ad .bd-tile .bd-body{flex:1}.hm-ad .bd-tile .bd-cta{margin:8px 0 0}.hm-ad .bd-tile .bd-sea{height:100%;width:38%;left:auto;right:0}.hm-ad .bd-tile .bd-chars{right:16px;bottom:10px}
 
 .split{display:grid;gap:14px}
 .list{display:flex;flex-direction:column;gap:6px}
@@ -651,6 +684,7 @@ const CH = {coco:{name:'Coco先生',svg:coco}, mango:{name:'マンゴー',svg:ma
 
 const I = {
  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>',
+ pencil:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>',
  book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/></svg>',
  vault:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v17l-7-4-7 4z"/></svg>',
  test:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l2 2 4-4"/><rect x="4" y="3" width="16" height="18" rx="2"/></svg>',
@@ -9471,7 +9505,7 @@ let PRON = {id:null,url:null,rec:null,result:''};
 let GQ = {};
 let RQ = {i:-1,answers:[]};
 
-const NAV = [['home','ホーム',I.home],['learn','学ぶ',I.book],['ask','AIに聞く',I.chat],['vault','保存庫',I.vault],['test','テスト',I.test]];
+const NAV = [['home','ホーム',I.home],['learn','学ぶ',I.pencil],['ask','AIに聞く',I.chat],['vault','保存庫',I.vault],['test','テスト',I.test]];
 const NAV2 = [['level','レベル診断',I.level],['pron','発音講座',I.mic],['talk','AI英会話',I.chat],['resume','履歴書',I.doc],['guide','手引書',I.guide],['me','マイページ',I.me]];
 function shell(){
   const FEAT = {ask:'ask',vault:'vault',talk:'talk',resume:'resume'};
@@ -9554,29 +9588,39 @@ V.welcome = ()=>{
 };
 
 V.home = ()=>{
+
   const due = dueCount(), known = Object.values(S.prog).filter(p=>p.state==='known').length;
   const lvLine = S.level==null ? 'まずはレベル診断から。カテゴリーごとに20問で、今のレベルが分かります。' : `今のレベルは「${lvName(S.level)}」。${esc(LV_TEXT[S.level])}`;
-  const latest = S.vault.slice(-2).reverse();
+  const latest = S.vault.slice(-3).reverse();
   const t = tier();
   const banner = t==='customer' ? ''
     : t==='counseled' ? `<div class="note tier"><span>お試し中（あと${trialLeft()}日）: AI即答は今日あと${askLeft()}回、保存庫はあと${Math.max(0,vaultRoom())}件。成約すると、すべての機能を留学のあとも使えます。</span><button class="btn sm cta" data-act="upsell">相談する</button><span class="upsell-msg small"></span></div>`
     : `<div class="note tier"><span>${expired()?`お試しの期限が切れました。保存庫の${S.vault.length}件は残っています。成約すると続きから使えます。`:`面談前は、レベル診断・テスト・一部の内容だけ使えます。無料カウンセリングを受けると、${TRIAL_DAYS}日間のお試しで多くの機能が使えます。`}</span><button class="btn sm cta" data-act="upsell">無料カウンセリングを相談する</button><span class="upsell-msg small"></span></div>`;
+  const row=(act,attr,ic,g,h,d)=>`<button class="hm-row" data-act="${act}" ${attr}><span class="cat-ic ${g}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${CAT_ICON[ic]}</svg></span><span class="hm-tx"><b>${h}</b><span>${d}</span></span><span class="hm-chev" aria-hidden="true">›</span></button>`;
+  const grp=(h,rows)=>`<section class="hm-group"><h3>${h}</h3>${rows.join('')}</section>`;
   return `<div class="greet">${coco(64)}<div class="speech"><b>Coco先生</b>${esc(S.user)}さん、${lvLine}</div></div>
   ${banner}
-  <button class="hero-study" data-act="learn" data-cat="study"><div><h2>留学で使う英語</h2><p>出発前の手続きから空港・授業・寮・病院・銀行まで、そのまま使える表現と会話</p></div><div class="pair">${coco(52)}${mango(52)}</div></button>
-  <div class="home-grid">
-    <div class="tile today"><div class="num">${due}</div><div><b>今日の復習</b><span>覚えた ${known}件・保存庫 ${S.vault.length}件</span></div></div>
-    <button class="tile" data-act="go" data-v="level"><b>レベル診断</b>${tileMark('level',0)}<span>${S.level==null?'カテゴリーごとに20問':'記録とグラフを見る'}</span></button>
-    <button class="tile" data-act="go" data-v="pron"><b>発音講座</b>${tileMark('pron',1)}<span>発音記号・ルール・聞き分け・言ってみる</span></button>
-    <button class="tile" data-act="go" data-v="talk"><b>AI英会話</b>${tileMark('talk',1)}<span>ワーホリ・留学生活・場面別の会話を練習</span></button>
-    <button class="tile" data-act="learn" data-cat="wh"><b>ワーホリ対策</b>${tileMark('wh',2)}<span>場面ごとのフレーズとシミュレーション</span></button>
-    <button class="tile" data-act="go" data-v="resume"><b>履歴書をつくる</b>${tileMark('resume',2)}<span>AIと一問一答で強みを見つける</span></button>
-    <button class="tile" data-act="learn" data-cat="grammar"><b>文法</b>${tileMark('grammar',2)}<span>レベル別の単元と確認問題</span></button>
-    ${bdTile()}
+  <div class="hm-today">
+    <div class="hm-card hm-review">
+      <span class="hm-k">今日の復習</span>
+      <div class="hm-rv"><div class="hm-num"><b>${due}</b><span>件</span></div><div><p class="hm-done">${due>=2?'覚えた表現を忘れないうちに。':due?'あと1件です。':'今日の分は終わりました。'}</p><p>覚えた ${known}件・保存庫 ${S.vault.length}件</p></div></div>
+      ${due>=2?`<button class="btn primary" data-act="review">復習をはじめる</button>`:`<button class="btn" data-act="go" data-v="test">テストで確かめる</button>`}
+    </div>
+    <button class="hm-card hm-ask" data-act="go" data-v="ask">
+      <span class="hm-ask-tx"><span class="hm-k">Coco先生に聞く</span><b><span class="nb">今、言えなかった表現を</span><span class="nb">Coco先生に聞く</span></b><span>聞いた表現は保存庫に入り、復習に出てきます。</span><span class="hm-ask-go">聞いてみる</span></span>
+      <span class="pair" aria-hidden="true">${coco(56)}${mango(48)}</span>
+    </button>
   </div>
-  <h2>保存庫の新着</h2>
-  ${latest.length ? `<div class="list">${latest.map(v=>`<button class="li" data-act="go" data-v="vault"><span><span class="t">${esc(v.en||'（メモ）')}</span><br><span class="s">${esc(v.ja)}</span></span><span class="tag">${esc(v.scene||'未分類')}</span></button>`).join('')}</div>`
-   : `<div class="panel empty">${mango(56)}<p style="margin-top:8px">言えなかった表現は、AIに聞いて保存庫へ。<br>次に使えるように、復習で何度も出てきます。</p><button class="btn mango" data-act="go" data-v="ask">AIに聞いてみる</button></div>`}`;
+  <button class="hero-study" data-act="learn" data-cat="study"><div><h2>留学で使う英語</h2><p>出発前の手続きから空港・授業・寮・病院・銀行まで、そのまま使える表現と会話</p></div><div class="pair">${coco(52)}${mango(52)}</div></button>
+  <h2 class="hm-h">目的から選ぶ</h2>
+  <div class="hm-groups">
+    ${grp('基礎をかためる',[row('go','data-v="level"','level','g0','レベル診断',S.level==null?'カテゴリーごとに20問':'記録とグラフを見る'),row('learn','data-cat="grammar"','grammar','g0','文法','レベル別の単元と確認問題'),row('go','data-v="pron"','pron','g0','発音講座','発音記号・聞き分け・言ってみる')])}
+    ${grp('話す練習',[row('go','data-v="talk"','talk','g1','AI英会話','留学生活・場面別・ワーホリ'),row('learn','data-cat="dialog"','dialog','g1','場面別フレーズ','買い物・レストラン・交通など')])}
+    ${grp('ワーホリの準備',[row('learn','data-cat="wh"','wh','g2','ワーホリ対策','仕事探し・面接・職場の表現'),row('go','data-v="resume"','resume','g2','履歴書をつくる','AIと一問一答で強みを見つける')])}
+  </div>
+  ${latest.length?`<div class="hm-hrow"><h2 class="hm-h">保存庫の新着</h2><button class="linkbtn" data-act="go" data-v="vault">すべて見る</button></div>
+  <div class="list">${latest.map(v=>`<button class="li" data-act="go" data-v="vault"><span><span class="t">${esc(v.en||'（メモ）')}</span><br><span class="s">${esc(v.ja)}</span></span><span class="tag">${esc(v.scene||'未分類')}</span></button>`).join('')}</div>`:''}
+  <div class="hm-ad">${bdTile()}</div>`;
 };
 
 V.level = ()=>{
@@ -10106,8 +10150,9 @@ function addVault(en,ja,scene,src){
   if(vaultRoom()<=0){ toast(`お試しの保存庫は${LIMIT.counseled.vault}件までです。成約すると上限なしで使えます。`); return false; }
   S.vault.push({id:Date.now()+Math.floor(Math.random()*1000),en,ja,scene,src,created:today(),used:0,state:null,step:-1,next:addDays(1)}); save(); return true; }
 
-const TSRC = {study:'留学で使う英語',word:'単語',phrasal:'句動詞（熟語）',colloc:'コロケーション',idiom:'イディオム',pattern:'構文',starter:'文頭・つなぎ言葉',scene:'場面別フレーズ',wh:'ワーホリ対策',vault:'保存庫',known:'記憶',unknown:'未記憶',fav:'お気に入り'};
+const TSRC = {due:'今日の復習',study:'留学で使う英語',word:'単語',phrasal:'句動詞（熟語）',colloc:'コロケーション',idiom:'イディオム',pattern:'構文',starter:'文頭・つなぎ言葉',scene:'場面別フレーズ',wh:'ワーホリ対策',vault:'保存庫',known:'記憶',unknown:'未記憶',fav:'お気に入り'};
 function pool(src,lv){
+  if(src==='due'){ const t=today(); return allItems().filter(x=>{const q=P(x.id); return q.next && q.next<=t;}).filter(allowed).concat(feature('vault')?S.vault.filter(v=>v.en&&v.ja&&v.next&&v.next<=t).map(v=>({id:'v:'+v.id,en:v.en,ja:v.ja})):[]); }
   if(src==='vault') return feature('vault') ? S.vault.filter(v=>v.en&&v.ja).map(v=>({id:'v:'+v.id,en:v.en,ja:v.ja})) : [];
   let xs;
   if(src==='unknown') xs = allItems().filter(x=>P(x.id).state==='unknown');
@@ -10343,7 +10388,7 @@ V.resume = ()=>{
 
 const GUIDE_FEATS = [
  ['ask','chat','g1','AIに聞く','言えなかった表現を、その場で聞く','日本語のまま質問すると、自然な表現・解説・例文が出ます。そのまま保存庫に入れて、あなただけの辞書にしていけます（くわしくは「はじめに」タブ）。'],
- ['learn','book','g0','学ぶ','単語やフレーズを覚える','単語・句動詞・イディオム・場面別フレーズ・文法などから選びます。レベルで絞り込み、「覚えた」「まだ」で仕分けると、復習する日が自動で決まります。'],
+ ['learn','pencil','g0','学ぶ','単語やフレーズを覚える','単語・句動詞・イディオム・場面別フレーズ・文法などから選びます。レベルで絞り込み、「覚えた」「まだ」で仕分けると、復習する日が自動で決まります。'],
  ['vault','vault','g1','保存庫','聞いた表現をためて復習する','授業や会話で言えなかったことをAIに聞いて、ここに入れます。復習して、実際に使えたら「実際に使えた！」を押します。'],
  ['test','test','g2','テスト','覚えたかを4択で確かめる','範囲を選んで、4択で答えます。正解は「覚えた」、不正解は「まだ」に入り、復習する日が自動で決まります。'],
  ['level','level','g0','レベル診断','今の自分のレベルを知る','カテゴリーごとに20問の簡単な判定です。結果を見て、「学ぶ」で自分のレベルから始めましょう（正式なCEFRの判定ではありません）。'],
@@ -10692,6 +10737,7 @@ document.addEventListener('click', e=>{
     case 'vdel': S.vault=S.vault.filter(x=>String(x.id)!==d.id); save(); rerender(); break;
     case 'vask': { const v=S.vault.find(x=>String(x.id)===d.id); ASK={q:v?`「${v.ja}」の別の言い方は？`:'',a:null,fb:null}; go('ask'); break; }
     case 'testfrom': T={setup:{src:d.src,lv:'all',dir:'ja2en'},qs:null,i:0,score:0,pick:null}; go('test'); break;
+    case 'review': T.setup={src:'due',lv:'all',dir:'ja2en'}; T.qs=null; startTest(); go('test'); break;
     case 'tstart': { const s=$('#t-src'); if(s){ T.setup={src:s.value,lv:$('#t-lv').value,dir:$('#t-dir').value}; } startTest(); if(T.qs) rerender(); break; }
     case 'tpick': tpick(+d.i); break;
     case 'tnext': T.i++; T.pick=null; rerender(); break;
