@@ -10136,14 +10136,20 @@ const PREPS = [
   uses:[["始まりの時点","I've lived here since April.","4月からずっとここに住んでいる。"],["出来事から","I haven't seen him since the party.","パーティー以来、彼に会っていない。"],["理由（接続詞）","Since it's raining, let's stay home.","雨だから家にいよう。"]]},
  {k:"without",core:"〜なしで",svg:'<rect class="pi-o" x="50" y="26" width="60" height="54" rx="8"/><circle class="pi-gh" cx="80" cy="53" r="12"/><line class="pi-a" x1="68" y1="41" x2="92" y2="65"/><line class="pi-a" x1="92" y1="41" x2="68" y2="65"/>',
   note:"あるはずのものが一緒にないイメージです（with の反対）。〜ing と組んで「〜しないで」にもなります。",
-  uses:[["ないまま","I can't live without coffee.","コーヒーなしでは生きられない。"],["〜しないで","He left without saying goodbye.","彼はさよならも言わずに帰った。"],["抜き","Iced coffee without sugar, please.","砂糖なしのアイスコーヒーをください。"]]}
+  uses:[["ないまま","I can't live without coffee.","コーヒーなしでは生きられない。"],["〜しないで","He left without saying goodbye.","彼はさよならも言わずに帰った。"],["抜き","Iced coffee without sugar, please.","砂糖なしのアイスコーヒーをください。"]]},
+ {k:"until",core:"〜までずっと（続いて）",svg:'<circle class="pi-gh" cx="24" cy="56" r="9"/><line class="pi-a" x1="36" y1="56" x2="114" y2="56" style="stroke-width:6" marker-end="MK"/><rect class="pi-of" x="124" y="26" width="8" height="56" rx="2"/>',
+  note:"ある状態が、区切りの時点（縦の線）までずっと続くイメージです。「〜までに（期限）」は by を使います。後ろに文を続けて「〜するまで」とも言えます（接続詞）。till とも言います。",
+  uses:[["続いて","The shop is open until 9 p.m.","その店は夜9時まで開いている。"],["〜しない（〜まで）","I didn't know until yesterday.","昨日まで知らなかった。"],["〜するまで（接続詞）","Wait here until I come back.","戻ってくるまでここで待っていて。"]]},
+ {k:"during",core:"〜の間に（期間の中で）",svg:'<rect class="pi-o" x="34" y="34" width="92" height="40" rx="8"/><circle class="pi-b" cx="72" cy="54" r="10"/><line class="pi-g" x1="18" y1="86" x2="142" y2="86"/>',
+  note:"休み・授業・旅行のような「出来事の期間」の中で何かが起こるイメージです。「3日間」のように長さを言うときは for を使います。",
+  uses:[["期間の中","I worked part-time during the summer.","夏の間、アルバイトをした。"],["ある時点で","My phone rang during the class.","授業中に電話が鳴った。"],["ずっと","It rained during the whole trip.","旅行の間ずっと雨だった。"]]}
 ];
 const PREP_K = PREPS.map(p=>p.k);
 
 const PREP_GROUPS = [
  ['位置','どこにある？','<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',['in','on','at','by','over','under','above','below','between','among','behind']],
  ['動き・方向','どこへ動く？','<path d="M4 12h14"/><path d="M13 6l6 6-6 6"/>',['up','down','into','out','off','away','back','to','toward','from','through','across','along','around','forward','ahead','aside']],
- ['時間・順番','いつ？','<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',['before','after','since']],
+ ['時間・順番','いつ？','<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',['before','after','since','until','during']],
  ['つながり・関係','何とどうつながる？','<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',['with','without','for','of','about','against','together','apart']]
 ];
 const prepSvg = (k,w)=>{ const p=PREPS.find(x=>x.k===k), body=p?p.svg:PREP_X[k]; if(!body) return ''; const id='pa-'+k+'-'+(w||0);
