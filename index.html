@@ -9668,8 +9668,7 @@ function stepNav(id){
   return `<div class="stepnav">
     <button class="btn" data-act="step" data-d="-1" ${prev?'':'disabled'}>← 前の${n}</button>
     <span class="muted small en">${i+1} / ${L.length}</span>
-    <button class="btn primary" data-act="step" data-d="1" ${next?'':'disabled'}>次の${n} →</button></div>
-    <p class="muted small" style="text-align:center;margin:4px 0 0">スマホは左右にスワイプ、パソコンは ← → キーでも移れます</p>`;
+    <button class="btn primary" data-act="step" data-d="1" ${next?'':'disabled'}>次の${n} →</button></div>`;
 }
 function favBtn(id){ if(!feature('fav')) return ''; const on=!!P(id).fav; return `<button class="fav" data-act="fav" data-id="${esc(id)}" aria-pressed="${on}" aria-label="お気に入り">${on?'★':'☆'}</button>`; }
 function knowBtns(id){ const st=P(id).state; return `<div class="row"><button class="btn sm ${st==='known'?'on':''}" data-act="know" data-id="${esc(id)}" data-ok="1">覚えた</button><button class="btn sm ${st==='unknown'?'on':''}" data-act="know" data-id="${esc(id)}" data-ok="0">まだ</button></div>`; }
