@@ -197,6 +197,7 @@ svg.growth{width:100%;max-width:640px;height:auto;margin-top:6px;display:block}
 .g-val{fill:var(--ink);font-size:12.5px;font-weight:700;font-family:var(--jp)}
 .up{color:var(--ok)}
 .cat-gl{font-size:12px;font-weight:700;color:var(--muted);margin:14px 0 6px}
+.cat-gh{display:flex;align-items:center;gap:12px;margin:30px 0 12px;font-size:22px;font-weight:700;line-height:1.3}.cat-gh:first-of-type{margin-top:20px}.cat-gh .cat-ic{width:40px;height:40px;border-radius:12px}.cat-gh .cat-ic svg{width:22px;height:22px}.cat-gh-t{display:flex;align-items:baseline;flex-wrap:wrap;column-gap:10px}.cat-gh-t small{font-size:13px;font-weight:500;color:var(--muted)}
 .catgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 @media (min-width:700px){.catgrid{grid-template-columns:repeat(4,1fr)}}
 .catwrap{position:relative;display:flex}.catwrap>.catcard{flex:1;padding-right:36px}
@@ -10398,6 +10399,11 @@ function tbChips(x){
   return `<div class="pp-links"><p class="filter-l" style="margin:0 0 6px">言いかえ道具箱</p>${asBase?`<button class="tb-chip" data-act="tbgo" data-b="${esc(asBase.b)}" data-t="${asBase.t}">言いかえ: <span class="en">${asBase.a.map(a=>esc(a[0])).join('・')}</span></button>`:''}${asAlt.map(o=>`<button class="tb-chip" data-act="tbgo" data-b="${esc(o.b)}" data-t="${o.t}">基本の語: <span class="en">${esc(o.b)}</span></button>`).join('')}</div>`;
 }
 
+const CAT_GROUP_HD = {
+ '語彙':['ことばを増やす','<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22.5z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5a2.5 2.5 0 0 1 2.5 2.5z"/>'],
+ '表現':['場面で使えるフレーズ','<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/>'],
+ '文法・ワーホリ':['文のしくみと、仕事探しの準備','<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 12.5h18"/>']
+};
 const CAT_GROUPS = [['語彙',['word','phrasal','colloc','idiom','prep','tool']],['表現',['study','dialog','pattern','starter']],['文法・ワーホリ',['grammar','wh']]];
 function catStats(k){
   const kn=xs=>xs.filter(x=>P(x.id).state==='known').length;
@@ -10457,7 +10463,7 @@ function myListBtns(){
 function learnMenu(){
   return `<div class="learn-head"><h1>学ぶ</h1>${myListBtns()}</div>
   <p class="muted small" style="margin:0 0 4px">学びたいものを選んでください。</p>
-  ${CAT_GROUPS.map(([g,ks])=>`<p class="cat-gl">${g}</p><div class="catgrid">${ks.map(catCard).join('')}</div>`).join('')}`;
+  ${CAT_GROUPS.map(([g,ks],gi)=>`<h2 class="cat-gh"><span class="cat-ic g${gi%3}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${(CAT_GROUP_HD[g]||['',''])[1]}</svg></span><span class="cat-gh-t">${g}<small>${(CAT_GROUP_HD[g]||[''])[0]}</small></span></h2><div class="catgrid">${ks.map(catCard).join('')}</div>`).join('')}`;
 }
 function openCatSheet(){
   let d=document.getElementById('catdlg');
