@@ -9626,7 +9626,7 @@ V.home = ()=>{
   <h2 class="hm-h">目的から選ぶ</h2>
   <div class="hm-groups">
     ${grp('基礎をかためる',[row('go','data-v="level"','level','g0','レベル診断',S.level==null?'カテゴリーごとに20問':'記録とグラフを見る'),row('learn','data-cat="word"','word','g0','単語',`レベル別 ${ITEMS.filter(x=>x.cat==='word').length.toLocaleString()}語`),row('learn','data-cat="grammar"','grammar','g0','文法','レベル別の単元と確認問題'),row('go','data-v="pron"','pron','g0','発音講座','発音記号・聞き分け・言ってみる')])}
-    ${grp('発展',[row('learn','data-cat="phrasal"','phrasal','g0','句動詞（熟語）','get up・look for など'),row('learn','data-cat="colloc"','colloc','g0','コロケーション','よく一緒に使う語の組み合わせ'),row('learn','data-cat="pattern"','pattern','g0','構文','文の型で、言える文を増やす')])}
+    ${grp('表現を広げる',[row('learn','data-cat="phrasal"','phrasal','g0','句動詞（熟語）','get up・look for など'),row('learn','data-cat="colloc"','colloc','g0','コロケーション','よく一緒に使う語の組み合わせ'),row('learn','data-cat="pattern"','pattern','g0','構文','文の型で、言える文を増やす'),row('learn','data-cat="idiom"','idiom','g0','イディオム','決まった言い回しと、その意味'),row('learn','data-cat="starter"','starter','g0','文頭・つなぎ言葉','話し始めと、話をつなぐ言葉')])}
     ${grp('話す練習',[row('go','data-v="talk"','talk','g1','AI英会話','留学生活・場面別・ワーホリ'),row('learn','data-cat="dialog"','dialog','g1','場面別フレーズ','買い物・レストラン・交通など')])}
     ${grp('ワーホリの準備',[row('learn','data-cat="wh"','wh','g2','ワーホリ対策','仕事探し・面接・職場の表現'),row('go','data-v="resume"','resume','g2','履歴書をつくる','AIと一問一答で強みを見つける')])}
   </div>
