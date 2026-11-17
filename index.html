@@ -452,7 +452,8 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .st-card.on .st-n{background:var(--teal);color:#fff}
 .st-card b{font-size:14.5px}
 .st-bar{position:absolute;left:0;right:0;bottom:0;height:3px}.st-bar i{display:block;height:100%;background:var(--teal)}
-.st-h{margin:14px 0 6px;font-size:15px}.st-h.pp-gh{margin:26px 0 10px;font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}.st-h.pp-gh .cat-ic{width:36px;height:36px;border-radius:10px}.st-h.pp-gh .cat-ic svg{width:20px;height:20px}.st-h.pp-gh small{font-size:14px;margin-left:8px}.st-h:first-child{margin-top:0}.st-h small{font-size:12px;color:var(--muted);font-weight:500;margin-left:4px}
+.st-h{margin:14px 0 6px;font-size:15px}.gd-pp{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:6px 0 4px}.gd-pp-fig{flex:none}.gd-pp-fig .pi{display:block}.gd-pp-key{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14px}.gd-pp-key li{display:flex;align-items:center;gap:8px}.gd-sw{flex:none;display:inline-block;width:18px;height:18px;border-radius:50%}.gd-sw-b{background:var(--mango)}.gd-sw-o{border-radius:4px;background:color-mix(in srgb,var(--teal) 15%,transparent);border:2px solid var(--teal)}.gd-sw-a{height:0;border-radius:0;border-top:3px solid var(--teal-ink)}.gd-sw-d{height:0;border-radius:0;border-top:2px dashed var(--muted)}.gd-h4{margin:16px 0 6px;font-size:15px}
+.st-h.pp-gh{margin:26px 0 10px;font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}.st-h.pp-gh .cat-ic{width:36px;height:36px;border-radius:10px}.st-h.pp-gh .cat-ic svg{width:20px;height:20px}.st-h.pp-gh small{font-size:14px;margin-left:8px}.st-h:first-child{margin-top:0}.st-h small{font-size:12px;color:var(--muted);font-weight:500;margin-left:4px}
 .hm-today{display:grid;gap:12px;margin-bottom:12px}
 @media (min-width:720px){.hm-today{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}}
 .hm-card{border-radius:22px;padding:18px 20px;text-align:left;display:flex;flex-direction:column;gap:6px}
@@ -10989,7 +10990,7 @@ V.resume = ()=>{
 
 const GUIDE_FEATS = [
  ['ask','chat','g1','AIに聞く','言えなかった表現を、その場で聞く','日本語のまま質問すると、自然な表現・解説・例文が出ます。そのまま保存庫に入れて、あなただけの辞書にしていけます（くわしくは「はじめに」タブ）。'],
- ['learn','pencil','g0','学ぶ','単語やフレーズを覚える','単語・句動詞・イディオム・場面別フレーズ・文法などから選びます。レベルで絞り込み、「覚えた」「まだ」で仕分けると、復習する日が自動で決まります。'],
+ ['learn','pencil','g0','学ぶ','単語やフレーズを覚える','単語・句動詞・イディオム・場面別フレーズ・文法などから選びます。レベルで絞り込み、「覚えた」「まだ」で仕分けると、復習する日が自動で決まります。前置詞は、イメージ図で学べます（くわしくは「くわしく」タブ）。'],
  ['vault','vault','g1','保存庫','聞いた表現をためて復習する','授業や会話で言えなかったことをAIに聞いて、ここに入れます。復習して、実際に使えたら「実際に使えた！」を押します。'],
  ['test','test','g2','テスト','覚えたかを4択で確かめる','範囲を選んで、4択で答えます。正解は「覚えた」、不正解は「まだ」に入り、復習する日が自動で決まります。'],
  ['level','level','g0','レベル診断','今の自分のレベルを知る','カテゴリーごとに20問の簡単な判定です。結果を見て、「学ぶ」で自分のレベルから始めましょう（正式なCEFRの判定ではありません）。'],
@@ -11099,6 +11100,35 @@ V.guide = ()=>{ const t=Math.min(R.guideT||0,GUIDE_TABS.length-1), pi=Math.min(R
     <li>イディオムは、<span class="en">a piece of cake</span>（とても簡単なこと。直訳は「ケーキ1切れ」）のように、直訳では意味が通らない決まった言い回しです。</li>
     <li><span class="en">take a shower</span>（コロケーション）と <span class="en">take off</span>（句動詞・離陸する）のように、似ていても分類が違うものがあります。迷うものは監修者が決めています。</li>
   </ul>   </details>
+   <details class="panel"><summary>前置詞（イメージ）の見方</summary>
+  <p class="muted">up・in・on のような小さな語を、訳ではなく「動きと位置のイメージ図」でつかむページです。</p>
+  <div class="gd-pp">
+   <div class="gd-pp-fig">${prepSvg('into',150)}<p class="muted small" style="margin:2px 0 0;text-align:center">例: <span class="en">into</span>（中へ入り込んで）</p></div>
+   <ul class="gd-pp-key">
+    <li><span class="gd-sw gd-sw-b"></span><span><b>黄色い玉</b>＝動くもの・話の主役</span></li>
+    <li><span class="gd-sw gd-sw-o"></span><span><b>緑の形</b>＝基準になる場所・もの</span></li>
+    <li><span class="gd-sw gd-sw-a"></span><span><b>矢印</b>＝動き</span></li>
+    <li><span class="gd-sw gd-sw-d"></span><span><b>点線</b>＝基準の高さ、時間の流れ、もとの位置</span></li>
+   </ul>
+  </div>
+  <h4 class="gd-h4">4つのグループ</h4>
+  <div class="panel" style="padding:0;overflow-x:auto"><table class="lvtable cmp">
+    <tbody>${PREP_GROUPS.map(g=>`<tr><th scope="row">${esc(g[0])}<span class="lvsub">${esc(g[1])}</span></th><td class="en">${g[3].slice(0,4).join(', ')} など ${g[3].length}語</td></tr>`).join('')}</tbody></table></div>
+  <h4 class="gd-h4">おすすめの使い方</h4>
+  <ol class="gnotes">
+    <li>図を見て、その語のイメージを1つつかむ</li>
+    <li>「イメージから広がる使い方」で、用例を聞いて読む</li>
+    <li>その語を使う句動詞・コロケーションに進む（ページの下にまとめて出ます）</li>
+    <li>迷いやすい組み合わせは「使い分け」の確認問題で確かめる</li>
+  </ol>
+  <h4 class="gd-h4">句動詞・コロケーションとのつながり</h4>
+  <ul class="gnotes">
+    <li>句動詞の多くは「動詞＋前置詞・副詞」です。<span class="en">up</span> のイメージ（上へ・最後まで）が分かると、<span class="en">give up</span>（最後まで手放す → あきらめる）や <span class="en">eat up</span>（全部食べる）が丸暗記せずに分かります。</li>
+    <li>コロケーションでも、<span class="en">on Monday</span>・<span class="en">in May</span> のように、どの前置詞を使うかで迷います。イメージ（面にくっつく on／幅の中の in）が分かると選べるようになります。</li>
+    <li>句動詞・コロケーションの詳しいページにも、使っている前置詞のイメージへのリンクがあります。</li>
+  </ul>
+  <button class="btn primary sm" style="margin-top:6px" data-act="learn" data-cat="prep" data-from="guide">前置詞（イメージ）を開く</button>
+   </details>
   </div>`;
  return `<div class="guide-pg"><h1>手引書</h1>${tabs}${body}</div>`; };
 
