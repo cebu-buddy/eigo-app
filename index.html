@@ -452,7 +452,7 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .st-card.on .st-n{background:var(--teal);color:#fff}
 .st-card b{font-size:14.5px}
 .st-bar{position:absolute;left:0;right:0;bottom:0;height:3px}.st-bar i{display:block;height:100%;background:var(--teal)}
-.st-h{margin:14px 0 6px;font-size:15px}.st-h:first-child{margin-top:0}.st-h small{font-size:12px;color:var(--muted);font-weight:500;margin-left:4px}
+.st-h{margin:14px 0 6px;font-size:15px}.st-h.pp-gh{margin:26px 0 10px;font-size:20px;font-weight:700}.st-h.pp-gh small{font-size:14px;margin-left:8px}.st-h:first-child{margin-top:0}.st-h small{font-size:12px;color:var(--muted);font-weight:500;margin-left:4px}
 .hm-today{display:grid;gap:12px;margin-bottom:12px}
 @media (min-width:720px){.hm-today{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}}
 .hm-card{border-radius:22px;padding:18px 20px;text-align:left;display:flex;flex-direction:column;gap:6px}
@@ -10164,7 +10164,7 @@ function prepView(){
     <p class="muted small" style="margin:10px 0 0">黄色い玉が動くもの、緑の形が基準の場所です。訳を覚えるより、イメージを1つつかむと、たくさんの句動詞やコロケーションが分かるようになります。</p>
     <h3 class="st-h" style="margin-top:16px">迷いやすい使い分け</h3>
     <div class="pc-list">${PREP_CMP.map(c=>`<button class="pc-card" data-act="prepcmp" data-c="${c.id}"><b class="en">${esc(c.title)}</b><span>${esc(c.sub)}</span></button>`).join('')}</div>
-    ${PREP_GROUPS.map(g=>`<h3 class="st-h" style="margin-top:18px">${esc(g[0])} <small>${esc(g[1])}</small></h3>
+    ${PREP_GROUPS.map(g=>`<h3 class="st-h pp-gh">${esc(g[0])} <small>${esc(g[1])}</small></h3>
     <div class="pp-grid">${g[2].map(k=>PREPS.find(p=>p.k===k)).map(p=>`<button class="pp-card ${(S.prepSeen||{})[p.k]?'seen':''}" data-act="prep" data-k="${p.k}">${prepSvg(p.k)}<b class="en">${p.k}</b><span>${esc(p.core)}</span></button>`).join('')}</div>`).join('')}`;
   const p=PREPS.find(x=>x.k===k), i=PREP_K.indexOf(k), ph=prepRel(k,'phrasal'), co=prepRel(k,'colloc'), more=R.prepMore===k;
   const rel=(xs,n)=>xs.slice(0,more?xs.length:n).map(x=>`<button class="pp-rel" data-act="sopen" data-id="${esc(x.id)}"><span class="en">${esc(x.en)}</span><span class="s">${esc(x.ja)}</span></button>`).join('');
