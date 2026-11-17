@@ -8314,14 +8314,14 @@ Object.assign(TALKS.find(t=>t.id==='class'),{goal:'週末のことを話して�
 Object.assign(TALKS.find(t=>t.id==='mates'),{goal:'放課後のことを話して、週末の約束をする',src:['study','学校生活']});
 Object.assign(TALKS.find(t=>t.id==='dorm'),{goal:'自己紹介をして、夕食の約束をする',src:['study','寮・生活']});
 const TALK_GROUPS = [
- {h:'ワーホリ', lead:'仕事探しから、働く・暮らすまで。ワーホリの場面ごとに練習できます。', sub:[
-   ['仕事探し',['wh_search','wh_apply','interview','wh_trial'],true],
-   ['働く',['wh_first','wh_cafe','wh_rest','wh_kitchen','wh_shift','wh_pay','wh_quit']],
-   ['生活',['house','wh_bank','wh_clinic']]]},
  {h:'留学生活', lead:'空港から、授業・寮・友達との時間まで。', sub:[
    ['',['st_airport','class','st_teacher','mates','dorm','st_dorm','st_clinic','st_bank']]]},
  {h:'場面別フレーズから', tab:'場面別', lead:'「場面別フレーズ」で覚えた表現を、会話で使ってみます。', sub:[
-   ['',['sc_first','sc_shop','sc_eat','sc_way','sc_phone','sc_meet','sc_travel','sc_ride','sc_health','sc_serve','sc_work','sc_weather','sc_cele']]]}
+   ['',['sc_first','sc_shop','sc_eat','sc_way','sc_phone','sc_meet','sc_travel','sc_ride','sc_health','sc_serve','sc_work','sc_weather','sc_cele']]]},
+ {h:'ワーホリ', lead:'仕事探しから、働く・暮らすまで。ワーホリの場面ごとに練習できます。', sub:[
+   ['仕事探し',['wh_search','wh_apply','interview','wh_trial'],true],
+   ['働く',['wh_first','wh_cafe','wh_rest','wh_kitchen','wh_shift','wh_pay','wh_quit']],
+   ['生活',['house','wh_bank','wh_clinic']]]}
 ];
 const talkPhrases = t => !t.src ? [] : ITEMS.filter(x=>x.cat===t.src[0] && x.scene===t.src[1]).sort((a,b)=>a.lv-b.lv).slice(0,8);
 
