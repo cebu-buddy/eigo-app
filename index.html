@@ -416,6 +416,14 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .today{display:flex;gap:16px;align-items:center}
 .today .num{font-family:var(--en);font-size:34px;font-weight:600;color:var(--teal-ink);line-height:1}
 .pi .pi-g{stroke:var(--line);stroke-width:1.5}.pi .pi-o{fill:var(--teal);fill-opacity:.15;stroke:var(--teal);stroke-width:2}.pi .pi-of{fill:var(--teal)}.pi .pi-b{fill:var(--mango)}.pi .pi-gh{fill:none;stroke:var(--mango);stroke-width:1.5;stroke-dasharray:3 3}.pi .pi-a{fill:none;stroke:var(--teal-ink);stroke-width:2.5;stroke-linecap:round}.pi .pi-d{stroke-dasharray:5 4}.pi .pi-mk{fill:none;stroke:var(--teal-ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pc-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+.pc-card{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:var(--mango-soft);border:1px solid color-mix(in srgb,var(--mango) 35%,transparent);border-radius:14px;padding:10px 14px;cursor:pointer;color:var(--ink)}.pc-card:hover{border-color:var(--mango)}.pc-card b{font-size:17px}.pc-card span{font-size:12.5px;color:var(--mango-ink);font-weight:700}
+.pc-inline{display:inline-flex;margin:12px 8px 0 0}
+.pc-cols{display:grid;gap:12px;margin-top:14px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.pc-col{background:var(--bg);border-radius:14px;padding:12px 14px}.pc-col .pi{width:100%;max-width:200px;height:auto;display:block;margin:0 auto 6px}
+.pc-w{font-size:24px}.pc-m{margin:2px 0 8px;font-weight:700;color:var(--teal-ink)}.pc-ex{margin:0 0 4px;font-size:14px}
+.pc-q{border-top:1px solid var(--line);padding:12px 0}.pc-s{font-size:17px;margin:0 0 8px}.pc-blank{display:inline-block;min-width:3em;text-align:center;border-bottom:2px solid var(--teal);color:var(--teal-ink);font-weight:700}
+.chip.pc-ok{background:var(--teal);border-color:var(--teal);color:#fff;opacity:1}.chip.pc-ng{background:var(--pink-soft);border-color:var(--pink);color:var(--pink-ink);opacity:1}.pc-okt{color:var(--teal-ink)}.pc-ngt{color:var(--pink-ink)}
 .pp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
 .pp-card{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 14px 14px;cursor:pointer;color:var(--ink)}
 .pp-card:hover{border-color:var(--teal)}.pp-card.seen{background:var(--mint)}
@@ -9826,8 +9834,8 @@ const PREPS = [
   uses:[["一部","One of my friends lives in Cebu.","友達の1人がセブに住んでいる。"],["つながり","What's the name of your school?","学校の名前は何？"],["中身","Can I have a cup of coffee?","コーヒーを1杯もらえますか？"]]}
 ];
 const PREP_K = PREPS.map(p=>p.k);
-const prepSvg = (k,w)=>{ const p=PREPS.find(x=>x.k===k); if(!p) return ''; const id='pa-'+k+'-'+(w||0);
-  return `<svg class="pi" viewBox="0 0 160 100" ${w?`width="${w}" height="${Math.round(w*100/160)}"`:''} aria-hidden="true"><defs><marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path class="pi-mk" d="M2 1L8 5L2 9"/></marker></defs>${p.svg.replace(/MK/g,`url(#${id})`)}</svg>`; };
+const prepSvg = (k,w)=>{ const p=PREPS.find(x=>x.k===k), body=p?p.svg:PREP_X[k]; if(!body) return ''; const id='pa-'+k+'-'+(w||0);
+  return `<svg class="pi" viewBox="0 0 160 100" ${w?`width="${w}" height="${Math.round(w*100/160)}"`:''} aria-hidden="true"><defs><marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path class="pi-mk" d="M2 1L8 5L2 9"/></marker></defs>${body.replace(/MK/g,`url(#${id})`)}</svg>`; };
 
 const prepRel = (k,cat)=>{ const re=new RegExp('(^|[^a-z])'+k+'($|[^a-z])','i'); return ITEMS.filter(x=>x.cat===cat && re.test(x.en)); };
 
@@ -9838,9 +9846,13 @@ function prepChips(x){
 }
 function prepView(){
   const head=`<div class="crumbrow"><button class="btn sm" data-act="learnmenu">← カテゴリー</button></div>`;
+  const cmp=PREP_CMP.find(c=>c.id===R.prepC); if(cmp) return prepCmpView(cmp);
   const k=PREP_K.includes(R.prepK)?R.prepK:null;
   if(!k) return `${head}<div class="learn-head"><h1 class="cat-title"><button class="catswitch" data-act="catsheet" aria-haspopup="dialog">${esc(CATS.prep)}<span class="sw">カテゴリ切替え ▾</span></button>${infoBtn('prep')}</h1></div>
     <p class="muted small" style="margin:10px 0 0">黄色い玉が動くもの、緑の形が基準の場所です。訳を覚えるより、イメージを1つつかむと、たくさんの句動詞やコロケーションが分かるようになります。</p>
+    <h3 class="st-h" style="margin-top:16px">迷いやすい使い分け</h3>
+    <div class="pc-list">${PREP_CMP.map(c=>`<button class="pc-card" data-act="prepcmp" data-c="${c.id}"><b class="en">${esc(c.title)}</b><span>${esc(c.sub)}</span></button>`).join('')}</div>
+    <h3 class="st-h" style="margin-top:18px">20語のイメージ</h3>
     <div class="pp-grid">${PREPS.map(p=>`<button class="pp-card ${(S.prepSeen||{})[p.k]?'seen':''}" data-act="prep" data-k="${p.k}">${prepSvg(p.k)}<b class="en">${p.k}</b><span>${esc(p.core)}</span></button>`).join('')}</div>`;
   const p=PREPS.find(x=>x.k===k), i=PREP_K.indexOf(k), ph=prepRel(k,'phrasal'), co=prepRel(k,'colloc'), more=R.prepMore===k;
   const rel=(xs,n)=>xs.slice(0,more?xs.length:n).map(x=>`<button class="pp-rel" data-act="sopen" data-id="${esc(x.id)}"><span class="en">${esc(x.en)}</span><span class="s">${esc(x.ja)}</span></button>`).join('');
@@ -9853,10 +9865,88 @@ function prepView(){
     ${ph.length?`<h3 class="st-h" style="margin-top:18px">${k} を使う句動詞 <small>${ph.length}</small></h3><div class="pp-rels">${rel(ph,12)}</div>`:''}
     ${co.length?`<h3 class="st-h" style="margin-top:18px">${k} を使うコロケーション <small>${co.length}</small></h3><div class="pp-rels">${rel(co,8)}</div>`:''}
     ${(ph.length>12||co.length>8)&&!more?`<button class="btn sm" style="margin-top:10px" data-act="prepmore" data-k="${k}">すべて表示する</button>`:''}
+    ${PREP_CMP.filter(c=>c.ws.some(w=>w[1]===k)).map(c=>`<button class="pc-card pc-inline" data-act="prepcmp" data-c="${c.id}"><span>使い分け</span><b class="en">${esc(c.title)}</b></button>`).join('')}
     ${gch>=0?`<p class="small" style="margin:16px 0 0">場所・時間の at / on / in の使い分けは、<button class="linkbtn" data-act="prepgr" data-i="${gch}">文法の「前置詞」の章</button>でも学べます。</p>`:''}
     <div class="row" style="justify-content:space-between;margin-top:16px">${i>0?`<button class="btn sm" data-act="prep" data-k="${PREP_K[i-1]}">← ${PREP_K[i-1]}</button>`:'<span></span>'}${i<PREP_K.length-1?`<button class="btn sm" data-act="prep" data-k="${PREP_K[i+1]}">${PREP_K[i+1]} →</button>`:''}</div>
   </div>`;
 }
+
+const PREP_X = {
+ byd:'<line class="pi-g" x1="18" y1="70" x2="124" y2="70"/><rect class="pi-of" x="124" y="26" width="8" height="56" rx="2"/><circle class="pi-b" cx="84" cy="56" r="11"/><path class="pi-a pi-d" d="M98 56 H114" marker-end="MK"/>',
+ until:'<circle class="pi-gh" cx="24" cy="56" r="9"/><line class="pi-a" x1="36" y1="56" x2="114" y2="56" style="stroke-width:6" marker-end="MK"/><rect class="pi-of" x="124" y="26" width="8" height="56" rx="2"/>',
+ forlen:'<line class="pi-a" x1="34" y1="56" x2="126" y2="56" marker-start="MK" marker-end="MK"/><line class="pi-g" x1="30" y1="40" x2="30" y2="72"/><line class="pi-g" x1="130" y1="40" x2="130" y2="72"/><circle class="pi-b" cx="80" cy="30" r="9"/>',
+ during:'<rect class="pi-o" x="34" y="34" width="92" height="40" rx="8"/><circle class="pi-b" cx="72" cy="54" r="10"/><line class="pi-g" x1="18" y1="86" x2="142" y2="86"/>'
+};
+const PREP_CMP = [
+ {id:'atonin',title:'at / on / in',sub:'時間と場所',
+  lead:'点（at）→ 面（on）→ 空間・幅（in）の順に、広くなっていきます。',
+  ws:[['at','at','一点','at the bus stop／at the front desk','at 7:30／at noon'],
+      ['on','on','面にくっつく','on the wall／on the 2nd floor','on Monday／on May 5'],
+      ['in','in','空間・幅の中','in my room／in Cebu','in May／in 2027／in the morning']],
+  cols:['場所','時間'],
+  tip:'時間は「ピンポイントの時刻 at → 1日 on → 月・年など長い幅 in」と覚えると迷いません。',
+  q:[['My flight leaves ___ 6:30.',['at','on','in'],0,'時刻はピンポイントなので at。'],
+     ['I have a class ___ Tuesday.',['at','on','in'],1,'曜日・日付は on。'],
+     ["I'll go back to Japan ___ December.",['at','on','in'],2,'月は幅のある時間なので in。'],
+     ["Let's meet ___ the main gate.",['at','on','in'],0,'待ち合わせ場所は地図の上の「点」なので at。']]},
+ {id:'tofor',title:'to / for',sub:'行き先・相手',
+  lead:'to は到着点まで「届く」。for は方向を「指す」だけで、届いたかは問いません。',
+  ws:[['to','to','到着点まで届く','go to the airport／give it to me／talk to the staff'],
+      ['for','for','方向・目的を指す','leave for Manila／buy a gift for my mom／wait for the bus']],
+  cols:['例'],
+  tip:'「〜へ向けて出発する」は leave for。「人に渡す」は give A to B、「人のために買う」は buy A for B です。',
+  q:[['I gave my passport ___ the officer.',['to','for'],0,'パスポートが相手に「届く」ので to。'],
+     ['I bought a souvenir ___ my sister.',['to','for'],1,'妹の「ために」買ったので for。'],
+     ['The plane left ___ Tokyo.',['to','for'],1,'東京へ「向けて」出発。まだ着いていないので for。'],
+     ['Please talk ___ your teacher.',['to','for'],0,'話しかける相手は to。']]},
+ {id:'byuntil',title:'by / until',sub:'〜までに・〜までずっと',
+  lead:'by は期限（それまでのどこかで1回）。until は継続（その時までずっと）。',
+  ws:[['byd','by','〜までに（期限）','Please submit it by Friday.／Check out by 11 a.m.'],
+      ['until','until','〜までずっと（継続）','I studied until midnight.／The shop is open until 9.']],
+  cols:['例'],
+  tip:'日本語の「〜まで」に「に」が付く（〜までに）なら by、付かない（〜までずっと）なら until です。',
+  q:[['Please check out ___ 11 a.m.',['by','until'],0,'11時「までに」1回チェックアウトするので by。'],
+     ['I studied ___ midnight.',['by','until'],1,'夜中「までずっと」勉強したので until。'],
+     ['Can you finish it ___ tomorrow?',['by','until'],0,'明日「までに」終わらせるので by。'],
+     ["Let's wait here ___ the rain stops.",['by','until'],1,'雨がやむ「までずっと」待つので until。']]},
+ {id:'forduring',title:'for / during',sub:'期間の言い方',
+  lead:'for は長さ（どのくらいの間）。during は出来事の名前（何の間）。',
+  ws:[['forlen','for','長さ（数字）','for two weeks／for an hour／for three months'],
+      ['during','during','出来事・期間の名前','during the class／during my stay／during the summer']],
+  cols:['例'],
+  tip:'後ろが「2週間」のような数字の長さなら for、「授業」「滞在」のような出来事なら during です。',
+  q:[['I stayed in Cebu ___ three months.',['for','during'],0,'3か月という長さなので for。'],
+     ["Please don't use your phone ___ the test.",['for','during'],1,'テストという出来事の間なので during。'],
+     ['It rained ___ the night.',['for','during'],1,'夜という期間の名前なので during。'],
+     ["I've known her ___ five years.",['for','during'],0,'5年という長さなので for。']]},
+ {id:'ininto',title:'in / into',sub:'中にある・中へ入る',
+  lead:'in は中にある「状態」。into は外から中へ入る「動き」。',
+  ws:[['in','in','中にある（状態）','I\'m in the room.／My keys are in my pocket.'],
+      ['into','into','中へ入る（動き）','She walked into the room.／He jumped into the pool.']],
+  cols:['例'],
+  tip:'walk・jump・pour など「動き」の動詞のあとで、外から中へ入るなら into です。',
+  q:[['She is ___ the kitchen.',['in','into'],0,'台所に「いる」状態なので in。'],
+     ['He jumped ___ the pool.',['in','into'],1,'外からプールの中へ入る動きなので into。'],
+     ['My keys are ___ my pocket.',['in','into'],0,'ポケットの中に「ある」状態なので in。'],
+     ['Pour the water ___ the glass.',['in','into'],1,'外からグラスの中へ入る動きなので into。']]}
+];
+let PCQ = {};
+function prepCmpView(c){
+  const i=PREP_CMP.indexOf(c), nOk=c.q.filter((q,j)=>PCQ[c.id+':'+j]===q[2]).length, nDone=c.q.filter((q,j)=>PCQ[c.id+':'+j]!=null).length;
+  return `<div class="crumbrow"><button class="btn sm" data-act="prep" data-k="">← 前置詞の一覧</button></div>
+  <div class="panel pp-detail">
+    <p class="filter-l" style="margin:0">使い分け・${esc(c.sub)}</p>
+    <h2 class="en" style="margin:2px 0 6px;font-size:28px">${esc(c.title)}</h2>
+    <p style="margin:0">${esc(c.lead)}</p>
+    <div class="pc-cols">${c.ws.map(w=>`<div class="pc-col">${prepSvg(w[0])}<div class="row" style="gap:6px"><b class="en pc-w">${esc(w[1])}</b>${sayBtn(w[1])}</div><p class="pc-m">${esc(w[2])}</p>${w.slice(3).map((e,j)=>`<p class="pc-ex">${c.cols.length>1?`<span class="tag">${esc(c.cols[j])}</span> `:''}<span class="en">${esc(e)}</span></p>`).join('')}${PREP_K.includes(w[0])?`<button class="linkbtn small" data-act="prep" data-k="${w[0]}">${esc(w[1])} のイメージを見る</button>`:''}</div>`).join('')}</div>
+    <div class="pt-note" style="margin-top:14px"><p class="filter-l" style="margin:0 0 2px">見分け方</p><p style="margin:0">${esc(c.tip)}</p></div>
+    <h3 class="st-h" style="margin-top:18px">確認問題 <small>${nDone?`${nOk} / ${c.q.length}問 正解`:`${c.q.length}問`}</small></h3>
+    ${c.q.map((q,j)=>{ const a=PCQ[c.id+':'+j], done=a!=null; return `<div class="pc-q"><p class="en pc-s">${esc(q[0]).replace('___','<span class="pc-blank">'+(done?esc(q[1][q[2]]):'＿＿')+'</span>')}</p><div class="row" style="gap:6px">${q[1].map((o,k)=>`<button class="chip ${done?(k===q[2]?'pc-ok':(k===a?'pc-ng':'')):''}" data-act="pcq" data-c="${c.id}" data-j="${j}" data-k="${k}" ${done?'disabled':''}>${esc(o)}</button>`).join('')}</div>${done?`<p class="small ${a===q[2]?'pc-okt':'pc-ngt'}" style="margin:6px 0 0">${a===q[2]?'正解。':'もう一歩。'}${esc(q[3])}</p>`:''}</div>`; }).join('')}
+    ${nDone===c.q.length?`<button class="btn sm" style="margin-top:10px" data-act="pcqreset" data-c="${c.id}">もう一度解く</button>`:''}
+    <div class="row" style="justify-content:space-between;margin-top:16px">${i>0?`<button class="btn sm" data-act="prepcmp" data-c="${PREP_CMP[i-1].id}">← ${esc(PREP_CMP[i-1].title)}</button>`:'<span></span>'}${i<PREP_CMP.length-1?`<button class="btn sm" data-act="prepcmp" data-c="${PREP_CMP[i+1].id}">${esc(PREP_CMP[i+1].title)} →</button>`:''}</div>
+  </div>`;
+}
+
 const hlWord=(s,k)=>esc(s).replace(new RegExp('(^|[^A-Za-z])('+k+')(?=$|[^A-Za-z])','i'),'$1<mark>$2</mark>');
 
 const CAT_GROUPS = [['語彙',['word','phrasal','colloc','idiom','prep']],['表現',['study','dialog','pattern','starter']],['文法・ワーホリ',['grammar','wh']]];
@@ -10804,8 +10894,11 @@ document.addEventListener('click', e=>{
       PRON={id:null,url:null,rec:null,result:''}; go('learn',ex); break; }
     case 'theme': S.theme=d.t; save(); applyTheme(); document.querySelectorAll('.theme-sw button').forEach(b=>{const on=b.dataset.t===d.t; b.classList.toggle('on',on); b.setAttribute('aria-checked',on);}); break;
     case 'ipaplay': { const u=ipaUrl(d.k); if(u){ try{speechSynthesis.cancel();}catch(e){} try{ new Audio(u).play(); }catch(e){} } break; }
-    case 'learn': PRON.id=null; document.getElementById('catdlg')?.close(); document.getElementById('cidlg')?.close(); go('learn',Object.assign({cat:d.cat,lv:'all',sel:null,prepK:null},d.sc?{whScene:d.sc}:{},d.from?{from:d.from}:{})); break;
-    case 'prep': if(d.k){ S.prepSeen=S.prepSeen||{}; S.prepSeen[d.k]=1; save(); } go('learn',{cat:'prep',prepK:d.k||null,prepMore:null,sel:null}); break;
+    case 'learn': PRON.id=null; document.getElementById('catdlg')?.close(); document.getElementById('cidlg')?.close(); go('learn',Object.assign({cat:d.cat,lv:'all',sel:null,prepK:null,prepC:null},d.sc?{whScene:d.sc}:{},d.from?{from:d.from}:{})); break;
+    case 'prep': if(d.k){ S.prepSeen=S.prepSeen||{}; S.prepSeen[d.k]=1; save(); } go('learn',{cat:'prep',prepK:d.k||null,prepC:null,prepMore:null,sel:null}); break;
+    case 'prepcmp': go('learn',{cat:'prep',prepC:d.c,prepK:null,sel:null}); break;
+    case 'pcq': PCQ[d.c+':'+d.j]=+d.k; rerender(); break;
+    case 'pcqreset': Object.keys(PCQ).forEach(x=>{ if(x.startsWith(d.c+':')) delete PCQ[x]; }); rerender(); break;
     case 'prepmore': R.prepMore=d.k; rerender(); break;
     case 'prepgr': go('learn',{cat:'grammar',gch:String(d.i),lv:'all',sel:null}); break;
     case 'learnmenu': PRON.id=null; go('learn',{cat:null,sel:null}); break;
