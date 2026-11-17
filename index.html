@@ -9355,7 +9355,7 @@ function shell(){
     ${NAV2.map(n=>`<button class="nav ${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}${lk(n[0])}</button>`).join('')}
     <div class="grp">利用区分: ${TIER_NAME[tier()]}</div>
     <div class="cta-pals" aria-hidden="true"><span class="pal p1">${coco(46)}</span><span class="pal p2">${mango(42)}</span></div>
-    <button class="ask-cta" data-act="go" data-v="ask">${I.chat}<span>今、言えなかった<br>表現をAIに聞く</span></button>
+    <button class="ask-cta" data-act="go" data-v="ask">${I.chat}<span>今、言えなかった<br>表現をCoco先生に聞く</span></button>
     ${themeSw('side-theme')}
     ${producedBy('side-pb')}
   </nav>`;
