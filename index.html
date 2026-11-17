@@ -86,6 +86,13 @@ button,input,select,textarea{font:inherit;color:inherit}
 main{padding:4px 16px 24px;max-width:1080px;margin:0 auto}
 .app.is-welcome{display:block!important;padding-bottom:24px}
 .welcome-main{max-width:560px;width:100%}
+.linkbtn{background:none;border:0;padding:0;color:var(--teal-ink);text-decoration:underline;cursor:pointer;font:inherit}
+.center{text-align:center}
+.gbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%}
+.lg-msg{margin:0;font-size:13px}
+.lg-msg.err{color:var(--pink-ink)}
+.sync-st{font-size:12px;color:var(--muted)}
+.policy h2{font-size:16px;margin:18px 0 6px}.policy p,.policy li{font-size:14px;line-height:1.8}
 @media (min-width:960px){.welcome-main{padding-top:4vh}}
 .tabbar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:10}
 .tabbar button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;padding:4px 0;border-radius:12px;cursor:pointer;color:var(--muted)}
@@ -522,6 +529,7 @@ label.f{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
 .bd-tall li i{flex:none;width:20px;height:20px;border-radius:50%;background:var(--teal);color:#fff;font-style:normal;font-size:12px;display:grid;place-items:center;margin-top:1px}
 @media (max-width:959px){ .home-grid .bd-tile{grid-column:1/-1;flex-direction:row;align-items:center;padding:14px 16px} .bd-tile .bd-body{flex:1} .bd-tile .bd-cta{margin:8px 0 0} .bd-tile .bd-sea{height:100%;width:38%;left:auto;right:0} .bd-tile .bd-chars{right:14px;bottom:10px} }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 <div class="app" id="app"></div>
@@ -564,7 +572,7 @@ function mango(s=56){
   <circle cx="19" cy="45" r="3.2" fill="#F26D5B" opacity=".55"/><circle cx="45" cy="45" r="3.2" fill="#F26D5B" opacity=".55"/>
   <path d="M27 45c3 3.5 7 3.5 10 0" stroke="#2A1A10" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>`;
 }
-const CH = {coco:{name:'ココ',svg:coco}, mango:{name:'マンゴー',svg:mango}};
+const CH = {coco:{name:'Coco先生',svg:coco}, mango:{name:'マンゴー',svg:mango}};
 
 const I = {
  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>',
@@ -8225,7 +8233,7 @@ const KEY = 'cocomango_proto2';
 const S0 = ()=>({user:'',tier:'general',trialStart:'',askCount:{d:'',n:0},talkTrialUsed:false,level:null,levelDate:'',prog:{},vault:[],tests:0,resume:{},rdesign:'classic',talkLog:0,notes:{},lvHist:[],pronDone:{}});
 let S = S0();
 try{ const raw = localStorage.getItem(KEY); if(raw) S = Object.assign(S, JSON.parse(raw)); }catch(e){}
-function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} if(typeof syncLater==='function') syncLater(); }
 
 function applyTheme(){ const r=document.documentElement; if(!r||!r.dataset) return; if(S.theme==='light'||S.theme==='dark') r.dataset.theme=S.theme; else delete r.dataset.theme; }
 applyTheme();
@@ -9278,7 +9286,7 @@ const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 const TIER_NAME = {general:'一般（面談前）', counseled:'面談実施者（お試し）', customer:'成約者'};
 const TRIAL_DAYS = 30;
 const LIMIT = {general:{ask:0,vault:0}, counseled:{ask:3,vault:30}, customer:{ask:50,vault:Infinity}};
-const CODES = {'MANGO4821':'counseled', 'COCO9375':'customer'};
+
 const DEBUG = /[?&]debug\b/.test(location.search);
 const STUDY_SCENES = ['出発前の手続き','空港','授業中','学校生活','寮・生活','病院・薬局','銀行・お金'];
 function trialLeft(){ if(!S.trialStart) return TRIAL_DAYS; return TRIAL_DAYS - Math.floor((Date.now()-new Date(S.trialStart+'T00:00:00').getTime())/86400000); }
@@ -9347,7 +9355,7 @@ function shell(){
 }
 function render(){
   $('#app').classList.toggle('is-welcome', !S.user);
-  if(!S.user){ $('#app').innerHTML = `<main id="main" class="welcome-main">${V.welcome()}</main>`; return; }
+  if(!S.user){ $('#app').innerHTML = `<main id="main" class="welcome-main">${V.welcome()}</main>`; after(); return; }
   $('#app').innerHTML = shell();
   $('#main').innerHTML = (V[R.v]||V.home)();
   after();
@@ -9355,7 +9363,7 @@ function render(){
 function go(v,extra){ R = Object.assign({}, R, {v}, extra||{}); render(); window.scrollTo(0,0); }
 function rerender(){ const y=window.scrollY;
   const xs=[...document.querySelectorAll('#main .chips')].map(c=>c.scrollLeft);
-  $('#main').innerHTML=(V[R.v]||V.home)(); after(); window.scrollTo(0,y);
+  $('#main').innerHTML=!S.user?V.welcome():(V[R.v]||V.home)(); after(); window.scrollTo(0,y);
   document.querySelectorAll('#main .chips').forEach((c,i)=>{ if(xs[i]!=null) c.scrollLeft=xs[i];
     const on=c.querySelector('.chip.on'); if(!on) return;
     const l=on.offsetLeft-c.offsetLeft, r=l+on.offsetWidth;
@@ -9368,16 +9376,32 @@ const producedBy = (cls='')=>`<p class="produced ${cls}">Produced by <a href="${
 
 const V = {};
 
-V.welcome = ()=>`<div style="padding-top:8vh">
-  <div class="row" style="gap:4px">${coco(84)}${mango(84)}</div>
+V.welcome = ()=>{
+  if(R.v==='privacy') return V.privacy();
+  const head=`<div class="row" style="gap:4px">${coco(84)}${mango(84)}</div>
   <h1>留学で「言えなかった」を、次は言えるように。</h1>
-  <p class="muted">フィリピン留学の前・留学中・留学のあとまで、ずっと使える英語アプリです。ココ（先生役）とマンゴー（一緒に学ぶ仲間）が案内します。キャラクターの名前と絵は仮です。</p>
+  <p class="muted">フィリピン留学の前・留学中・留学のあとまで、ずっと使える英語アプリです。Coco先生とマンゴー（一緒に学ぶ仲間）が案内します。キャラクターの名前と絵は仮です。</p>`;
+  if(AUTH.user) return `<div style="padding-top:8vh">${head}
   <div class="panel stack" style="margin-top:16px">
-    <div><label class="f" for="w-name">ニックネーム</label><input type="text" id="w-name" placeholder="例: ハナコ" autocomplete="nickname"></div>
-    <div><label class="f" for="w-code">招待コード（面談・成約のときにお渡しします）</label><input type="text" id="w-code" placeholder="お持ちでなければ空欄のまま"></div>
+    <p style="margin:0">ログインしました（${esc(AUTH.email)}）。アプリの中で呼ばれる名前を決めてください。</p>
+    <div><label class="f" for="w-name">ニックネーム</label><input type="text" id="w-name" placeholder="例: ハナコ" autocomplete="nickname" data-autofocus></div>
     <button class="btn primary" data-act="login">はじめる</button>
-    <p class="muted small">ニックネームと学習記録は、この端末の中にだけ保存されます（まだログインはありません）。別の端末では引き継げず、ブラウザのデータを消すと記録も消えます。</p>
   </div>${producedBy('center')}</div>`;
+  return `<div style="padding-top:8vh">${head}
+  <div class="panel stack" style="margin-top:16px">
+    <h3 style="margin:0">ログインして始める</h3>
+    <p class="muted small" style="margin:0">学習記録がアカウントに保存され、スマホとパソコンなど、別の端末でも続きから使えます。</p>
+    ${loginBox()}
+  </div>
+  <div class="panel stack" style="margin-top:12px">
+    <h3 style="margin:0">ログインせずに試す</h3>
+    <div><label class="f" for="w-name">ニックネーム</label><input type="text" id="w-name" placeholder="例: ハナコ" autocomplete="nickname"></div>
+    <button class="btn" data-act="login">ログインせずに始める</button>
+    <p class="muted small" style="margin:0">記録はこの端末の中にだけ保存されます。あとからログインすると、それまでの記録をアカウントに引き継げます。</p>
+  </div>
+  <p class="small center" style="margin-top:12px"><button class="linkbtn" data-act="go" data-v="privacy">プライバシーポリシー</button></p>
+  ${producedBy('center')}</div>`;
+};
 
 V.home = ()=>{
   const due = dueCount(), known = Object.values(S.prog).filter(p=>p.state==='known').length;
@@ -9387,7 +9411,7 @@ V.home = ()=>{
   const banner = t==='customer' ? ''
     : t==='counseled' ? `<div class="note tier"><span>お試し中（あと${trialLeft()}日）: AI即答は今日あと${askLeft()}回、保存庫はあと${Math.max(0,vaultRoom())}件。成約すると、すべての機能を留学のあとも使えます。</span><button class="btn sm cta" data-act="upsell">相談する</button><span class="upsell-msg small"></span></div>`
     : `<div class="note tier"><span>${expired()?`お試しの期限が切れました。保存庫の${S.vault.length}件は残っています。成約すると続きから使えます。`:`面談前は、レベル診断・テスト・一部の内容だけ使えます。無料カウンセリングを受けると、${TRIAL_DAYS}日間のお試しで多くの機能が使えます。`}</span><button class="btn sm cta" data-act="upsell">無料カウンセリングを相談する</button><span class="upsell-msg small"></span></div>`;
-  return `<div class="greet">${coco(64)}<div class="speech"><b>ココ</b>${esc(S.user)}さん、${lvLine}</div></div>
+  return `<div class="greet">${coco(64)}<div class="speech"><b>Coco先生</b>${esc(S.user)}さん、${lvLine}</div></div>
   ${banner}
   <button class="hero-study" data-act="learn" data-cat="study"><div><h2>留学で使う英語</h2><p>出発前の手続きから空港・授業・寮・病院・銀行まで、そのまま使える表現と会話</p></div><div class="pair">${coco(52)}${mango(52)}</div></button>
   <div class="home-grid">
@@ -9954,7 +9978,7 @@ V.test = ()=>{
   }
   if(T.i>=T.qs.length){
     const good = T.score>=Math.ceil(T.qs.length*.7);
-    return `<h1>テストの結果</h1><div class="panel"><div class="greet" style="margin:0">${good?mango(72):coco(72)}<div class="speech"><b>${good?'マンゴー':'ココ'}</b>${T.score} / ${T.qs.length}問正解！${good?'この調子！':'「まだ」の表現は、未記憶の一覧から復習できます。'}</div></div></div>
+    return `<h1>テストの結果</h1><div class="panel"><div class="greet" style="margin:0">${good?mango(72):coco(72)}<div class="speech"><b>${good?'マンゴー':'Coco先生'}</b>${T.score} / ${T.qs.length}問正解！${good?'この調子！':'「まだ」の表現は、未記憶の一覧から復習できます。'}</div></div></div>
     <div class="row" style="margin-top:12px"><button class="btn primary" data-act="tstart">同じ範囲でもう一度</button><button class="btn" data-act="treset">範囲を選び直す</button><button class="btn" data-act="learn" data-cat="unknown">未記憶の一覧へ</button></div>`;
   }
   const q=T.qs[T.i], ans=T.pick!==null, ja2en=T.setup.dir!=='en2ja';
@@ -10079,7 +10103,7 @@ function cvImage(file,maxW,cb){
   const rd=new FileReader(); rd.onload=()=>{ const im=new Image(); im.onload=()=>{ const s=Math.min(1,maxW/Math.max(im.width,im.height)); const c=document.createElement('canvas'); c.width=Math.round(im.width*s); c.height=Math.round(im.height*s); c.getContext('2d').drawImage(im,0,0,c.width,c.height); cb(c.toDataURL('image/jpeg',0.82)); }; im.src=rd.result; }; rd.readAsDataURL(file);
 }
 function cvSave(){
-  try{ localStorage.setItem(KEY, JSON.stringify(S)); return true; }catch(e){ if(e && (e.name==='QuotaExceededError'||e.code===22)){ toast('保存できる容量を超えました。画像の数を減らすか、小さい画像にしてください。'); return false; } return true; } }
+  try{ localStorage.setItem(KEY, JSON.stringify(S)); if(typeof syncLater==='function') syncLater(); return true; }catch(e){ if(e && (e.name==='QuotaExceededError'||e.code===22)){ toast('保存できる容量を超えました。画像の数を減らすか、小さい画像にしてください。'); return false; } return true; } }
 function cvRefresh(){ const p=document.getElementById('cv-preview'); if(p){ p.innerHTML=resumeHTML(); fitCV(); } }
 V.resume = ()=>{
   if(!feature('resume')) return `<h1>履歴書をつくる</h1>${upsell(tier()==='general'?lockMsg():'履歴書の作成は、成約すると使えます。お試しでは見本を見られます。')}
@@ -10095,7 +10119,7 @@ V.resume = ()=>{
    <div class="stack">
     <div class="panel"><h3>AIと一問一答で強みを見つける</h3>
       ${RQ.i<0?`<p class="muted small">質問に日本語で答えると、AIがアピールポイントを英文にまとめます。</p><button class="btn mango" data-act="rqstart">はじめる</button>`
-       : RQ.i<RQS.length?`<div class="greet" style="margin:6px 0">${coco(44)}<div class="speech"><b>ココ</b>${esc(RQS[RQ.i])}</div></div><form data-form="rq" class="ask-box"><input type="text" id="rq-a" aria-label="答え" data-autofocus><button class="btn primary">答える</button></form><p class="muted small">${RQ.i+1} / ${RQS.length}</p>`
+       : RQ.i<RQS.length?`<div class="greet" style="margin:6px 0">${coco(44)}<div class="speech"><b>Coco先生</b>${esc(RQS[RQ.i])}</div></div><form data-form="rq" class="ask-box"><input type="text" id="rq-a" aria-label="答え" data-autofocus><button class="btn primary">答える</button></form><p class="muted small">${RQ.i+1} / ${RQS.length}</p>`
        : `<p>まとめた例を「自己紹介」に入れました。本番は、あなたの答えからAIが英文を作ります。</p><button class="btn sm" data-act="rqstart">もう一度</button>`}
     </div>
     <div class="panel"><h3>色を選ぶ</h3>
@@ -10156,7 +10180,7 @@ const GUIDE_FEATS = [
 ];
 const FEAT_LOCK = v=>{ const F={ask:'ask',vault:'vault',talk:'talk',resume:'resume'}; return F[v] && !feature(F[v]) ? `<span class="lockmark" aria-label="鍵（今の区分では使えません）">${I.lock}</span>` : ''; };
 V.guide = ()=>`<div class="guide-pg"><h1>手引書</h1>
-  <div class="greet" style="margin-top:0">${coco(56)}<div class="speech"><b>ココ</b>時期ごと・機能ごとの使い方です。帰国後も続けて使えます。</div></div>
+  <div class="greet" style="margin-top:0">${coco(56)}<div class="speech"><b>Coco先生</b>時期ごと・機能ごとの使い方です。帰国後も続けて使えます。</div></div>
   <section class="ask-hero" aria-labelledby="ask-hero-h">
     <p class="ask-hero-k">このアプリでいちばん大事にしている機能</p>
     <h2 id="ask-hero-h">言えなかった表現を、その場でAIに聞く</h2>
@@ -10376,14 +10400,14 @@ V.me = ()=>{
   <div class="panel" style="margin-top:14px"><h3>画面の明るさ</h3><p class="muted small" style="margin:0 0 8px">「自動」は、端末（スマホ・パソコン）の設定に合わせます。</p>${themeSw()}</div>
   <div class="panel" style="margin-top:14px"><h3>利用区分</h3>
     <p>${TIER_NAME[tier()]}${expired()?'（お試しの期限切れ）':tier()==='counseled'?`（あと${trialLeft()}日）`:''}</p>
-${tier()!=='customer'?`<div class="filter" style="margin-top:8px"><label class="filter-l" for="me-code">招待コードをお持ちの方</label><div class="ask-box"><input type="text" id="me-code" placeholder="面談・成約のときにお渡しするコード" autocomplete="off"><button class="btn" data-act="code">使う</button></div></div>`:''}
+${tier()!=='customer'?(AUTH.user?`<div class="filter" style="margin-top:8px"><label class="filter-l" for="me-code">招待コードをお持ちの方</label><div class="ask-box"><input type="text" id="me-code" placeholder="面談・成約のときにお渡しするコード" autocomplete="off"><button class="btn" data-act="code">使う</button></div></div>`:`<p class="muted small" style="margin:8px 0 0">招待コードをお持ちの方は、下の「アカウント」からログインすると使えます。</p>`):''}
 ${DEBUG?`    <p class="muted small">確認用: 区分を切り替えて、見え方を確かめられます（URLに ?debug を付けたときだけ表示）。</p>
     <div class="row"><button class="btn sm ${S.tier==='general'?'on':''}" data-act="settier" data-t="general">一般（面談前）</button><button class="btn sm ${S.tier==='counseled'&&!expired()?'on':''}" data-act="settier" data-t="counseled">面談実施者</button><button class="btn sm ${S.tier==='customer'?'on':''}" data-act="settier" data-t="customer">成約者</button><button class="btn sm ${expired()?'on':''}" data-act="expire">お試しを期限切れにする</button></div>`:''}</div>
   <div class="panel" style="margin-top:14px"><h3>このアプリについて</h3>
     <p class="small" style="margin:0 0 6px">フィリピン留学・セブ島留学のエージェント「${PRODUCER.name}」が作っている、留学の前・留学中・留学のあとまで、ずっと使える英語アプリです。</p>
     ${producedBy()}</div>
-  <div class="row" style="margin-top:16px"><button class="btn" data-act="logout">ログアウト</button><button class="btn" data-act="wipe">この端末の学習データを消す</button></div>
-  <p class="muted small" style="margin-top:10px">今後、ここにアカウントの削除、プライバシーポリシー、利用規約を置きます。</p>`;
+  ${accountPanel()}
+  <p class="small" style="margin-top:12px"><button class="linkbtn" data-act="go" data-v="privacy">プライバシーポリシー</button></p>`;
 };
 
 document.addEventListener('click', e=>{
@@ -10391,17 +10415,17 @@ document.addEventListener('click', e=>{
   const d = b.dataset;
   switch(d.act){
     case 'go': if(d.v==='level' && R.v!=='level' && LQS.done) LQS={cat:null,i:0,score:0,pick:null,qs:[],done:false}; if(d.v==='pron') PU={id:null,i:0,t:0,pick:null,score:0}; if(d.v==='learn'){ go('learn',{cat:null,sel:null}); break; } go(d.v); break;
-    case 'login': { const n=$('#w-name').value.trim(); if(!n){ $('#w-name').focus(); return; } S.user=n;
-      const code=$('#w-code').value.trim().toUpperCase(); S.tier=CODES[code]||'general'; S.trialStart = S.tier==='counseled'?today():''; S.talkTrialUsed=false;
-      if(code && !CODES[code]) toast('招待コードが見つからなかったので、一般（面談前）で始めます。');
-      save(); go('home'); break; }
+    case 'login': { const n=$('#w-name').value.trim(); if(!n){ $('#w-name').focus(); return; } S.user=n; if(!AUTH.user){ S.tier=S.tier||'general'; } save(); go('home'); break; }
     case 'settier': S.tier=d.t; S.trialStart = d.t==='counseled'?today():''; S.talkTrialUsed=false; S.askCount={d:'',n:0}; save(); render(); toast(`区分を「${TIER_NAME[d.t]}」にしました。`); break;
     case 'expire': S.tier='counseled'; S.trialStart=addDays(-(TRIAL_DAYS+1)); save(); render(); toast('お試しを期限切れにしました（一般と同じ範囲になります）。'); break;
     case 'upsell': { const m=b.parentElement.querySelector('.upsell-msg'); if(COUNSEL_URL){ window.open(COUNSEL_URL,'_blank','noopener'); } else if(m){ m.textContent='申し込み先を準備中です。セブ島留学バディーのサイトからご相談ください。'; } break; }
-    case 'code': { const c=($('#me-code')?.value||'').trim().toUpperCase(); const tt=CODES[c];
-      if(!tt){ toast('招待コードが見つかりませんでした。もう一度ご確認ください。'); break; }
-      S.trialStart = tt==='counseled' ? (S.tier==='counseled'&&S.trialStart ? S.trialStart : today()) : ''; S.tier=tt; S.talkTrialUsed=false; save(); render(); toast(`「${TIER_NAME[tt]}」になりました。`); break; }
-    case 'logout': S.user=''; save(); render(); break;
+    case 'code': redeemCode(($('#me-code')?.value||'').trim()); break;
+    case 'logout': if(AUTH.user){ signOut(); } else { S.user=''; save(); render(); } break;
+    case 'acdel': deleteAccount(); break;
+    case 'lgemail': LOGIN={step:'email',email:LOGIN.email||'',msg:''}; rerenderAny(); break;
+    case 'lgback': LOGIN={step:'menu',email:LOGIN.email,msg:''}; rerenderAny(); break;
+    case 'lggoogle': loginGoogle(); break;
+    case 'lgresend': sendCode(LOGIN.email); break;
     case 'wipe': if(confirm('この端末に保存した学習記録・保存庫・履歴書の入力を消します。元に戻せません。消しますか？')){ S=Object.assign(S0(),{user:S.user,tier:S.tier,trialStart:S.trialStart}); save(); render(); } break;
     case 'say': say(d.t); break;
     case 'smore': R.sxp=Object.assign({},R.sxp,{[d.k]:1}); rerender(); break;
@@ -10490,6 +10514,8 @@ document.addEventListener('click', e=>{
 });
 document.addEventListener('submit', e=>{
   const f=e.target.closest('[data-form]'); if(!f) return; e.preventDefault();
+  if(f.dataset.form==='lgmail'){ sendCode(($('#lg-email')?.value||'').trim()); return; }
+  if(f.dataset.form==='lgcode'){ verifyCode(($('#lg-code')?.value||'').replace(/\s/g,'')); return; }
   if(f.dataset.form==='ask'){ const q=$('#ask-q').value.trim(); if(!q) return; if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[limTier()].ask}回）を使い切りました。`); return; } if(VOICE.on){ try{VOICE.rec.stop();}catch(e){} } useAsk(); askAI(q); }
   if(f.dataset.form==='vadd'){ const en=$('#va-en').value.trim(), ja=$('#va-ja').value.trim(); if(!en||!ja){ alert('英語と意味を入れてください。'); return; } addVault(en,ja,$('#va-sc').value,'manual'); rerender(); }
   if(f.dataset.form==='talk'){ talkSend($('#talk-in').value); }
@@ -10561,7 +10587,200 @@ document.addEventListener('keydown', e=>{
   else if(R.v==='level' && LQS.cat && !LQS.done && LQS.pick===null && LQS.qs[LQS.i] && (n-1)<=LQS.qs[LQS.i].opts.length){ document.querySelector(`[data-act=lvpick][data-i="${n-1}"]`).click(); }
 });
 
+const SB_URL = 'https://weypkaiucqtvlmyldhwz.supabase.co';
+const SB_KEY = 'sb_publishable_4t3nRP3Tm1RqlEIZaYJMzw_DoERMvPN';
+const SYNC_SKIP = ['tier','trialStart','_dirty','syncedUser','askCount'];
+let SB = null;
+const AUTH = {user:null, email:'', ready:false, google:false, sync:'', syncAt:null, busy:false};
+let LOGIN = {step:'menu', email:'', msg:'', err:false};
+let SYNC_T = null;
+
+function rerenderAny(){ if(!S.user) render(); else rerender(); }
+
+function loginBox(){
+  if(!SB) return `<p class="muted small" style="margin:0">ログインの準備ができませんでした。通信を確かめて、ページを開き直してください。</p>`;
+  const m = LOGIN.msg ? `<p class="lg-msg ${LOGIN.err?'err':''}" role="${LOGIN.err?'alert':'status'}">${esc(LOGIN.msg)}</p>` : '';
+  if(LOGIN.step==='email') return `<form class="stack" data-form="lgmail" style="gap:8px">
+      <div><label class="f" for="lg-email">メールアドレス</label><input type="email" id="lg-email" value="${esc(LOGIN.email)}" placeholder="例: hanako@example.com" autocomplete="email" inputmode="email" required data-autofocus></div>
+      ${m}<button class="btn primary" type="submit" ${AUTH.busy?'disabled':''}>${AUTH.busy?'送っています…':'ログイン用のコードを送る'}</button>
+      <p class="muted small" style="margin:0">パスワードはいりません。メールに届く6桁のコードでログインします。初めての方は、そのまま登録になります。</p>
+      <button type="button" class="linkbtn small" data-act="lgback">戻る</button></form>`;
+  if(LOGIN.step==='code') return `<form class="stack" data-form="lgcode" style="gap:8px">
+      <p style="margin:0">${esc(LOGIN.email)} に、6桁のコードを送りました。メールに書かれたコードを入れてください。</p>
+      <div><label class="f" for="lg-code">コード（6桁）</label><input type="text" id="lg-code" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="123456" required data-autofocus></div>
+      ${m}<button class="btn primary" type="submit" ${AUTH.busy?'disabled':''}>${AUTH.busy?'確かめています…':'ログインする'}</button>
+      <p class="muted small" style="margin:0">メールが見つからないときは、迷惑メールのフォルダも見てください。メールの中のボタンを押してもログインできます（このブラウザで開いた場合）。</p>
+      <div class="row" style="gap:12px"><button type="button" class="linkbtn small" data-act="lgresend">コードを送り直す</button><button type="button" class="linkbtn small" data-act="lgemail">メールアドレスを変える</button></div></form>`;
+  return `<div class="stack" style="gap:8px">${m}
+    ${AUTH.google?`<button class="btn gbtn" data-act="lggoogle"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Googleでログイン</button>`:''}
+    <button class="btn ${AUTH.google?'':'primary'} gbtn" data-act="lgemail">メールでログイン</button></div>`;
+}
+
+function syncText(){
+  if(AUTH.sync==='saving') return 'アカウントに保存しています…';
+  if(AUTH.sync==='err') return 'アカウントに保存できませんでした。通信が戻ると、次の操作のときにもう一度保存します。';
+  if(AUTH.sync==='ok' && AUTH.syncAt) return `記録はアカウントに保存されています（${AUTH.syncAt.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'})}）`;
+  return '記録はアカウントに保存されます。';
+}
+function syncShow(){ const el=document.getElementById('sync-st'); if(el) el.textContent=syncText(); }
+
+function accountPanel(){
+  if(AUTH.user) return `<div class="panel" style="margin-top:14px"><h3>アカウント</h3>
+    <p style="margin:0 0 4px">ログイン中: ${esc(AUTH.email)}</p>
+    <p class="sync-st" id="sync-st" aria-live="polite" style="margin:0 0 10px">${syncText()}</p>
+    <div class="row"><button class="btn" data-act="logout">ログアウト</button></div>
+    <p class="muted small" style="margin:10px 0 0">ログアウトすると、この端末からは記録を消します（アカウントには残ります）。もう一度ログインすれば、続きから使えます。</p>
+    <details style="margin-top:12px"><summary class="small">アカウントを削除する</summary>
+      <p class="small" style="margin:8px 0">アカウントと、保存した学習記録・保存庫・履歴書の入力を、すべて削除します。元に戻せません。</p>
+      <button class="btn sm" data-act="acdel">アカウントを削除する</button></details></div>`;
+  return `<div class="panel" style="margin-top:14px"><h3>アカウント</h3>
+    <p class="small" style="margin:0 0 10px">いまはログインしていません。記録はこの端末の中だけです。ログインすると、これまでの記録をアカウントに引き継いで、別の端末でも続きから使えます。</p>
+    ${loginBox()}
+    <div class="row" style="margin-top:14px"><button class="btn sm" data-act="logout">最初の画面に戻る</button><button class="btn sm" data-act="wipe">この端末の学習データを消す</button></div></div>`;
+}
+
+V.privacy = ()=>`<div class="policy">
+  <h1>プライバシーポリシー</h1>
+  <p class="muted small">制定日: 2026年11月17日（下書き）</p>
+  <p>株式会社Via.Mahalo（セブ島留学バディー。以下「当社」）は、英語学習アプリ「CocoMan英語」（以下「本アプリ」）で取り扱う情報について、次のとおり定めます。</p>
+  <h2>1. 取得する情報</h2>
+  <ul><li>ログインに使うメールアドレス（Googleでログインした場合は、Googleアカウントのメールアドレス）</li>
+  <li>ニックネーム（本名である必要はありません）</li>
+  <li>学習の記録（覚えた項目、保存庫、テストの結果、レベル、履歴書の入力内容など）</li>
+  <li>「AIに聞く」の利用回数を数えるための、端末ごとの番号と、通信元のIPアドレス（いずれも、元の値が分からない形に変換して数えます）</li></ul>
+  <p>ログインしない場合、ニックネームと学習の記録は、お使いの端末の中にだけ保存され、当社には送られません。</p>
+  <h2>2. 使う目的</h2>
+  <ul><li>ログインと、別の端末でも同じ学習記録を使えるようにするため</li>
+  <li>招待コードによる利用区分（面談実施者・成約者）を確かめるため</li>
+  <li>「AIに聞く」の回数の上限を守るため</li>
+  <li>本アプリの不具合の調査と改善のため</li></ul>
+  <h2>3. 外部のサービス</h2>
+  <p>本アプリは、次のサービスを使っています。それぞれのサービスで、必要な範囲の情報が扱われます。</p>
+  <ul><li>Supabase（ログインと学習記録の保存。サーバーは東京）</li>
+  <li>Anthropic（「AIに聞く」の回答。質問の文章が送られます。当社は質問の文章を保存しません）</li>
+  <li>Cloudflare（「AIに聞く」の中継と回数の管理）</li>
+  <li>Google（Googleでログインする場合）</li>
+  <li>GitHub Pages（本アプリの配信）</li></ul>
+  <p>法令に基づく場合を除き、ご本人の同意なく、これら以外の第三者に情報を渡すことはありません。広告のための情報の提供もしません。</p>
+  <h2>4. 「AIに聞く」に入力する内容</h2>
+  <p>質問には、氏名・連絡先など、個人を特定できる情報を書かないでください。</p>
+  <h2>5. 削除</h2>
+  <p>マイページの「アカウントを削除する」から、いつでもアカウントと学習記録を削除できます。削除した記録は元に戻せません。</p>
+  <h2>6. お問い合わせ</h2>
+  <p>セブ島留学バディーのLINE公式アカウント（<a href="${COUNSEL_URL}" target="_blank" rel="noopener">友だち追加</a>）からご連絡ください。</p>
+  <h2>7. 変更</h2>
+  <p>内容を変えるときは、本アプリの中でお知らせします。</p>
+  <p style="margin-top:20px"><button class="btn" data-act="go" data-v="${S.user?'me':'home'}">戻る</button></p></div>`;
+
+function hasData(x){ return !!(x && (Object.keys(x.prog||{}).length || (x.vault||[]).length || x.tests || x.level!=null || Object.keys(x.resume||{}).length || x.talkLog || (x.lvHist||[]).length)); }
+function mergeState(a, b){
+  const o = Object.assign({}, a, b);
+  o.prog = Object.assign({}, a.prog, b.prog);
+  o.notes = Object.assign({}, a.notes, b.notes);
+  o.pronDone = Object.assign({}, a.pronDone, b.pronDone);
+  const seen = new Set((b.vault||[]).map(v=>String(v.id))), seenEn = new Set((b.vault||[]).map(v=>v.en));
+  o.vault = (b.vault||[]).concat((a.vault||[]).filter(v=>!seen.has(String(v.id)) && !seenEn.has(v.en)));
+  const hs = new Set(); o.lvHist = (b.lvHist||[]).concat(a.lvHist||[]).filter(h=>{ const k=JSON.stringify(h); if(hs.has(k)) return false; hs.add(k); return true; });
+  o.tests = Math.max(a.tests||0, b.tests||0); o.talkLog = Math.max(a.talkLog||0, b.talkLog||0);
+  if(a.level!=null && (b.level==null || (a.levelDate||'') > (b.levelDate||''))){ o.level=a.level; o.levelDate=a.levelDate; }
+  if(!Object.keys(b.resume||{}).length) o.resume = a.resume;
+  o.user = b.user || a.user;
+  return o;
+}
+function keepLocal(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function syncLater(){
+  if(!SB || !AUTH.user || !AUTH.ready) return;
+  if(!S._dirty){ S._dirty = true; keepLocal(); }
+  clearTimeout(SYNC_T); SYNC_T = setTimeout(pushNow, 1500);
+}
+async function pushNow(){
+  clearTimeout(SYNC_T); if(!SB || !AUTH.user) return;
+  const data = {}; for(const k in S){ if(!SYNC_SKIP.includes(k)) data[k]=S[k]; }
+  AUTH.sync='saving'; syncShow();
+  const { error } = await SB.from('app_state').upsert({user_id:AUTH.user.id, data, updated_at:new Date().toISOString()});
+  if(error){ AUTH.sync='err'; syncShow(); return; }
+  S._dirty=false; keepLocal(); AUTH.sync='ok'; AUTH.syncAt=new Date(); syncShow();
+}
+document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState==='hidden' && S._dirty && AUTH.user) pushNow(); });
+
+async function onLogin(user){
+  AUTH.user=user; AUTH.email=user.email||''; AUTH.ready=false;
+  const uid=user.id;
+  const [p, st] = await Promise.all([
+    SB.from('profiles').select('tier,trial_start').eq('id',uid).maybeSingle(),
+    SB.from('app_state').select('data').eq('user_id',uid).maybeSingle()]);
+  if(p.error || st.error){ toast('アカウントの記録を読めませんでした。通信を確かめて、開き直してください。'); AUTH.ready=true; render(); return; }
+  const remote = st.data && st.data.data;
+  let next;
+  if(!remote) next = S;
+  else if(S.syncedUser===uid && !S._dirty) next = remote;
+  else next = hasData(S) && S.syncedUser!==uid ? mergeState(S, remote) : (S._dirty ? mergeState(S, remote) : remote);
+  const devId = S.devId;
+  S = Object.assign(S0(), next);
+  if(!S.devId && devId) S.devId = devId;
+  S.tier = (p.data && p.data.tier) || 'general'; S.trialStart = (p.data && p.data.trial_start) || '';
+  S.syncedUser = uid; S._dirty = true; keepLocal();
+  AUTH.ready = true; LOGIN = {step:'menu', email:'', msg:'', err:false};
+  applyTheme(); render(); pushNow();
+}
+function onLogout(){ AUTH.user=null; AUTH.email=''; AUTH.ready=false; AUTH.sync=''; }
+
+async function acctInit(){
+  if(!window.supabase || !window.supabase.createClient) return;
+  try{ SB = window.supabase.createClient(SB_URL, SB_KEY, {auth:{persistSession:true, autoRefreshToken:true, detectSessionInUrl:true, flowType:'pkce'}}); }catch(e){ SB=null; return; }
+  fetch(SB_URL+'/auth/v1/settings',{headers:{apikey:SB_KEY}}).then(r=>r.json()).then(j=>{ AUTH.google=!!(j.external&&j.external.google); if(!AUTH.user && (!S.user || R.v==='me')) rerenderAny(); }).catch(()=>{});
+  SB.auth.onAuthStateChange((ev, session)=>{ setTimeout(()=>{
+    const u = session && session.user;
+    if(u){ if(AUTH.user && AUTH.user.id===u.id) return; onLogin(u); }
+    else if(AUTH.user){ onLogout(); render(); }
+  },0); });
+}
+
+async function sendCode(email){
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ LOGIN={step:'email',email,msg:'メールアドレスの形を確かめてください。',err:true}; rerenderAny(); return; }
+  AUTH.busy=true; LOGIN={step:LOGIN.step,email,msg:'',err:false}; rerenderAny();
+  const { error } = await SB.auth.signInWithOtp({email, options:{shouldCreateUser:true, emailRedirectTo:location.origin+location.pathname}});
+  AUTH.busy=false;
+  if(error){ const rl = /rate|limit|seconds/i.test(error.message||'') || error.status===429;
+    LOGIN={step:'email',email,msg: rl?'短い時間にたくさん送られたため、少し待ってから、もう一度送ってください。':'コードを送れませんでした。メールアドレスを確かめて、もう一度送ってください。',err:true}; rerenderAny(); return; }
+  LOGIN={step:'code',email,msg:'',err:false}; rerenderAny();
+}
+async function verifyCode(token){
+  if(!/^\d{6,10}$/.test(token)){ LOGIN.msg='メールに書かれた数字のコードを入れてください。'; LOGIN.err=true; rerenderAny(); return; }
+  AUTH.busy=true; LOGIN.msg=''; rerenderAny();
+  const { error } = await SB.auth.verifyOtp({email:LOGIN.email, token, type:'email'});
+  AUTH.busy=false;
+  if(error){ LOGIN.msg='コードが違うか、期限が切れています。もう一度確かめるか、コードを送り直してください。'; LOGIN.err=true; rerenderAny(); return; }
+  toast('ログインしました。');
+}
+async function loginGoogle(){
+  const { error } = await SB.auth.signInWithOAuth({provider:'google', options:{redirectTo:location.origin+location.pathname}});
+  if(error){ LOGIN.msg='Googleでログインできませんでした。メールでのログインをお試しください。'; LOGIN.err=true; rerenderAny(); }
+}
+async function signOut(){
+  if(S._dirty) await pushNow();
+  try{ await SB.auth.signOut({scope:'local'}); }catch(e){}
+  onLogout(); const theme=S.theme, devId=S.devId; S = S0(); S.theme=theme; S.devId=devId; keepLocal();
+  go('home'); toast('ログアウトしました。この端末からは記録を消しました（アカウントには残っています）。');
+}
+async function deleteAccount(){
+  if(!confirm('アカウントと、保存した学習記録をすべて削除します。元に戻せません。削除しますか？')) return;
+  const { error } = await SB.rpc('delete_me');
+  if(error){ toast('削除できませんでした。通信を確かめて、もう一度お試しください。'); return; }
+  try{ await SB.auth.signOut({scope:'local'}); }catch(e){}
+  onLogout(); const theme=S.theme; S = S0(); S.theme=theme; keepLocal();
+  go('home'); toast('アカウントを削除しました。');
+}
+async function redeemCode(c){
+  if(!c){ toast('招待コードを入れてください。'); return; }
+  if(!AUTH.user){ toast('招待コードは、ログインすると使えます。'); return; }
+  const { data, error } = await SB.rpc('redeem_code', {p_code:c});
+  if(error){ toast('通信できませんでした。もう一度お試しください。'); return; }
+  if(!data || !data.ok){ toast('招待コードが見つかりませんでした。もう一度ご確認ください。'); return; }
+  S.tier=data.tier; S.trialStart=data.trial_start||''; S.talkTrialUsed=false; save(); render(); toast(`「${TIER_NAME[data.tier]}」になりました。`);
+}
 render();
+acctInit();
 </script>
 </body>
 </html>
