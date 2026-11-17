@@ -1180,7 +1180,7 @@ const ITEMS = [
  it('phrasal',3,'go over','','見直す、確認する',"Let's go over the answers.",'答えを見直そう。',"Can we go over the plan again?",'もう一度計画を確認できる？'),
  it('phrasal',3,'fall behind','','遅れをとる',"I fell behind in class when I was sick.",'病気のとき授業で遅れをとった。',"Don't fall behind on your homework.",'宿題を遅らせないで。'),
  it('phrasal',4,'iron out','','（問題を）解消する',"We need to iron out a few details.",'いくつか細かい点を詰める必要がある。',"They ironed out their differences.",'彼らは意見の違いを解消した。'),
- it('phrasal',4,'touch base','','連絡を取る、確認し合う',"Let's touch base next week.",'来週また連絡を取り合おう。',"I just wanted to touch base about the project.",'プロジェクトの件で確認したくて。'),
+ it('idiom',4,'touch base','','連絡を取る、確認し合う',"Let's touch base next week.",'来週また連絡を取り合おう。',"I just wanted to touch base about the project.",'プロジェクトの件で確認したくて。'),
  it('phrasal',4,'follow up on','','（その後の）確認をする',"I'm following up on my application.",'応募の件で確認のご連絡です。',"Could you follow up on this?",'これの確認をお願いできますか？'),
 
  it('colloc',0,'take a seat','','座る',"Please take a seat.",'どうぞおかけください。',"Take a seat anywhere.",'どこでも座って。'),
@@ -1729,11 +1729,9 @@ C(VP,2,'be based on','～に基づいている',"The movie is based on a true st
 C(VP,2,'blame ... on','…を～のせいにする',"Don't blame it on me!",'私のせいにしないで！',"He blamed the delay on the traffic.",'彼は遅れを渋滞のせいにした。');
 C(VP,1,'concentrate on','～に集中する',"I can't concentrate on my studies.",'勉強に集中できない。',"Concentrate on one thing at a time.",'一度に一つのことに集中して。');
 C(VP,2,'congratulate ... on','…を～のことで祝う',"I congratulated her on her new job.",'彼女の就職を祝った。',"Let me congratulate you on passing the test.",'合格おめでとう。');
-C(VP,2,'count on','～を頼りにする',"You can count on me.",'任せて。',"I'm counting on you.",'頼りにしているよ。');
 C(VP,1,'depend on','～次第である、～に頼る',"It depends on the weather.",'天気次第だ。',"I don't want to depend on my parents.",'親に頼りたくない。');
 C(VP,4,'elaborate on','～について詳しく述べる',"Could you elaborate on that point?",'その点について詳しく話していただけますか？',"He didn't elaborate on his plan.",'彼は計画について詳しく語らなかった。');
 C(VP,2,'insist on','～を強く主張する、言い張る',"She insisted on paying.",'彼女は自分が払うと言って聞かなかった。',"My mom insists on calling me every day.",'母は毎日電話すると言い張る。');
-C(VP,1,'work on','～に取り組む',"I'm working on my pronunciation.",'発音に取り組んでいる。',"We need to work on this project.",'このプロジェクトに取り組まないと。');
 C(VP,2,'admit to','～を認める',"He admitted to making a mistake.",'彼は間違いを認めた。',"She wouldn't admit to anything.",'彼女は何も認めようとしなかった。');
 C(VP,1,'apologize to','～に謝る',"I apologized to my teacher.",'先生に謝った。',"You should apologize to her.",'彼女に謝ったほうがいい。');
 C(VP,1,'belong to','～のものである、～に所属する',"Who does this bag belong to?",'このカバンは誰の？',"I belong to the tennis club.",'テニス部に所属している。');
@@ -1749,11 +1747,9 @@ C(VP,2,'react to','～に反応する',"How did she react to the news?",'その�
 C(VP,2,'refer to','～を参照する、～に言及する',"Please refer to the handout.",'配布資料をご参照ください。',"Who are you referring to?",'誰のことを言っているの？');
 C(VP,2,'respond to','～に返答する、反応する',"Please respond to my email.",'メールに返信してください。',"She didn't respond to my message.",'彼女はメッセージに返事をくれなかった。');
 C(VP,0,'talk to','～と話す',"Can I talk to you?",'ちょっと話せる？',"I talked to my mom on video.",'母とビデオ通話で話した。');
-C(VP,2,'account for','～（の割合）を占める、～を説明する',"Rent accounts for half of my budget.",'家賃が予算の半分を占める。',"How do you account for this?",'これをどう説明しますか？');
 C(VP,1,'apologize for','～のことで謝る',"I apologize for being late.",'遅れて申し訳ありません。',"He apologized for the mistake.",'彼は間違いを謝った。');
 C(VP,0,'ask for','～を求める、頼む',"Can I ask for the bill?",'お会計をお願いできますか？',"Don't be afraid to ask for help.",'助けを求めるのを怖がらないで。');
 C(VP,2,'blame ... for','…を～のことで責める',"Don't blame yourself for it.",'そのことで自分を責めないで。',"They blamed me for the mess.",'散らかったのを私のせいにされた。');
-C(VP,2,'care for','～の世話をする',"She cares for her grandmother.",'彼女は祖母の世話をしている。',"Nurses care for patients.",'看護師は患者の世話をする。');
 C(VP,2,'charge ... for','…に～の料金を請求する',"They charged me for the extra night.",'追加の1泊分を請求された。',"Do you charge for Wi-Fi?",'Wi-Fiは有料ですか？');
 C(VP,2,'forgive ... for','…の～を許す',"Please forgive me for being late.",'遅れたことを許してください。',"I forgave him for lying.",'うそをついたことを許した。');
 C(VP,0,'pay for','～の代金を払う',"I'll pay for dinner.",'夕食は私が払うよ。',"How much did you pay for it?",'それにいくら払ったの？');
@@ -1767,7 +1763,6 @@ C(VP,2,'associate ... with','…を～と結びつけて考える',"I associate 
 C(VP,2,'compare ... with','…を～と比べる',"Don't compare yourself with others.",'自分を他人と比べないで。',"Compared with Tokyo, Cebu is cheap.",'東京と比べるとセブは安い。');
 C(VP,3,'comply with','～に従う',"All staff must comply with the rules.",'全スタッフは規則に従わなければならない。',"Please comply with the safety instructions.",'安全上の指示に従ってください。');
 C(VP,2,'confuse ... with','…を～と混同する',"I always confuse 'right' with 'light'.",'いつも right と light を混同する。',"Sorry, I confused you with someone else.",'すみません、別の人と間違えました。');
-C(VP,1,'deal with','～に対処する',"How do you deal with stress?",'ストレスにどう対処している？',"I'll deal with it tomorrow.",'明日対処するよ。');
 C(VP,1,'help ... with','…の～を手伝う',"Can you help me with my homework?",'宿題を手伝ってくれる？',"I helped her with her bags.",'彼女の荷物を運ぶのを手伝った。');
 C(VP,3,'tamper with','～を勝手にいじる',"Don't tamper with the smoke alarm.",'火災報知器を勝手にいじらないで。',"Someone tampered with the lock.",'誰かが鍵に細工した。');
 C(VP,2,'benefit from','～から恩恵を受ける',"You'll benefit from studying abroad.",'留学から得るものは大きいよ。',"Many students benefit from one-on-one classes.",'多くの学生がマンツーマン授業の恩恵を受けている。');
@@ -1777,7 +1772,6 @@ C(VP,3,'distinguish ... from','…を～と区別する',"Can you distinguish /r
 C(VP,1,'choose from','～から選ぶ',"You can choose from three courses.",'3つのコースから選べます。',"There are many dishes to choose from.",'選べる料理がたくさんある。');
 C(VP,0,'come from','～の出身である',"Where do you come from?",'どこの出身？',"I come from Osaka.",'大阪出身です。');
 C(VP,2,'graduate from','～を卒業する',"I graduated from university in 2023.",'2023年に大学を卒業した。',"When did you graduate from high school?",'高校はいつ卒業したの？');
-C(VP,0,'hear from','～から連絡をもらう',"I haven't heard from him.",'彼から連絡がない。',"I look forward to hearing from you.",'ご連絡をお待ちしています。');
 C(VP,2,'prevent ... from','…が～するのを妨げる',"The rain prevented us from going out.",'雨で出かけられなかった。',"This cream prevents your skin from burning.",'このクリームで日焼けを防げる。');
 C(VP,2,'protect ... from','…を～から守る',"Sunglasses protect your eyes from the sun.",'サングラスは日差しから目を守る。',"Lock your door to protect your things from theft.",'盗難から持ち物を守るためにドアに鍵をかけて。');
 C(VP,1,'recover from','～から回復する',"Have you recovered from your cold?",'風邪は治った？',"It took a week to recover from jet lag.",'時差ぼけが治るのに1週間かかった。');
@@ -2333,7 +2327,8 @@ PV(0,'get in','（車に）乗る、中に入る',"Get in the car.",'車に乗�
 PV(0,'get out','（車から）降りる、出る',"Get out of the taxi here.",'ここでタクシーを降りて。',"Get out of the water!",'水から出て！');
 PV(0,'go back','戻る',"I want to go back to Cebu.",'セブに戻りたい。',"Let's go back to the hotel.",'ホテルに戻ろう。');
 PV(0,'come on','さあ、がんばって、急いで',"Come on, let's go!",'さあ、行こう！',"Come on, you can do it!",'がんばれ、できるよ！');
-PV(0,'look at','～を見る',"Look at the sunset!",'夕日を見て！',"Can you look at my homework?",'宿題を見てもらえる？');
+C(VP,0,'look at','～を見る',"Look at the sunset!",'夕日を見て！',"Can you look at my homework?",'宿題を見てもらえる？');
+PV(2,'care for','世話をする、好む',"She cares for her grandmother.",'彼女は祖母の世話をしている。',"Would you care for some tea?",'お茶はいかがですか？');
 PV(0,'put away','片付ける',"Put away your toys.",'おもちゃを片付けて。',"Please put your phone away.",'携帯をしまってください。');
 PV(0,'go away','立ち去る、なくなる',"Go away!",'あっちへ行って！',"The pain went away.",'痛みがなくなった。');
 PV(1,'turn up','音量を上げる、現れる',"Can you turn up the music?",'音楽の音を上げてくれる？',"He turned up late.",'彼は遅れて現れた。');
@@ -7062,7 +7057,7 @@ PV(3,"pass up","（機会を）見送る","Don't pass up this chance.","この�
 PV(3,"patch up","修復する、仲直りする","They patched up their friendship.","2人は仲直りした。","He patched up the hole in the tent.","彼はテントの穴を繕った。");
 PV(3,"piece together","つなぎ合わせる","Police pieced together what happened.","警察は何が起きたかをつなぎ合わせた。","I pieced together the story from her texts.","彼女のメッセージから話をつなぎ合わせた。");
 PV(3,"play down","軽く扱う","He played down his injury.","彼はけがを大したことないように言った。","Don't play down your skills.","自分の能力を控えめに言いすぎないで。");
-PV(3,"point to","示す、指摘する","The data points to a big problem.","データは大きな問題を示している。","She pointed to the map.","彼女は地図を指さした。");
+C(VP,3,"point to","示す、指摘する","The data points to a big problem.","データは大きな問題を示している。","She pointed to the map.","彼女は地図を指さした。");
 PV(3,"polish off","さっさと平らげる、片づける","He polished off the whole pizza.","彼はピザを丸ごと平らげた。","Let's polish off this report.","このレポートを片づけちゃおう。");
 PV(2,"pop in","ちょっと立ち寄る","I'll pop in after work.","仕事のあとにちょっと寄るね。","Pop in anytime!","いつでも寄ってね！");
 PV(3,"press on","（困難にめげず）続ける","We were tired, but we pressed on.","疲れていたが進み続けた。","Press on with your studies.","勉強を続けて。");
@@ -7076,7 +7071,7 @@ PV(2,"rip off","ぼったくる","That taxi driver ripped me off.","あのタク
 PV(3,"roll out","（新製品などを）展開する","The app rolled out a new feature.","アプリに新機能が追加された。","The program will roll out next year.","その制度は来年始まる。");
 PV(3,"round up","集める、（数を）切り上げる","Round up the students for the photo.","写真のために生徒を集めて。","Round up to the nearest dollar.","1ドル単位に切り上げて。");
 PV(3,"run by","（意見を聞くために）～に話す","Let me run this by my boss.","上司に確認させて。","Can I run an idea by you?","アイデアを聞いてもらえる？");
-PV(2,"run late","遅れる","Sorry, I'm running late.","ごめん、遅れてる。","The bus is running late today.","今日はバスが遅れている。");
+C(AD,2,"run late","遅れる","Sorry, I'm running late.","ごめん、遅れてる。","The bus is running late today.","今日はバスが遅れている。");
 PV(2,"run through","ざっと目を通す、練習する","Let's run through the plan again.","計画をもう一度ざっと確認しよう。","We ran through the speech twice.","スピーチを2回通しで練習した。");
 PV(3,"rush into","急いで決める","Don't rush into a decision.","急いで決めないで。","They rushed into marriage.","2人は急いで結婚した。");
 PV(2,"see off","見送る","My family saw me off at the airport.","家族が空港で見送ってくれた。","We went to see her off.","彼女を見送りに行った。");
@@ -9768,8 +9763,8 @@ function catStats(k){
 const CAT_INFO = {
  study:{one:'出発前の手続き、空港、フィリピンの語学学校の授業中・学校生活・寮、病院や薬局、銀行やお金の場面で、そのまま使える表現と会話。',ex:[["Could you say that again, please?",'もう一度言っていただけますか？']],gain:'留学の初日から困らずに話せる力'},
  word:{one:'1語の基本の単語。レベル別に、発音記号・音声・例文2つ付きで覚えます。',ex:[['borrow','借りる'],['schedule','予定']],gain:'英語を聞く・読む・話す、すべての土台'},
- phrasal:{one:'動詞と、up・off・out などの短い語を組み合わせると、もとの単語からは想像しにくい「別の意味」になる表現です。',ex:[['give up','あきらめる（give＝与える ＋ up からは想像しにくい）'],['pick up','拾う／車で迎えに行く']],point:'単語を知っていても意味が分からない、ネイティブが会話でいちばんよく使う表現です。',gain:'ネイティブの会話を聞いて分かる力'},
- colloc:{one:'英語でよく一緒に使う、決まった単語の組み合わせです。自然な組み合わせを覚えます。',ex:[['make a mistake','間違える（× do a mistake）'],['heavy rain','大雨（× strong rain）']],point:'意味は分かるのに、日本語から直訳すると組み合わせを間違えやすい表現です。',gain:'自然な英語を話す・書く力'},
+ phrasal:{one:'動詞と、up・off・out などの短い語を組み合わせると、もとの単語からは想像しにくい「別の意味」になる表現です。',ex:[['give up','あきらめる（give＝与える ＋ up からは想像しにくい）'],['pick up','拾う／車で迎えに行く']],point:'単語を知っていても意味が分からない、ネイティブが会話でいちばんよく使う表現です。up・on などを外すと意味が変わる、または通じなくなるものを、句動詞にしています。',gain:'ネイティブの会話を聞いて分かる力'},
+ colloc:{one:'英語でよく一緒に使う、決まった単語の組み合わせです。自然な組み合わせを覚えます。',ex:[['make a mistake','間違える（× do a mistake）'],['heavy rain','大雨（× strong rain）']],point:'意味は分かるのに、日本語から直訳すると組み合わせを間違えやすい表現です。前置詞などを外しても動詞の意味のままで、どの語と組み合わせるかを覚えるものを、コロケーションにしています。',gain:'自然な英語を話す・書く力'},
  idiom:{one:'直訳では意味が通らない、決まった言い回しです。全体でひとつの意味として覚えます。',ex:[['a piece of cake','とても簡単なこと（直訳は「ケーキ1切れ」）'],['break the ice','初対面の緊張をほぐす（直訳は「氷を割る」）']],point:'単語が全部分かっても、直訳すると意味を取り違えます。',gain:'ネイティブらしい表現を理解する力'},
  pattern:{one:'単語を入れ替えるだけで、たくさんの文が作れる「文の型」です。',ex:[["I'd like to ~",'〜したいのですが（I\'d like to book a table.）']],gain:'言いたいことを、すぐに文にする力'},
  starter:{one:'文の頭に置くだけで話し始めやすくなる表現と、会話の間をつなぐ言葉です。気持ちや話の流れを自然に伝えられます。',ex:[['Actually, ...','実は…'],['To be honest, ...','正直に言うと…']],gain:'会話をなめらかに始める・つなぐ力'},
