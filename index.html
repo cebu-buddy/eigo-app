@@ -263,6 +263,10 @@ dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
 
 .guide-pg h2{color:var(--head-brown)}
 .pu-h{display:flex;align-items:center;gap:8px}.ipa-play{margin-left:10px}.ipa-play+.ipa-play{margin-left:6px}.credit{margin:22px 0 8px}.credit summary{cursor:pointer;color:var(--muted);font-size:13px}
+.talk-grp{margin-top:18px}.talk-sub{font-size:15px;margin:14px 0 6px;color:var(--muted)}.talk-demo{font-style:normal;font-size:11px;font-weight:700;color:var(--teal-ink);background:var(--mint);border-radius:999px;padding:1px 7px;margin-left:4px}
+.talk-ph summary{cursor:pointer}.talk-ph .ex{margin-top:10px}
+.tile[disabled]{opacity:.55;cursor:default}
+.talk-grp .tile .row{flex-wrap:nowrap;align-items:center;gap:10px}.talk-grp .tile .row>svg{flex:none}.talk-grp .tile .row>div{min-width:0}
 .fg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:10px 0 8px}
 .fg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column}
 .fg-h{display:flex;align-items:center;gap:10px}.fg-h h3{margin:0;font-size:16px;display:flex;align-items:center;gap:6px}
@@ -8229,9 +8233,9 @@ const AI_DEMO = {
 };
 
 const TALKS = [
- {id:'interview',name:'ワーホリの面接練習',who:'coco',role:'カフェの店長',lines:["Hi, thanks for coming in. Could you tell me about yourself?","Nice to meet you. Why do you want to work at our café?","Great. When are you available to work?","Thank you! We'll be in touch soon."],
+ {id:'interview',name:'面接',who:'coco',role:'カフェの店長',lines:["Hi, thanks for coming in. Could you tell me about yourself?","Nice to meet you. Why do you want to work at our café?","Great. When are you available to work?","Thank you! We'll be in touch soon."],
   fix:[["I am work in café.","I worked at a café.",'過去の経験は過去形で。a café の a も忘れずに。'],["I can work everyday.","I can work every day.",'「毎日」は every day の2語。everyday は「日常の」。'],["I want to study English.","I want to improve my English by talking with customers.",'理由を具体的にすると、熱意が伝わります。']]},
- {id:'house',name:'ワーホリのシェアハウス探し',who:'coco',role:'シェアハウスのオーナー',lines:["Hi! You must be here to see the room. Come on in.","This is the room. It's 250 dollars a week, bills included. Any questions?","The bond is two weeks' rent. When would you like to move in?","Sounds good. I'll text you the details tonight."],
+ {id:'house',name:'シェアハウス探し',who:'coco',role:'シェアハウスのオーナー',lines:["Hi! You must be here to see the room. Come on in.","This is the room. It's 250 dollars a week, bills included. Any questions?","The bond is two weeks' rent. When would you like to move in?","Sounds good. I'll text you the details tonight."],
   fix:[["Is the bill included?","Are bills included?",'光熱費（電気・水道・ネット）はまとめて bills と複数形で言います。'],["Can I see other room?","Can I see the other room?",'「もう1つの部屋」と決まっているときは the other。'],["I want to live from next Monday.","I'd like to move in next Monday.","「入居する」は move in。I'd like to の方がていねいです。"]]},
  {id:'class',name:'授業の始まりの雑談',who:'coco',role:'先生',lines:["Good morning! How was your weekend?","Sounds fun. What do you want to practice today?","Okay, let's start with some speaking practice.","Good job today. See you tomorrow!"],
   fix:[["I go to beach.","I went to the beach.",'週末のことは過去形。the beach の the も。'],["I want to practice speak.","I want to practice speaking.",'practice のあとは -ing の形。']]},
@@ -8241,8 +8245,62 @@ const TALKS = [
   fix:[["I'm from Japan. And you?","I'm from Japan. How about you?",'And you? でも通じますが、How about you? の方が自然です。']]}
 ];
 
+const TS=(id,name,who,role,goal,src)=>({id,name,who,role,goal,src});
+TALKS.push(
+ TS('wh_search','お店で仕事を探す','coco','お店のスタッフ','募集しているか聞いて、履歴書を渡す',['wh','仕事探し']),
+ TS('wh_apply','電話で応募する','coco','お店の店長（電話）','電話で応募して、面接の日時を決める',['wh','応募の電話・メール']),
+ TS('wh_trial','トライアル（試し勤務）','coco','先輩スタッフ','指示を聞き返しながら、試し勤務をこなす',['wh','トライアル（試し勤務）']),
+ TS('wh_first','職場の初日','coco','先輩スタッフ','あいさつをして、仕事の流れを教わる',['wh','職場の初日']),
+ TS('wh_cafe','カフェの接客','mango','お客さん','注文を受けて、お会計まで進める',['wh','カフェの接客']),
+ TS('wh_rest','レストランの接客','mango','お客さん','席に案内して、注文を受ける',['wh','レストランの接客']),
+ TS('wh_kitchen','キッチン・裏方の仕事','coco','シェフ','指示を確かめながら、仕込みをする',['wh','キッチン・裏方の仕事']),
+ TS('wh_shift','シフト・休みの連絡','coco','店長','休みをもらう、シフトを代わってもらう',['wh','シフト・休みの連絡']),
+ TS('wh_pay','給料・契約の確認','coco','店長','時給・支払い日・契約の内容を確かめる',['wh','給料・契約の確認']),
+ TS('wh_quit','仕事を辞める・推薦状','coco','店長','辞めることを伝えて、推薦状をお願いする',['wh','仕事を辞める・推薦状']),
+ TS('wh_bank','銀行・携帯の手続き','coco','銀行の窓口の人','銀行の口座を作る',['wh','銀行・携帯の手続き']),
+ TS('wh_clinic','病院・薬局','coco','薬剤師','症状を伝えて、薬をもらう',['wh','病院・薬局']),
+ TS('st_airport','空港の入国審査','coco','入国審査官','滞在の目的と期間を答える',['study','空港']),
+ TS('st_teacher','先生に聞き返す・質問する','coco','先生','分からないところを聞き返して、質問する',['study','授業中']),
+ TS('st_dorm','寮の困りごとを伝える','coco','寮のスタッフ','お湯が出ないことを伝えて、直してもらう',['study','寮・生活']),
+ TS('st_clinic','留学先の病院・薬局','coco','お医者さん','症状を伝えて、診てもらう',['study','病院・薬局']),
+ TS('st_bank','両替・お金の手続き','coco','両替所のスタッフ','両替をして、レートと手数料を確かめる',['study','銀行・お金']),
+ TS('sc_first','初対面','mango','パーティーで会った人','自己紹介をして、話を広げる',['scene','初対面']),
+ TS('sc_shop','買い物','coco','お店の店員','サイズや値段を聞いて、買う',['scene','買い物']),
+ TS('sc_eat','レストランで食べる','coco','レストランの店員','注文して、お会計をする',['scene','食べる時']),
+ TS('sc_way','道案内','mango','道を聞いてきた観光客','行き方を説明する',['scene','道案内']),
+ TS('sc_phone','電話で予約する','coco','レストランの予約係','電話で予約を取る',['scene','電話']),
+ TS('sc_meet','待ち合わせ','mango','友達','待ち合わせの時間と場所を決める',['scene','待ち合わせ']),
+ TS('sc_travel','旅行（ホテル）','coco','ホテルのフロント','チェックインして、困りごとを伝える',['scene','旅行']),
+ TS('sc_ride','乗り物（Grab・タクシー）','coco','運転手','行き先を伝えて、着くまで話す',['scene','車内や乗り物']),
+ TS('sc_health','体調を伝える','coco','お医者さん','症状を伝えて、診てもらう',['scene','身体と健康、病気']),
+ TS('sc_serve','接客','mango','お客さん','お客さんの質問に答えて、案内する',['scene','接客']),
+ TS('sc_work','仕事・ビジネス','coco','同僚','会議で意見を言う、仕事の相談をする',['scene','仕事、ビジネス']),
+ TS('sc_weather','天気の雑談','mango','近所の人','天気の話から、雑談を広げる',['scene','天気']),
+ TS('sc_cele','お祝い・お見舞い','mango','友達','誕生日を祝う、体調を気づかう',['scene','お祝い・お見舞い'])
+);
+Object.assign(TALKS.find(t=>t.id==='interview'),{goal:'自己紹介をして、働ける日を伝える',src:['wh','面接']});
+Object.assign(TALKS.find(t=>t.id==='house'),{goal:'部屋を見て、家賃と入居日を確かめる',src:['wh','家探し・シェアハウス']});
+Object.assign(TALKS.find(t=>t.id==='class'),{goal:'週末のことを話して、授業を始める',src:['study','授業中']});
+Object.assign(TALKS.find(t=>t.id==='mates'),{goal:'放課後のことを話して、週末の約束をする',src:['study','学校生活']});
+Object.assign(TALKS.find(t=>t.id==='dorm'),{goal:'自己紹介をして、夕食の約束をする',src:['study','寮・生活']});
+const TALK_GROUPS = [
+ {h:'ワーホリ', lead:'仕事探しから、働く・暮らすまで。ワーホリの場面ごとに練習できます。', sub:[
+   ['仕事探し',['wh_search','wh_apply','interview','wh_trial']],
+   ['働く',['wh_first','wh_cafe','wh_rest','wh_kitchen','wh_shift','wh_pay','wh_quit']],
+   ['生活',['house','wh_bank','wh_clinic']]]},
+ {h:'留学生活', lead:'空港から、授業・寮・友達との時間まで。', sub:[
+   ['',['st_airport','class','st_teacher','mates','dorm','st_dorm','st_clinic','st_bank']]]},
+ {h:'場面別フレーズから', lead:'「場面別フレーズ」で覚えた表現を、会話で使ってみます。', sub:[
+   ['',['sc_first','sc_shop','sc_eat','sc_way','sc_phone','sc_meet','sc_travel','sc_ride','sc_health','sc_serve','sc_work','sc_weather','sc_cele']]]}
+];
+const talkPhrases = t => !t.src ? [] : ITEMS.filter(x=>x.cat===t.src[0] && x.scene===t.src[1]).sort((a,b)=>a.lv-b.lv).slice(0,8);
+
+function talkActive(){ const u=S.talkUntil; return !!u && (u==='infinity' || new Date(u) > new Date()); }
+function talkOK(){ return tier()==='customer' || talkActive(); }
+function talkUntilText(){ const u=S.talkUntil; if(!u) return ''; if(u==='infinity') return '期限なし'; const d=new Date(u); return isNaN(d)?'':`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日まで`; }
+
 const KEY = 'cocomango_proto2';
-const S0 = ()=>({user:'',tier:'general',trialStart:'',askCount:{d:'',n:0},talkTrialUsed:false,level:null,levelDate:'',prog:{},vault:[],tests:0,resume:{},rdesign:'classic',talkLog:0,notes:{},lvHist:[],pronDone:{}});
+const S0 = ()=>({user:'',tier:'general',trialStart:'',askCount:{d:'',n:0},talkTrialUsed:false,talkUntil:'',level:null,levelDate:'',prog:{},vault:[],tests:0,resume:{},rdesign:'classic',talkLog:0,notes:{},lvHist:[],pronDone:{}});
 let S = S0();
 try{ const raw = localStorage.getItem(KEY); if(raw) S = Object.assign(S, JSON.parse(raw)); }catch(e){}
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} if(typeof syncLater==='function') syncLater(); }
@@ -9346,7 +9404,7 @@ const NAV = [['home','ホーム',I.home],['learn','学ぶ',I.book],['ask','AIに
 const NAV2 = [['level','レベル診断',I.level],['pron','発音講座',I.mic],['talk','AI英会話',I.chat],['resume','履歴書',I.doc],['guide','手引書',I.guide],['me','マイページ',I.me]];
 function shell(){
   const FEAT = {ask:'ask',vault:'vault',talk:'talk',resume:'resume'};
-  const lk = v=> FEAT[v] && !feature(FEAT[v]) ? `<span class="lockmark" aria-label="鍵">${I.lock}</span>` : '';
+  const lk = v=> (v==='talk' ? !talkOK() : FEAT[v] && !feature(FEAT[v])) ? `<span class="lockmark" aria-label="鍵">${I.lock}</span>` : '';
   const side =`<nav class="side" aria-label="メニュー">
     <button class="brand" data-act="go" data-v="home"><span class="brand-ic" aria-hidden="true">${coco(34)}${mango(34)}</span><span>CocoMan英語<small class="sub">言えなかったを、その場で</small></span></button>
     <label class="srch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="srch-side" class="srch-in" type="search" placeholder="英語・日本語で検索（例: 楽しみ）" value="${esc(R.q||'')}" autocomplete="off" enterkeyhint="search" aria-label="表現を検索"></label>
@@ -9431,7 +9489,7 @@ V.home = ()=>{
     <div class="tile today"><div class="num">${due}</div><div><b>今日の復習</b><span>覚えた ${known}件・保存庫 ${S.vault.length}件</span></div></div>
     <button class="tile" data-act="go" data-v="level"><b>レベル診断</b>${tileMark('level',0)}<span>${S.level==null?'カテゴリーごとに20問':'記録とグラフを見る'}</span></button>
     <button class="tile" data-act="go" data-v="pron"><b>発音講座</b>${tileMark('pron',1)}<span>発音記号・ルール・聞き分け・言ってみる</span></button>
-    <button class="tile" data-act="go" data-v="talk"><b>AI英会話</b>${tileMark('talk',1)}<span>面接・授業・ルームメイトと練習</span></button>
+    <button class="tile" data-act="go" data-v="talk"><b>AI英会話</b>${tileMark('talk',1)}<span>ワーホリ・留学生活・場面別の会話を練習</span></button>
     <button class="tile" data-act="learn" data-cat="wh"><b>ワーホリ対策</b>${tileMark('wh',2)}<span>場面ごとのフレーズとシミュレーション</span></button>
     <button class="tile" data-act="go" data-v="resume"><b>履歴書をつくる</b>${tileMark('resume',2)}<span>AIと一問一答で強みを見つける</span></button>
     <button class="tile" data-act="learn" data-cat="grammar"><b>文法</b>${tileMark('grammar',2)}<span>レベル別の単元と確認問題</span></button>
@@ -10026,29 +10084,48 @@ function tpick(i){
 }
 
 V.talk = ()=>{
-  if(!feature('talk')) return `<h1>AI英会話</h1>${upsell('AI英会話は、無料カウンセリング（面談）を受けると、1回体験できます。')}`;
-  if(!TALK.id && tier()==='counseled' && S.talkTrialUsed) return `<h1>AI英会話</h1>${upsell('お試しのAI英会話（1回）は使い終わりました。成約すると、すべての場面で練習できます。')}`;
+  if(!talkOK()) return talkLock();
   if(!TALK.id){
     return `<h1>AI英会話</h1><p class="muted">場面を選んで、AIと英語で話します。終わると、直しの一覧が出て、保存庫に入れられます。</p>
-    ${tier()==='counseled'?`<p class="tier note">お試し中: AI英会話は1回だけ体験できます。好きな場面を1つ選んでください。</p>`:''}
-    <div class="home-grid">${TALKS.map(t=>`<button class="tile" data-act="talkstart" data-id="${t.id}"><div class="row">${CH[t.who].svg(44)}<div><b>${esc(t.name)}</b><span>相手: ${esc(t.role)}</span></div></div></button>`).join('')}</div>
-    <p class="note" style="margin-top:14px">AI英会話は準備中です。今は見本として、AIの話す内容が決まった台本になっています。使えるようになると、AIがあなたの答えに合わせて話し、終わったあとに英語を直します。</p>`;
+    ${tier()!=='customer'&&talkActive()?`<p class="tier note">クーポンで使っています（${talkUntilText()}）。</p>`:''}
+    ${talkGroups(false)}
+    <p class="note" style="margin-top:14px">AI英会話は準備中です。今は「見本あり」の場面だけ、AIの話す内容が決まった台本で試せます。ほかの場面では、その場面で使える表現を見られます。使えるようになると、AIがあなたの答えに合わせて話し、終わったあとに英語を直します。</p>`;
   }
   const t = TALKS.find(x=>x.id===TALK.id);
-  return `<div class="row" style="justify-content:space-between"><h1 style="margin:0">${esc(t.name)}</h1><button class="btn sm" data-act="talkend">終わる</button></div>
+  if(!t.lines) return `<div class="row" style="justify-content:space-between"><h1 style="margin:0">${esc(t.name)}</h1><button class="btn sm" data-act="talkend">場面を選び直す</button></div>
   <p class="muted small">相手: ${esc(t.role)}（${CH[t.who].name}）</p>
+  <div class="panel" style="margin-top:10px"><p style="margin:0"><b>会話のゴール:</b> ${esc(t.goal||'')}</p></div>
+  <p class="note" style="margin-top:12px">この場面の会話は、AIにつながると使えるようになります（準備中）。今は、この場面で使える表現を聞いて、保存庫に入れておけます。</p>
+  ${talkPhraseList(t,true)}`;
+  return `<div class="row" style="justify-content:space-between"><h1 style="margin:0">${esc(t.name)}</h1><button class="btn sm" data-act="talkend">終わる</button></div>
+  <p class="muted small">相手: ${esc(t.role)}（${CH[t.who].name}）${t.goal?`　ゴール: ${esc(t.goal)}`:''}</p>
+  ${talkPhraseList(t,false)}
   <div class="chat" style="margin-top:10px">${TALK.msgs.map(m=>m.ai?`<div class="row" style="align-items:flex-end;gap:6px">${CH[t.who].svg(36)}<div class="msg ai"><span class="en">${esc(m.t)}</span> ${sayBtn(m.t)}</div></div>`:`<div class="msg me en">${esc(m.t)}</div>`).join('')}</div>
   ${TALK.done ? `<div class="panel" style="margin-top:14px"><h2 style="margin-top:0">ふりかえり</h2><p class="muted small">今は見本として、よくある直しの例を出しています。</p>
      ${t.fix.map(f=>{const inV=S.vault.some(v=>v.en===f[1]);return `<div class="ex"><div class="muted small"><s>${esc(f[0])}</s></div><div class="row"><span class="e">${esc(f[1])}</span>${sayBtn(f[1])}<button class="btn sm" data-act="exvault" data-en="${esc(f[1])}" data-ja="${esc(f[2])}" data-scene="AI英会話" ${inV?'disabled':''}>${inV?'保存済み':'保存庫に入れる'}</button></div><div class="small">${esc(f[2])}</div></div>`}).join('')}
      <div class="row" style="margin-top:8px"><button class="btn primary" data-act="talkstart" data-id="${t.id}">もう一度</button><button class="btn" data-act="talkend">場面を選び直す</button></div></div>`
    : `<form class="ask-box" data-form="talk" style="margin-top:14px"><input type="text" id="talk-in" placeholder="英語で答える" aria-label="あなたの答え" data-autofocus>${SR?`<button type="button" class="btn mic" data-act="talkmic" aria-label="話して入力">${I.mic}</button>`:''}<button class="btn primary" type="submit">送る</button></form>`}`;
 };
-function talkStart(id){ if(!feature('talk') || (tier()==='counseled' && S.talkTrialUsed)){ TALK={id:null,msgs:[],step:0,done:false}; go('talk'); return; } const t=TALKS.find(x=>x.id===id); TALK={id,msgs:[{ai:true,t:t.lines[0]}],step:1,done:false}; R.v='talk'; render(); say(t.lines[0]); }
+function talkStart(id){ if(!talkOK()){ TALK={id:null,msgs:[],step:0,done:false}; go('talk'); return; } const t=TALKS.find(x=>x.id===id); if(!t) return;
+  if(!t.lines){ TALK={id,msgs:[],step:0,done:false}; R.v='talk'; render(); window.scrollTo(0,0); return; }
+  TALK={id,msgs:[{ai:true,t:t.lines[0]}],step:1,done:false}; R.v='talk'; render(); say(t.lines[0]); }
+function talkTile(t,lock){ return `<button class="tile" data-act="talkstart" data-id="${t.id}" ${lock?'disabled':''}><div class="row">${CH[t.who].svg(44)}<div><b>${esc(t.name)}</b><span>相手: ${esc(t.role)}${t.lines?'　<em class="talk-demo">見本あり</em>':''}</span></div></div></button>`; }
+function talkGroups(lock){ return TALK_GROUPS.map(g=>`<section class="talk-grp"><h2>${esc(g.h)}</h2><p class="muted small" style="margin-top:-4px">${esc(g.lead)}</p>
+  ${g.sub.map(([sh,ids])=>`${sh?`<h3 class="talk-sub">${esc(sh)}</h3>`:''}<div class="home-grid">${ids.map(id=>talkTile(TALKS.find(t=>t.id===id),lock)).join('')}</div>`).join('')}</section>`).join(''); }
+function talkPhraseList(t,open){ const ps=talkPhrases(t); if(!ps.length) return '';
+  const body=ps.map(x=>{const inV=S.vault.some(v=>v.en===x.en);return `<div class="ex"><div class="row"><span class="e">${esc(x.en)}</span>${sayBtn(x.en)}<button class="btn sm" data-act="exvault" data-en="${esc(x.en)}" data-ja="${esc(x.ja)}" data-scene="${esc(t.name)}" ${inV?'disabled':''}>${inV?'保存済み':'保存庫に入れる'}</button></div><div class="muted small">${esc(x.ja)}</div></div>`;}).join('');
+  return `<details class="panel talk-ph" style="margin-top:10px" ${open?'open':''}><summary><b>この場面で使える表現</b></summary>${body}</details>`; }
+function talkLock(){ const ex=S.talkUntil && !talkActive();
+  return `<h1>AI英会話</h1><div class="panel lock">${coco(56)}<div><h3>${ex?'AI英会話のクーポンの期限が切れました。':'AI英会話は、成約された方と、AI英会話のクーポンコードをお持ちの方が使えます。'}</h3>
+  ${AUTH.user?`<div class="ask-box" style="margin-top:8px"><input type="text" id="talk-code" placeholder="クーポンコード" autocomplete="off" aria-label="AI英会話のクーポンコード"><button class="btn" data-act="talkcode">使う</button></div>`
+   :`<p class="muted small">クーポンコードを使うには、ログインが必要です。マイページの「アカウント」からログインできます。</p><button class="btn" data-act="go" data-v="me">マイページを開く</button>`}
+  <p class="muted small" style="margin-top:10px">留学のご相談は、無料カウンセリングで受け付けています。</p><button class="btn cta" data-act="upsell">無料カウンセリングを相談する</button></div></div>
+  <h2>練習できる場面</h2>${talkGroups(true)}`; }
 function talkSend(text){
   const t=TALKS.find(x=>x.id===TALK.id); if(!text.trim()) return;
   TALK.msgs.push({t:text.trim()});
   if(TALK.step<t.lines.length){ const line=t.lines[TALK.step++]; TALK.msgs.push({ai:true,t:line}); setTimeout(()=>say(line),150); }
-  if(TALK.step>=t.lines.length){ TALK.done=true; S.talkLog++; if(tier()==='counseled') S.talkTrialUsed=true; save(); }
+  if(TALK.step>=t.lines.length){ TALK.done=true; S.talkLog++; save(); }
   rerender();
 }
 
@@ -10212,7 +10289,7 @@ V.guide = ()=>`<div class="guide-pg"><h1>手引書</h1>
     <p class="ask-hero-end">毎日の生活や仕事で出会った表現が、少しずつたまっていきます。<b>あなたが本当に出会った言葉だけでできた、あなただけのとっておきの辞書</b>になります。</p>
     <div class="row" style="justify-content:space-between;align-items:center;gap:10px"><p class="muted small" style="margin:0">コツ: 忘れないうちに、その日のうちに聞きましょう。名前や連絡先は書かないでください。</p><button class="btn primary sm" data-act="go" data-v="ask">${I.chat} AIに聞いてみる</button></div>
   </section>
-  <h2>こだわったポイント</h2>
+  <h2>その他のこだわりポイント</h2>
   <p class="muted small" style="margin-top:-4px">単語やフレーズを、覚えるだけでなく、実際に使えるようにするための工夫です。</p>
   <div class="fg-grid">
    <div class="fg"><div class="fg-h"><span class="cat-ic g1" aria-hidden="true">${I.speaker}</span><h3>音声で、正しい発音を意識できる</h3></div>
@@ -10221,6 +10298,8 @@ V.guide = ()=>`<div class="guide-pg"><h1>手引書</h1>
     <p class="fg-how">同じ意味のほかの単語や、似た言い回し（パラフレーズ）も、解説の中で紹介しています。1つの言い方が出てこなくても、別の言い方で伝えられるようになります。</p></div>
    <div class="fg"><div class="fg-h"><span class="cat-ic g2" aria-hidden="true">${I.chat}</span><h3>例文を2つずつ</h3></div>
     <p class="fg-how">どの表現にも、例文を2つ入れています。違う場面の例を見比べることで、どんなときに使えるのかをイメージしやすくなります。</p></div>
+   <div class="fg"><div class="fg-h"><span class="cat-ic g0" aria-hidden="true">${I.home}</span><h3>見やすく、使いやすいデザイン</h3></div>
+    <p class="fg-how">文字の大きさや色、ボタンの置き場所まで、見やすさと使いやすさ（UI・UX）を大切にして作りました。毎日開くのが楽しくなり、また戻ってきたくなる学習ツールを目指しています。</p></div>
   </div>
   <h2>英語の勉強のほかに、できること</h2>
   <p class="muted small" style="margin-top:-4px">単語やフレーズを覚えるだけでなく、通じる発音と、ワーホリの仕事探し（レジュメ・面接）の準備もできます。</p>
@@ -10423,7 +10502,7 @@ V.me = ()=>{
   <div class="panel" style="margin-top:14px"><h3>画面の明るさ</h3><p class="muted small" style="margin:0 0 8px">「自動」は、端末（スマホ・パソコン）の設定に合わせます。</p>${themeSw()}</div>
   <div class="panel" style="margin-top:14px"><h3>利用区分</h3>
     <p>${TIER_NAME[tier()]}${expired()?'（お試しの期限切れ）':tier()==='counseled'?`（あと${trialLeft()}日）`:''}</p>
-${tier()!=='customer'?(AUTH.user?`<div class="filter" style="margin-top:8px"><label class="filter-l" for="me-code">招待コードをお持ちの方</label><div class="ask-box"><input type="text" id="me-code" placeholder="面談・成約のときにお渡しするコード" autocomplete="off"><button class="btn" data-act="code">使う</button></div></div>`:`<p class="muted small" style="margin:8px 0 0">招待コードをお持ちの方は、下の「アカウント」からログインすると使えます。</p>`):''}
+${tier()!=='customer'&&S.talkUntil?`<p class="small" style="margin:8px 0 0">AI英会話のクーポン: ${talkActive()?talkUntilText():'期限切れ'}</p>`:''}${tier()!=='customer'?(AUTH.user?`<div class="filter" style="margin-top:8px"><label class="filter-l" for="me-code">招待コード・クーポンコードをお持ちの方</label><div class="ask-box"><input type="text" id="me-code" placeholder="面談・成約・クーポンのコード" autocomplete="off"><button class="btn" data-act="code">使う</button></div></div>`:`<p class="muted small" style="margin:8px 0 0">招待コードをお持ちの方は、下の「アカウント」からログインすると使えます。</p>`):''}
 ${DEBUG?`    <p class="muted small">確認用: 区分を切り替えて、見え方を確かめられます（URLに ?debug を付けたときだけ表示）。</p>
     <div class="row"><button class="btn sm ${S.tier==='general'?'on':''}" data-act="settier" data-t="general">一般（面談前）</button><button class="btn sm ${S.tier==='counseled'&&!expired()?'on':''}" data-act="settier" data-t="counseled">面談実施者</button><button class="btn sm ${S.tier==='customer'?'on':''}" data-act="settier" data-t="customer">成約者</button><button class="btn sm ${expired()?'on':''}" data-act="expire">お試しを期限切れにする</button></div>`:''}</div>
   <div class="panel" style="margin-top:14px"><h3>このアプリについて</h3>
@@ -10443,6 +10522,7 @@ document.addEventListener('click', e=>{
     case 'expire': S.tier='counseled'; S.trialStart=addDays(-(TRIAL_DAYS+1)); save(); render(); toast('お試しを期限切れにしました（一般と同じ範囲になります）。'); break;
     case 'upsell': { const m=b.parentElement.querySelector('.upsell-msg'); if(COUNSEL_URL){ window.open(COUNSEL_URL,'_blank','noopener'); } else if(m){ m.textContent='申し込み先を準備中です。セブ島留学バディーのサイトからご相談ください。'; } break; }
     case 'code': redeemCode(($('#me-code')?.value||'').trim()); break;
+    case 'talkcode': redeemCode(($('#talk-code')?.value||'').trim()); break;
     case 'logout': if(AUTH.user){ signOut(); } else { S.user=''; save(); render(); } break;
     case 'acdel': deleteAccount(); break;
     case 'lgemail': LOGIN={step:'email',email:LOGIN.email||'',msg:''}; rerenderAny(); break;
@@ -10612,7 +10692,7 @@ document.addEventListener('keydown', e=>{
 
 const SB_URL = 'https://weypkaiucqtvlmyldhwz.supabase.co';
 const SB_KEY = 'sb_publishable_4t3nRP3Tm1RqlEIZaYJMzw_DoERMvPN';
-const SYNC_SKIP = ['tier','trialStart','_dirty','syncedUser','askCount'];
+const SYNC_SKIP = ['tier','trialStart','talkUntil','_dirty','syncedUser','askCount'];
 let SB = null;
 const AUTH = {user:null, email:'', ready:false, google:false, sync:'', syncAt:null, busy:false};
 let LOGIN = {step:'menu', email:'', msg:'', err:false};
@@ -10730,7 +10810,7 @@ async function onLogin(user){
   AUTH.user=user; AUTH.email=user.email||''; AUTH.ready=false;
   const uid=user.id;
   const [p, st] = await Promise.all([
-    SB.from('profiles').select('tier,trial_start').eq('id',uid).maybeSingle(),
+    SB.from('profiles').select('*').eq('id',uid).maybeSingle(),
     SB.from('app_state').select('data').eq('user_id',uid).maybeSingle()]);
   if(p.error || st.error){ toast('アカウントの記録を読めませんでした。通信を確かめて、開き直してください。'); AUTH.ready=true; render(); return; }
   const remote = st.data && st.data.data;
@@ -10741,7 +10821,7 @@ async function onLogin(user){
   const devId = S.devId;
   S = Object.assign(S0(), next);
   if(!S.devId && devId) S.devId = devId;
-  S.tier = (p.data && p.data.tier) || 'general'; S.trialStart = (p.data && p.data.trial_start) || '';
+  S.tier = (p.data && p.data.tier) || 'general'; S.trialStart = (p.data && p.data.trial_start) || ''; S.talkUntil = (p.data && p.data.talk_until) || '';
   S.syncedUser = uid; S._dirty = true; keepLocal();
   AUTH.ready = true; LOGIN = {step:'menu', email:'', msg:'', err:false};
   applyTheme(); render(); pushNow();
@@ -10795,11 +10875,13 @@ async function deleteAccount(){
   go('home'); toast('アカウントを削除しました。');
 }
 async function redeemCode(c){
-  if(!c){ toast('招待コードを入れてください。'); return; }
-  if(!AUTH.user){ toast('招待コードは、ログインすると使えます。'); return; }
+  if(!c){ toast('コードを入れてください。'); return; }
+  if(!AUTH.user){ toast('コードは、ログインすると使えます。'); return; }
   const { data, error } = await SB.rpc('redeem_code', {p_code:c});
   if(error){ toast('通信できませんでした。もう一度お試しください。'); return; }
-  if(!data || !data.ok){ toast('招待コードが見つかりませんでした。もう一度ご確認ください。'); return; }
+  if(!data || !data.ok){ toast('コードが見つからないか、期限が切れています。もう一度ご確認ください。'); return; }
+  if(data.kind==='talk'){ S.talkUntil=data.talk_until||''; save(); render(); toast(`AI英会話が使えるようになりました（${talkUntilText()}）。`); return; }
+  if(data.talk_until) S.talkUntil=data.talk_until;
   S.tier=data.tier; S.trialStart=data.trial_start||''; S.talkTrialUsed=false; save(); render(); toast(`「${TIER_NAME[data.tier]}」になりました。`);
 }
 render();
