@@ -10408,7 +10408,7 @@ const CAT_GROUPS = [['語彙',['word','phrasal','colloc','idiom','prep','tool']]
 function catStats(k){
   const kn=xs=>xs.filter(x=>P(x.id).state==='known').length;
   if(k==='tool'){ const n=TOOLBOX.length, m=TOOLBOX.reduce((a,o)=>a+o.a.length,0), seen=Object.keys(S.tbSeen||{}).length; return {label:`${n}語・言いかえ${m}`,total:n,known:Math.min(seen,n)}; }
-  if(k==='prep'){ const n=Object.keys(S.prepSeen||{}).filter(x=>PREP_K.includes(x)).length; return {label:`${PREPS.length}語・見た ${n}`,total:PREPS.length,known:n}; }
+  if(k==='prep') return {label:`${PREPS.length}語・使い分け${PREP_CMP.length}`,total:0,known:0,nobar:true};
   if(k==='grammar'){ const n=GR_CH.reduce((a,c)=>a+c.u.length,0); return {label:`${GR_CH.length}章・${n}単元`,total:n,known:kn(GRAMMAR)}; }
   if(k==='wh'){ const xs=ITEMS.filter(x=>x.cat==='wh'); return {label:`${WH_SCENES.length}場面`,total:xs.length+WH_SIMS.length,known:kn(xs)+WH_SIMS.filter(s=>P(s.id).simBest>=s.steps.length).length}; }
   if(k==='dialog'){ const xs=ITEMS.filter(x=>x.cat==='scene'); return {label:`${GEN_SCENES.length}場面`,total:xs.length,known:kn(xs)}; }
@@ -10455,7 +10455,7 @@ function openCatInfo(k){
 const INFO_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="7.5" r="1.4" fill="currentColor"/><path d="M12 11v6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
 const infoBtn = k=>`<button class="catinfo" data-act="catinfo" data-cat="${k}" aria-label="${esc(CATS[k].replace('（付録）',''))}とは（説明を開く）">${INFO_ICON}</button>`;
 function catCard(k){ const s=catStats(k), pct=s.total?Math.round(s.known/s.total*100):0;
-  return `<div class="catwrap"><button class="catcard" data-act="learn" data-cat="${k}"><span class="cat-hd">${catIcon(k,CAT_GROUPS.findIndex(g=>g[1].includes(k)))}<b>${esc(CATS[k].replace('（付録）',''))}</b></span>${CAT_INFO[k]?`<span class="cat-desc">${esc(CAT_INFO[k].one)}</span>`:''}<span class="n">${esc(s.label)}</span><span class="cbar" aria-hidden="true"><i style="width:${pct}%"></i></span></button>${infoBtn(k)}</div>`; }
+  return `<div class="catwrap"><button class="catcard" data-act="learn" data-cat="${k}"><span class="cat-hd">${catIcon(k,CAT_GROUPS.findIndex(g=>g[1].includes(k)))}<b>${esc(CATS[k].replace('（付録）',''))}</b></span>${CAT_INFO[k]?`<span class="cat-desc">${esc(CAT_INFO[k].one)}</span>`:''}<span class="n">${esc(s.label)}</span>${s.nobar?'':`<span class="cbar" aria-hidden="true"><i style="width:${pct}%"></i></span>`}</button>${infoBtn(k)}</div>`; }
 function myListBtns(){
   const nKnown = allItems().filter(x=>P(x.id).state==='known').length, nUnknown = allItems().filter(x=>P(x.id).state==='unknown').length, nFav = Object.values(S.prog).filter(v=>v.fav).length;
   return `<div class="mylist" aria-label="自分のリスト"><button class="mybtn ${R.cat==='known'?'on':''}" data-act="learn" data-cat="known" aria-pressed="${R.cat==='known'}">記憶 <b>${nKnown}</b></button><button class="mybtn ${R.cat==='unknown'?'on':''}" data-act="learn" data-cat="unknown" aria-pressed="${R.cat==='unknown'}">未記憶 <b>${nUnknown}</b></button><button class="mybtn ${R.cat==='fav'?'on':''}" data-act="learn" data-cat="fav" aria-pressed="${R.cat==='fav'}">★ お気に入り <b>${nFav}</b></button></div>`;
