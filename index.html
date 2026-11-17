@@ -316,6 +316,12 @@ dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
 .gd-pcard{margin-top:8px;border-top:4px solid var(--tlc)}
 .gd-pcard .tl-when{margin:0;font-size:12px;font-weight:700;color:var(--muted)}
 .gd-plead{margin:4px 0 10px;font-size:15px}
+.gd-sort-l{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.gd-sort-l li{display:flex;gap:12px;align-items:flex-start}
+.gd-sort-l li>div{display:grid;gap:3px}
+.gd-sort-l b{font-size:15px}
+.gd-sort-l span:not(.ask-n){font-size:14px;line-height:1.7}
+.gd-sort-l .ask-n{flex:none}
 .gd-steps{margin:0;padding-left:1.4em;display:grid;gap:8px;font-size:14px;line-height:1.7}
 .gd-list .gd-row{gap:12px;padding-left:12px}
 .gd-acc{display:grid;gap:8px}
@@ -11069,7 +11075,7 @@ V.resume = ()=>{
 
 const GUIDE_FEATS = [
  ['ask','chat','g1','AIに聞く','言えなかった表現を、その場で聞く','日本語のまま質問すると、自然な表現・解説・例文が出ます。そのまま保存庫に入れて、あなただけの辞書にしていけます（くわしくは「はじめに」タブ）。'],
- ['learn','pencil','g0','学ぶ','単語やフレーズを覚える','単語・句動詞・イディオム・場面別フレーズ・文法などから選びます。レベルで絞り込み、「覚えた」「まだ」で仕分けると、復習する日が自動で決まります。前置詞は、イメージ図で学べます（くわしくは「くわしく」タブ）。'],
+ ['learn','pencil','g0','学ぶ','単語やフレーズを覚える','単語・句動詞・イディオム・場面別フレーズ・文法などから選びます。レベルで絞り込み、「覚えた」「まだ」で仕分けると、復習する日が自動で決まります。まず分かる・分からないで仕分けてから、「未記憶」を覚えていくのがおすすめです。前置詞は、イメージ図で学べます（くわしくは「くわしく」タブ）。'],
  ['vault','vault','g1','保存庫','聞いた表現をためて復習する','授業や会話で言えなかったことをAIに聞いて、ここに入れます。復習して、実際に使えたら「実際に使えた！」を押します。'],
  ['test','test','g2','テスト','覚えたかを4択で確かめる','範囲を選んで、4択で答えます。正解は「覚えた」、不正解は「まだ」に入り、復習する日が自動で決まります。'],
  ['level','level','g0','レベル診断','今の自分のレベルを知る','カテゴリーごとに20問の簡単な判定です。結果を見て、「学ぶ」で自分のレベルから始めましょう（正式なCEFRの判定ではありません）。'],
@@ -11121,6 +11127,14 @@ V.guide = ()=>{ const t=Math.min(R.guideT||0,GUIDE_TABS.length-1), pi=Math.min(R
   <div class="gd-per" role="tablist" aria-label="時期">${GUIDE_PER.map((x,i)=>`<button role="tab" aria-selected="${i===pi}" class="${i===pi?'on':''}" style="--tlc:var(--tl${i+1})" data-act="guideper" data-p="${i}"><span class="gd-pn">${i+1}</span>${['留学前','留学中','ワーホリ前','帰国後'][i]}</button>`).join('')}</div>
   <div class="panel gd-pcard" style="--tlc:var(--tl${pi+1})"><p class="tl-when">${P[0]}</p><p class="gd-plead">${P[2]}</p>
    <ol class="gd-steps">${P[3].map(x=>`<li>${x}</li>`).join('')}</ol></div>
+  <h2 class="gd-h">おすすめの覚え方（2回に分けて仕分ける）</h2>
+  <div class="panel gd-sort">
+   <ol class="gd-sort-l">
+    <li><span class="ask-n">1</span><div><b>まず「分かる・分からない」で仕分ける</b><span>一覧をざっと見て、もう分かるものは「覚えた」、分からないものは「まだ」を押します。1つに時間をかけず、テンポよく進めるのがコツです。</span></div></li>
+    <li><span class="ask-n">2</span><div><b>次に「覚えた・まだ」を振り分けていく</b><span>「未記憶」に入ったものだけを学びます。覚えたら「覚えた」に切り替えます。分かるものを何度も見なくてよいので、覚えるべきものに時間を使えます。</span></div></li>
+   </ol>
+   <p class="muted small" style="margin:10px 0 0">「覚えた」にしたものも、復習する日が来たら見直します。テストで確かめるのもおすすめです。</p>
+  </div>
   <h2 class="gd-h">機能の一覧</h2>
   <ul class="tk-list gd-list">${GUIDE_FEATS.map(([v,ic,g,name,role,how])=>guideRow(v,ic,g,name,role,how)).join('')}${guideRow('','chat','g2','面接対策','よく聞かれる質問と答え方','「ワーホリ対策」の「面接」で、よく聞かれる質問と答え方の例を見て、返事を選んで進めるシミュレーションで練習します。仕上げに「AI英会話」の「面接」で、本番のように受け答えを練習できます。','data-cat="wh" data-sc="面接"')}</ul>`;
  if(t===2) body=`
