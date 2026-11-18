@@ -318,6 +318,11 @@ dialog.sheet::backdrop{background:rgba(30,40,38,.45)}
 .gd-plead{margin:4px 0 10px;font-size:15px}
 .my-sel{max-width:320px}
 .st-h.my-h:first-child{margin-top:4px}
+.guest-note{margin:0 0 14px;padding:12px 14px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;border-color:var(--mango)}
+.guest-note p{margin:0}.guest-note .btn{margin-left:auto}
+.gate-line{align-self:flex-start;display:inline-flex;text-decoration:none;color:inherit}
+.en-go{width:100%;justify-content:center}
+.en-acc>summary{cursor:pointer;font-weight:700;font-size:14px}
 .gd-sort-l{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 .gd-sort-l li{display:flex;gap:12px;align-items:flex-start}
 .gd-sort-l li>div{display:grid;gap:3px}
@@ -9815,9 +9820,17 @@ function shell(){
      : `<button class="${R.v===n[0]?'on':''}" data-act="go" data-v="${n[0]}">${n[2]}${n[1]}</button>`).join('')}</nav>`;
   return side + `<div>${top}<main id="main"></main></div>` + tab;
 }
+
+function gateView(){
+  if(!gateOk()) return R.v==='privacy' ? V.privacy() : V.entry();
+  if(!S.user) return V.welcome();
+  if(guestExpired()) return R.v==='privacy' ? V.privacy() : V.trialEnd();
+  return null;
+}
 function render(){
-  $('#app').classList.toggle('is-welcome', !S.user);
-  if(!S.user){ $('#app').innerHTML = `<main id="main" class="welcome-main">${V.welcome()}</main>`; after(); return; }
+  const g = gateView();
+  $('#app').classList.toggle('is-welcome', g!=null);
+  if(g!=null){ $('#app').innerHTML = `<main id="main" class="welcome-main">${g}</main>`; after(); return; }
   $('#app').innerHTML = shell();
   $('#main').innerHTML = backBar() + (V[R.v]||V.home)();
   after();
@@ -9831,9 +9844,9 @@ function goBack(){ if(histD()>0) history.back(); else go(R.from||'home'); }
 addEventListener('popstate', e=>{ const st=e.state; if(!st || !st.R) return; R=Object.assign({}, st.R); render(); setTimeout(()=>window.scrollTo(0, st.y||0), 0); saveRoute(); });
 const BACK_NAME = {guide:'手引書'};
 function backBar(){ return R.from && BACK_NAME[R.from] && R.v!==R.from ? `<button class="backbar" data-act="goback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>${BACK_NAME[R.from]}に戻る</button>` : ''; }
-function rerender(){ const y=window.scrollY;
+function rerender(){ if(gateView()!=null || $('#app').classList.contains('is-welcome')){ render(); return; } const y=window.scrollY;
   const xs=[...document.querySelectorAll('#main .chips')].map(c=>c.scrollLeft);
-  $('#main').innerHTML=!S.user?V.welcome():backBar()+(V[R.v]||V.home)(); after(); window.scrollTo(0,y);
+  $('#main').innerHTML=backBar()+(V[R.v]||V.home)(); after(); window.scrollTo(0,y);
   document.querySelectorAll('#main .chips').forEach((c,i)=>{ if(xs[i]!=null) c.scrollLeft=xs[i];
     const on=c.querySelector('.chip.on'); if(!on) return;
     const l=on.offsetLeft-c.offsetLeft, r=l+on.offsetWidth;
@@ -9845,6 +9858,64 @@ const PRODUCER = {name:'セブ島留学バディー', url:'https://cebu-buddy.co
 const producedBy = (cls='')=>`<p class="produced ${cls}">Produced by <a href="${PRODUCER.url}" target="_blank" rel="noopener">${PRODUCER.name}</a></p>`;
 
 const V = {};
+
+const GATE_KEY = KEY+'_gate';
+const GUEST_DAYS = 3;
+let GATE = (()=>{ try{ return JSON.parse(localStorage.getItem(GATE_KEY))||{}; }catch(e){ return {}; } })();
+const saveGate = ()=>{ try{ localStorage.setItem(GATE_KEY, JSON.stringify(GATE)); }catch(e){} };
+const localDay = (d=new Date())=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const dayDiff = (a,b)=>Math.round((new Date(b+'T00:00:00')-new Date(a+'T00:00:00'))/86400000);
+const gateOk = ()=>!!(GATE.entry || AUTH.entryOk);
+const isGuest = ()=>!AUTH.user && !S.syncedUser;
+function guestUsedDays(){ if(!GATE.guestStart){ GATE.guestStart=localDay(); saveGate(); } return dayDiff(GATE.guestStart, localDay())+1; }
+const guestLeft = ()=>Math.max(0, GUEST_DAYS - guestUsedDays() + 1);
+const guestExpired = ()=>isGuest() && !!S.user && guestUsedDays() > GUEST_DAYS;
+const guestEndDate = ()=>{ const d=new Date((GATE.guestStart||localDay())+'T00:00:00'); d.setDate(d.getDate()+GUEST_DAYS-1); return `${d.getMonth()+1}月${d.getDate()}日`; };
+let ENTRY = {msg:'', busy:false};
+async function submitEntry(code){
+  code=(code||'').trim();
+  if(!code){ ENTRY.msg='入場コードを入れてください。'; render(); return; }
+  if(!SB){ ENTRY.msg='通信できませんでした。通信を確かめて、ページを開き直してください。'; render(); return; }
+  ENTRY={msg:'',busy:true}; render();
+  const { data, error } = await SB.rpc('check_entry', {p_code:code});
+  ENTRY.busy=false;
+  if(error){ ENTRY.msg='通信できませんでした。少し待ってから、もう一度お試しください。'; render(); return; }
+  if(data!==true){ ENTRY.msg='入場コードが違うか、使えなくなっています。もう一度ご確認ください。'; render(); return; }
+  GATE.entry=true; GATE.code=code.toUpperCase(); saveGate(); if(AUTH.user) AUTH.entryOk=true;
+  ENTRY.msg=''; render(); toast('入場コードを確かめました。');
+}
+const gateHead = (t,lead)=>`<div class="row" style="gap:4px">${coco(84)}${mango(84)}</div>
+  <h1 class="wl-h1">${t}</h1><p class="muted">${lead}</p>`;
+V.entry = ()=>`<div style="padding-top:8vh">${gateHead('「今、言えなかった」を、次は言えるように。','このアプリは、入場コードをお持ちの方だけが使えます。コードは、セブ島留学バディーからお渡ししています。')}
+  <div class="panel stack" style="margin-top:16px">
+    <h3 style="margin:0">入場コードを入れる</h3>
+    ${AUTH.user?`<p class="small" style="margin:0">ログイン中（${esc(AUTH.email)}）です。このアカウントでは、まだ入場コードが確かめられていません。</p>`:''}
+    <form class="stack" data-form="entry" style="gap:8px">
+      <div><label class="f" for="en-code">入場コード</label><input type="text" id="en-code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="例: ABCD1234" required data-autofocus></div>
+      ${ENTRY.msg?`<p class="lg-msg err" role="alert">${esc(ENTRY.msg)}</p>`:''}
+      <button class="btn primary en-go" type="submit" ${ENTRY.busy?'disabled':''}>${ENTRY.busy?'確かめています…':'入る'}</button>
+    </form>
+    <p class="muted small" style="margin:0">コードを入れるのは、この端末で最初の1回だけです。コードをお持ちでない方は、LINEでお問い合わせください。</p>
+    <a class="btn sm gate-line" href="${COUNSEL_URL}" target="_blank" rel="noopener">LINEで問い合わせる</a>
+  </div>
+  ${AUTH.user?`<p class="small center" style="margin-top:12px"><button class="linkbtn" data-act="logout">ログアウトする</button></p>`:`<details class="panel en-acc" style="margin-top:12px"><summary>入場コードを入れたことのあるアカウントで、ログインする</summary>
+    <p class="muted small" style="margin:8px 0">別の端末で入場コードを入れてログインしたことがある方は、同じアカウントでログインすると、コードなしで入れます。</p>${loginBox()}</details>`}
+  <p class="small center" style="margin-top:12px"><button class="linkbtn" data-act="go" data-v="privacy">プライバシーポリシー</button></p>
+  ${producedBy('center')}</div>`;
+V.trialEnd = ()=>`<div style="padding-top:8vh">${gateHead('お試し期間（3日間）が終わりました','ログインせずに使えるのは、最初に開いた日から3日間です。使ってみていただき、ありがとうございました。')}
+  <div class="panel stack" style="margin-top:16px">
+    <h3 style="margin:0">ログインして、続きから使う</h3>
+    <p class="muted small" style="margin:0">ログインすると、期限なしで使えます。この端末で覚えた単語や保存庫の記録は、そのままアカウントに引き継がれます。</p>
+    ${loginBox()}
+  </div>
+  <div class="panel stack" style="margin-top:12px">
+    <h3 style="margin:0">留学やアプリのことを相談する</h3>
+    <p class="muted small" style="margin:0">フィリピン留学のこと、アプリの使い方のことなど、セブ島留学バディーのLINEで、お気軽にご相談ください（無料）。</p>
+    <a class="btn gate-line" href="${COUNSEL_URL}" target="_blank" rel="noopener">LINEで無料相談する</a>
+  </div>
+  <p class="small center" style="margin-top:12px"><button class="linkbtn" data-act="go" data-v="privacy">プライバシーポリシー</button></p>
+  ${producedBy('center')}</div>`;
+const guestNote = ()=>isGuest() ? `<div class="panel guest-note"><p><b>ログインせずにお試し中: あと${guestLeft()}日</b>（${guestEndDate()}まで）</p><p class="muted small">ログインすると、期限なしで使えます。記録もそのまま引き継げます。</p><button class="btn sm" data-act="go" data-v="me">ログインする</button></div>` : '';
 
 V.welcome = ()=>{
   if(R.v==='privacy') return V.privacy();
@@ -9864,10 +9935,10 @@ V.welcome = ()=>{
     ${loginBox()}
   </div>
   <div class="panel stack" style="margin-top:12px">
-    <h3 style="margin:0">ログインせずに試す</h3>
+    <h3 style="margin:0">ログインせずに試す（3日間）</h3>
     <div><label class="f" for="w-name">ニックネーム</label><input type="text" id="w-name" placeholder="例: ハナコ" autocomplete="nickname"></div>
     <button class="btn" data-act="login">ログインせずに始める</button>
-    <p class="muted small" style="margin:0">記録はこの端末の中にだけ保存されます。あとからログインすると、それまでの記録をアカウントに引き継げます。</p>
+    <p class="muted small" style="margin:0">使い心地を確かめるためのお試しです。最初に開いた日から3日間使えます。記録はこの端末の中にだけ保存され、あとからログインすると、アカウントに引き継げます。</p>
   </div>
   <p class="small center" style="margin-top:12px"><button class="linkbtn" data-act="go" data-v="privacy">プライバシーポリシー</button></p>
   ${producedBy('center')}</div>`;
@@ -9884,7 +9955,7 @@ V.home = ()=>{
     : `<div class="note tier"><span>${expired()?`お試しの期限が切れました。保存庫の${S.vault.length}件は残っています。成約すると続きから使えます。`:`面談前は、レベル診断・テスト・一部の内容だけ使えます。無料カウンセリングを受けると、${TRIAL_DAYS}日間のお試しで多くの機能が使えます。`}</span><button class="btn sm cta" data-act="upsell">無料カウンセリングを相談する</button><span class="upsell-msg small"></span></div>`;
   const row=(act,attr,ic,g,h,d)=>`<button class="hm-row" data-act="${act}" ${attr}><span class="cat-ic ${g}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${CAT_ICON[ic]}</svg></span><span class="hm-tx"><b>${h}</b><span>${d}</span></span><span class="hm-chev" aria-hidden="true">›</span></button>`;
   const grp=(h,rows)=>`<section class="hm-group"><h3>${h}</h3>${rows.join('')}</section>`;
-  return `<div class="greet">${coco(64)}<div class="speech"><b>Coco先生</b>${esc(S.user)}さん、${lvLine}</div></div>
+  return `${guestNote()}<div class="greet">${coco(64)}<div class="speech"><b>Coco先生</b>${esc(S.user)}さん、${lvLine}</div></div>
   ${banner}
   <div class="hm-today">
     <div class="hm-card hm-review">
@@ -11387,7 +11458,7 @@ document.addEventListener('click', e=>{
   const d = b.dataset;
   switch(d.act){
     case 'go': if(d.v==='level' && R.v!=='level' && LQS.done) LQS={cat:null,i:0,score:0,pick:null,qs:[],done:false}; if(d.v==='pron') PU={id:null,i:0,t:0,pick:null,score:0}; if(d.v==='learn'){ go('learn',{cat:null,sel:null}); break; } go(d.v, d.from?{from:d.from}:null); break;
-    case 'login': { const n=$('#w-name').value.trim(); if(!n){ $('#w-name').focus(); return; } S.user=n; if(!AUTH.user){ S.tier=S.tier||'general'; } save(); go('home'); break; }
+    case 'login': { const n=$('#w-name').value.trim(); if(!n){ $('#w-name').focus(); return; } S.user=n; if(!AUTH.user){ S.tier=S.tier||'general'; guestUsedDays(); } save(); go('home'); break; }
     case 'settier': S.tier=d.t; S.trialStart = d.t==='counseled'?today():''; S.talkTrialUsed=false; S.askCount={d:'',n:0}; save(); render(); toast(`区分を「${TIER_NAME[d.t]}」にしました。`); break;
     case 'expire': S.tier='counseled'; S.trialStart=addDays(-(TRIAL_DAYS+1)); save(); render(); toast('お試しを期限切れにしました（一般と同じ範囲になります）。'); break;
     case 'upsell': { const m=b.parentElement.querySelector('.upsell-msg'); if(COUNSEL_URL){ window.open(COUNSEL_URL,'_blank','noopener'); } else if(m){ m.textContent='申し込み先を準備中です。セブ島留学バディーのサイトからご相談ください。'; } break; }
@@ -11504,6 +11575,7 @@ document.addEventListener('click', e=>{
 });
 document.addEventListener('submit', e=>{
   const f=e.target.closest('[data-form]'); if(!f) return; e.preventDefault();
+  if(f.dataset.form==='entry'){ submitEntry($('#en-code')?.value); return; }
   if(f.dataset.form==='lgmail'){ sendCode(($('#lg-email')?.value||'').trim()); return; }
   if(f.dataset.form==='lgcode'){ verifyCode(($('#lg-code')?.value||'').replace(/\s/g,'')); return; }
   if(f.dataset.form==='ask'){ const q=$('#ask-q').value.trim(); if(!q) return; if(askLeft()<=0){ toast(`今日聞ける回数（${LIMIT[limTier()].ask}回）を使い切りました。`); return; } if(VOICE.on){ try{VOICE.rec.stop();}catch(e){} } useAsk(); askAI(q); }
@@ -11585,7 +11657,7 @@ const AUTH = {user:null, email:'', ready:false, google:false, sync:'', syncAt:nu
 let LOGIN = {step:'menu', email:'', msg:'', err:false};
 let SYNC_T = null;
 
-function rerenderAny(){ if(!S.user) render(); else rerender(); }
+function rerenderAny(){ if(gateView()!=null) render(); else rerender(); }
 
 function loginBox(){
   if(!SB) return `<p class="muted small" style="margin:0">ログインの準備ができませんでした。通信を確かめて、ページを開き直してください。</p>`;
@@ -11660,7 +11732,7 @@ V.privacy = ()=>`<div class="policy">
   <p>セブ島留学バディーのLINE公式アカウント（<a href="${COUNSEL_URL}" target="_blank" rel="noopener">友だち追加</a>）からご連絡ください。</p>
   <h2>7. 変更</h2>
   <p>内容を変えるときは、本アプリの中でお知らせします。</p>
-  <p style="margin-top:20px"><button class="btn" data-act="go" data-v="${S.user?'me':'home'}">戻る</button></p></div>`;
+  <p style="margin-top:20px"><button class="btn" data-act="go" data-v="${S.user&&!guestExpired()&&gateOk()?'me':'home'}">戻る</button></p></div>`;
 
 function hasData(x){ return !!(x && (Object.keys(x.prog||{}).length || (x.vault||[]).length || x.tests || x.level!=null || Object.keys(x.resume||{}).length || x.talkLog || (x.lvHist||[]).length)); }
 function mergeState(a, b){
@@ -11710,15 +11782,20 @@ async function onLogin(user){
   if(!S.devId && devId) S.devId = devId;
   S.tier = (p.data && p.data.tier) || 'general'; S.trialStart = (p.data && p.data.trial_start) || ''; S.talkUntil = (p.data && p.data.talk_until) || '';
   S.syncedUser = uid; S._dirty = true; keepLocal();
+  AUTH.entryOk = !!(p.data && p.data.entry_ok);
+  if(AUTH.entryOk && !GATE.entry){ GATE.entry=true; saveGate(); }
+  else if(!AUTH.entryOk && GATE.entry && GATE.code){
+    SB.rpc('check_entry',{p_code:GATE.code}).then(({data})=>{ if(data===true) AUTH.entryOk=true; }).catch(()=>{}); }
   AUTH.ready = true; LOGIN = {step:'menu', email:'', msg:'', err:false};
   applyTheme(); render(); pushNow();
 }
-function onLogout(){ AUTH.user=null; AUTH.email=''; AUTH.ready=false; AUTH.sync=''; }
+function onLogout(){ AUTH.user=null; AUTH.email=''; AUTH.ready=false; AUTH.sync=''; AUTH.entryOk=false; }
 
 async function acctInit(){
   if(!window.supabase || !window.supabase.createClient) return;
   try{ SB = window.supabase.createClient(SB_URL, SB_KEY, {auth:{persistSession:true, autoRefreshToken:true, detectSessionInUrl:true, flowType:'pkce'}}); }catch(e){ SB=null; return; }
-  fetch(SB_URL+'/auth/v1/settings',{headers:{apikey:SB_KEY}}).then(r=>r.json()).then(j=>{ AUTH.google=!!(j.external&&j.external.google); if(!AUTH.user && (!S.user || R.v==='me')) rerenderAny(); }).catch(()=>{});
+  if(gateView()!=null) render();
+  fetch(SB_URL+'/auth/v1/settings',{headers:{apikey:SB_KEY}}).then(r=>r.json()).then(j=>{ AUTH.google=!!(j.external&&j.external.google); if(!AUTH.user && (gateView()!=null || R.v==='me')) rerenderAny(); }).catch(()=>{});
   SB.auth.onAuthStateChange((ev, session)=>{ setTimeout(()=>{
     const u = session && session.user;
     if(u){ if(AUTH.user && AUTH.user.id===u.id) return; onLogin(u); }
