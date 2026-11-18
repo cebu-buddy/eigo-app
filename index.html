@@ -814,8 +814,32 @@ function mango(s=56){
     });
   }
 
+  // URLの ?c=コード を取り出し、URLからは消す（ブックマークや共有にコードが残りにくいように）
+  function urlCode(){
+    try{
+      const u=new URL(location.href); const c=(u.searchParams.get('c')||'').trim().toUpperCase();
+      if(c){ u.searchParams.delete('c'); history.replaceState(null,'',u.pathname+(u.search||'')+u.hash); }
+      return c;
+    }catch(e){ return ''; }
+  }
+
   async function start(){
     const g=getGate();
+    const uc=urlCode();
+    if(uc && uc!==g.code){
+      let ok=false;
+      if(g.code){ try{ ok=(await rpc('app_bundle_version',{p_code:g.code}))!=null; }catch(e){ ok=true; } }
+      if(!ok){
+        loading('読み込んでいます…');
+        let got;
+        try{ got=await rpc('get_app_bundle',{p_code:uc}); }
+        catch(e){ entry('通信できませんでした。少し待ってから、もう一度お試しください。', false, uc); return; }
+        if(!got || !got.b){ entry('このURLは、見られる期間が終わりました。続けて使うには、入場コードを入れてください。'); return; }
+        g.entry=true; g.code=uc; setGate(g);
+        await cachePut({v:got.v, b:got.b});
+        run(got.b); return;
+      }
+    }
     if(!g.code){ entry(); return; }
     loading('読み込んでいます…');
     const cached=await cacheGet();
@@ -824,7 +848,7 @@ function mango(s=56){
     catch(e){ if(cached&&cached.b){ run(cached.b); return; } entry('通信できませんでした。通信を確かめて、ページを開き直してください。', false, g.code); return; }
     if(ver==null){   // コードが使えなくなった
       g.entry=false; delete g.code; setGate(g); await cacheDel();
-      entry('入場コードが変わりました。新しいコードを入れてください。'); return;
+      entry('入場コードの期限が切れたか、コードが変わりました。新しいコードを入れてください。'); return;
     }
     if(cached && cached.v===ver && cached.b){ run(cached.b); return; }
     if(!cached) loading('はじめて開くときは、少し時間がかかります…');
